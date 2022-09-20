@@ -1,0 +1,54 @@
+body{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.877);
+}
+
+.board-game{
+    background-color: rgb(55, 54, 54);
+    width: 80vmin;
+    height: 80vmin;
+    display: grid;
+    grid-template-rows: repeat(21, auto);
+    grid-template-columns: repeat(21, auto);
+}
+
+.snake{
+    background-color: #034414;
+    z-index: 10;
+}
+
+.food{
+    background-color: red;
+    z-index: 9;
+}
+
+.board-game::before{
+    content: '';
+    position: absolute;
+    width: 80vmin;
+    height: 80vmin;
+    background: linear-gradient(#fdbb2d, #22c1c3);
+    animation: animate 3s linear infinite;
+}
+@keyframes animate{
+    0%{
+        filter: hue-rotate(0deg) brightness(100%) blur(10px);
+    }
+    100%{
+        filter: hue-rotate(360deg) brightness(100%) blur(10px);
+    }
+}
+.board-game::after{
+    content: '';
+    position: absolute;
+    width: 80vmin;
+    height: 80vmin;
+    background-color: rgb(65, 63, 64);
+}
