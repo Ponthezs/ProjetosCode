@@ -1,0 +1,151 @@
+@font-face {
+    font-family: NetFlixReplica;
+    src: url(font/bebas/Bebas-Regular.ttf);
+}
+body{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-image: url(../img/Backgraund-Banner.jpg);
+    background-image: cover;
+    background-repeat: no-repeat;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body::before{
+    content: '';
+    background-color: rgb(0, 0, 0 .5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+.logo img{
+    height: 45px;
+    width: 168px;
+}
+.header{
+    padding: 20px 50px;
+    position: relative;
+    z-index: 10;
+}
+.login-body{
+    padding:60px;
+    z-index:90;
+    position:relative;
+    max-width:450px;
+    height:550px;
+    margin-left: 50%;
+    background-color: rgb(0, 0, 0, 0.75);
+    border-radius: 10px;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+}
+.login-body h2{
+    font-size:32px;
+    color:#fff;
+    margin-top:0;
+}
+.login-body input{
+    height: 50px;
+    width: 100%;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    outline: none;
+}
+.login-body input:hover{
+    background-color: #444;
+}
+.input-box{
+    margin-bottom: 25px;
+}
+.login-body button{
+    height: 50px;
+    width: 100%;
+    color: #fff;
+    background-color: #e50914;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 10px;
+}
+.login-body button:hover{
+    background-color: #ad151d;
+    cursor: pointer;
+}
+.support{
+    display: flex;
+    color: aliceblue;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.support input{
+    width: 15px;
+    height: 15px;
+}
+.remember{
+    display: flex;
+    align-items: center;
+}
+.remember span{
+    margin-right: 5px;
+    height: 25px;
+}
+.help a {
+    text-decoration: none;
+    color: #444;
+}
+.help a:hover{
+    text-decoration: underline;
+}
+.login-facebook{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.login-facebook span{
+    margin-right: 5px;
+    font-size: 13px;
+}
+.login-facebook span a{
+    text-decoration: none;
+    color: #444;
+}
+h2{
+    color: aliceblue;
+}
+.sing-up{
+    color: #444;
+    font-size: 16px;
+}
+.sing-up a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+.sing-up a:hover{
+    text-decoration: underline;
+}
+.terms{
+    color: #333;
+    font-size: 13px;
+}
+.terms a {
+    text-decoration: none;
+    color: #0071eb;
+}
+.terms a:hover{
+    text-decoration: underline;
+}
