@@ -17,7 +17,7 @@ loadSprite('kaboom', 'etY46bP.png');
 loadSprite('bg', 'qIXIczt.png');
 loadSprite('wall-gold', 'VtTXsgH.png');
 loadSprite('brick-wood', 'U751RRV.png');
-loadSprite('bomberman', 'T0xbHb8.png', {
+loadSprite('bomberman', 'T0xbHb8.png',{
     sliceX: 7,
     sliceY: 4,
     anims: {
