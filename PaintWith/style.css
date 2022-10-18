@@ -1,0 +1,75 @@
+/* Setting the font of the body to the system font. */
+body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+}
+
+/* Styling the app div. */
+.app{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+/* Styling the controls div. */
+.controls{
+    width: 100%;
+    height: 10vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: black;
+    color: aliceblue;
+}
+
+/* Styling the divs inside the controls div. */
+.controls>div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Styling the title. */
+.title{
+    font-size: 2rem;
+}
+
+/* Styling the buttons. */
+.btn{
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover{
+    background-color: rgb(22, 22, 22);
+}
+
+.project{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+}
+
+canvas{
+    background-color: whitesmoke;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+input {
+    font-size: 2rem;
+    background-color: black;
+    outline: none;
+    border: 0;
+    text-align: center;
+    color: antiquewhite;
+}
