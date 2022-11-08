@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 1000px;
+    color: aliceblue;
+    font-size: 200px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 30px;
+    border-bottom: 5px solid #1c1c1e;
+}
+
+.buttons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    font-size: 60px;
+}
