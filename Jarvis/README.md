@@ -1,8 +1,8 @@
 # Jarvis
 
-Um Assistente Virtual desenvolvido em Python 
+Um Assistente Virtual desenvolvido em Python.
 
-Foco: 
+Foco:
     Facil de utilizar.
     Rápido e expansível.
 
