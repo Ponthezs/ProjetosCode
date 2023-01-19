@@ -1,0 +1,2 @@
+Bibliotecas:
+SpeechRecognition==3.9.0
