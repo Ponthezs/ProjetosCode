@@ -7,6 +7,6 @@ Foco:
     Rápido e expansível.
 
 Técnologias:
-    Reconhecimento de voz: (Google,)
-    Síntese de voz: ()
-    Algum tipo de voz: ()
+    Reconhecimento de voz: (Google para reconhecimento online, Vosk para reconhecimento offline!)
+    Síntese de voz: (pyttsx3)
+    Algum tipo de voz: (Commands, (Vamos precisar de NLU),)

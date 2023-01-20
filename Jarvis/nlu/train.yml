@@ -1,0 +1,43 @@
+commands:
+  #HORAS
+ - command:
+    input:  Que horas são?
+    entity: time
+    action: getTime
+ - command:
+    input:  fale a hora
+    entity: time
+    action: getTime
+
+ - command:
+    input:  Qual a data de hoje?
+    entity: time
+    action: getDate
+
+ - command:
+    input:  Data de hoje
+    entity: time
+    action: getDate
+
+  # Tempo
+ - command:
+    input:  Previsão do tempo
+    entity: weather
+    action: getWeather
+
+ - command:
+    input:  Como está o clima?
+    entity: weather
+    action: getWeather
+
+  # Open
+
+ - command:
+    input:  Abrir Google
+    entity: open
+    action: 
+
+ - command:
+    input:  Abrir Spotify
+    entity: open
+    action: 
