@@ -1,0 +1,5 @@
+Bibliotecas:
+SpeechRecognition == 3.9.0
+Vosk == Versão mais recente
+pyAudio == Versão mais recente
+pyttsx3 == 2.90
