@@ -6,6 +6,7 @@ import pyaudio
 import pyttsx3
 import json
 import core
+from nlu.classifier import classify
 #########################################################################################################
 #I WAS NOT ABLE TO IMPORT THE FOLDER, PROBLEM BEING SOLVED!!!!
 import datetime
