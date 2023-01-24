@@ -5,3 +5,5 @@ print(data)
 
 for command in data ['commands']:
     print(command)
+
+    

@@ -4,7 +4,6 @@ from vosk import Model, KaldiRecognizer
 import os
 import pyaudio
 import pyttsx3
-engine = pyttsx3.init()
 import json
 import core
 #########################################################################################################
@@ -23,6 +22,7 @@ class SystemInfo:
 #########################################################################################################
 '''Síntese de fala'''
 """VOICE"""
+engine = pyttsx3.init()
 voices = engine.getProperty('voices')       #getting details of current voice
 '''for voice in voices:
     print(engine.setProperty('voice', voice.id))'''
@@ -52,7 +52,10 @@ while True:
         if result is not None:
             text = result['text']
 
-        print(text)
+            # Reconhecer entidade do texto.
+            entity = classify(text)
 
-        if text == 'que horas são' or text == 'fale a hora':
-            speak(SystemInfo.get_time())
+            if entity == 'time\getTime':
+                speak(core.SystemInfo.get_time())
+
+            print('Text: {}  Entity: {}'.format(text, entity))
