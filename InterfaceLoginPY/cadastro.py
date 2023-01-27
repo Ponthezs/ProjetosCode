@@ -1,4 +1,6 @@
 from PySimpleGUI import PySimpleGUI as sg
+import PyQt5
+
 
 #layout
 sg.theme('Reddit')
