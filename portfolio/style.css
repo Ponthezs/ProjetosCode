@@ -35,7 +35,7 @@ header{
 .logo i{
     height: 45px;
     width:45px;
-    background-color: #00ff22;
+    background-color: #ffd000;
     border-radius: 50%;
     color:#fff;
     font-weight: 700;
@@ -63,7 +63,7 @@ nav .togglebtn{
 }
 nav .togglebtn span{
     display: block;
-    background-color: #73ff00;
+    background-color: #00fff2;
     margin: 5px 0px;
     width:100%;
     height:3px;
@@ -113,11 +113,11 @@ nav .navlinks li a{
     font-size: 14px;
 }
 .hero-text h5 span{
-    color:#007ced;
+    color:#00ffea;
     font-size: 16px;
 }
 .hero-text h1{
-    color: #007ced;
+    color: #00edcd;
     font-size: 3rem;
 }
 .hero-text p{
@@ -139,16 +139,16 @@ nav .navlinks li a{
     box-shadow:  0 10px 10px -8px rgb(0 0 0 / 78%);
 }
 .btn.active{
-    border-color: #007ced;
+    border-color: #ffd000;
 }
 .hero-text .social i{
-    color: #e5e5e5;
+    color: #ffffff;
     font-size: 18px;
     margin-right: 10px;
     transition: 0.5s;
 }
 .hero-text .social i:hover{
-    color:#007ced;
+    color:#1ced00;
     transform: rotate(360deg);
 }
 /* Respnosiv design & displaying navbar for small screen */
