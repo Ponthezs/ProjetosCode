@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "type": "module", 
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^5.15.1",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.15.1"
   }
 }
