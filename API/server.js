@@ -9,7 +9,7 @@ app.use(express.json())
 
 app.post('/users', async (req, res) => {
 
-    await prisma.user.create({
+    await prisma.user.create ({
         data: {
             email: req.body.email,
             name: req.body.name,
