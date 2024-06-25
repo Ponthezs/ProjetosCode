@@ -1,7 +1,6 @@
 import express from 'express'
 import { Prisma, PrismaClient } from '@prisma/client'
 
-
 const prisma = new PrismaClient()
 const app = express()
 app.use(express.json())
@@ -9,7 +8,7 @@ app.use(express.json())
 
 app.post('/users', async (req, res) => {
 
-    await prisma.user.create ({
+    prisma.user.create ({
         data: {
             email: req.body.email,
             name: req.body.name,
@@ -34,7 +33,7 @@ app.get('/users', async (req, res) => {
 
 app.put('/users/:id', async (req, res) => {
 
-    await prisma.user.update({
+    prisma.user.update({
         whare: {
             id: req.params.id
 
