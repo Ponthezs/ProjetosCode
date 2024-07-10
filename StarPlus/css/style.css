@@ -1,8 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kanit", sans-serif;
+  }
 body,html {
     color: aliceblue;
     height: 100%;
     margin: 0;
-    padding: 0!important;
+    padding: 0  ;
 }
 .bg {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -73,6 +79,7 @@ a{
     margin: auto;
 }          
 .plano h1{
+    box-sizing: border-box;
     margin: 25px 15px;
     font-size: 44px;
     text-align: center;
@@ -163,17 +170,3 @@ ul{
   justify-content: baseline;
 
 }
-
-
-
-
-
-/*Inicio Star*/
-/*Div´s*/
-/*Planos*/
-/*Hover*/
-/* */
-/* */
-/* */
-/* */
-/* */
