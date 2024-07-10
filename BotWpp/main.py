@@ -3,9 +3,9 @@ import time
 
 class WhatappBot:
     def _init_(self):
-        self.mensagem = "Amor eu te amo muito, você me faz feliz com coisas simples na minha vida, e por isso que eu te amo! eu acho que hoje em dia não sei oque seria sem você!"
+        self.mensagem = "#"
         
-        self.grupos = ["Central de reclamação ❤️💍."]
+        self.grupos = ["#"]
         options = webdriver.Chrome()
         options.add_argument('lang=pt-br')
         self.driver = webdriver.Chrome(executable_path=r'./chromedriver.exe')
