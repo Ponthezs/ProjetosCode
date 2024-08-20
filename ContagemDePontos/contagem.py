@@ -48,7 +48,7 @@ def exibir_pontuacoes():
         cabecalho = next(leitor_csv)  # Pular o cabeçalho
         for linha in leitor_csv:
             nome, pontos = linha
-            lista_pontuacoes.insert(tk.END, f"Nome: {nome}, Pontos: {pontos}\n")
+            lista_pontuacoes.insert(tk.END, f"{nome}: {pontos} pontos\n")
 
 # Função chamada quando o botão "Salvar" é pressionado
 def salvar():
@@ -64,29 +64,36 @@ def salvar():
 
 # Criação da janela principal
 root = tk.Tk()
-root.title("Armazenamento de Pontuações de Jogos")
+root.title("Armazenamento de Pontuações")
 
-# Criação dos widgets
-label_nome = tk.Label(root, text="Nome do Jogador:")
-label_nome.pack()
+# Define a cor de fundo da janela principal
+root.configure(bg="#f0f0f0")
 
-entrada_nome = tk.Entry(root)
-entrada_nome.pack()
+# Configuração do layout
+root.geometry("400x300")
+root.resizable(False, False)
 
-label_pontos = tk.Label(root, text="Pontuação:")
-label_pontos.pack()
+# Criação dos widgets com novo estilo
+label_nome = tk.Label(root, text="Nome do Jogador:", bg="#f0f0f0", font=("Arial", 12))
+label_nome.pack(pady=(10, 5))
 
-entrada_pontos = tk.Entry(root)
-entrada_pontos.pack()
+entrada_nome = tk.Entry(root, font=("Arial", 12))
+entrada_nome.pack(pady=5, padx=10, fill=tk.X)
 
-botao_salvar = tk.Button(root, text="Salvar", command=salvar)
-botao_salvar.pack()
+label_pontos = tk.Label(root, text="Pontuação:", bg="#f0f0f0", font=("Arial", 12))
+label_pontos.pack(pady=5)
 
-botao_exibir = tk.Button(root, text="Exibir Pontuações", command=exibir_pontuacoes)
-botao_exibir.pack()
+entrada_pontos = tk.Entry(root, font=("Arial", 12))
+entrada_pontos.pack(pady=5, padx=10, fill=tk.X)
 
-lista_pontuacoes = tk.Text(root, height=10, width=50)
-lista_pontuacoes.pack()
+botao_salvar = tk.Button(root, text="Salvar", command=salvar, font=("Arial", 12), bg="#4CAF50", fg="white", padx=10, pady=5)
+botao_salvar.pack(pady=10)
+
+botao_exibir = tk.Button(root, text="Exibir Pontuações", command=exibir_pontuacoes, font=("Arial", 12), bg="#2196F3", fg="white", padx=10, pady=5)
+botao_exibir.pack(pady=(0, 10))
+
+lista_pontuacoes = tk.Text(root, height=10, width=50, font=("Arial", 12), wrap=tk.WORD)
+lista_pontuacoes.pack(padx=10, pady=5)
 
 # Inicia a interface gráfica
 root.mainloop()
