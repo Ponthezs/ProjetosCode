@@ -1,71 +1,71 @@
-let timerInterval;
+// Variáveis de controle do cronômetro
+let timer;
 let isRunning = false;
-let elapsedTime = 0; // tempo em milissegundos
+let elapsedTime = 0; // Tempo total em milissegundos
 
-const minutesEl = document.getElementById('minutes');
-const secondsEl = document.getElementById('seconds');
-const millisecondsEl = document.getElementById('miliseconds');
-const startBtn = document.querySelector('.mainStartBtn');
-const lapResetBtn = document.querySelector('.lapResetBtn');
-const lapsEl = document.querySelector('.laps');
+// Elementos da interface
+const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('stopButton');
+const lapButton = document.getElementById('lapButton');
+const minutesDisplay = document.getElementById('minutes');
+const secondsDisplay = document.getElementById('seconds');
+const millisecondsDisplay = document.getElementById('miliseconds');
+const lapsList = document.querySelector('.laps');
 
-function formatTime(time) {
-    const minutes = Math.floor(time / 60000);
-    const seconds = Math.floor((time % 60000) / 1000);
-    const milliseconds = Math.floor((time % 1000) / 10);
-    
-    return {
-        minutes: minutes.toString().padStart(2, '0'),
-        seconds: seconds.toString().padStart(2, '0'),
-        milliseconds: milliseconds.toString().padStart(2, '0')
-    };
+// Atualiza o tempo exibido
+function updateTime() {
+    elapsedTime += 10; // Incrementa o tempo em milissegundos
+
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    const milliseconds = Math.floor((elapsedTime % 1000) / 10);
+
+    minutesDisplay.textContent = String(minutes).padStart(2, '0') + ':';
+    secondsDisplay.textContent = String(seconds).padStart(2, '0') + ':';
+    millisecondsDisplay.textContent = String(milliseconds).padStart(2, '0');
 }
 
-function updateDisplay() {
-    const { minutes, seconds, milliseconds } = formatTime(elapsedTime);
-    minutesEl.textContent = `${minutes}:`;
-    secondsEl.textContent = `${seconds}:`;
-    millisecondsEl.textContent = milliseconds;
-}
-
+// Inicia o cronômetro
 function startTimer() {
     if (!isRunning) {
-        timerInterval = setInterval(() => {
-            elapsedTime += 10;
-            updateDisplay();
-        }, 10);
+        timer = setInterval(updateTime, 10); // Atualiza a cada 10 milissegundos
         isRunning = true;
-        startBtn.textContent = 'Stop';
-    } else {
-        clearInterval(timerInterval);
-        isRunning = false;
-        startBtn.textContent = 'Start';
+        startButton.style.display = 'none';
+        stopButton.style.display = 'inline';
+        lapButton.disabled = false; // Habilita o botão Lap
     }
 }
 
-function resetTimer() {
-    clearInterval(timerInterval);
-    isRunning = false;
-    elapsedTime = 0;
-    updateDisplay();
-    startBtn.textContent = 'Start';
+// Para o cronômetro
+function stopTimer() {
+    if (isRunning) {
+        clearInterval(timer);
+        isRunning = false;
+        startButton.style.display = 'inline';
+        stopButton.style.display = 'none';
+        lapButton.disabled = true; // Desabilita o botão Lap
+    }
 }
 
-function addLap() {
+// Adiciona um novo lap à lista
+function recordLap() {
     if (isRunning) {
         const lapTime = formatTime(elapsedTime);
-        const lapEl = document.createElement('div');
-        lapEl.className = 'lap';
-        lapEl.textContent = `Lap: ${lapTime.minutes}:${lapTime.seconds}:${lapTime.milliseconds}`;
-        lapsEl.appendChild(lapEl);
+        const lapItem = document.createElement('li');
+        lapItem.textContent = lapTime;
+        lapsList.appendChild(lapItem);
     }
 }
 
-startBtn.addEventListener('click', startTimer);
-lapResetBtn.addEventListener('click', () => {
-    if (isRunning) {
-        addLap();
-    } else {
-        resetTimer();
-    }
-});
+// Formata o tempo em minutos, segundos e milissegundos
+function formatTime(timeInMs) {
+    const minutes = Math.floor(timeInMs / 60000);
+    const seconds = Math.floor((timeInMs % 60000) / 1000);
+    const milliseconds = Math.floor((timeInMs % 1000) / 10);
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(2, '0')}`;
+}
+
+// Event listeners para os botões
+startButton.addEventListener('click', startTimer);
+stopButton.addEventListener('click', stopTimer);
+lapButton.addEventListener('click', recordLap);
