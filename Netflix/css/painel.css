@@ -1,151 +1,206 @@
-@font-face {
-    font-family: NetFlixReplica;
-    src: url(font/bebas/Bebas-Regular.ttf);
-}
-body{
-    text-decoration: none;
-    padding: 0;
+* {
     margin: 0;
-    height: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #fff;
+    background: #000;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  
+  .container {
+    max-width: 1130px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    position: fixed;
+    z-index: 100;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 56px;
+    background: rgba(0, 0, 0, 0.5); /* Slightly translucent background for better readability */
+    backdrop-filter: blur(10px); /* Optional: adds blur effect behind header */
+  }
+  
+  .header a {
+    display: inline-block;
+    background: #e50914;
+    color: white;
+    padding: 8px 18px;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+  
+  .main {
+    padding: 4rem 2rem;
+    height: 785px;
+    background: url("../img/bg.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     position: relative;
-    background-image: url(../img/Backgraund-Banner.jpg);
-    background-image: cover;
-    background-repeat: no-repeat;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-body::before{
-    content: '';
-    background-color: rgb(0, 0, 0 .5);
-    width: 100%;
-    height: 100%;
+  }
+  
+  .main-child {
+    z-index: 1;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  .main h1 {
+    font-size: 4rem;
+    max-width: 600px;
+  }
+  
+  .main span {
+    display: block;
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  
+  .form-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  
+  .form-cta input {
+    padding: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+  }
+  
+  .form-cta button {
+    background: #e50914;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 15px 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .form-cta button::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../img/seta.svg") no-repeat center;
+    background-size: contain;
+  }
+  
+  .form-cta button:hover {
+    background: #f40612;
+  }
+  
+  .main p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .gradient {
+    background: rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8) 0,
+      rgba(0, 0, 0, 0) 60%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
-
-}
-.logo img{
-    height: 45px;
-    width: 168px;
-}
-.header{
-    padding: 20px 50px;
+    bottom: 0;
+  }
+  
+  .section {
+    background: black;
+    padding: 3rem 1rem;
+    border-top: 8px solid #222;
+    text-align: center;
+  }
+  
+  .section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+  
+  .section p {
+    font-size: 1.5rem;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .img-tv {
     position: relative;
-    z-index: 10;
-}
-.login-body{
-    padding:60px;
-    z-index:90;
-    position:relative;
-    max-width:450px;
-    height:550px;
-    margin-left: 50%;
-    background-color: rgb(0, 0, 0, 0.75);
-    border-radius: 10px;
-    box-sizing: border-box;
-    transform: translateX(-50%);
-}
-.login-body h2{
-    font-size:32px;
-    color:#fff;
-    margin-top:0;
-}
-.login-body input{
-    height: 50px;
+  }
+  
+  .img-tv img {
+    z-index: 1;
+  }
+  
+  .video-tv {
+    position: absolute;
     width: 100%;
-    color: #fff;
-    background-color: #333;
-    border: none;
-    border-radius: 5px;
-    padding-left: 15px;
-    box-sizing: border-box;
-    outline: none;
-}
-.login-body input:hover{
-    background-color: #444;
-}
-.input-box{
-    margin-bottom: 25px;
-}
-.login-body button{
-    height: 50px;
-    width: 100%;
-    color: #fff;
-    background-color: #e50914;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 16px;
-    border: none;
-    margin-bottom: 10px;
-}
-.login-body button:hover{
-    background-color: #ad151d;
-    cursor: pointer;
-}
-.support{
-    display: flex;
-    color: aliceblue;
-    justify-content: space-between;
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-.support input{
-    width: 15px;
-    height: 15px;
-}
-.remember{
-    display: flex;
-    align-items: center;
-}
-.remember span{
-    margin-right: 5px;
-    height: 25px;
-}
-.help a {
-    text-decoration: none;
-    color: #444;
-}
-.help a:hover{
-    text-decoration: underline;
-}
-.login-facebook{
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-.login-facebook span{
-    margin-right: 5px;
-    font-size: 13px;
-}
-.login-facebook span a{
-    text-decoration: none;
-    color: #444;
-}
-h2{
-    color: aliceblue;
-}
-.sing-up{
-    color: #444;
-    font-size: 16px;
-}
-.sing-up a {
-    color: #fff;
-    font-size: 16px;
-    text-decoration: none;
-}
-.sing-up a:hover{
-    text-decoration: underline;
-}
-.terms{
-    color: #333;
-    font-size: 13px;
-}
-.terms a {
-    text-decoration: none;
-    color: #0071eb;
-}
-.terms a:hover{
-    text-decoration: underline;
-}
+    max-width: 400px;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  
+  .download .grid > div:first-child {
+    order: 2;
+  }
+  
+  .download .img-tv {
+    order: 1;
+  }
+  
+  .device-pile .video-tv {
+    max-width: 340px;
+    top: 0;
+    left: 0;
+  }
+  
+  .footer {
+    padding: 4rem 1rem 2rem;
+    border-top: 8px solid #222;
+    background: black;
+    text-align: center;
+  }
+  
+  .footer .form-cta {
+    margin: 0 auto;
+  }
+  
+  .footer p {
+    margin-top: 2rem;
+    color: #757575;
+    font-size: 0.875rem;
+  }
+  

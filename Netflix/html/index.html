@@ -1,99 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Netflix Brasil - assistir séries online, assistir filmes online
-    </title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="shortcut icon" href="../favicon.ico" />
-  </head>
-  <body>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Brasil - Assistir Séries e Filmes Online</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+</head>
+<body>
     <header class="header">
-      <img src="../img/netflix.svg" alt="Netflix" draggable="false" />
-      <a href="login.html">Entrar</a>
+        <a href="/" aria-label="Página inicial">
+            <img src="../img/netflix.svg" alt="Logo da Netflix" draggable="false">
+        </a>
+        <nav>
+            <a href="login.html">Entrar</a>
+        </nav>
     </header>
+
     <main class="main">
-      <div class="main-child">
-        <h1>Filmes, séries e muito mais. Sem limites.</h1>
-        <span>Assista onde quiser. Cancele quando quiser.</span>
-        <form class="form-cta">
-          <input type="text" placeholder="Email" />
-          <button>Vamos lá</button>
-        </form>
-        <p>
-          Pronto para assistir? Informe seu email para criar ou reiniciar sua
-          assinatura.
-        </p>
-      </div>
-      <div class="gradient"></div>
+        <div class="main-child">
+            <h1>Filmes, Séries e Muito Mais. Sem Limites.</h1>
+            <span>Assista onde quiser. Cancele quando quiser.</span>
+            <form class="form-cta" action="signup.html" method="get">
+                <input type="email" name="email" placeholder="Email" required aria-label="Email">
+                <button type="submit">Vamos Lá</button>
+            </form>
+            <p>Pronto para assistir? Informe seu email para criar ou reiniciar sua assinatura.</p>
+        </div>
+        <div class="gradient"></div>
     </main>
+
     <section class="section">
-      <div class="container">
-        <div class="grid">
-          <div>
-            <h1>Aproveite na TV.</h1>
-            <p>
-              Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV,
-              aparelhos de Blu-ray e outros aparelhos.
-            </p>
-          </div>
-          <div class="img-tv">
-            <img src="../img/tv.png" alt="TV" />
-            <video class="video-tv" autoplay playsinline muted loop>
-              <source
-                src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v"
-                type="video/mp4"
-              />
-            </video>
-          </div>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <h1>Aproveite na TV</h1>
+                    <p>Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.</p>
+                </div>
+                <div class="img-tv">
+                    <img src="../img/tv.png" alt="TV">
+                    <video class="video-tv" autoplay playsinline muted loop aria-label="Vídeo de TV">
+                        <source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
+
     <section class="download section">
-      <div class="container">
-        <div class="grid">
-          <div>
-            <h1>Baixe séries para assistir offline.</h1>
-            <p>
-              Salve seus títulos favoritos e sempre tenha algo para assistir.
-            </p>
-          </div>
-          <div class="img-tv">
-            <img src="img/el.jpg" alt="El" />
-          </div>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <h1>Baixe Séries para Assistir Offline</h1>
+                    <p>Salve seus títulos favoritos e sempre tenha algo para assistir.</p>
+                </div>
+                <div class="img-tv">
+                    <img src="../img/el.jpg" alt="Personagem da série">
+                </div>
+            </div>
         </div>
-      </div>
     </section>
+
     <section class="device-pile section">
-      <div class="container">
-        <div class="grid">
-          <div>
-            <h1>Assista quando quiser.</h1>
-            <p>
-              Assista no celular, tablet, smart TV ou notebook sem pagar a mais
-              por isso.
-            </p>
-          </div>
-          <div class="img-tv">
-            <img src="../img/device-pile.png" alt="Device Pile" />
-            <video class="video-tv" autoplay playsinline muted loop>
-              <source
-                src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices.m4v"
-                type="video/mp4"
-              />
-            </video>
-          </div>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <h1>Assista Quando Quiser</h1>
+                    <p>Assista no celular, tablet, smart TV ou notebook sem pagar a mais por isso.</p>
+                </div>
+                <div class="img-tv">
+                    <img src="../img/device-pile.png" alt="Dispositivos">
+                    <video class="video-tv" autoplay playsinline muted loop aria-label="Vídeo de dispositivos">
+                        <source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices.m4v" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
+
     <footer class="footer">
-      <form class="form-cta">
-        <input type="text" placeholder="Email" />
-        <button>Vamos lá</button>
-      </form>
-      <p>Copyright © 2020 Netflix Brasil. Todos os direitos reservados.</p>
+        <form class="form-cta" action="signup.html" method="get">
+            <input type="email" name="email" placeholder="Email" required aria-label="Email">
+            <button type="submit">Vamos Lá</button>
+        </form>
+        <p>&copy; 2020 Netflix Brasil. Todos os direitos reservados.</p>
     </footer>
-  </body>
+</body>
 </html>
