@@ -8,7 +8,7 @@
 
 /* Estilo geral */
 body, html {
-    color: aliceblue;
+    color: #fff;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -23,7 +23,7 @@ body, html {
 }
 
 a {
-    color: white;
+    color: #fff;
     text-decoration: none;
     text-align: center;
 }
@@ -31,21 +31,27 @@ a {
 /* Botões */
 .agr button {
     background: linear-gradient(90deg, #fa1660, #ff6e00);
-    padding: 15px;
+    padding: 15px 25px;
     position: absolute;
-    left: 90%;
-    margin: 5px;
+    right: 5%;
+    top: 10px;
     border: none;
     font-weight: bold;
-    color: white;
+    color: #fff;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
+.agr button:hover {
+    background: linear-gradient(90deg, #ff6e00, #fa1660);
+}
+
+/* Seção de Introdução */
 .star-inicio {
     text-align: center;
-    padding: 400px 0;
-    color: white;
-    margin: 5px;
+    padding: 250px 0;
+    color: #fff;
 }
 
 .star-inicio p {
@@ -54,57 +60,79 @@ a {
 }
 
 .star-inicio button {
-    height: 20%;
     padding: 15px;
-    width: 550px;
-    color: white;
+    width: 250px;
+    color: #fff;
     background: linear-gradient(90deg, rgba(255,50,50,1) 0%, rgba(144,31,196,1) 41%, rgba(255,0,138,1) 100%);
     font-weight: bold;
     font-size: 15px;
     border-radius: 5px;
     border: none;
-    transition: 0.1s ease;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.star-inicio button:hover {
+    background: linear-gradient(90deg, rgba(255,0,138,1) 0%, rgba(144,31,196,1) 41%, rgba(255,50,50,1) 100%);
 }
 
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 5;
+    font-size: 48px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.material-symbols-outlined:hover {
+    transform: translateY(10px);
 }
 
 /* Estilo dos Planos */
 .plano {
-    margin: auto;
+    text-align: center;
+    padding: 50px 0;
 }
 
 .plano h1 {
-    margin: 25px 15px;
     font-size: 44px;
-    text-align: center;
-}
-
-.combo {
-    background-image: url(../img/roxo.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 25px;
+    margin-bottom: 25px;
 }
 
 ul {
-    margin: 25px 125px 0 125px;
+    margin: 0 auto;
+    padding: 0;
     list-style: none;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+ul li {
+    background-color: #1c1e22;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    min-width: 250px;
+    margin: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ul li img {
+    max-width: 100px;
+    margin-bottom: 15px;
 }
 
 .htres {
-    margin: 25px 125px;
     font-size: 28px;
-    text-align: center;
-    align-items: center;
+    margin: 15px 0;
 }
 
 .medium {
-    text-align: center;
+    font-size: 16px;
+    margin-bottom: 25px;
 }
 
 /* Estilo dos Botões dos Cartões */
@@ -114,28 +142,45 @@ ul {
     background: linear-gradient(90deg, rgba(24,6,125,1) 0%, rgba(111,6,115,1) 73%, rgba(42,0,102,1) 100%);
     border: none;
     border-radius: 5px;
-    color: white;
-    padding: 15px 35px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    color: #fff;
+    padding: 15px 25px;
     font-size: 15px;
-    margin: 2px 110px;
-    transition: 0.4s ease;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-.filmes2 h1, .filmes2 p {
-    margin: 25px 150px;
+.button--card1:hover,
+.button--card2:hover,
+.button--card3:hover {
+    background: linear-gradient(90deg, rgba(42,0,102,1) 0%, rgba(111,6,115,1) 73%, rgba(24,6,125,1) 100%);
+}
+
+/* Seção de Filmes */
+.filmes2 {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.filmes2 h1 {
+    font-size: 44px;
+    margin-bottom: 15px;
+}
+
+.filmes2 p {
+    font-size: 18px;
+    margin-bottom: 25px;
 }
 
 .filmes2 img {
-    margin: 5px 150px;
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.espn {
-    margin: 5px 150px;
-    display: flex;
-    align-items: center;
-    justify-content: baseline;
+.espn img {
+    max-width: 80%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
