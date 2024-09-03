@@ -3,7 +3,7 @@ from tkinter import messagebox, ttk
 import csv
 from datetime import date, timedelta
 
-# Definindo as classes principais
+# Definindo as classes principais (baseado no diagrama anterior)
 
 class Usuario:
     def __init__(self, nome, email, senha):
@@ -118,13 +118,13 @@ class Biblioteca:
             for usuario in self.usuarios:
                 writer.writerow({'nome': usuario.nome, 'email': usuario.email, 'senha': usuario.senha})
 
-    def salvar_livros_csv(self, arquivo_csv):
+    def salvar_admins_csv(self, arquivo_csv):
         with open(arquivo_csv, mode='w', newline='') as file:
-            fieldnames = ['ISBN', 'titulo', 'autor', 'sinopse', 'numeroPaginas']
+            fieldnames = ['nome', 'email', 'senha']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
-            for livro in self.catalogo:
-                writer.writerow({'ISBN': livro.ISBN, 'titulo': livro.titulo, 'autor': livro.autor, 'sinopse': livro.sinopse, 'numeroPaginas': livro.numeroPaginas})
+            for admin in self.admins:
+                writer.writerow({'nome': admin.nome, 'email': admin.email, 'senha': admin.senha})
 
     def carregar_admins_csv(self, arquivo_csv):
         try:
@@ -135,9 +135,6 @@ class Biblioteca:
                     self.adicionarAdmin(admin)
         except FileNotFoundError:
             pass
-
-# Criando uma instância global de Biblioteca
-biblioteca = Biblioteca()
 
 # Funções para a Interface
 
@@ -204,7 +201,6 @@ def renovar_emprestimo(usuario):
         emprestimo = usuario.historicoEmprestimos[index]
         resultado = emprestimo.renovarEmprestimo()
         messagebox.showinfo("Renovação", resultado)
-        atualizar_historico_emprestimos(usuario)
     else:
         messagebox.showwarning("Erro", "Nenhum empréstimo selecionado.")
 
@@ -234,96 +230,154 @@ def mostrar_interface_usuario(usuario):
     titulo_entry = tk.Entry(user_window)
     titulo_entry.grid(row=0, column=1, padx=10, pady=5)
 
-    tk.Button(user_window, text="Buscar", command=buscar_livro).grid(row=0, column=2, padx=10, pady=5)
-    
-    global lista_livros
-    lista_livros = ttk.Treeview(user_window, columns=("Autor", "ISBN"), show='headings')
-    lista_livros.heading("Autor", text="Autor")
-    lista_livros.heading("ISBN", text="ISBN")
-    lista_livros.grid(row=1, column=0, columnspan=3, padx=10, pady=5)
-    lista_livros.bind('<Double-1>', lambda e: realizar_emprestimo(usuario))
+    tk.Button(user_window, text="Buscar", command=buscar_livro).grid(row=1, column=0
 
-    tk.Button(user_window, text="Ver Multas", command=lambda: verificar_multas(usuario)).grid(row=2, column=0, padx=10, pady=5)
-    
-    tk.Label(user_window, text="Histórico de Empréstimos").grid(row=3, column=0, padx=10, pady=5)
+, columnspan=2, pady=10)
+
+    global lista_livros
+    lista_livros = ttk.Treeview(user_window, columns=('Autor', 'ISBN'), show='headings')
+    lista_livros.heading('Autor', text='Autor')
+    lista_livros.heading('ISBN', text='ISBN')
+    lista_livros.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
+
+    tk.Button(user_window, text="Realizar Empréstimo", command=lambda: realizar_emprestimo(usuario)).grid(row=3, column=0, columnspan=2, pady=10)
+
+    tk.Label(user_window, text="Histórico de Empréstimos").grid(row=4, column=0, columnspan=2, padx=10, pady=5)
 
     global lista_historico
-    lista_historico = ttk.Treeview(user_window, columns=("Data Empréstimo", "Data Devolução", "Status"), show='headings')
-    lista_historico.heading("Data Empréstimo", text="Data Empréstimo")
-    lista_historico.heading("Data Devolução", text="Data Devolução")
-    lista_historico.heading("Status", text="Status")
-    lista_historico.grid(row=4, column=0, columnspan=3, padx=10, pady=5)
-    lista_historico.bind('<Double-1>', lambda e: renovar_emprestimo(usuario))
+    lista_historico = ttk.Treeview(user_window, columns=('Data Empréstimo', 'Data Devolução', 'Status'), show='headings')
+    lista_historico.heading('Data Empréstimo', text='Data Empréstimo')
+    lista_historico.heading('Data Devolução', text='Data Devolução')
+    lista_historico.heading('Status', text='Status')
+    lista_historico.grid(row=5, column=0, columnspan=2, padx=10, pady=5)
+
+    tk.Button(user_window, text="Renovar Empréstimo", command=lambda: renovar_emprestimo(usuario)).grid(row=6, column=0, padx=10, pady=5)
+    tk.Button(user_window, text="Verificar Multas", command=lambda: verificar_multas(usuario)).grid(row=6, column=1, padx=10, pady=5)
 
     atualizar_historico_emprestimos(usuario)
 
 def mostrar_interface_admin(admin):
     admin_window = tk.Toplevel(root)
-    admin_window.title(f"Admin - {admin.nome}")
+    admin_window.title(f"Administração - {admin.nome}")
 
-    tk.Label(admin_window, text="Adicionar Livro").grid(row=0, column=0, padx=10, pady=5)
+    tk.Button(admin_window, text="Adicionar Livro", command=lambda: adicionar_atualizar_livro(admin)).grid(row=0, column=0, padx=10, pady=5)
+    tk.Button(admin_window, text="Atualizar Livro", command=lambda: adicionar_atualizar_livro(admin, atualizar=True)).grid(row=0, column=1, padx=10, pady=5)
+    tk.Button(admin_window, text="Remover Livro", command=lambda: remover_livro(admin)).grid(row=0, column=2, padx=10, pady=5)
+    tk.Button(admin_window, text="Gerenciar Usuários", command=lambda: gerenciar_usuarios(admin)).grid(row=1, column=0, columnspan=3, padx=10, pady=5)
 
-    tk.Label(admin_window, text="ISBN").grid(row=1, column=0, padx=10, pady=5)
-    isbn_entry = tk.Entry(admin_window)
-    isbn_entry.grid(row=1, column=1, padx=10, pady=5)
-
-    tk.Label(admin_window, text="Título").grid(row=2, column=0, padx=10, pady=5)
+    tk.Label(admin_window, text="Buscar Livro por Título").grid(row=2, column=0, padx=10, pady=5)
+    global titulo_entry
     titulo_entry = tk.Entry(admin_window)
     titulo_entry.grid(row=2, column=1, padx=10, pady=5)
 
-    tk.Label(admin_window, text="Autor").grid(row=3, column=0, padx=10, pady=5)
-    autor_entry = tk.Entry(admin_window)
-    autor_entry.grid(row=3, column=1, padx=10, pady=5)
+    tk.Button(admin_window, text="Buscar", command=buscar_livro).grid(row=3, column=0, columnspan=3, pady=10)
 
-    tk.Label(admin_window, text="Sinopse").grid(row=4, column=0, padx=10, pady=5)
-    sinopse_entry = tk.Entry(admin_window)
-    sinopse_entry.grid(row=4, column=1, padx=10, pady=5)
+    global lista_livros
+    lista_livros = ttk.Treeview(admin_window, columns=('Autor', 'ISBN'), show='headings')
+    lista_livros.heading('Autor', text='Autor')
+    lista_livros.heading('ISBN', text='ISBN')
+    lista_livros.grid(row=4, column=0, columnspan=3, padx=10, pady=5)
 
-    tk.Label(admin_window, text="Número de Páginas").grid(row=5, column=0, padx=10, pady=5)
-    numero_paginas_entry = tk.Entry(admin_window)
-    numero_paginas_entry.grid(row=5, column=1, padx=10, pady=5)
+def adicionar_atualizar_livro(admin, atualizar=False):
+    def salvar_livro():
+        ISBN = isbn_entry.get()
+        titulo = titulo_entry.get()
+        autor = autor_entry.get()
+        sinopse = sinopse_entry.get()
+        numero_paginas = int(numero_paginas_entry.get())
 
-    def adicionar_livro():
-        livro = Livro(isbn_entry.get(), titulo_entry.get(), autor_entry.get(), sinopse_entry.get(), numero_paginas_entry.get())
-        admin.adicionarLivro(livro, biblioteca)
-        biblioteca.salvar_livros_csv('livros.csv')
-        messagebox.showinfo("Sucesso", "Livro adicionado com sucesso!")
+        if atualizar:
+            selecionado = lista_livros.selection()
+            if selecionado:
+                index = int(selecionado[0])
+                livro = livros_mostrados[index]
+                novos_dados = {
+                    'titulo': titulo,
+                    'autor': autor,
+                    'sinopse': sinopse,
+                    'numeroPaginas': numero_paginas
+                }
+                admin.atualizarLivro(livro, novos_dados)
+                messagebox.showinfo("Atualização", "Livro atualizado com sucesso!")
+                livro_window.destroy()
+            else:
+                messagebox.showwarning("Erro", "Nenhum livro selecionado.")
+        else:
+            novo_livro = Livro(ISBN, titulo, autor, sinopse, numero_paginas)
+            admin.adicionarLivro(novo_livro, biblioteca)
+            messagebox.showinfo("Sucesso", "Livro adicionado com sucesso!")
+            livro_window.destroy()
 
-    tk.Button(admin_window, text="Adicionar Livro", command=adicionar_livro).grid(row=6, column=0, columnspan=2, padx=10, pady=5)
+    livro_window = tk.Toplevel(root)
+    livro_window.title("Adicionar/Atualizar Livro")
 
-    tk.Label(admin_window, text="Atualizar Livro").grid(row=7, column=0, padx=10, pady=5)
+    tk.Label(livro_window, text="ISBN").grid(row=0, column=0, padx=10, pady=5)
+    isbn_entry = tk.Entry(livro_window)
+    isbn_entry.grid(row=0, column=1, padx=10, pady=5)
 
-    # Interface de gerenciamento de usuários
-    tk.Label(admin_window, text="Gerenciar Usuários").grid(row=8, column=0, padx=10, pady=5)
-    tk.Button(admin_window, text="Visualizar Usuários", command=lambda: visualizar_usuarios(admin_window)).grid(row=9, column=0, padx=10, pady=5)
+    tk.Label(livro_window, text="Título").grid(row=1, column=0, padx=10, pady=5)
+    titulo_entry = tk.Entry(livro_window)
+    titulo_entry.grid(row=1, column=1, padx=10, pady=5)
 
-    def visualizar_usuarios(window):
-        usuarios_window = tk.Toplevel(window)
-        usuarios_window.title("Usuários")
+    tk.Label(livro_window, text="Autor").grid(row=2, column=0, padx=10, pady=5)
+    autor_entry = tk.Entry(livro_window)
+    autor_entry.grid(row=2, column=1, padx=10, pady=5)
 
-        global lista_usuarios
-        lista_usuarios = ttk.Treeview(usuarios_window, columns=("Nome", "Email"), show='headings')
-        lista_usuarios.heading("Nome", text="Nome")
-        lista_usuarios.heading("Email", text="Email")
-        lista_usuarios.grid(row=0, column=0, padx=10, pady=5)
-        for usuario in biblioteca.usuarios:
-            lista_usuarios.insert('', 'end', text=usuario.nome, values=(usuario.nome, usuario.email))
+    tk.Label(livro_window, text="Sinopse").grid(row=3, column=0, padx=10, pady=5)
+    sinopse_entry = tk.Entry(livro_window)
+    sinopse_entry.grid(row=3, column=1, padx=10, pady=5)
 
-    # Carregar os dados de usuários e admins de arquivos CSV
-    biblioteca.carregar_usuarios_csv('usuarios.csv')
-    biblioteca.carregar_admins_csv('admins.csv')
+    tk.Label(livro_window, text="Número de Páginas").grid(row=4, column=0, padx=10, pady=5)
+    numero_paginas_entry = tk.Entry(livro_window)
+    numero_paginas_entry.grid(row=4, column=1, padx=10, pady=5)
 
-# Função para limpar os campos de entrada
-def clear_entries():
-    nome_entry.delete(0, tk.END)
-    email_entry.delete(0, tk.END)
-    senha_entry.delete(0, tk.END)
+    tk.Button(livro_window, text="Salvar", command=salvar_livro).grid(row=5, column=0, columnspan=2, pady=10)
 
-# Interface Principal
+def remover_livro(admin):
+    selecionado = lista_livros.selection()
+    if selecionado:
+        index = int(selecionado[0])
+        livro = livros_mostrados[index]
+        admin.removerLivro(livro, biblioteca)
+        messagebox.showinfo("Sucesso", "Livro removido com sucesso!")
+    else:
+        messagebox.showwarning("Erro", "Nenhum livro selecionado.")
 
+def gerenciar_usuarios(admin):
+    def atualizar_lista_usuarios():
+        lista_usuarios.delete(*lista_usuarios.get_children())
+        for i, usuario in enumerate(biblioteca.usuarios):
+            lista_usuarios.insert('', 'end', iid=i, text=usuario.nome, values=(usuario.email, usuario.multa))
+
+    user_window = tk.Toplevel(root)
+    user_window.title("Gerenciamento de Usuários")
+
+    global lista_usuarios
+    lista_usuarios = ttk.Treeview(user_window, columns=('Email', 'Multa'), show='headings')
+    lista_usuarios.heading('Email', text='Email')
+    lista_usuarios.heading('Multa', text='Multa')
+    lista_usuarios.grid(row=0, column=0, columnspan=3, padx=10, pady=5)
+
+    atualizar_lista_usuarios()
+
+# Instanciando a biblioteca
+biblioteca = Biblioteca()
+biblioteca.carregar_usuarios_csv('usuarios.csv')
+biblioteca.carregar_admins_csv('admins.csv')
+
+# Adicionando alguns livros ao catálogo da biblioteca
+biblioteca.catalogo.extend([
+    Livro("978-3-16-148410-0", "O Senhor dos Anéis", "J.R.R. Tolkien", "Uma aventura épica na Terra Média.", 1178),
+    Livro("978-0-7432-7356-5", "O Código Da Vinci", "Dan Brown", "Um mistério envolvendo arte, religião e códigos secretos.", 689),
+    Livro("978-0-452-28423-4", "1984", "George Orwell", "Uma distopia sobre um futuro totalitário.", 328),
+    Livro("978-0-14-028333-4", "Orgulho e Preconceito", "Jane Austen", "Um clássico romance sobre amor e sociedade.", 279)
+])
+
+# Criando a interface com tkinter
 root = tk.Tk()
-root.title("Biblioteca")
+root.title("Sistema de Biblioteca")
 
+# Widgets para Cadastro e Login
 tk.Label(root, text="Nome").grid(row=0, column=0, padx=10, pady=5)
 nome_entry = tk.Entry(root)
 nome_entry.grid(row=0, column=1, padx=10, pady=5)
@@ -333,10 +387,10 @@ email_entry = tk.Entry(root)
 email_entry.grid(row=1, column=1, padx=10, pady=5)
 
 tk.Label(root, text="Senha").grid(row=2, column=0, padx=10, pady=5)
-senha_entry = tk.Entry(root, show='*')
+senha_entry = tk.Entry(root, show="*")
 senha_entry.grid(row=2, column=1, padx=10, pady=5)
 
-tk.Button(root, text="Cadastrar", command=realizar_cadastro).grid(row=3, column=0, padx=10, pady=5)
-tk.Button(root, text="Login", command=realizar_login).grid(row=3, column=1, padx=10, pady=5)
+tk.Button(root, text="Cadastrar", command=realizar_cadastro).grid(row=3, column=0, pady=10)
+tk.Button(root, text="Login", command=realizar_login).grid(row=3, column=1, pady=10)
 
 root.mainloop()
