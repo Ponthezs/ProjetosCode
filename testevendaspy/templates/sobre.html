@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/produtos">Produtos</a>
+            <a href="/sobre">Sobre Nós</a>
+            <a href="/contato">Contato</a>
+        </nav>
+    </header>
+
+    <section class="sobre">
+        <h1>Sobre Nós</h1>
+        <p>Somos uma empresa dedicada a oferecer os melhores produtos para nossos clientes. Conheça nossa história e valores.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Site de Vendas. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
