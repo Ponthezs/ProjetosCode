@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/produtos">Produtos</a>
+            <a href="/sobre">Sobre Nós</a>
+            <a href="/contato">Contato</a>
+        </nav>
+    </header>
+
+    <section class="produtos">
+        <h1>Nossos Produtos</h1>
+        <!-- Exemplo de produto -->
+        <div class="produto">
+            <img src="{{ url_for('static', filename='images/produto1.jpg') }}" alt="Produto 1">
+            <h2>Produto 1</h2>
+            <p>Descrição breve do produto.</p>
+            <p>R$99,90</p>
+            <button>Adicionar ao Carrinho</button>
+        </div>
+        <!-- Adicione mais produtos aqui -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Site de Vendas. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
