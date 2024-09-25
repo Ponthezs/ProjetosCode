@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ponte\\Downloads\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectUniqueName": "D:\\GitHub Projects\\ProjetosCode\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
       "projectName": "WinFormsApp1",
-      "projectPath": "C:\\Users\\ponte\\Downloads\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectPath": "D:\\GitHub Projects\\ProjetosCode\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
       "packagesPath": "C:\\Users\\ponte\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ponte\\Downloads\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\obj\\",
+      "outputPath": "D:\\GitHub Projects\\ProjetosCode\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ponte\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -70,7 +70,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
