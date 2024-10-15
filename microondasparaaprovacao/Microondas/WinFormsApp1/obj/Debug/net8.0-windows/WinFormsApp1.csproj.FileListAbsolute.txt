@@ -66,3 +66,21 @@ C:\Users\ponte\Downloads\microondasparaaprovacao\Microondas-main\Microondas\WinF
 C:\Users\ponte\Downloads\microondasparaaprovacao\Microondas-main\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb
 C:\Users\ponte\Downloads\microondasparaaprovacao\Microondas-main\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
 C:\Users\ponte\Downloads\microondasparaaprovacao\Microondas-main\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.exe
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.deps.json
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.runtimeconfig.json
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.dll
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.pdb
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Form1.resources
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Form2.resources
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.GenerateResource.cache
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfoInputs.cache
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfo.cs
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.CoreCompileInputs.cache
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.sourcelink.json
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.dll
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\refint\WinFormsApp1.dll
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
+D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll

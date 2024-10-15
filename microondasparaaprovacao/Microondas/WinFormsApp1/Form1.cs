@@ -119,26 +119,62 @@ namespace WinFormsApp1
             }
             else
             {
-                if (tempoS > contador)
+                // Aqui você pode apenas manter o progresso visual sem repetir constantemente
+                string informativa = $"Aquecendo... Tempo restante: {SegundosParaMinutos(tempoS)}";
+                stringInformativa.Text = informativa;
+
+                if (tempoS <= 0)
                 {
-                    string info = new string(stringAquecimento, potenciaM) + " ";
-                    stringInformativa.Text += info;
-                    contador++;
-                }
-                else
-                {
-                    stringInformativa.Text += " Aquecimento concluído";
+                    stringInformativa.Text = "Aquecimento concluído";
                     limp.Start(); // Inicia o timer de limpeza
                     timer.Stop(); // Para o timer de aquecimento
                 }
             }
         }
 
+
         // Método chamado pelo timer principal a cada segundo
         private void timerChama(object sender, ElapsedEventArgs e)
         {
-            criaStringInformativa(); // Atualiza a string informativa
+            if (tempoS > 0)
+            {
+                tempoS--; // Decrementa o tempo restante
+
+                // Garante que a atualização dos controles seja feita na thread da UI
+                if (displayResult.InvokeRequired)
+                {
+                    displayResult.Invoke(new Action(() =>
+                    {
+                        displayResult.Text = SegundosParaMinutos(tempoS); // Atualiza o display com o tempo restante
+                        criaStringInformativa(); // Atualiza a string informativa
+                    }));
+                }
+                else
+                {
+                    displayResult.Text = SegundosParaMinutos(tempoS); // Atualiza o display com o tempo restante
+                    criaStringInformativa(); // Atualiza a string informativa
+                }
+            }
+            else
+            {
+                timer.Stop(); // Para o timer quando o tempo acabar
+
+                if (displayResult.InvokeRequired)
+                {
+                    displayResult.Invoke(new Action(() =>
+                    {
+                        stringInformativa.Text = "Aquecimento concluído";
+                    }));
+                }
+                else
+                {
+                    stringInformativa.Text = "Aquecimento concluído";
+                }
+                limp.Start(); // Inicia o timer de limpeza
+            }
         }
+
+
 
         // Método chamado pelo timer de limpeza
         private void limpeza(object sender, ElapsedEventArgs e)

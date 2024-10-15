@@ -268,6 +268,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Window;
             ClientSize = new Size(810, 625);
             Controls.Add(panelCustom);
             Controls.Add(CadastraNovo);
