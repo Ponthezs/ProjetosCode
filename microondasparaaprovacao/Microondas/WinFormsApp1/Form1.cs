@@ -59,17 +59,26 @@ namespace WinFormsApp1
         // Método que limpa os campos da interface
         public void limpaCampos()
         {
-            displayResult.Text = "";
-            displayMain.Text = "";
-            power.Text = "";
-            powerResult.Text = "";
-            stringInformativa.Text = "";
-            tempoS = 0;
-            potenciaM = 10;
-            contador = 0;
-            stringAquecimento = '.';
-            init = true;
+            if (displayResult.InvokeRequired)
+            {
+                // Chama o método na thread correta
+                displayResult.Invoke(new Action(limpaCampos));
+            }
+            else
+            {
+                displayResult.Text = "";
+                displayMain.Text = "";
+                power.Text = "";
+                powerResult.Text = "";
+                stringInformativa.Text = "";
+                tempoS = 0;
+                potenciaM = 10;
+                contador = 0;
+                stringAquecimento = '.';
+                init = true;
+            }
         }
+
 
         // Método que valida a potência informada
         public bool validaPotencia(int potencia)
