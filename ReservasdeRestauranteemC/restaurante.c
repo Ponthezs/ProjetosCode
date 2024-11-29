@@ -132,26 +132,24 @@
 
 #define MAX_RESERVAS 100
 
-// Estrutura para armazenar os dados de uma reserva
+
 typedef struct {
     char nome[100];
     char cpf[15];
-    int dia; // 1 - Quinta, 2 - Sexta, 3 - Sábado, 4 - Domingo
+    int dia;
     int numeroPessoas;
 } Reserva;
 
-// Declaração de variáveis globais
 Reserva reservas[MAX_RESERVAS];
 int totalReservas = 0;
 
-// Funções
 void fazerReserva();
 void listarReservas();
 void totalPessoasPorDia();
 void limparTela();
 void pausar();
 
-// Função principal
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
@@ -189,7 +187,6 @@ int main() {
     return 0;
 }
 
-// Função para fazer uma nova reserva
 void fazerReserva() {
     if (totalReservas >= MAX_RESERVAS) {
         printf("Limite máximo de reservas atingido.\n");
@@ -201,11 +198,11 @@ void fazerReserva() {
 
     printf("Nome do responsável: ");
     fgets(novaReserva.nome, 100, stdin);
-    novaReserva.nome[strcspn(novaReserva.nome, "\n")] = '\0'; // Remove o \n do final
+    novaReserva.nome[strcspn(novaReserva.nome, "\n")] = '\0';
 
     printf("CPF: ");
     fgets(novaReserva.cpf, 15, stdin);
-    novaReserva.cpf[strcspn(novaReserva.cpf, "\n")] = '\0'; // Remove o \n do final
+    novaReserva.cpf[strcspn(novaReserva.cpf, "\n")] = '\0';
 
     do {
         printf("Dia da reserva (1 - Quinta, 2 - Sexta, 3 - Sábado, 4 - Domingo): ");
@@ -222,7 +219,6 @@ void fazerReserva() {
     pausar();
 }
 
-// Função para listar todas as reservas
 void listarReservas() {
     if (totalReservas == 0) {
         printf("Nenhuma reserva cadastrada.\n");
@@ -241,7 +237,6 @@ void listarReservas() {
     pausar();
 }
 
-// Função para calcular o total de pessoas por dia
 void totalPessoasPorDia() {
     if (totalReservas == 0) {
         printf("Nenhuma reserva cadastrada.\n");
@@ -267,12 +262,10 @@ void totalPessoasPorDia() {
     pausar();
 }
 
-// Função para limpar a tela
 void limparTela() {
-    system("cls"); // Use "clear" no Linux/Unix, se necessário
+    system("cls");
 }
 
-// Função para pausar o programa
 void pausar() {
     printf("\nPressione qualquer tecla para continuar...\n");
     system("pause");
