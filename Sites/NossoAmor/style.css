@@ -1,12 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffe6f2;
+    background-color: #f7d1e37e;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 header {
-    background-color: #ff4d6d;
+    background-color: #fc7890;
     color: white;
     padding: 20px;
     font-size: 24px;
@@ -43,5 +43,5 @@ button {
     transition: 0.3s;
 }
 button:hover {
-    background-color: #d43f5e;
+    background-color: #e68296;
 }
