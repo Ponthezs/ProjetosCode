@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Nosso Amor ❤️</h1>
+    </header>
+    
+    <div class="container">
+        <section id="fotos">
+            <h2>Nossos Momentos</h2>
+            <div class="galeria">
+                <img src="Images/AnoNovo.jpeg" alt="#">
+                <img src="Images/AnoNovo2.jpeg" alt="#">
+                <img src="images/ParqueJP.jpeg" alt="#">
+            </div>
+        </section>
+        
+        <section id="linha-do-tempo">
+            <h2>Nossa História</h2>
+            <ul>
+                <li><strong>18/02/2024:</strong> Nos conhecemos ❤️</li>
+                <li><strong>06/03/2023:</strong> Primeiro encontro romântico 🌹</li>
+                <li><strong>26/12/2024:</strong> Nossa primeira viagem juntos ✈️</li>
+                <li><strong>25/12/2024:</strong> Nosso primeiro Natal 🎄</li>
+            </ul>
+        </section>
+        
+        <section id="mensagem">
+            <h2>Mensagem Especial</h2>
+            <p id="texto-mensagem">Clique no botão para ver uma mensagem especial!</p>
+            <button onclick="mostrarMensagem()">Mostrar Mensagem 💌</button>
+        </section>
+    </div>
+    
+    <script>
+        function mostrarMensagem() {
+            document.getElementById('texto-mensagem').innerText = "Te amo muito! Obrigado por estar sempre ao meu lado. ❤️";
+        }
+    </script>
+</body>
+</html>

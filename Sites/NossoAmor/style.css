@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe6f2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #ff4d6d;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+}
+.container {
+    width: 80%;
+    margin: auto;
+}
+#fotos, #linha-do-tempo, #mensagem {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.galeria {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.galeria img {
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+button {
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: #d43f5e;
+}
