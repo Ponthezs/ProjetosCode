@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub Projects\\ProjetosCode\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectUniqueName": "D:\\GitHub Projects\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
       "projectName": "WinFormsApp1",
-      "projectPath": "D:\\GitHub Projects\\ProjetosCode\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
+      "projectPath": "D:\\GitHub Projects\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\WinFormsApp1.csproj",
       "packagesPath": "C:\\Users\\ponte\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub Projects\\ProjetosCode\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\obj\\",
+      "outputPath": "D:\\GitHub Projects\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
