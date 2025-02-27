@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Login - Barbearia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Bem-vindo à Barbearia</h2>
+        <img src="logo.png" alt="Logo da Barbearia" class="logo">
+        <input type="text" id="loginUser" placeholder="Usuário">
+        <input type="password" id="loginPass" placeholder="Senha">
+        <button onclick="login()">Entrar</button>
+        <p>Não tem uma conta? <a href="#" onclick="showRegister()">Registre-se</a></p>
+    </div>
+
+    <div class="container" id="registerContainer" style="display:none;">
+        <h2>Registro</h2>
+        <img src="logo.png" alt="Logo da Barbearia" class="logo">
+        <input type="text" id="registerUser" placeholder="Usuário">
+        <input type="password" id="registerPass" placeholder="Senha">
+        <button onclick="register()">Registrar</button>
+        <p>Já tem uma conta? <a href="#" onclick="showLogin()">Faça login</a></p>
+    </div>
+
+    <script>
+        function showRegister() {
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.querySelector('.container').style.display = 'block';
+            document.getElementById('registerContainer').style.display = 'none';
+        }
+
+        function register() {
+            const user = document.getElementById('registerUser').value;
+            const pass = document.getElementById('registerPass').value;
+            
+            if (user && pass) {
+                localStorage.setItem(user, pass);
+                alert('Usuário registrado com sucesso!');
+                showLogin();
+            } else {
+                alert('Preencha todos os campos!');
+            }
+        }
+
+        function login() {
+            const user = document.getElementById('loginUser').value;
+            const pass = document.getElementById('loginPass').value;
+            
+            if ((user === 'admin' && pass === '123') || localStorage.getItem(user) === pass) {
+                alert('Login bem-sucedido!');
+                window.location.href = 'dashboard.html'; // Redirecionamento
+            } else {
+                alert('Usuário ou senha incorretos!');
+            }
+        }
+    </script>
+</body>
+</html>
