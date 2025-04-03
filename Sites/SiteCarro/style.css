@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: 0;
     list-style: none;
+    font-family: "Poppins", sans-serif;
 }
 
 body{
@@ -36,10 +37,9 @@ header{
 }
 
 section{
-    background-image: radial-gradient(#0162a2, #0162a2);
+    background-image: radial-gradient(#0162a2, #004c7d, #002a47);
     height: 100vh;
     position: relative;
-
 
     & .list {
         width: 70vw;
@@ -70,7 +70,7 @@ section{
                 height: 100%;
                 display: flex;
                 flex-direction: column;
-                justify-content: end;
+                justify-content: center;
                 align-items: end;
                 gap: 20px;
 
@@ -81,6 +81,7 @@ section{
                 & h2 {
                     font-size: 8em;
                     line-height: 1em;
+                    font-family: "Boldonse", system-ui;
                 }
 
                 & .description {
@@ -96,19 +97,57 @@ section{
                     width: 120px;
                     text-transform: uppercase;
                     border: 2px solid #000;
-                    background-color: #beff1b;
+                    background-color: #a8e619;
                     color: #000;
                     cursor: pointer;
                     font-weight: bold;
+                    font-family: "Boldonse", system-ui;
                 }
             }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            height: 200px;
+            width: 100%;
+            top: 50%;
+            border-top: 1px solid #fff;
+
         }
     }
 
     .arrows{
+        width: 70vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -25px);
+        display: flex;
+        justify-content: space-between;
+
+        & button:nth-child(1) {
+            & img {
+                transform: scale(-1);
+            }
+        }
+
         & button {
-            & img{
-                width: 100px;
+            top: 60%;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+
+            & img {
+                width: 30px;
+                margin-top: 4px;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background-color: #a8e619;
             }
         }
     }
@@ -127,9 +166,49 @@ section{
 
         & .number {
             font-size: 5em;
+            font-family: "Boldonse", system-ui;
+        }
+
+        & ul{
+            display: flex;
+            gap: 10px;
+
+            & li {
+                width: 50px;
+                height: 5px;
+                background-color: #a8e619;
+                border-radius: 5px;
+                transition: 0.5s;
+            }
+
+            & .active {
+                background-color: white;
+            }
         }
 
     }
-
 }
 
+section {
+
+    & .list {
+
+        & .item {
+
+            transform: translateX(100vw);
+            transition: 0.5s;
+
+            & .car-ferrari{
+
+                & img {
+
+                }
+            }
+
+            & .content{
+
+            }
+
+        }
+    }
+}
