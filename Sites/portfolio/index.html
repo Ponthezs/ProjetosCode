@@ -1,94 +1,206 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Pontes Portfolio</title>
+    <title>Portfólio - Felipe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" type="imagex/png" href="images/user-solid.svg">
-    <!----Font awesome cdn  font icon css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-</head>
+    </head>
 <body>
-     <div class="hero-header">
-        <div class="wrapper">
-            <header>
-                <div class="logo">
-                    <i class="fa-solid fa-f"></i>
-                    <div class="logo-text">Felipe Pontes</div>
-                </div>
-                <nav>
-                    <div class="togglebtn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul class="navlinks">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="">Resume</a></li>
-                        <li><a href="https://github.com/Ponthezs">GitHub</a></li>
-                        <li><a href="https://wa.me/5544984475452">Contact</a></li>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="#home">F</a> </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li> <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#experiencia">Experiência</a></li>
+                    <li><a href="#projetos">Projetos</a></li> <li><a href="#certificacoes">Certificações</a></li>
+                    <li><a href="#contato">Contato</a></li>
                     </ul>
-                </nav>
-            </header>
-            <div class="container">
-                 <div class="hero-pic">
-                    <img src="images/MyPhoto.jpg" alt="profile pic">
-                 </div>
-                 <div class="hero-text">
-                    <h5>Hi I'm <span class="input">Software Engineering Student</span></h5>
-                    <h1>Felipe Pontes</h1>
-                    <p> Software Engineering Student | Passionate about Continuous Learning and Innovation
-
-                        Currently studying Software Engineering, I am a technology enthusiast and am always looking for new opportunities for learning and personal and professional development. During my academic career, I developed a strong foundation in programming, algorithms, requirements engineering, software architecture and agile methodologies.
-                        
-                        Skills and Competencies:
-                        Programming: Experience in several languages, including Python, JavaScript, C# and Front-End.
-                        Software Development: Practical knowledge in design and implementation of software systems.
-                        Agile Methodologies: Practice in Scrum and Kanban, focusing on continuous delivery and constant improvement.
-                        Software Quality: Skills in software testing, test automation and quality assurance.
-                        
-                        Goal:
-                        My goal is to continue to expand my software engineering skills and contribute to innovative projects that have a positive impact. I am open to internship opportunities and collaboration on projects that allow me to apply my knowledge and learn even more.
-                    </p>
-
-                    <div class="btn-group">
-                       <a href="#" class="btn active">Download CV</a>
-                       <a href="https://wa.me/5544984475452" class="btn">Contact</a>
-                    </div>
-
-                    <div class="social">
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-dribbble"></i></a>
-                        <a href="#"><i class="fa-brands fa-pintrest"></i></a>
-                    </div>
-                 </div>
-            </div>
+            </nav>
         </div>
-     </div>
-     <!---typed js for typing text effect-->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
-     <script>
-        /** creating button click show hide navbar **/
-        var togglebtn=document.querySelector(".togglebtn");
-        var nav=document.querySelector(".navlinks");
-        var links=document.querySelector(".navlinks li");
+    </header>
 
-        togglebtn.addEventListener("click", function(){
-            this.classList.toggle("click");
-            nav.classList.toggle("open");
-        })
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container hero-container">
+                <div class="profile-image-container">
+                    <img src="images/MyPhoto.jpg" alt="Foto de [Seu Nome]">
+                </div>
+                <div class="intro-text-container">
+                    <p class="hero-subtitle">OI, EU SOU SCRUM MASTER & DEV ENTHUSIAST</p> <h1>FELIPE PONTES DOS SANTOS</h1>
+                    <p class="hero-description">
+                        Atualmente estou atuando como Scrum Master.
+                        Sou um entusiasta de tecnologia, sempre buscando novas oportunidades para aprendizado e desenvolvimento pessoal e profissional.
+                        Durante minha trajetória, desenvolvi uma base forte em programação, algoritmos, arquitetura de software e metodologias ágeis.
+                        Minhas competências incluem: [.NET, JS, Front-End/Back-End], implementação de sistemas, Scrum, Kanban,
+                        foco em entrega contínua e melhoria constante. Qualidade de software, testes e automação também são áreas de meu interesse.
+                        Meu objetivo é expandir minhas habilidades e contribuir para projetos inovadores que tenham um impacto positivo.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="seu-cv.pdf" download class="btn btn-primary">Download CV</a>
+                        <a href="#contato" class="btn btn-secondary">Contato</a>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/ponthezs/" target="_blank" title="LinkedIn">LinkedIn</a>
+                        <a href="https://github.com/Ponthezs" target="_blank" title="GitHub">GitHub</a>
+                        <a href="mailto:pontesfelipe835@gmail.com" title="Email">Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        var typed=new Typed(".input",{
-            strings:["Frontend Developer","UX Designer","Web Developer"],
-            typedSpeed:70,
-            backSpeed:55,
-            loop:true
-        })
-     </script>
+        <section id="sobre" class="content-section">
+            <div class="container">
+                <h2>Sobre Mim</h2>
+                <p>
+                    Minha paixão pela agilidade e pelo papel de Scrum Master é complementada pela minha vivência prática em desenvolvimento.
+                    Isso me permite não apenas facilitar cerimônias e remover impedimentos, mas também entender profundamente
+                    os desafios técnicos da equipe, promovendo uma comunicação mais eficaz e colaborativa.
+                </p>
+                <p>
+                    Acredito na liderança servidora, na transparência e na melhoria contínua como pilares para construir times de alta performance
+                    e entregar produtos de valor. Busco constantemente aprimorar meus conhecimentos em [mencione áreas específicas de interesse, ex: novas tecnologias de desenvolvimento, práticas de coaching ágil].
+                </p>
+            </div>
+        </section>
+
+        <section id="habilidades" class="content-section">
+            <div class="container">
+                <h2>Habilidades</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Scrum & Agile</h3>
+                        <ul>
+                            <li>Framework Scrum</li>
+                            <li>Kanban / Lean</li>
+                            <li>Métricas Ágeis</li>
+                            <li>Facilitação & Coaching</li>
+                            <li>Gestão de Impedimentos</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Ferramentas de Gestão</h3>
+                        <ul>
+                            <li>Microsoft 365 / Azure DevOps</li>
+                            <li>Trello / Project Standart</li>
+                            <li>Miro</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Desenvolvimento</h3>
+                        <ul>
+                            <li>Linguagens: [JS, Python, Java]</li>
+                            <li>Frameworks: [React, Node.js]</li>
+                            <li>Bancos de Dados: [SQL, Oracle]</li>
+                            <li>Controle de Versão: Git</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Interpessoais</h3>
+                        <ul>
+                            <li>Comunicação</li>
+                            <li>Liderança Servidora</li>
+                            <li>Resolução de Problemas</li>
+                            <li>Adaptabilidade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="content-section">
+            <div class="container">
+                <h2>Experiência Profissional</h2>
+                <div class="job">
+                    <h3>Assistente de Projetos | Scrum Master</h3>
+                    <p><strong>Benner Saúde</strong> | Maringá, Paraná</p>
+                    <p><em>Fev/2024 – Atualmente</em></p>
+                    <ul>
+                        <li>Gestão e análise de indicadores para melhoria contínua.</li>
+                        <li>Suporte na tomada de decisões gerenciais.</li>
+                        <li>Colaborei com POs para refinar o backlog do produto.</li>
+                        <li> Controle e distribuição de demandas da equipe.</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Jovem Aprendiz</h3>
+                    <p><strong>Benner Sáude</strong> | Maringá, Paraná</p>
+                    <p><em>Out/2021 – Mar/2023</em></p>
+                    <ul>
+                        <li>Gestão de fornecedores e contratos.</li>
+                        <li>Controle financeiro e faturamento de projetos.</li>
+                        <li>Participei ativamente de equipes ágeis.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="content-section">
+            <div class="container">
+                <h2>Meus Principais Projetos</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>[Nome do Projeto 1]</h3>
+                        <p><strong>Papel:</strong> Scrum Master</p>
+                        <p><strong>Descrição:</strong> [Breve descrição do projeto, o problema, solução e seu papel crucial.]</p>
+                        <p><strong>Tecnologias:</strong> Scrum, Jira, [Outras Tecnologias Relevantes]</p>
+                        <p class="project-impact"><strong>Impacto:</strong> [Resultados quantificáveis, ex: Aumento de X% na velocidade da equipe, entrega de Y funcionalidades chave.]</p>
+                        </div>
+                    <div class="project-card">
+                        <h3>[Nome do Projeto 2]</h3>
+                        <p><strong>Papel:</strong> [Desenvolvedor / Scrum Master]</p>
+                        <p><strong>Descrição:</strong> [Breve descrição, como seu conhecimento técnico/ágil foi aplicado.]</p>
+                        <p><strong>Tecnologias:</strong> [Linguagens, Frameworks, Metodologia]</p>
+                        <p class="project-impact"><strong>Impacto:</strong> [Resultados e aprendizados.]</p>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+        <section id="certificacoes" class="content-section">
+            <div class="container">
+                <h2>Certificações</h2>
+                <div class="certification-item">
+                    <h3>Gerente Ágil</h3>
+                    <p><strong>Organização:</strong> Alura | <strong>Data:</strong> Set/2022</p>
+                </div>
+                <div class="certification-item">
+                    <h3>Carreira QA</h3>
+                    <p><strong>Organização:</strong> Alura | <strong>Data:</strong> Dez/2022</p>
+                </div>
+                <hr>
+                <h3>Formação Acadêmica</h3>
+                <div class="certification-item">
+                     <p><strong>Bacharelado Engenharia de Software</strong> - Unicesumar (2024 - 2028)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="content-section">
+            <div class="container">
+                <h2>Entre em Contato</h2>
+                <p>Estou disponível para novas oportunidades e colaborações. Vamos conversar!</p>
+                <div class="contact-info">
+                    <p><strong>Email:</strong> <a href="mailto:pontesfelipe835@gmail.com">pontesfelipe835@gmail.com</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ponthezs/" target="_blank">Felipe Pontes</a></p>
+                    <p><strong>GitHub:</strong> <a href="https://github.com/Ponthezs" target="_blank">Felipe Pontes</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Felipe Pontes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

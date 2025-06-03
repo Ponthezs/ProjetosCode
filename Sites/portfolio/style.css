@@ -1,214 +1,388 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
+/* Reset básico e Configurações Globais */
+* {
     margin: 0;
-    font-family: poppins,sans-serif;
-    text-decoration: none;
+    padding: 0;
+    box-sizing: border-box;
 }
-body{
-    overflow-x: hidden;
+
+html {
+    scroll-behavior: smooth; /* Rolagem suave para links de âncora */
 }
-.hero-header{
-    width:100%;
-    height: 100%;
-    min-height: 100vh;
-    background: #222;
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    background-color: #121212; /* Fundo principal escuro */
+    color: #e0e0e0; /* Cor de texto principal clara */
 }
-.wrapper{
-    width:1280px;
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 0 20px;
+
+.container {
+    width: 90%;
+    max-width: 1100px; /* Largura máxima para o conteúdo */
+    margin: auto;
+    overflow: hidden; /* Clearfix */
 }
-header{
-    padding: 40px 0 30px;
+
+/* Cabeçalho e Navegação */
+header {
+    background-color: #1e1e1e; /* Um pouco mais claro que o body */
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
-.logo{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
-.logo i{
-    height: 45px;
-    width:45px;
-    background-color: #000000;
-    border-radius: 50%;
-    color:#fff;
-    font-weight: 700;
-    font-size: 1.5rem;
-    padding: 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    text-align: center;
-    
-}
-.logo .logo-text{
-    font-size: 24px;
-    font-weight: 500;
-    color:#fff;
-}
-nav .togglebtn{
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    top:45px;
-    right: 3%;
-    z-index: 5;
-    cursor: pointer;
-    display: none;
-}
-nav .togglebtn span{
-    display: block;
-    background-color: #00fff2;
-    margin: 5px 0px;
-    width:100%;
-    height:3px;
-    transition: 0.3s;
-    transition-property:  transform, opacity;
 
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
-nav .navlinks{
-    list-style-type: none;
+
+nav ul {
+    list-style: none;
 }
-nav .navlinks li{
-    display: inline-block;
+
+nav ul li {
+    display: inline-block; /* Links lado a lado */
+    margin-left: 25px;
 }
-nav .navlinks li a{
-     color:#e5e5e5;
-     margin-right: 2.5rem;
+
+nav ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
 }
-.container {
+
+nav ul li a:hover,
+nav ul li a.active { /* Você pode adicionar a classe 'active' via JS se quiser destacar a seção atual */
+    color: #00aaff; /* Cor de destaque azul */
+}
+
+/* Seção Hero (Home) */
+.hero-section {
+    min-height: 90vh; /* Altura mínima para ocupar boa parte da tela */
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    padding-top:4rem;
+    justify-content: center;
+    padding: 4rem 0; /* Espaçamento vertical */
+    background-color: #181818; /* Fundo ligeiramente diferente para a seção hero */
 }
-.container .hero-pic{
-    width: 300px;
-    height: 300px;
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Espaço entre a imagem e o texto */
+}
+
+.profile-image-container {
+    flex-basis: 35%; /* Largura da coluna da imagem */
+    text-align: center;
+}
+
+.profile-image-container img {
+    width: 280px; /* Tamanho da imagem */
+    height: 280px;
     border-radius: 50%;
-    overflow: hidden;
-    border: 15px solid #444;
-    box-shadow: 5px 7px 25px rgba(0,0,0,0.5);
+    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
+    border: 7px solid #2a2a2a; /* Borda da imagem */
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.3); /* Sombra sutil azulada */
 }
-.hero-pic img{
-    height: 100%;
-    width:100%;
-    transition: 0.5s;
+
+.intro-text-container {
+    flex-basis: 60%; /* Largura da coluna de texto */
 }
-.hero-pic img:hover{
-    transform: scale(1.2);
+
+.hero-subtitle {
+    color: #00aaff; /* Azul para o subtítulo */
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
 }
-.hero-text{
-    max-width: 500px;
+
+.intro-text-container h1 {
+    font-size: 3.2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-description {
+    font-size: 1rem;
+    color: #bbb; /* Cinza mais claro para a descrição */
+    margin-bottom: 2rem;
+}
+
+.hero-buttons .btn {
+    margin-right: 1rem;
+    margin-bottom: 1rem; /* Para empilhar em mobile */
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #00aaff;
+    color: #121212; /* Texto escuro para contraste */
+    border: 2px solid #00aaff;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: #00aaff;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #ccc;
+    border: 2px solid #555;
+}
+
+.btn-secondary:hover {
+    background-color: #555;
+    color: #fff;
+    border-color: #555;
+}
+
+.social-icons {
+    margin-top: 2rem;
+}
+
+.social-icons a {
+    color: #ccc;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 1.2rem; /* Aumente se usar ícones de fonte */
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #00aaff;
+}
+
+/* Seções de Conteúdo Geral */
+.content-section {
+    padding: 4rem 0;
+    background-color: #1e1e1e; /* Cor de fundo para seções de conteúdo */
+    margin-bottom: 1px; /* Linha sutil de separação ou sobreposição */
+}
+.content-section:nth-child(even) { /* Alternar cor de fundo se desejar */
+    /* background-color: #1a1a1a; */
+}
+
+
+.content-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 3rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.content-section h2::after { /* Linha decorativa abaixo do título da seção */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #00aaff;
+    border-radius: 2px;
+}
+
+/* Estilos para Habilidades */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.skill-category {
+    background-color: #2a2a2a; /* Fundo para cada categoria de skill */
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.skill-category h3 {
+    color: #00aaff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.skill-category ul {
+    list-style: none;
+}
+
+.skill-category ul li {
+    margin-bottom: 0.5rem;
+    color: #bbb;
+}
+
+/* Estilos para Experiência e Certificações */
+.job, .certification-item {
+    background-color: #2a2a2a;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border-left: 5px solid #00aaff; /* Destaque na lateral */
+}
+
+.job h3, .certification-item h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.job p, .certification-item p {
+    margin-bottom: 0.5rem;
+    color: #bbb;
+}
+.job p strong, .certification-item p strong {
+    color: #ddd;
+}
+
+.job ul {
+    list-style-position: inside;
+    padding-left: 0;
+    color: #bbb;
+}
+.job ul li {
+    margin-bottom: 0.3rem;
+}
+
+/* Estilos para Projetos */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: #2a2a2a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
 }
-.hero-text h5{
-    color:#e5e5e5;
-    font-size: 14px;
-}
-.hero-text h5 span{
-    color:#00ffea;
-    font-size: 16px;
-}
-.hero-text h1{
-    color: #00edcd;
-    font-size: 3rem;
-}
-.hero-text p{
-    color:#e5e5e5;
 
+.project-card h3 {
+    color: #00aaff;
+    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
 }
-.btn-group{
-    margin:45px 0;
+
+.project-card p {
+    color: #bbb;
+    margin-bottom: 0.7rem;
+    font-size: 0.95rem;
+    flex-grow: 1; /* Para que as descrições ocupem espaço disponível */
 }
-.btn-group .btn{
-    border-color: #d5d5d5;
-    color:#fff;
-    background-color: #333;
-    padding: 12px 25px;
-    margin: 5px 0px;
-    margin-right:7px;
-    border-radius: 30px;
-    border:2px solid #e5e5e5;
-    box-shadow:  0 10px 10px -8px rgb(0 0 0 / 78%);
+.project-card p strong {
+    color: #ddd;
 }
-.btn.active{
-    border-color: #ffd000;
+.project-card .project-impact {
+    font-style: italic;
+    color: #00caff; /* Destaque para impacto */
 }
-.hero-text .social i{
-    color: #ffffff;
-    font-size: 18px;
-    margin-right: 10px;
-    transition: 0.5s;
+.project-card .btn-link { /* Estilo para links de "Ver Detalhes" se usar */
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: auto; /* Empurra o link para baixo */
 }
-.hero-text .social i:hover{
-    color:#1ced00;
-    transform: rotate(360deg);
+.project-card .btn-link:hover {
+    text-decoration: underline;
 }
-/* Respnosiv design & displaying navbar for small screen */
-@media(max-width:930px)
-{
-    nav .togglebtn{
-        display: initial;
+
+
+/* Estilos para Contato */
+.contact-info p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+.contact-info a {
+    color: #00aaff;
+    text-decoration: none;
+}
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #181818;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
     }
-    /* for toggle button**/
-    .click {
-        top:45px;
+    .logo {
+        margin-bottom: 1rem;
     }
-    .click span{
-        position: absolute;
-        margin-top:12px
-    }
-    .click span:first-child{
-        transform: rotate(-40deg);
-    }
-    .click span:nth-child(2)
-    {
-        opacity: 0;
-        margin:0;
-    }
-    .click span:last-child{
-        transform: rotate(45deg);
-        top:0;
-    }
-    nav .navlinks{
-        position: absolute;
-        top:110px;
-        right:-100%;
-        bottom: 0;
-        width: 60%;
-        height: 100vh;
-        background-color: #222;
-        z-index: 3;
-        box-shadow: 5px 13px 30px rgba(0,0,0,0.1);
-        transition: 0.5s;
-        padding: 25px 0px;
-    }
-    nav .navlinks li{
-        display: block;
-    }
-    nav .navlinks li a{
-        display: block;
-        margin-bottom: 15px;
+    nav ul li {
+        display: block; /* Menu empilhado */
+        margin: 0.5rem 0;
         text-align: center;
     }
-    nav .navlinks.open{
-        right:0;
+
+    .hero-container {
+        flex-direction: column; /* Empilha a imagem e o texto */
+        text-align: center;
     }
-}
-@media(max-width:768px)
-{
-    .container{
-        flex-direction: column;
-        padding-top:2rem
+    .profile-image-container img {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 2rem;
     }
-    .hero-text{
-        padding:40px 0px;
+    .intro-text-container h1 {
+        font-size: 2.5rem;
+    }
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    .hero-buttons {
+        display: flex;
+        flex-direction: column; /* Botões empilhados */
+        align-items: center;
+    }
+    .hero-buttons .btn {
+        width: 80%;
+        margin-bottom: 1rem;
+        margin-right: 0;
+    }
+
+    .content-section h2 {
+        font-size: 2rem;
+    }
+    .skills-grid, .projects-grid {
+        grid-template-columns: 1fr; /* Uma coluna para grids */
     }
 }
