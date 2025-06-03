@@ -274,7 +274,7 @@ nav ul li a.active { /* Você pode adicionar a classe 'active' via JS se quiser 
 /* Estilos para Projetos */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Mantém o layout responsivo */
     gap: 2rem;
 }
 
@@ -287,6 +287,17 @@ nav ul li a.active { /* Você pode adicionar a classe 'active' via JS se quiser 
     flex-direction: column;
 }
 
+/* NOVO ESTILO PARA A IMAGEM DO PROJETO */
+.project-image {
+    width: 100%; /* Faz a imagem ocupar toda a largura do card (respeitando o padding) */
+    height: 200px; /* Defina uma altura fixa para as imagens dos projetos */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer. Pode cortar partes da imagem. */
+    /* object-fit: contain; */ /* Alternativa: Garante que toda a imagem apareça, podendo deixar espaços vazios. */
+    border-radius: 6px; /* Bordas arredondadas para a imagem */
+    margin-bottom: 1rem; /* Espaço entre a imagem e o título do projeto */
+    background-color: #333; /* Cor de fundo caso a imagem demore a carregar ou não exista */
+}
+
 .project-card h3 {
     color: #00aaff;
     margin-bottom: 0.8rem;
@@ -297,24 +308,25 @@ nav ul li a.active { /* Você pode adicionar a classe 'active' via JS se quiser 
     color: #bbb;
     margin-bottom: 0.7rem;
     font-size: 0.95rem;
-    flex-grow: 1; /* Para que as descrições ocupem espaço disponível */
+    flex-grow: 1; 
 }
 .project-card p strong {
     color: #ddd;
 }
 .project-card .project-impact {
     font-style: italic;
-    color: #00caff; /* Destaque para impacto */
+    color: #00caff; 
 }
-.project-card .btn-link { /* Estilo para links de "Ver Detalhes" se usar */
+.project-card .btn-link { 
     color: #00aaff;
     text-decoration: none;
     font-weight: 600;
-    margin-top: auto; /* Empurra o link para baixo */
+    margin-top: auto; 
 }
 .project-card .btn-link:hover {
     text-decoration: underline;
 }
+
 
 
 /* Estilos para Contato */
