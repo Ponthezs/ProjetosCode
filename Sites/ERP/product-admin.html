@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerir Produtos - ERP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        if (localStorage.getItem('gestorProPlus_theme_v2') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-slate-900">
+    <div id="toast-container"></div>
+
+    <nav id="mainNavbar" class="bg-sky-700 dark:bg-sky-800 p-4 shadow-lg hidden-element">
+         <div class="container mx-auto flex flex-wrap items-center justify-between">
+            <a href="index.html" class="text-white text-xl font-bold">ERP Admin</a>
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <a href="index.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium"><i class="fas fa-store mr-1"></i>Ver Loja</a>
+                <a href="cart.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <i class="fas fa-shopping-cart mr-1"></i>Carrinho (<span id="cartItemCount">0</span>)
+                </a>
+                <a href="product-admin.html" class="text-white bg-sky-800 dark:bg-sky-900 px-3 py-2 rounded-md text-sm font-medium hidden-element" id="adminMenuProductCreateLink"><i class="fas fa-plus-circle mr-1"></i>Gerir Produtos</a>
+                <a href="permissions-admin.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium hidden-element" id="adminMenuPermissionsLink"><i class="fas fa-users-cog mr-1"></i>Permissões</a>
+                <button id="themeToggle" class="text-white p-2 rounded-md hover:bg-sky-600 dark:hover:bg-sky-700"><i class="fas fa-moon"></i></button>
+                 <div class="relative">
+                     <button type="button" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center" id="userMenuButton">
+                        <i class="fas fa-user-circle mr-1"></i><span id="loggedInUserDisplay">User</span> <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div id="userDropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden-element" role="menu">
+                        <a href="#" onclick="logoutUser()" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700" role="menuitem">Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8 main-content-area">
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-sky-800 dark:text-sky-300">Gerir Produtos</h1>
+        </header>
+
+        <section class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl mb-8">
+            <h2 id="formProductTitle" class="text-2xl font-semibold mb-6 text-sky-700 dark:text-sky-400 border-b dark:border-slate-700 pb-3">Adicionar Novo Produto</h2>
+            <form id="formManageProduct" class="space-y-4">
+                <!-- data-editing-id será adicionado/removido pelo JS -->
+                <div>
+                    <label for="productCode" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Código do Produto (deixe em branco para gerar auto):</label>
+                    <input type="text" id="productCode" name="productCode" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm dark:bg-slate-700">
+                </div>
+                <div>
+                    <label for="productName" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Nome do Produto <span class="text-red-500">*</span>:</label>
+                    <input type="text" id="productName" name="productName" required class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm dark:bg-slate-700">
+                </div>
+                <div>
+                    <label for="productPrice" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Preço (R$) <span class="text-red-500">*</span>:</label>
+                    <input type="number" id="productPrice" name="productPrice" step="0.01" min="0" required class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm dark:bg-slate-700">
+                </div>
+                <div>
+                    <label for="productStock" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Stock <span class="text-red-500">*</span>:</label>
+                    <input type="number" id="productStock" name="productStock" min="0" required class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm dark:bg-slate-700">
+                </div>
+                <div>
+                    <label for="productImageUrl" class="block text-sm font-medium text-gray-700 dark:text-slate-300">URL da Imagem:</label>
+                    <input type="url" id="productImageUrl" name="productImageUrl" placeholder="https://exemplo.com/imagem.png" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm dark:bg-slate-700">
+                </div>
+                <div class="flex space-x-3 pt-2">
+                    <button type="submit" id="saveProductButton" class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150">Adicionar Produto</button>
+                    <button type="button" id="cancelEditButton" class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 hidden-element">Cancelar Edição</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl">
+            <h2 class="text-2xl font-semibold mb-6 text-sky-700 dark:text-sky-400 border-b dark:border-slate-700 pb-3">Produtos Cadastrados</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
+                    <thead class="bg-gray-50 dark:bg-slate-700">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">Imagem</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">Código</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">Nome</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">Preço</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">Stock</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminProductTableBody" class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+                        <!-- Linhas da tabela de produtos serão inseridas aqui -->
+                    </tbody>
+                </table>
+            </div>
+            <p id="noAdminProductsMessage" class="text-center text-gray-500 dark:text-slate-400 mt-4 hidden-element">Nenhum produto cadastrado.</p>
+        </section>
+    </main>
+    
+    <footer class="text-center p-4 text-sm text-gray-500 dark:text-slate-400 mt-12 border-t dark:border-slate-700">
+        &copy; <span id="currentYear"></span> ERP. Todos os direitos reservados.
+    </footer>
+
+    <script src="script.js"></script>
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userMenuButton = document.getElementById('userMenuButton');
+            const userDropdownMenu = document.getElementById('userDropdownMenu');
+            if(userMenuButton && userDropdownMenu){
+                userMenuButton.addEventListener('click', () => userDropdownMenu.classList.toggle('hidden-element'));
+                document.addEventListener('click', (event) => {
+                    if (!userMenuButton.contains(event.target) && !userDropdownMenu.contains(event.target)) {
+                        userDropdownMenu.classList.add('hidden-element');
+                    }
+                });
+            }
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+/* Estilos CSS (style.css) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+/* .view e .active-view não são mais necessários para a lógica principal de navegação */
+
+.login-container {
+    width: 350px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.logo-login {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.logo-header {
+    max-width: 70px; 
+    height: auto;
+    vertical-align: middle;
+    margin-right: 10px; 
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 15px 0; 
+    border-bottom: #0779e4 3px solid;
+    text-align: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-grow: 1; 
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em; 
+    vertical-align: middle;
+}
+
+header nav {
+    margin-top: 10px; 
+}
+
+/* Estilo para os links de navegação e botão de logout */
+header nav a.nav-button, header nav button { 
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px; 
+    padding: 8px 12px; 
+    margin: 0 5px;
+    border-radius: 5px;
+    background: none;
+    border: 1px solid transparent; 
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: inline-block; /* Para que padding e margin funcionem bem em <a> */
+}
+
+header nav a.nav-button.active, 
+header nav a.nav-button:hover, 
+header nav button:hover {
+    background-color: #0779e4;
+    border-color: #0056b3;
+    font-weight: bold;
+}
+
+#logoutButton { /* Estilo específico para o botão de logout */
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+#logoutButton:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+h2, h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form input[type="datetime-local"],
+form input[type="month"],
+form input[type="tel"],
+form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"], .action-button {
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: #0779e4;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.action-button svg { 
+    margin-right: 6px;
+}
+
+button[type="submit"]:hover, .action-button:hover {
+    background: #0056b3;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.item-card { 
+    background-color: #e9ecef;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.item-card p {
+    margin: 5px 0;
+}
+
+.item-card button { 
+    margin-top: 10px;
+    margin-right: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.button-vendido {
+    background-color: #28a745; 
+}
+.button-vendido:hover {
+    background-color: #1e7e34;
+}
+.button-delete {
+    background-color: #dc3545; 
+}
+.button-delete:hover {
+    background-color: #bd2130;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; 
+    }
+    .header-content {
+        margin-bottom: 10px;
+    }
+    header nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column; 
+    }
+    header nav a.nav-button, header nav button {
+        margin: 5px 0; 
+        width: calc(100% - 10px); 
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .container {
+        width: 95%;
+    }
+    .login-container {
+        width: 90%;
+    }
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 450px; 
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+}
+.modal-content div { 
+    margin-bottom: 15px;
+    text-align: left; 
+}
+.modal-content label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: bold;
+}
+.modal-content input, .modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    margin: 5px; 
+    border-radius: 5px;
+    cursor: pointer;
+}
+.modal-confirm-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+.modal-cancel-button {
+    background-color: #6c757d; 
+    color: white;
+    border: none;
+}
+.modal-delete-button { 
+     background-color: #dc3545;
+     color: white;
+     border: none;
+}

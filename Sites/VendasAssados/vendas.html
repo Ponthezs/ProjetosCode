@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas - Sistema de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="appHeader">
+        <div class="header-content">
+            <img src="imagens/logo.png" alt="Logo da Empresa" class="logo-header" onerror="this.style.display='none'">
+            <h1>Painel de Controle</h1>
+        </div>
+        <nav>
+            <a href="dashboard.html" class="nav-button">Início</a>
+            <a href="agendamentos.html" class="nav-button">Agendamentos</a>
+            <a href="vendas.html" class="nav-button active">Vendas</a>
+            <a href="relatorios.html" class="nav-button">Relatórios</a>
+            <button id="logoutButton">Sair</button>
+        </nav>
+    </header>
+
+    <main id="appContent">
+        <div id="vendasView" class="container">
+            <h2>Registrar Venda</h2>
+            <div class="item-card">
+                <h3>Venda na Hora (Balcão)</h3>
+                <form id="formVendaBalcao">
+                    <div>
+                        <label for="itemVenda">Item:</label>
+                        <select id="itemVenda">
+                            <option value="frango">Frango</option>
+                            <option value="costela">Costela</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="pesoVenda">Peso (kg):</label>
+                        <input type="number" step="0.01" id="pesoVenda" min="0.1" required>
+                    </div>
+                    <div>
+                        Preço/kg Frango: R$ <span id="precoKgFrangoDisplay"></span><br>
+                        Preço/kg Costela: R$ <span id="precoKgCostelaDisplay"></span>
+                    </div>
+                    <div>
+                        <h3>Valor Total: R$ <span id="valorTotalVendaDisplay">0.00</span></h3>
+                    </div>
+                    <button type="submit" class="action-button">Registrar Venda</button>
+                </form>
+            </div>
+
+            <h3>Vendas Registradas Hoje</h3>
+            <div id="listaVendasHoje">
+                </div>
+        </div>
+    </main>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessageText">Tem certeza?</p>
+            <button id="modalConfirm" class="modal-confirm-button">Confirmar</button>
+            <button id="modalCancel" class="modal-cancel-button">Cancelar</button>
+        </div>
+    </div>
+    <div id="promptModal" class="modal">
+         <div class="modal-content">
+            <p id="promptModalMessageText">Informe o valor:</p>
+            <input type="number" id="promptModalInput" step="0.01" min="0.01" style="width: 100%; padding: 10px; margin-bottom:15px; box-sizing: border-box;">
+            <p id="promptModalError" style="color:red; font-size:0.9em; display:none;">Valor inválido.</p>
+            <button id="promptModalConfirm" class="modal-confirm-button">OK</button>
+            <button id="promptModalCancel" class="modal-cancel-button">Cancelar</button>
+        </div>
+    </div>
+    <div id="editVendaModal" class="modal">
+        <div class="modal-content">
+            <h3>Editar Venda</h3>
+            <input type="hidden" id="editVendaIdInput">
+            <div>
+                <label for="editVendaItemSelect">Item:</label>
+                <select id="editVendaItemSelect">
+                    <option value="frango">Frango</option>
+                    <option value="costela">Costela</option>
+                </select>
+            </div>
+            <div>
+                <label for="editVendaPesoInput">Peso (kg):</label>
+                <input type="number" id="editVendaPesoInput" step="0.01" min="0.01" required>
+            </div>
+            <p style="text-align:center; margin-top: 10px;">Novo Valor Calculado: R$ <span id="editVendaNovoValorDisplay">0.00</span></p>
+            <p id="editVendaModalError" style="color:red; font-size:0.9em; display:none; text-align:center;">Erro.</p>
+            <div style="text-align:center; margin-top: 20px;">
+                <button id="editVendaConfirmBtn" class="modal-confirm-button">Salvar Alterações</button>
+                <button id="editVendaCancelBtn" class="modal-cancel-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

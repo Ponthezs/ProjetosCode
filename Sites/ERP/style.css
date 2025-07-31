@@ -1,0 +1,82 @@
+/* style.css */
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Classes de ajuda para visibilidade controlada por JS */
+.hidden-element {
+    display: none !important;
+}
+
+/* Estilos para o Toast (notificações) */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+    min-width: 250px;
+    text-align: center;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.toast.success { background-color: #28a745; }
+.toast.error { background-color: #dc3545; }
+.toast.info { background-color: #17a2b8; }
+
+/* Estilos para o tema escuro (controlado por JS e Tailwind) */
+.dark-mode {
+    background-color: #0f172a; /* Fundo bem escuro azul petróleo */
+    color: #f1f5f9; /* Texto quase branco */
+}
+.dark-mode .bg-white { background-color: #1e293b !important; }
+.dark-mode .text-gray-800 { color: #f1f5f9 !important; }
+.dark-mode .text-gray-700 { color: #94a3b8 !important; }
+.dark-mode .text-gray-600 { color: #cbd5e1 !important; }
+.dark-mode .text-gray-500 { color: #64748b !important; }
+.dark-mode .border-gray-300 { border-color: #334155 !important; }
+.dark-mode .border-gray-200 { border-color: #1e293b !important; }
+.dark-mode .bg-gray-50 { background-color: #1e293b !important; }
+.dark-mode .bg-gray-100 { background-color: #0f172a !important; }
+.dark-mode .text-sky-700 { color: #38bdf8 !important; /* Neon azul claro */ }
+.dark-mode .text-sky-600 { color: #0ea5e9 !important; /* Neon azul um pouco mais escuro */ }
+.dark-mode .border-sky-200 { border-color: #0ea5e9 !important; }
+.dark-mode .bg-sky-50 { background-color: #1e3a8a !important; } /* Azul profundo */
+.dark-mode input, .dark-mode select, .dark-mode textarea {
+    background-color: #1e293b !important;
+    color: #f1f5f9 !important;
+    border-color: #334155 !important;
+}
+.dark-mode input::placeholder, .dark-mode textarea::placeholder {
+    color: #64748b;
+}
+
+.product-card img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* Ajustes para a barra de navegação fixa */
+body {
+    padding-top: 70px; /* Altura aproximada da navbar + um pouco de espaço */
+}
+#mainNavbar {
+    position: fixed; /* Ou 'sticky' se preferir */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+}
+
+/* Para garantir que o conteúdo não fique sob a navbar fixa */
+.main-content-area {
+    padding-top: 1rem; /* Ou o valor que achar adequado */
+}

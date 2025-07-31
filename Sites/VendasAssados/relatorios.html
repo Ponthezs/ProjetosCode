@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - Sistema de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="appHeader">
+        <div class="header-content">
+            <img src="imagens/logo.png" alt="Logo da Empresa" class="logo-header" onerror="this.style.display='none'">
+            <h1>Painel de Controle</h1>
+        </div>
+        <nav>
+            <a href="dashboard.html" class="nav-button">Início</a>
+            <a href="agendamentos.html" class="nav-button">Agendamentos</a>
+            <a href="vendas.html" class="nav-button">Vendas</a>
+            <a href="relatorios.html" class="nav-button active">Relatórios</a>
+            <button id="logoutButton">Sair</button>
+        </nav>
+    </header>
+
+    <main id="appContent">
+        <div id="relatoriosView" class="container">
+            <h2>Relatórios de Vendas</h2>
+            <div class="item-card">
+                <h3>Relatório Mensal</h3>
+                <div>
+                    <label for="mesRelatorio">Selecionar Mês/Ano:</label>
+                    <input type="month" id="mesRelatorio">
+                    <button id="gerarRelatorioButton" class="action-button" style="margin-left: 10px;">Gerar Relatório</button>
+                </div>
+                <h3 style="margin-top: 20px;">Total de Vendas do Período: R$ <span id="totalVendasMesDisplay">0.00</span></h3>
+                <div id="listaVendasRelatorio">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessageText">Tem certeza?</p>
+            <button id="modalConfirm" class="modal-confirm-button">Confirmar</button>
+            <button id="modalCancel" class="modal-cancel-button">Cancelar</button>
+        </div>
+    </div>
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <p id="promptModalMessageText">Informe o valor:</p>
+            <input type="number" id="promptModalInput" step="0.01" min="0.01" style="width: 100%; padding: 10px; margin-bottom:15px; box-sizing: border-box;">
+            <p id="promptModalError" style="color:red; font-size:0.9em; display:none;">Valor inválido.</p>
+            <button id="promptModalConfirm" class="modal-confirm-button">OK</button>
+            <button id="promptModalCancel" class="modal-cancel-button">Cancelar</button>
+        </div>
+    </div>
+     <div id="editVendaModal" class="modal">
+        <div class="modal-content">
+            <h3>Editar Venda</h3>
+            <input type="hidden" id="editVendaIdInput">
+            <div><label for="editVendaItemSelect">Item:</label><select id="editVendaItemSelect"><option value="frango">Frango</option><option value="costela">Costela</option></select></div>
+            <div><label for="editVendaPesoInput">Peso (kg):</label><input type="number" id="editVendaPesoInput" step="0.01" min="0.01" required></div>
+            <p>Novo Valor: R$ <span id="editVendaNovoValorDisplay">0.00</span></p>
+            <p id="editVendaModalError" style="color:red; display:none;">Erro.</p>
+            <button id="editVendaConfirmBtn" class="modal-confirm-button">Salvar</button><button id="editVendaCancelBtn" class="modal-cancel-button">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

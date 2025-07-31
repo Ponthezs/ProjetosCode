@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo - ERP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        if (localStorage.getItem('gestorProPlus_theme_v2') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div id="toast-container"></div>
+
+    <div class="min-h-screen flex flex-col items-center justify-center main-content-area px-4">
+        <div class="max-w-md w-full p-8 bg-white dark:bg-slate-800 rounded-xl shadow-2xl space-y-8">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-sky-700 dark:text-sky-400">
+                    Crie a sua conta
+                </h2>
+            </div>
+            <form id="formRegister" class="mt-8 space-y-6">
+                <div>
+                    <label for="registerUsername" class="sr-only">Nome de Utilizador</label>
+                    <input id="registerUsername" name="username" type="text" autocomplete="username" required
+                           class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-slate-400 text-gray-900 dark:text-white focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                           placeholder="Nome de utilizador">
+                </div>
+                <div>
+                    <label for="registerPassword" class="sr-only">Senha</label>
+                    <input id="registerPassword" name="password" type="password" autocomplete="new-password" required
+                           class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-slate-400 text-gray-900 dark:text-white focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                           placeholder="Senha">
+                </div>
+                <div>
+                    <label for="registerPasswordConfirm" class="sr-only">Confirmar Senha</label>
+                    <input id="registerPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" required
+                           class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 dark:border-slate-600 placeholder-gray-500 dark:placeholder-slate-400 text-gray-900 dark:text-white focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                           placeholder="Confirmar senha">
+                </div>
+                <div>
+                    <button type="submit"
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 dark:focus:ring-offset-slate-800 transition-colors">
+                        Registar
+                    </button>
+                </div>
+            </form>
+            <p class="mt-4 text-center text-sm text-gray-600 dark:text-slate-400">
+                Já tem uma conta?
+                <a href="login.html" class="font-medium text-sky-600 hover:text-sky-500 dark:text-sky-400 dark:hover:text-sky-300">
+                    Faça login aqui
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

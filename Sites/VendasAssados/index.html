@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <img src="imagens/logo.png" alt="Logo da Empresa" class="logo-login" onerror="this.style.display='none'; console.error('Logo não encontrada em imagens/logo.png')">
+        <h1>Controle de Vendas</h1>
+        <p style="font-size: 0.9em; color: #666;">(Frangos & Costelas - Domingos)</p>
+        <form id="loginForm">
+            <div>
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" value="ADM" required>
+            </div>
+            <div>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" value="1234" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <p id="loginError" class="error-message"></p>
+        <p style="font-size: 0.8em; color: #999; margin-top: 20px;">
+            <strong>Atenção:</strong> Este sistema utiliza login simplificado e armazena dados localmente no navegador. Não é seguro para dados críticos.
+        </p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

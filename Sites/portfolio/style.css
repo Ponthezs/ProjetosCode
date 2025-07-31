@@ -1,4 +1,3 @@
-/* Reset básico e Configurações Globais */
 * {
     margin: 0;
     padding: 0;
@@ -6,26 +5,24 @@
 }
 
 html {
-    scroll-behavior: smooth; /* Rolagem suave para links de âncora */
-}
+    scroll-behavior: smooth;
 
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.7;
-    background-color: #121212; /* Fundo principal escuro */
-    color: #e0e0e0; /* Cor de texto principal clara */
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
 .container {
     width: 90%;
-    max-width: 1100px; /* Largura máxima para o conteúdo */
+    max-width: 1100px;
     margin: auto;
-    overflow: hidden; /* Clearfix */
+    overflow: hidden;
 }
 
-/* Cabeçalho e Navegação */
 header {
-    background-color: #1e1e1e; /* Um pouco mais claro que o body */
+    background-color: #1e1e1e;
     color: #fff;
     padding: 1rem 0;
     position: sticky;
@@ -52,7 +49,7 @@ nav ul {
 }
 
 nav ul li {
-    display: inline-block; /* Links lado a lado */
+    display: inline-block;
     margin-left: 25px;
 }
 
@@ -64,18 +61,18 @@ nav ul li a {
 }
 
 nav ul li a:hover,
-nav ul li a.active { /* Você pode adicionar a classe 'active' via JS se quiser destacar a seção atual */
-    color: #00aaff; /* Cor de destaque azul */
+nav ul li a.active {
+    color: #00aaff;
 }
 
-/* Seção Hero (Home) */
+
 .hero-section {
-    min-height: 90vh; /* Altura mínima para ocupar boa parte da tela */
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 0; /* Espaçamento vertical */
-    background-color: #181818; /* Fundo ligeiramente diferente para a seção hero */
+    padding: 4rem 0;
+    background-color: #181818;
 }
 
 .hero-container {
