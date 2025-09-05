@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Novo Atendimento{% endblock %}
+{% block content %}
+    <h2>Registrar Novo Atendimento</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Descrição</label>
+            <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="priority">Prioridade</label>
+            <select class="form-control" id="priority" name="priority">
+                {% for p in priorities %}
+                <option value="{{ p.name }}">{{ p.value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="attachments">Anexos (Imagens, Documentos)</label>
+            <input type="file" class="form-control-file" id="attachments" name="attachments" multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Atendimento</button>
+    </form>
+{% endblock %}
