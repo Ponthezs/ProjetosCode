@@ -3,45 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosso Amor❤️</title>
+    <title>Nosso Amor ❤️ - Eloah & Felipe</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Eloah & Felipe ❤️</h1>
-    </header>
-    
-    <div class="container">
-        <section id="fotos">
-            <h2>Nossos Momentos</h2>
-            <div class="galeria">
-                <img src="Images/AnoNovo.jpeg" alt="#">
-                <img src="Images/AnoNovo2.jpeg" alt="#">
-                <img src="images/ParqueJP.jpeg" alt="#">
-            </div>
-        </section>
-        
-        <section id="linha-do-tempo">
-            <h2>Nossa História</h2>
-            <ul>
-                <li><strong>18/02/2024:</strong> Nos conhecemos ❤️</li>
-                <li><strong>06/03/2023:</strong> Primeiro encontro romântico 🌹</li>
-                <li><strong>26/12/2024:</strong> Nossa primeira viagem juntos ✈️</li>
-                <li><strong>25/12/2024:</strong> Nosso primeiro Natal 🎄</li>
-            </ul>
-        </section>
-        
-        <section id="mensagem">
-            <h2>Mensagem Especial</h2>
-            <p id="texto-mensagem">Clique no botão para ver uma mensagem especial!</p>
-            <button onclick="mostrarMensagem()">Mostrar Mensagem 💌</button>
-        </section>
+    <!-- Partículas de fundo -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-    
-    <script>
-        function mostrarMensagem() {
-            document.getElementById('texto-mensagem').innerText = "Te amo muito! Obrigado por estar sempre ao meu lado. ❤️";
-        }
-    </script>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">💕</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#timeline">História</a></li>
+                <li><a href="#galeria">Momentos</a></li>
+                <li><a href="#mensagens">Mensagens</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="heart-animation">💕</div>
+            <h1 class="title">Eloah & Felipe</h1>
+            <p class="subtitle">Uma História de Amor</p>
+            <p class="tagline">Juntos desde o primeiro encontro</p>
+            <a href="#timeline" class="cta-button">Conheça Nossa História</a>
+        </div>
+    </section>
+
+    <!-- Contador de Dias Juntos -->
+    <section class="contador-dias">
+        <div class="contador-card">
+            <h3>Dias Juntos</h3>
+            <div class="dias-numero" id="diasJuntos">0</div>
+            <p>Contando cada momento especial</p>
+        </div>
+    </section>
+
+    <!-- Timeline - Nossa História -->
+    <section class="timeline" id="timeline">
+        <h2 class="section-title">📖 Nossa História</h2>
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-date">18/02/2024</span>
+                    <h3>Nos Conhecemos</h3>
+                    <p>O dia em que tudo começou... Um encontro que mudaria nossas vidas para sempre ❤️</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-date">06/03/2024</span>
+                    <h3>Primeiro Encontro Romântico</h3>
+                    <p>Um momento mágico, cheio de risadas e conexão. O começo de algo lindo 🌹</p>
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-date">31/12/2024</span>
+                    <h3>Nosso Primeiro Ano Novo</h3>
+                    <p>Celebrando amor e momentos especiais juntos. Uma data que nunca esqueceremos</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-date">26/12/2024</span>
+                    <h3>Primeira Viagem</h3>
+                    <p>Explorando o mundo juntos e criando memórias que durarão para sempre ✈️</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria de Momentos -->
+    <section class="galeria" id="galeria">
+        <h2 class="section-title">📸 Nossos Momentos</h2>
+        <div class="galeria-grid">
+            <div class="galeria-item">
+                <img src="Images/AnoNovo.jpeg" alt="Ano Novo - Momento Especial">
+                <div class="galeria-overlay">
+                    <p>Ano Novo, Amor Renovado 🎆</p>
+                </div>
+            </div>
+            <div class="galeria-item">
+                <img src="Images/AnoNovo2.jpeg" alt="Ano Novo 2">
+                <div class="galeria-overlay">
+                    <p>Celebrando Juntos 🥂</p>
+                </div>
+            </div>
+            <div class="galeria-item">
+                <img src="Images/ParqueJP.jpeg" alt="Parque JP">
+                <div class="galeria-overlay">
+                    <p>Momentos Felizes 🌳</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mensagens Especiais -->
+    <section class="mensagens" id="mensagens">
+        <h2 class="section-title">💌 Mensagens Especiais</h2>
+        <div class="mensagens-container">
+            <button class="msg-button" onclick="mostrarMensagem(0)">Para Eloah ❤️</button>
+            <button class="msg-button" onclick="mostrarMensagem(1)">Para Felipe 💙</button>
+            <button class="msg-button" onclick="mostrarMensagem(2)">Nosso Amor 💕</button>
+        </div>
+        <div class="mensagem-display" id="mensagemDisplay">
+            <p id="textoMensagem">Clique em um botão para ver a mensagem especial!</p>
+            <button class="close-btn" onclick="fecharMensagem()">✕</button>
+        </div>
+    </section>
+
+    <!-- Perguntas Românticas -->
+    <section class="random-quotes">
+        <h2 class="section-title">✨ Sabia que...</h2>
+        <div class="quote-card" id="quoteCard">
+            <p id="quoteText">Clique no coração para descobrir!</p>
+        </div>
+        <button class="heart-btn" onclick="proximaCuriosidade()">💕</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Feito com 💕 para o nosso amor</p>
+        <p>&copy; 2024 - 2025 | Eloah & Felipe</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -2,49 +2,115 @@
     width: 100%;
     user-select: none;
     text-align: left;
-    
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease;
 }
+
 .records th{
     height: 50px;
     background-color: var(--primary-color);
+    color: white;
     padding-left: 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
 }
+
+.records th:hover {
+    background-color: #1e40af;
+    opacity: 0.9;
+}
+
 .records td{
     height: 50px;
     padding-left: 20px;
-}
-.records th:last-child,
-.records td:last-child{
-    padding: 0;
-    min-width: 140px;
-    text-align: center;
- }
-.records tr:hover{
-    background-color: var(--secundary-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
-@media(max-width:480px){
+.records tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.records tbody tr:hover{
+    background-color: var(--primary-color);
+    opacity: 0.08;
+}
+
+.records th:last-child,
+.records td:last-child{
+    padding: 0 10px;
+    width: 100px;
+    text-align: center;
+}
+
+.records .actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.records .actions button {
+    padding: 6px 10px;
+    font-size: 1.2rem;
+    min-width: auto;
+    height: 36px;
+    width: 36px;
+}
+
+.sort-indicator {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+@media(max-width:768px){
     .records{
         border-spacing: 5px;
     }
+    
     .records thead{
         display:none;
     }
-    .records tr{
-        box-shadow: 0 1px 3px var(--shadow-color);
+    
+    .records tbody tr{
+        display: block;
+        box-shadow: 0 2px 6px var(--shadow-color);
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background-color: var(--card-bg);
+        transition: all 0.3s ease;
     }
-    .records td:not(:first-child){
+    
+    .records td{
         display:flex;
         justify-content: space-between;
-        padding: 0 20px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-color);
     }
 
-    .records td{
-        margin:10px 0;
+    .records td:last-child {
+        justify-content: flex-end;
+        border-bottom: none;
     }
 
-    .records tr:hover{
+    .records td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--primary-color);
+        min-width: 100px;
+    }
+
+    .records tbody tr:hover{
         background-color: inherit;
     }
 }

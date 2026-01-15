@@ -4,53 +4,113 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Star+ - Séries, filmes e esportes em um só lugar">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <title>Star</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Star+ - Sua melhor escolha em filmes, séries e esportes</title>
 </head>
 <body class="bg">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">Star+</div>
+            <button class="btn-assine"><a href="#planos">ASSINE AGORA</a></button>
+        </div>
+    </nav>
     <div class="container">
-        <div class="agr">
-            <button><a href="#">ASSINE AGORA</a></button>
-        </div>
-        <div class="star-inicio">
-            <img src="img/Star.png" alt="Logo Star"><br><br>
-            <p>Séries, filmes e esportes que você adora aqui.</p><br>
-            <button><a href="#">ESCOLHA SEU PLANO</a></button>
-            <br><br><br><br>
-            <span class="material-symbols-outlined">arrow_downward</span>
-        </div>
-        <div class="plano">
-            <h1>Escolha seu plano</h1><br>
-            <ul>
-                <li>
-                    <img src="img/Star.png" alt="Star Plan">
-                    <h3 class="htres">R$ 32,90/mês*</h3>
-                    <p class="medium">No Star+ você encontra estreias de filmes, séries e eventos esportivos com a ESPN.</p>
-                    <button class="button--card1"><a href="#">ASSINE AGORA</a></button>
+        <section class="star-inicio">
+            <img src="img/Star.png" alt="Logo Star" class="logo-star">
+            <h1>Séries, filmes e esportes que você adora aqui.</h1>
+            <p>Assine agora e aproveite a melhor seleção de conteúdo exclusivo</p>
+            <button class="btn-principal"><a href="#planos">ESCOLHA SEU PLANO</a></button>
+            <div class="scroll-indicator">
+                <span class="material-symbols-outlined">arrow_downward</span>
+            </div>
+        </section>
+        <section class="plano" id="planos">
+            <h1>Escolha seu plano</h1>
+            <p class="subtitle-plano">Selecione o melhor pacote para você</p>
+            <ul class="plans-container">
+                <li class="plan-card">
+                    <img src="img/Star.png" alt="Star Plan" class="plan-logo">
+                    <h3 class="plan-price">R$ 32,90/mês*</h3>
+                    <p class="plan-description">No Star+ você encontra estreias de filmes, séries e eventos esportivos com a ESPN.</p>
+                    <ul class="plan-features">
+                        <li>✓ Filmes em HD</li>
+                        <li>✓ Séries exclusivas</li>
+                        <li>✓ ESPN ao vivo</li>
+                    </ul>
+                    <button class="button-plan"><a href="#assinar">ASSINE AGORA</a></button>
                 </li>
-                <li>
-                    <img class="combo" src="img/Combo.png" alt="Combo Plan">
-                    <h3 class="htres">R$ 45,90/mês*</h3>
-                    <p class="medium">Assine Disney+ e Star+ juntos. Economize e aproveite agora os dois serviços por um preço único.</p>
-                    <button class="button--card2"><a href="#">ASSINE AGORA</a></button>
+                <li class="plan-card featured">
+                    <span class="badge">Melhor Escolha</span>
+                    <img class="combo" src="img/Combo.png" alt="Combo Plan" class="plan-logo">
+                    <h3 class="plan-price">R$ 45,90/mês*</h3>
+                    <p class="plan-description">Assine Disney+ e Star+ juntos. Economize e aproveite agora os dois serviços por um preço único.</p>
+                    <ul class="plan-features">
+                        <li>✓ Tudo do Star+</li>
+                        <li>✓ Disney+ completo</li>
+                        <li>✓ Economia 15%</li>
+                    </ul>
+                    <button class="button-plan featured"><a href="#assinar">ASSINE AGORA</a></button>
                 </li>
-                <li>
-                    <img src="img/staz.png" alt="STAZ Plan">
-                    <h3 class="htres">R$ 55,90/mês*</h3>
-                    <p class="medium">Disney+, Star+ e STARZPLAY em um plano especial. Assine agora os três serviços juntos.</p>
-                    <button class="button--card3"><a href="#">ASSINE AGORA</a></button>
+                <li class="plan-card">
+                    <img src="img/staz.png" alt="STAZ Plan" class="plan-logo">
+                    <h3 class="plan-price">R$ 55,90/mês*</h3>
+                    <p class="plan-description">Disney+, Star+ e STARZPLAY em um plano especial. Assine agora os três serviços juntos.</p>
+                    <ul class="plan-features">
+                        <li>✓ Todos os planos</li>
+                        <li>✓ STARZPLAY</li>
+                        <li>✓ Melhor valor</li>
+                    </ul>
+                    <button class="button-plan"><a href="#assinar">ASSINE AGORA</a></button>
                 </li>
             </ul>
-        </div>
-        <div class="filmes2">
+            <p class="terms">*Preços e ofertas sujeitos a alterações. Consulte os termos de serviço.</p>
+        </section>
+        <section class="content">
             <h1>O que você vai ver primeiro?</h1>
             <p>Estreias de filmes, clássicos e sagas, suas séries favoritas e lançamentos exclusivos, comédias animadas, produções originais e esportes ao vivo com a ESPN.</p>
-            <img src="img/Filmes2.jfif" alt="Filmes em destaque">
+            <img src="img/Filmes2.jfif" alt="Filmes em destaque" class="content-image">
+        </section>
+        
+        <section class="sports">
+            <img src="img/esportes1.png" alt="Esportes ao vivo" class="sports-image">
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre o Star+</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#imprensa">Imprensa</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#ajuda">Ajuda</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#privacidade">Privacidade</a></li>
+                    <li><a href="#termos">Termos de Serviço</a></li>
+                    <li><a href="#cookies">Cookies</a></li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <img src="img/esportes1.png" alt="Esportes ao vivo">
+        <div class="footer-bottom">
+            <p>&copy; 2024 Star+. Todos os direitos reservados.</p>
         </div>
-    </div>  
+    </footer>
 </body>
 </html>

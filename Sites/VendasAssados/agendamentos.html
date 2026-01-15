@@ -3,87 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamentos - Sistema de Vendas</title>
+    <meta name="description" content="Sistema de gerenciamento de agendamentos para vendas de assados">
+    <title>Agendamentos - Sistema de Vendas de Assados</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header id="appHeader">
         <div class="header-content">
             <img src="imagens/logo.png" alt="Logo da Empresa" class="logo-header" onerror="this.style.display='none'">
-            <h1>Painel de Controle</h1>
+            <h1>Sistema de Vendas - Assados</h1>
         </div>
         <nav>
             <a href="dashboard.html" class="nav-button">Início</a>
             <a href="agendamentos.html" class="nav-button active">Agendamentos</a>
             <a href="vendas.html" class="nav-button">Vendas</a>
             <a href="relatorios.html" class="nav-button">Relatórios</a>
-            <button id="logoutButton">Sair</button>
+            <button id="logoutButton" title="Fazer logout">Sair</button>
         </nav>
     </header>
 
     <main id="appContent">
         <div id="agendamentosView" class="container">
-            <h2>Gerenciar Agendamentos</h2>
-            <div class="item-card">
-                <h3>Novo Agendamento</h3>
-                <form id="formAgendamento">
-                    <div>
-                        <label for="clienteNome">Nome do Cliente:</label>
-                        <input type="text" id="clienteNome" required>
+            <h2>📅 Gerenciar Agendamentos</h2>
+            
+            <div class="form-section">
+                <h3>➕ Novo Agendamento</h3>
+                <form id="formAgendamento" class="form-grid">
+                    <div class="form-group">
+                        <label for="clienteNome">👤 Nome do Cliente <span class="required">*</span></label>
+                        <input type="text" id="clienteNome" name="clienteNome" placeholder="Digite o nome completo" required maxlength="100">
                     </div>
-                    <div>
-                        <label for="itemAgendado">Item:</label>
-                        <select id="itemAgendado">
-                            <option value="frango">Frango</option>
-                            <option value="costela">Costela</option>
-                        </select>
+
+                    <div class="form-group">
+                        <label for="dataRetirada">📅 Data/Hora de Retirada <span class="required">*</span></label>
+                        <input type="datetime-local" id="dataRetirada" name="dataRetirada" required>
                     </div>
-                    <div>
-                        <label for="quantidadeAgendada">Quantidade (aprox. kg ou unidades):</label>
-                        <input type="text" id="quantidadeAgendada" placeholder="Ex: 1.5kg ou 1 unidade" required>
+
+                    <div class="form-group">
+                        <label for="contatoCliente">📞 Telefone (Opcional)</label>
+                        <input type="tel" id="contatoCliente" name="contatoCliente" placeholder="(11) 99999-9999" maxlength="20">
                     </div>
-                     <div>
-                        <label for="dataRetirada">Data/Hora Retirada:</label>
-                        <input type="datetime-local" id="dataRetirada" required>
+
+                    <div class="form-group full-width">
+                        <h4>🛒 Itens do Agendamento</h4>
+                        <div id="itensAgendamento" style="border: 2px solid #e1e8ed; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #f8f9fa; min-height: 40px;">
+                            <p style="color: #7f8c8d; font-style: italic; margin: 0;">Nenhum item adicionado ainda...</p>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px; align-items: flex-end;">
+                            <div>
+                                <label for="novoItem" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9em;">Produto</label>
+                                <select id="novoItem" style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-family: inherit; transition: all 0.3s;">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="novaQuantidade" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9em;">Quantidade</label>
+                                <input type="text" id="novaQuantidade" placeholder="Ex: 1.5 ou 2" style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-family: inherit; transition: all 0.3s;" maxlength="50">
+                            </div>
+                            <button type="button" id="btnAdicionarItem" class="action-button button-primary" style="width: 100%; padding: 12px 16px;">
+                                ➕ Adicionar
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <label for="contatoCliente">Contato (Telefone):</label>
-                        <input type="tel" id="contatoCliente" placeholder="(Opcional)">
+
+                    <div class="form-group full-width">
+                        <button type="submit" class="action-button button-primary" style="width: 100%; padding: 14px; font-size: 15px; font-weight: 700;">
+                            ✓ Registrar Agendamento
+                        </button>
                     </div>
-                    <button type="submit" class="action-button">Agendar</button>
                 </form>
             </div>
 
-            <h3>Agendamentos Pendentes</h3>
-            <div id="listaAgendamentos">
+            <div class="list-section">
+                <div class="section-header">
+                    <h3>📋 Agendamentos Pendentes</h3>
+                    <span id="countAgendamentos" class="badge">0</span>
                 </div>
+                <div id="listaAgendamentos" class="list-container">
+                    <!-- Carregado dinamicamente pelo JavaScript -->
+                </div>
+            </div>
         </div>
     </main>
 
-    <div id="confirmationModal" class="modal">
+    <!-- Modal de Confirmação -->
+    <div id="confirmationModal" class="modal" role="dialog" aria-labelledby="modalMessageText" aria-modal="true">
         <div class="modal-content">
+            <button class="modal-close" id="modalCloseBtn" aria-label="Fechar modal">&times;</button>
             <p id="modalMessageText">Tem certeza?</p>
-            <button id="modalConfirm" class="modal-confirm-button">Confirmar</button>
-            <button id="modalCancel" class="modal-cancel-button">Cancelar</button>
+            <div class="modal-buttons">
+                <button id="modalConfirm" class="modal-confirm-button">Confirmar</button>
+                <button id="modalCancel" class="modal-cancel-button">Cancelar</button>
+            </div>
         </div>
     </div>
-    <div id="promptModal" class="modal">
+
+    <!-- Modal de Prompt (Peso) -->
+    <div id="promptModal" class="modal" role="dialog" aria-labelledby="promptModalMessageText" aria-modal="true">
         <div class="modal-content">
-            <p id="promptModalMessageText">Informe o valor:</p>
-            <input type="number" id="promptModalInput" step="0.01" min="0.01" style="width: 100%; padding: 10px; margin-bottom:15px; box-sizing: border-box;">
-            <p id="promptModalError" style="color:red; font-size:0.9em; display:none;">Valor inválido.</p>
-            <button id="promptModalConfirm" class="modal-confirm-button">OK</button>
-            <button id="promptModalCancel" class="modal-cancel-button">Cancelar</button>
+            <button class="modal-close" id="promptCloseBtn" aria-label="Fechar modal">&times;</button>
+            <p id="promptModalMessageText">Informe o peso:</p>
+            <input type="number" id="promptModalInput" step="0.01" min="0.01" placeholder="Digite o peso em kg" aria-label="Entrada de peso">
+            <p id="promptModalError" class="error-text" role="alert">Valor inválido. Informe um número maior que zero.</p>
+            <div class="modal-buttons">
+                <button id="promptModalConfirm" class="modal-confirm-button">OK</button>
+                <button id="promptModalCancel" class="modal-cancel-button">Cancelar</button>
+            </div>
         </div>
     </div>
-     <div id="editVendaModal" class="modal"> <div class="modal-content">
-            <h3>Editar Venda</h3>
+
+    <!-- Modal de Edição de Venda (não usado em agendamentos, mas necessário para compatibilidade) -->
+    <div id="editVendaModal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <button class="modal-close" id="editVendaCloseBtn" aria-label="Fechar modal">&times;</button>
+            <h3>✏️ Editar Venda</h3>
             <input type="hidden" id="editVendaIdInput">
-            <div><label for="editVendaItemSelect">Item:</label><select id="editVendaItemSelect"><option value="frango">Frango</option><option value="costela">Costela</option></select></div>
-            <div><label for="editVendaPesoInput">Peso (kg):</label><input type="number" id="editVendaPesoInput" step="0.01" min="0.01" required></div>
-            <p>Novo Valor: R$ <span id="editVendaNovoValorDisplay">0.00</span></p>
-            <p id="editVendaModalError" style="color:red; display:none;">Erro.</p>
-            <button id="editVendaConfirmBtn" class="modal-confirm-button">Salvar</button><button id="editVendaCancelBtn" class="modal-cancel-button">Cancelar</button>
+            <div class="form-group">
+                <label for="editVendaItemSelect">Item:</label>
+                <select id="editVendaItemSelect">
+                    <option value="frango">Frango</option>
+                    <option value="costela">Costela</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editVendaPesoInput">Peso (kg):</label>
+                <input type="number" id="editVendaPesoInput" step="0.01" min="0.01" required>
+            </div>
+            <p>Novo Valor: <strong>R$ <span id="editVendaNovoValorDisplay">0.00</span></strong></p>
+            <p id="editVendaModalError" class="error-text" role="alert">Erro ao processar.</p>
+            <div class="modal-buttons">
+                <button id="editVendaConfirmBtn" class="modal-confirm-button">Salvar</button>
+                <button id="editVendaCancelBtn" class="modal-cancel-button">Cancelar</button>
+            </div>
         </div>
     </div>
 

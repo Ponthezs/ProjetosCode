@@ -12,6 +12,7 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 .bg {
@@ -20,48 +21,104 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
 a {
     color: #fff;
     text-decoration: none;
     text-align: center;
+    transition: color 0.3s ease;
 }
 
-/* Botões */
-.agr button {
+/* Navbar */
+.navbar {
+    background: rgba(9, 11, 19, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
     background: linear-gradient(90deg, #fa1660, #ff6e00);
-    padding: 15px 25px;
-    position: absolute;
-    right: 5%;
-    top: 10px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-assine {
+    background: linear-gradient(90deg, #fa1660, #ff6e00);
+    padding: 12px 20px;
     border: none;
+    border-radius: 5px;
     font-weight: bold;
     color: #fff;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.agr button:hover {
-    background: linear-gradient(90deg, #ff6e00, #fa1660);
+.btn-assine:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(250, 22, 96, 0.4);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Seção de Introdução */
 .star-inicio {
     text-align: center;
-    padding: 250px 0;
+    padding: 150px 0;
     color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-star {
+    max-width: 150px;
+    margin-bottom: 30px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.star-inicio h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
 .star-inicio p {
-    font-size: 25px;
-    font-weight: bold;
+    font-size: clamp(16px, 3vw, 25px);
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #ccc;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
-.star-inicio button {
-    padding: 15px;
-    width: 250px;
+.btn-principal {
+    padding: 15px 40px;
+    width: auto;
     color: #fff;
     background: linear-gradient(90deg, rgba(255,50,50,1) 0%, rgba(144,31,196,1) 41%, rgba(255,0,138,1) 100%);
     font-weight: bold;
@@ -69,11 +126,19 @@ a {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease-out 0.6s backwards;
 }
 
-.star-inicio button:hover {
+.btn-principal:hover {
     background: linear-gradient(90deg, rgba(255,0,138,1) 0%, rgba(144,31,196,1) 41%, rgba(255,50,50,1) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(144, 31, 196, 0.4);
+}
+
+.scroll-indicator {
+    margin-top: 50px;
+    animation: bounce 2s infinite;
 }
 
 .material-symbols-outlined {
@@ -82,105 +147,322 @@ a {
     color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease;
+    display: inline-block;
 }
 
 .material-symbols-outlined:hover {
     transform: translateY(10px);
 }
 
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
 /* Estilo dos Planos */
 .plano {
     text-align: center;
-    padding: 50px 0;
+    padding: 80px 0;
+    background: rgba(9, 11, 19, 0.7);
 }
 
 .plano h1 {
-    font-size: 44px;
-    margin-bottom: 25px;
+    font-size: clamp(32px, 4vw, 44px);
+    margin-bottom: 15px;
+    font-weight: 700;
 }
 
-ul {
+.subtitle-plano {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 50px;
+}
+
+.plans-container {
     margin: 0 auto;
     padding: 0;
     list-style: none;
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-items: center;
+    margin-bottom: 30px;
 }
 
-ul li {
-    background-color: #1c1e22;
-    border-radius: 10px;
-    padding: 20px;
-    width: 30%;
-    min-width: 250px;
-    margin: 15px;
+.plan-card {
+    background: linear-gradient(135deg, #1c1e22 0%, #2a2e35 100%);
+    border-radius: 15px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 320px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-ul li img {
-    max-width: 100px;
-    margin-bottom: 15px;
+.plan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(250, 22, 96, 0.2);
+    border-color: rgba(250, 22, 96, 0.5);
 }
 
-.htres {
+.plan-card.featured {
+    border: 2px solid #fa1660;
+    transform: scale(1.05);
+}
+
+.plan-card.featured:hover {
+    transform: scale(1.08) translateY(-10px);
+}
+
+.badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #fa1660, #ff6e00);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.plan-logo {
+    max-width: 80px;
+    margin-bottom: 20px;
+}
+
+.combo {
+    max-width: 100px !important;
+}
+
+.plan-price {
     font-size: 28px;
     margin: 15px 0;
+    background: linear-gradient(90deg, #fa1660, #ff6e00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.medium {
+.plan-description {
     font-size: 16px;
-    margin-bottom: 25px;
+    margin: 15px 0 20px;
+    color: #ccc;
+    line-height: 1.5;
 }
 
-/* Estilo dos Botões dos Cartões */
-.button--card1,
-.button--card2,
-.button--card3 {
+.plan-features {
+    list-style: none;
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plan-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.button-plan {
     background: linear-gradient(90deg, rgba(24,6,125,1) 0%, rgba(111,6,115,1) 73%, rgba(42,0,102,1) 100%);
     border: none;
     border-radius: 5px;
     color: #fff;
-    padding: 15px 25px;
-    font-size: 15px;
+    padding: 12px 30px;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
 }
 
-.button--card1:hover,
-.button--card2:hover,
-.button--card3:hover {
+.button-plan:hover {
     background: linear-gradient(90deg, rgba(42,0,102,1) 0%, rgba(111,6,115,1) 73%, rgba(24,6,125,1) 100%);
+    transform: scale(1.02);
 }
 
-/* Seção de Filmes */
-.filmes2 {
+.button-plan.featured {
+    background: linear-gradient(90deg, #fa1660, #ff6e00);
+}
+
+.button-plan.featured:hover {
+    box-shadow: 0 10px 25px rgba(250, 22, 96, 0.4);
+}
+
+.terms {
+    font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+}
+
+/* Seção de Conteúdo */
+.content {
     text-align: center;
-    padding: 50px 0;
+    padding: 80px 0;
 }
 
-.filmes2 h1 {
-    font-size: 44px;
-    margin-bottom: 15px;
+.content h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 20px;
+    font-weight: 700;
 }
 
-.filmes2 p {
+.content p {
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
+    color: #ccc;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
 
-.filmes2 img {
-    max-width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.content-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
 }
 
-.espn img {
-    max-width: 80%;
-    margin: 0 auto;
-    display: block;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.content-image:hover {
+    transform: scale(1.02);
+}
+
+/* Seção de Esportes */
+.sports {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.sports-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer */
+.footer {
+    background: #090B13;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px 0 20px;
+    margin-top: 80px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #fa1660;
+    font-weight: 700;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-section ul li a {
+    font-size: 14px;
+    color: #ccc;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #fa1660;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .star-inicio {
+        padding: 100px 0;
+        min-height: auto;
+    }
+    
+    .btn-principal {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+    
+    .plano {
+        padding: 60px 0;
+    }
+    
+    .plans-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .plan-card.featured {
+        transform: scale(1);
+    }
+    
+    .plan-card.featured:hover {
+        transform: translateY(-10px);
+    }
+    
+    .content {
+        padding: 60px 0;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
 }

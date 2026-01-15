@@ -17,17 +17,44 @@
 </head>
 <body>
     <header>
-        <h1 class="header-title">Cadastro de Clientes</h1>
+        <div class="header-content">
+            <h1 class="header-title">📋 Cadastro de Clientes</h1>
+            <button id="themeToggle" class="theme-toggle" title="Modo escuro/claro">🌙</button>
+        </div>
     </header>
     <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Clientes</button>
+        <div class="controls">
+            <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Clientes</button>
+            <input type="text" id="searchInput" class="search-field" placeholder="🔍 Buscar por nome, email ou celular...">
+            <div class="button-group">
+                <button id="exportBtn" class="button green" title="Exportar dados">📥 Exportar CSV</button>
+                <button id="importBtn" class="button blue" title="Importar dados">📤 Importar</button>
+                <input type="file" id="importFile" accept=".json,.csv" style="display: none;">
+            </div>
+        </div>
+        <div class="stats" id="statsContainer" style="display: none;">
+            <div class="stat-card">
+                <span class="stat-label">Total de Clientes</span>
+                <span class="stat-value" id="totalClients">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Última Atualização</span>
+                <span class="stat-value" id="lastUpdate">-</span>
+            </div>
+        </div>
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <p>Nenhum cliente encontrado. <a href="#" onclick="clearSearch()">Limpar busca</a></p>
+        </div>
+        <div id="noRecords" class="empty-state" style="display: none;">
+            <p>Nenhum cliente cadastrado. Clique em <strong>"Cadastrar Clientes"</strong> para adicionar o primeiro.</p>
+        </div>
         <table id="tbClient" class="records">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Celular</th>
-                    <th>Cidade</th>
+                    <th onclick="sortTable('nome')">Nome <span class="sort-indicator">⇅</span></th>
+                    <th onclick="sortTable('email')">E-mail <span class="sort-indicator">⇅</span></th>
+                    <th onclick="sortTable('celular')">Celular <span class="sort-indicator">⇅</span></th>
+                    <th onclick="sortTable('cidade')">Cidade <span class="sort-indicator">⇅</span></th>
                     <th>Ação</th>
                 </tr>
             </thead>
@@ -48,12 +75,13 @@
                     <input type="text" id="cidade" class="modal-field" placeholder="Cidade do Cliente" required>
                 </form>
                 <footer class="modal-footer">
-                    <button id="salvar" class="button green">Salvar</button>
+                    <button id="salvar" class="button green">✓ Salvar</button>
                     <button id="cancelar" class="button blue">Cancelar</button>
                 </footer>
             </div>
         </div>
     </main>
+    <div id="notification" class="notification"></div>
     <footer>
         Copyright &copy; Felipe Pontes
     </footer>
