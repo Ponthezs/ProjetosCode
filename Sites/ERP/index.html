@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.0/crypto-js.min.js"></script>
     <script>
         if (localStorage.getItem('gestorProPlus_theme_v2') === 'dark') {
             document.documentElement.classList.add('dark-mode');
@@ -43,6 +44,16 @@
     <main class="container mx-auto p-4 md:p-8 main-content-area">
         <header class="mb-8">
             <h1 class="text-4xl font-bold text-sky-800 dark:text-sky-300">Nossos Produtos</h1>
+            <input 
+                type="text" 
+                id="productSearchInput"
+                placeholder="Buscar produtos..."
+                class="w-full p-3 border border-gray-300 rounded-md dark:bg-slate-700 dark:border-slate-600 dark:text-white mt-4"
+                oninput="searchProducts(this.value)"
+            >
+            <div id="categoryFilters" class="mt-4 flex space-x-2 overflow-x-auto pb-2">
+                <button onclick="filterProductsByCategory()" class="px-4 py-2 bg-sky-600 text-white rounded-full whitespace-nowrap hover:bg-sky-700">Todos</button>
+            </div>
         </header>
         <div id="productListContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Produtos serão inseridos aqui pelo script.js -->
@@ -54,6 +65,7 @@
         &copy; <span id="currentYear"></span> ERP. Todos os direitos reservados.
     </footer>
 
+    <script src="validators.js"></script>
     <script src="script.js"></script>
     <script>
         // Pequeno script para o dropdown do utilizador e ano atual

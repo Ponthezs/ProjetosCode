@@ -84,3 +84,14 @@ D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\
 D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb
 D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
 D:\GitHub Projects\ProjetosCode\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Form1.resources
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Form2.resources
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.GenerateResource.cache
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfoInputs.cache
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfo.cs
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.sourcelink.json
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.dll
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\refint\WinFormsApp1.dll
+C:\Users\Felipe\OneDrive\Documentos\Github\ProjetosCode\ProjetosC\microondasparaaprovacao\Microondas\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb

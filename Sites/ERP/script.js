@@ -9,8 +9,12 @@ const THEME_KEY = 'gestorProPlus_theme_v2';
 
 let allProducts = {};
 let users = [];
-let loggedInUser = null; // { username: string, isAdmin: boolean }
-let userCart = {}; // { productId: quantity }
+let loggedInUser = null;
+let userCart = {};
+let currentCategory = null;
+let currentSearchTerm = '';
+let currentPage = 1;
+const PRODUCTS_PER_PAGE = 12;
 
 // ===== UTILITY FUNCTIONS =====
 function saveData(key, data) {
@@ -35,13 +39,34 @@ function loadData(key, defaultValue = null) {
 function showToast(message, type = 'info', duration = 3000) {
     const toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
-        console.warn("Toast container não encontrado. Mensagem:", message);
+        console.warn("Toast container não encontrado.");
         return;
     }
-    toastContainer.textContent = message;
-    toastContainer.className = `toast ${type} show`; // Reinicia classes e adiciona 'show'
+
+    // Remover toast anterior se existir
+    const existingToast = toastContainer.querySelector('.toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    // Criar novo toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type} show`;
+    
+    let icon = '✓';
+    switch(type) {
+        case 'success': icon = '✓'; break;
+        case 'error': icon = '✕'; break;
+        case 'warning': icon = '⚠'; break;
+        case 'info': icon = 'ℹ'; break;
+    }
+
+    toast.innerHTML = `<span>${icon}</span> ${sanitizeString(message)}`;
+    toastContainer.appendChild(toast);
+
     setTimeout(() => {
-        toastContainer.classList.remove('show');
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 500);
     }, duration);
 }
 
@@ -77,13 +102,21 @@ function setupThemeToggle() {
 
 // ===== AUTHENTICATION MODULE =====
 function loginUser(username, password) {
-    const user = users.find(u => u.username === username && u.password === password); // NUNCA FAÇA ISTO EM PRODUÇÃO!
+    const userVal = validateUsername(username);
+    if (!userVal.valid) {
+        showToast(userVal.error, 'error');
+        return false;
+    }
+
+    const hashedPassword = hashPassword(password);
+    const user = users.find(u => u.username === username && u.password === hashedPassword);
+    
     if (user) {
         loggedInUser = { username: user.username, isAdmin: user.isAdmin };
         saveData(LOGGED_IN_USER_KEY, loggedInUser);
         loadUserCart();
         showToast(`Bem-vindo, ${user.username}!`, 'success');
-        window.location.href = 'index.html'; // Redirecionar para a loja
+        window.location.href = 'index.html';
         return true;
     }
     showToast('Utilizador ou senha inválidos.', 'error');
@@ -91,11 +124,25 @@ function loginUser(username, password) {
 }
 
 function registerUser(username, password) {
+    const userVal = validateUsername(username);
+    if (!userVal.valid) {
+        showToast(userVal.error, 'error');
+        return false;
+    }
+
+    const passVal = validatePassword(password);
+    if (!passVal.valid) {
+        showToast(passVal.error, 'error');
+        return false;
+    }
+
     if (users.find(u => u.username === username)) {
         showToast('Este nome de utilizador já existe.', 'error');
         return false;
     }
-    users.push({ username, password, isAdmin: false }); // NUNCA GUARDE SENHA ASSIM EM PRODUÇÃO!
+
+    const hashedPassword = hashPassword(password);
+    users.push({ username, password: hashedPassword, isAdmin: false });
     saveData(DB_USERS_KEY, users);
     showToast('Conta criada com sucesso! Faça login.', 'success');
     window.location.href = 'login.html';
@@ -185,26 +232,49 @@ function loadInitialProducts() {
 function renderProductListStore() { // Para index.html
     const container = document.getElementById('productListContainer');
     if (!container) return;
+    
+    // Filtrar produtos baseado em busca e categoria
+    let filteredProducts = Object.entries(allProducts);
+    
+    if (currentSearchTerm) {
+        const term = currentSearchTerm.toLowerCase();
+        filteredProducts = filteredProducts.filter(([id, product]) => 
+            product.name.toLowerCase().includes(term) || id.toLowerCase().includes(term)
+        );
+    }
+    
+    if (currentCategory) {
+        filteredProducts = filteredProducts.filter(([id, product]) => 
+            product.category === currentCategory
+        );
+    }
+    
+    filteredProducts = filteredProducts.filter(([id, product]) => product.stock > 0);
+
+    const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+    const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    const end = start + PRODUCTS_PER_PAGE;
+    const pageProducts = filteredProducts.slice(start, end);
+
     container.innerHTML = '';
-    if (Object.keys(allProducts).length === 0) {
-        container.innerHTML = '<p class="text-center text-gray-500 col-span-full">Nenhum produto disponível no momento.</p>';
+
+    if (filteredProducts.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 col-span-full">Nenhum produto disponível.</p>';
         return;
     }
-    for (const id in allProducts) {
-        const product = allProducts[id];
-        if (product.stock <= 0) continue; // Não mostrar produtos sem stock na loja
 
+    pageProducts.forEach(([id, product]) => {
         const card = document.createElement('div');
-        card.className = 'product-card bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden flex flex-col border border-gray-200 dark:border-slate-700';
+        card.className = 'product-card bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden flex flex-col border border-gray-200 dark:border-slate-700 hover:shadow-xl transition-shadow';
         card.innerHTML = `
-            <img src="${product.imageUrl || 'https://placehold.co/400x225/cccccc/333333?text=Sem+Imagem'}" alt="${product.name}" class="w-full h-48">
+            <img src="${product.imageUrl || 'https://placehold.co/400x225/cccccc/333333?text=Sem+Imagem'}" alt="${sanitizeString(product.name)}" class="w-full h-48">
             <div class="p-4 flex flex-col flex-grow">
-                <h3 class="text-xl font-semibold text-sky-700 dark:text-sky-400 mb-2 truncate" title="${product.name}">${product.name}</h3>
+                <h3 class="text-xl font-semibold text-sky-700 dark:text-sky-400 mb-2 truncate" title="${sanitizeString(product.name)}">${sanitizeString(product.name)}</h3>
                 <p class="text-gray-700 dark:text-slate-300 mb-1 text-sm">Cód: ${id}</p>
                 <p class="text-2xl font-bold text-green-600 dark:text-green-400 mb-2">R$ ${product.price.toFixed(2)}</p>
                 <p class="text-sm text-gray-600 dark:text-slate-400 mb-3">Em stock: ${product.stock}</p>
                 <div class="mt-auto flex items-center space-x-2">
-                    <input type="number" id="qty-store-${id}" value="1" min="1" max="${product.stock}" class="w-20 p-2 border border-gray-300 dark:border-slate-600 rounded-md text-center dark:bg-slate-700">
+                    <input type="number" id="qty-store-${id}" value="1" min="1" max="${product.stock}" inputmode="numeric" class="w-20 p-2 border border-gray-300 dark:border-slate-600 rounded-md text-center dark:bg-slate-700 text-sm">
                     <button class="flex-grow bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-md text-sm transition duration-150" 
                             onclick="addProductToCart('${id}', 'qty-store-${id}')">
                         <i class="fas fa-cart-plus mr-1"></i>Adicionar
@@ -213,6 +283,26 @@ function renderProductListStore() { // Para index.html
             </div>
         `;
         container.appendChild(card);
+    });
+
+    // Renderizar controles de paginação
+    if (totalPages > 1) {
+        const paginationDiv = document.createElement('div');
+        paginationDiv.className = 'col-span-full flex justify-center items-center space-x-2 mt-8';
+        
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className = `px-3 py-2 rounded-md transition-colors ${i === currentPage ? 'bg-sky-600 text-white' : 'bg-gray-300 dark:bg-slate-700 hover:bg-gray-400 dark:hover:bg-slate-600'}`;
+            btn.textContent = i;
+            btn.onclick = () => {
+                currentPage = i;
+                renderProductListStore();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            paginationDiv.appendChild(btn);
+        }
+
+        container.parentElement.appendChild(paginationDiv);
     }
 }
 
@@ -251,23 +341,48 @@ function renderAdminProductTable() { // Para product-admin.html
 function handleProductFormSubmit(event) {
     event.preventDefault();
     if (!loggedInUser || !loggedInUser.isAdmin) {
-        showToast("Acesso negado.", "error"); return;
+        showToast("Acesso negado.", "error");
+        return;
     }
 
     const form = event.target;
-    const editingId = form.dataset.editingId; // Usar data attribute para ID de edição
-    const id = (editingId || form.productCode.value.trim().toUpperCase()) || generateId(); // Gerar ID se novo e não fornecido
-    const name = form.productName.value.trim();
+    const editingId = form.dataset.editingId;
+    const id = (editingId || form.productCode.value.trim().toUpperCase()) || generateId();
+    const name = sanitizeString(form.productName.value.trim());
     const price = parseFloat(form.productPrice.value);
     const stock = parseInt(form.productStock.value);
     const imageUrl = form.productImageUrl.value.trim();
 
-    if (!id || !name || isNaN(price) || price < 0 || isNaN(stock) || stock < 0) {
-        showToast("Preencha Código, Nome, Preço (>=0) e Stock (>=0) corretamente.", "error", 4000); return;
+    // Validações
+    const nameVal = validateProductName(name);
+    if (!nameVal.valid) {
+        showToast(nameVal.error, 'error');
+        return;
     }
 
-    if (!editingId && allProducts[id]) { // Adicionando novo, mas ID já existe
-        showToast("Erro: Código de produto já existe. Escolha outro ou deixe em branco para gerar um automaticamente.", "error", 5000); return;
+    const priceVal = validateProductPrice(price);
+    if (!priceVal.valid) {
+        showToast(priceVal.error, 'error');
+        return;
+    }
+
+    const stockVal = validateProductStock(stock);
+    if (!stockVal.valid) {
+        showToast(stockVal.error, 'error');
+        return;
+    }
+
+    if (imageUrl) {
+        const imgVal = validateImageUrl(imageUrl);
+        if (!imgVal.valid) {
+            showToast(imgVal.error, 'error');
+            return;
+        }
+    }
+
+    if (!editingId && allProducts[id]) {
+        showToast("Erro: Código de produto já existe. Escolha outro ou deixe em branco para gerar um automaticamente.", "error", 5000);
+        return;
     }
     
     allProducts[id] = { name, price, stock, imageUrl };
@@ -316,30 +431,56 @@ function cancelProductFormEdit() {
 
 function deleteProduct(productId) {
     if (!loggedInUser || !loggedInUser.isAdmin) {
-        showToast("Acesso negado.", "error"); return;
+        showToast("Acesso negado.", "error");
+        return;
     }
-    if (confirm(`Tem a certeza que quer apagar o produto ${allProducts[productId]?.name || productId}? Esta ação também o removerá de todos os carrinhos.`)) {
-        delete allProducts[productId];
-        // Remover de todos os carrinhos (simulação)
-        users.forEach(user => {
-            const userCartKey = DB_CART_KEY_PREFIX + user.username;
-            let cartData = loadData(userCartKey, {});
-            if (cartData[productId]) {
-                delete cartData[productId];
-                saveData(userCartKey, cartData);
-            }
-        });
-        if (userCart[productId]) { // Remover do carrinho do utilizador logado
-            delete userCart[productId];
-            saveUserCart();
-            updateCartIconCount();
-        }
+    const product = allProducts[productId];
+    if (!product) return;
 
-        saveData(DB_PRODUCTS_KEY, allProducts);
-        showToast("Produto apagado.", "info");
-        renderAdminProductTable();
-        // Se a página da loja estiver aberta em outra aba, ela não será atualizada automaticamente.
+    // Criar modal de confirmação
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    modal.innerHTML = `
+        <div class="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-sm w-full mx-4">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Confirmar exclusão</h3>
+            <p class="text-gray-700 dark:text-slate-300 mb-4">
+                Tem a certeza que quer apagar "<strong>${sanitizeString(product.name)}</strong>"? 
+                <br><small>Esta ação não pode ser desfeita.</small>
+            </p>
+            <div class="flex justify-end space-x-3">
+                <button onclick="this.closest('.fixed').remove()" 
+                        class="px-4 py-2 bg-gray-300 dark:bg-slate-700 text-gray-900 dark:text-white rounded-md hover:bg-gray-400 dark:hover:bg-slate-600">
+                    Cancelar
+                </button>
+                <button onclick="confirmDeleteProduct('${productId}'); this.closest('.fixed').remove();" 
+                        class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                    Apagar
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function confirmDeleteProduct(productId) {
+    delete allProducts[productId];
+    users.forEach(user => {
+        const userCartKey = DB_CART_KEY_PREFIX + user.username;
+        let cartData = loadData(userCartKey, {});
+        if (cartData[productId]) {
+            delete cartData[productId];
+            saveData(userCartKey, cartData);
+        }
+    });
+    if (userCart[productId]) {
+        delete userCart[productId];
+        saveUserCart();
+        updateCartIconCount();
     }
+
+    saveData(DB_PRODUCTS_KEY, allProducts);
+    showToast("Produto apagado.", "success");
+    renderAdminProductTable();
 }
 
 // ===== CART MODULE =====
@@ -361,23 +502,30 @@ function saveUserCart() {
 function addProductToCart(productId, quantityInputId) {
     if (!loggedInUser) {
         showToast("Faça login para adicionar produtos ao carrinho.", "info");
-        // Opcional: redirecionar para login ou mostrar modal de login
-        // window.location.href = 'login.html';
+        window.location.href = 'login.html';
         return;
     }
+
     const product = allProducts[productId];
     const quantityInput = document.getElementById(quantityInputId);
     const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
-    if (!product) { showToast("Produto não encontrado.", "error"); return; }
-    if (isNaN(quantity) || quantity <= 0) { showToast("Quantidade inválida.", "error"); return; }
+    if (!product) {
+        showToast("Produto não encontrado.", "error");
+        return;
+    }
+
+    if (isNaN(quantity) || quantity <= 0) {
+        showToast("Quantidade inválida.", "error");
+        return;
+    }
     
     const currentCartQuantity = userCart[productId] || 0;
     const totalQuantityAttempted = currentCartQuantity + quantity;
 
     if (product.stock < totalQuantityAttempted) {
-        showToast(`Stock insuficiente para ${product.name}. Disponível: ${product.stock}. No carrinho: ${currentCartQuantity}. Tentando adicionar: ${quantity}.`, "error", 6000);
-        if (quantityInput) quantityInput.value = Math.max(1, product.stock - currentCartQuantity); // Sugerir quantidade máxima possível
+        showToast(`Stock insuficiente para ${product.name}. Disponível: ${product.stock}.`, "error", 5000);
+        if (quantityInput) quantityInput.value = Math.max(1, product.stock - currentCartQuantity);
         return;
     }
 
@@ -631,31 +779,109 @@ function toggleAdminStatus(usernameToToggle) {
 }
 
 
-// ===== PAGE INITIALIZATION ROUTER =====
+// ===== SEARCH & FILTER MODULE =====
+function searchProducts(searchTerm) {
+    currentSearchTerm = searchTerm.trim();
+    currentPage = 1;
+    renderProductListStore();
+}
+
+function filterProductsByCategory(categoryId) {
+    currentCategory = categoryId || null;
+    currentPage = 1;
+    renderProductListStore();
+}
+
+function renderCategoryFilters() {
+    const filterContainer = document.getElementById('categoryFilters');
+    if (!filterContainer) return;
+
+    const categories = {
+        'escritorio': 'Escritório',
+        'informatica': 'Informática',
+        'papelaria': 'Papelaria',
+        'outros': 'Outros'
+    };
+
+    // Já tem o botão "Todos", agora adiciona os outros
+    Object.entries(categories).forEach(([id, name]) => {
+        const btn = document.createElement('button');
+        btn.className = 'px-4 py-2 bg-gray-300 dark:bg-slate-700 rounded-full whitespace-nowrap hover:bg-gray-400 dark:hover:bg-slate-600 transition-colors';
+        btn.textContent = name;
+        btn.onclick = () => filterProductsByCategory(id);
+        filterContainer.appendChild(btn);
+    });
+}
+
+// ===== LOADING OVERLAY MODULE =====
+function showLoading(show = true, message = 'Carregando...') {
+    let loadingDiv = document.getElementById('loadingOverlay');
+    
+    if (show) {
+        if (!loadingDiv) {
+            loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loadingOverlay';
+            loadingDiv.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            loadingDiv.innerHTML = `
+                <div class="bg-white dark:bg-slate-800 rounded-lg p-6 flex flex-col items-center space-y-4">
+                    <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-sky-600"></div>
+                    <p class="text-gray-700 dark:text-slate-200 text-center">${sanitizeString(message)}</p>
+                </div>
+            `;
+            document.body.appendChild(loadingDiv);
+        }
+    } else {
+        if (loadingDiv) {
+            loadingDiv.remove();
+        }
+    }
+}
+
+// ===== ERROR HANDLING MODULE =====
+function setupErrorHandlers() {
+    window.addEventListener('error', (event) => {
+        console.error('Erro não tratado:', event.error);
+        showToast('Um erro inesperado ocorreu. Por favor, recarregue a página.', 'error', 5000);
+    });
+
+    window.addEventListener('unhandledrejection', (event) => {
+        console.error('Promise rejeitada não tratada:', event.reason);
+        showToast('Erro na operação. Por favor, tente novamente.', 'error', 5000);
+    });
+}
 document.addEventListener('DOMContentLoaded', () => {
+    // Configurar tratamento de erros global
+    setupErrorHandlers();
+
+    // Verificar localStorage
+    if (!isLocalStorageAvailable()) {
+        showToast('Armazenamento local não disponível. Algumas funcionalidades podem não funcionar.', 'warning', 7000);
+    }
+
     // Aplicar tema salvo ou default
     const savedTheme = loadData(THEME_KEY, 'light');
     applyTheme(savedTheme);
-    setupThemeToggle(); // Configurar o botão de toggle
+    setupThemeToggle();
 
     // Carregar dados essenciais
     loadInitialProducts();
     users = loadData(DB_USERS_KEY, []);
-    if (users.length === 0 || !users.find(u => u.username === 'adm')) { // Garantir admin default
-        users = [{ username: 'adm', password: '1234', isAdmin: true }];
+    if (users.length === 0 || !users.find(u => u.username === 'adm')) {
+        const defaultAdminPassword = hashPassword('1234');
+        users = [{ username: 'adm', password: defaultAdminPassword, isAdmin: true }];
         saveData(DB_USERS_KEY, users);
     }
 
-    const currentPage = window.location.pathname.split("/").pop() || 'index.html'; // Default para index se path for /
+    const currentPageName = window.location.pathname.split("/").pop() || 'index.html';
 
-    if (!checkAuthAndPermissions(currentPage)) {
-        return; // Auth check já redirecionou, não continuar
+    if (!checkAuthAndPermissions(currentPageName)) {
+        return;
     }
     
-    updateNavbar(); // Atualizar visibilidade da navbar e links
+    updateNavbar();
 
     // Chamar a função de inicialização específica da página
-    switch (currentPage) {
+    switch (currentPageName) {
         case 'login.html':
             const loginForm = document.getElementById('formLogin');
             if (loginForm) {
@@ -673,13 +899,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const pass = document.getElementById('registerPassword').value;
                     const confirmPass = document.getElementById('registerPasswordConfirm').value;
                     if (pass !== confirmPass) {
-                        showToast('As senhas não coincidem.', 'error'); return;
+                        showToast('As senhas não coincidem.', 'error');
+                        return;
                     }
                     registerUser(document.getElementById('registerUsername').value, pass);
                 });
             }
             break;
         case 'index.html':
+            renderCategoryFilters();
             renderProductListStore();
             break;
         case 'product-admin.html':
@@ -703,7 +931,6 @@ document.addEventListener('DOMContentLoaded', () => {
             break;
         case 'checkout.html':
             renderCheckoutPageContent();
-            // Event listeners para botões de pagamento são adicionados dinamicamente ou podem ser fixos
             document.getElementById('payBoletoBtn')?.addEventListener('click', () => simulatePayment('Boleto'));
             document.getElementById('payPixBtn')?.addEventListener('click', () => simulatePayment('PIX'));
             document.getElementById('payCardBtn')?.addEventListener('click', () => simulatePayment('Cartão de Crédito'));

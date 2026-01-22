@@ -1,4 +1,8 @@
 /* style.css */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     transition: background-color 0.3s, color 0.3s;
@@ -9,34 +13,40 @@ body {
     display: none !important;
 }
 
-/* Estilos para o Toast (notificações) */
+/* Estilos para o Toast (notificações) - Melhorado */
 .toast {
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 24px;
+    transform: translateX(-50%) translateY(100px);
+    padding: 14px 24px;
     border-radius: 8px;
     color: white;
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
-    min-width: 250px;
-    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 90%;
+    word-wrap: break-word;
 }
+
 .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
-.toast.success { background-color: #28a745; }
-.toast.error { background-color: #dc3545; }
-.toast.info { background-color: #17a2b8; }
+
+.toast-success { background-color: #10b981; }
+.toast-error { background-color: #ef4444; }
+.toast-info { background-color: #3b82f6; }
+.toast-warning { background-color: #f59e0b; }
 
 /* Estilos para o tema escuro (controlado por JS e Tailwind) */
 .dark-mode {
-    background-color: #0f172a; /* Fundo bem escuro azul petróleo */
-    color: #f1f5f9; /* Texto quase branco */
+    background-color: #0f172a;
+    color: #f1f5f9;
 }
+
 .dark-mode .bg-white { background-color: #1e293b !important; }
 .dark-mode .text-gray-800 { color: #f1f5f9 !important; }
 .dark-mode .text-gray-700 { color: #94a3b8 !important; }
@@ -46,37 +56,149 @@ body {
 .dark-mode .border-gray-200 { border-color: #1e293b !important; }
 .dark-mode .bg-gray-50 { background-color: #1e293b !important; }
 .dark-mode .bg-gray-100 { background-color: #0f172a !important; }
-.dark-mode .text-sky-700 { color: #38bdf8 !important; /* Neon azul claro */ }
-.dark-mode .text-sky-600 { color: #0ea5e9 !important; /* Neon azul um pouco mais escuro */ }
+.dark-mode .text-sky-700 { color: #38bdf8 !important; }
+.dark-mode .text-sky-600 { color: #0ea5e9 !important; }
 .dark-mode .border-sky-200 { border-color: #0ea5e9 !important; }
-.dark-mode .bg-sky-50 { background-color: #1e3a8a !important; } /* Azul profundo */
-.dark-mode input, .dark-mode select, .dark-mode textarea {
+.dark-mode .bg-sky-50 { background-color: #1e3a8a !important; }
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
     background-color: #1e293b !important;
     color: #f1f5f9 !important;
     border-color: #334155 !important;
 }
-.dark-mode input::placeholder, .dark-mode textarea::placeholder {
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
     color: #64748b;
 }
 
+/* Card de produtos */
 .product-card img {
     aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 
-/* Ajustes para a barra de navegação fixa */
+/* Navbar fixa */
 body {
-    padding-top: 70px; /* Altura aproximada da navbar + um pouco de espaço */
+    padding-top: 70px;
 }
+
 #mainNavbar {
-    position: fixed; /* Ou 'sticky' se preferir */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
 }
 
-/* Para garantir que o conteúdo não fique sob a navbar fixa */
 .main-content-area {
-    padding-top: 1rem; /* Ou o valor que achar adequado */
+    padding-top: 1rem;
+}
+
+/* Inputs melhorados para mobile */
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+select,
+textarea {
+    font-size: 16px; /* Evita zoom automático em iOS */
+    padding: 10px 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+
+    #mainNavbar {
+        position: static;
+        padding: 8px 16px;
+    }
+
+    .main-content-area {
+        padding: 8px;
+    }
+
+    .product-card {
+        border: 1px solid #e5e7eb;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
+    }
+
+    input[type="number"] {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .toast {
+        left: 10px;
+        right: 10px;
+        transform: translateY(100px);
+        max-width: calc(100% - 20px);
+    }
+
+    .toast.show {
+        transform: translateY(0);
+    }
+
+    #userDropdownMenu {
+        right: -10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    h1 {
+        font-size: 1.875rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+    }
+
+    .flex-col {
+        flex-direction: column !important;
+    }
+
+    #productSearchInput {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    #categoryFilters {
+        flex-wrap: wrap;
+    }
+
+    #categoryFilters button {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Animação de spin para loading */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Modal de confirmação */
+.fixed.inset-0 {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }

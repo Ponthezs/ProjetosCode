@@ -1,0 +1,174 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\felipe\\onedrive\\documentos\\github\\projetoscode\\projetosc\\microondasparaaprovacao\\microondas\\winformsapp1\\models\\programaspadroes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\models\\programaspadroes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\.github\\copilot-instructions.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.github\\copilot-instructions.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\felipe\\onedrive\\documentos\\github\\projetoscode\\projetosc\\microondasparaaprovacao\\microondas\\winformsapp1\\form2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\felipe\\onedrive\\documentos\\github\\projetoscode\\projetosc\\microondasparaaprovacao\\microondas\\winformsapp1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\felipe\\onedrive\\documentos\\github\\projetoscode\\projetosc\\microondasparaaprovacao\\microondas\\winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\felipe\\onedrive\\documentos\\github\\projetoscode\\projetosc\\microondasparaaprovacao\\microondas\\winformsapp1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\winformsapp1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|c:\\users\\felipe\\onedrive\\documentos\\github\\projetoscode\\projetosc\\microondasparaaprovacao\\microondas\\winformsapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B83A4DF-EC0D-4664-9B7F-154FE770F90D}|WinFormsApp1\\WinFormsApp1.csproj|solutionrelative:winformsapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 179,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form2.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form2.Designer.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form2.Designer.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form2.Designer.cs",
+              "RelativeToolTip": "WinFormsApp1\\Form2.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "copilot-instructions.md",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\.github\\copilot-instructions.md",
+              "RelativeDocumentMoniker": ".github\\copilot-instructions.md",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\.github\\copilot-instructions.md",
+              "RelativeToolTip": ".github\\copilot-instructions.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-01-22T00:00:37.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProgramasPadroes.cs",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Models\\ProgramasPadroes.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Models\\ProgramasPadroes.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Models\\ProgramasPadroes.cs",
+              "RelativeToolTip": "WinFormsApp1\\Models\\ProgramasPadroes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.609Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form1.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form1.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form1.cs",
+              "RelativeToolTip": "WinFormsApp1\\Form1.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form2.cs",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form2.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form2.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form2.cs",
+              "RelativeToolTip": "WinFormsApp1\\Form2.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowHgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form1.Designer.cs",
+              "RelativeToolTip": "WinFormsApp1\\Form1.Designer.cs",
+              "ViewState": "AgIAAEkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Program.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Program.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Program.cs",
+              "RelativeToolTip": "WinFormsApp1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.cs [Projeto]",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form1.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form1.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form1.cs [Projeto]",
+              "RelativeToolTip": "WinFormsApp1\\Form1.cs [Projeto]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.774Z",
+              "EditorCaption": " [Projeto]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Form2.cs [Projeto]",
+              "DocumentMoniker": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form2.cs",
+              "RelativeDocumentMoniker": "WinFormsApp1\\Form2.cs",
+              "ToolTip": "C:\\Users\\Felipe\\OneDrive\\Documentos\\Github\\ProjetosCode\\ProjetosC\\microondasparaaprovacao\\Microondas\\WinFormsApp1\\Form2.cs [Projeto]",
+              "RelativeToolTip": "WinFormsApp1\\Form2.cs [Projeto]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-21T23:52:08.799Z",
+              "EditorCaption": " [Projeto]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
