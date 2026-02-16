@@ -1,5 +1,4 @@
 // Schema Datailer - Plataforma Multi-Lava-Car
-// Estrutura preparada para múltiplos estabelecimentos
 
 generator client {
   provider = "prisma-client-js"
@@ -10,23 +9,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ========== EMPRESA / LAVA-CAR ==========
 model LavaCar {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   nome               String
-  email              String   // e-mail admin / contato
-  senhaHash          String?  // senha do admin do estabelecimento
+  email              String
+  senhaHash          String?
   telefone           String?
   endereco           String
   cidade             String
   estado             String
   cep                String?
-  // Horários: abertura/fechamento por dia (0=dom, 6=sáb)
-  // Ex: { "0": null, "1": { "abertura": "08:00", "fechamento": "18:00" }, ... }
-  horariosFuncionamento String @default("{}") // JSON
-  // Intervalo entre agendamentos (minutos) - ex: 30
+  horariosFuncionamento String @default("{}")
   intervaloSlots     Int      @default(30)
-  taxaCancelamento   Float    @default(0)    // valor cobrado se cancelar com < 24h
+  taxaCancelamento   Float    @default(0)
   ativo              Boolean  @default(true)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
@@ -35,13 +30,12 @@ model LavaCar {
   agendamentos       Agendamento[]
 }
 
-// ========== SERVIÇOS (por Lava-Car) ==========
 model Servico {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   lavaCarId  String   @db.ObjectId
   nome       String
   preco      Float
-  duracao    Int      // minutos
+  duracao    Int
   descricao  String?
   ativo      Boolean  @default(true)
 
@@ -49,14 +43,13 @@ model Servico {
   agendamentos Agendamento[]
 }
 
-// ========== CLIENTE (plataforma) ==========
 model Cliente {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   email      String   @unique
   senhaHash  String
   nome       String
   telefone   String
-  cidade     String?  // para filtrar lava-cars por localidade
+  cidade     String?
   estado     String?
   ativo      Boolean  @default(true)
   createdAt  DateTime @default(now())
@@ -65,23 +58,22 @@ model Cliente {
   agendamentos Agendamento[]
 }
 
-// ========== AGENDAMENTO ==========
 model Agendamento {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   lavaCarId     String   @db.ObjectId
   clienteId     String   @db.ObjectId
   servicoId     String   @db.ObjectId
-  data          String   // YYYY-MM-DD
-  horaInicio    String   // HH:mm
-  horaFim       String   // HH:mm (calculado pela duração do serviço)
-  status        String   @default("confirmado") // confirmado, concluido, cancelado
+  data          String
+  horaInicio    String
+  horaFim       String
+  status        String   @default("confirmado")
   valor         Float
   observacao    String?
   emailConfirmacaoEnviado Boolean @default(false)
   emailCancelamentoEnviado Boolean @default(false)
   canceladoEm   DateTime?
   motivoCancelamento String?
-  taxaCobrada   Float?   // se cancelou fora do prazo
+  taxaCobrada   Float?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

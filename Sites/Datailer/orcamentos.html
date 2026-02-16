@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamentos | Datailer Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer<span class="logo-accent">Premium</span></span>
+            </a>
+            <nav class="app-nav">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="agendamentos.html" class="nav-link">Agendamentos</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="servicos.html" class="nav-link">Serviços</a>
+                <a href="orcamentos.html" class="nav-link active">Orçamentos</a>
+                <a href="relatorios.html" class="nav-link">Relatórios</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Orçamentos</h1>
+                <p>Gerencie orçamentos e converta em vendas</p>
+            </div>
+
+            <section id="novo" class="card form-card">
+                <h2>Novo Orçamento</h2>
+                <form id="formOrcamento" class="form-grid">
+                    <div class="form-group">
+                        <label for="orcCliente">Cliente *</label>
+                        <select id="orcCliente" required>
+                            <option value="">Selecione o cliente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orcValidade">Validade (dias)</label>
+                        <input type="number" id="orcValidade" value="7" min="1" placeholder="7">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Serviços</label>
+                        <div class="orcamento-itens">
+                            <div id="orcItensLista" class="orc-itens-lista"></div>
+                            <div class="orc-add-row">
+                                <select id="orcServicoAdd">
+                                    <option value="">Adicionar serviço</option>
+                                </select>
+                                <input type="number" id="orcQtdAdd" value="1" min="1" placeholder="Qtd">
+                                <button type="button" id="orcAddItem" class="btn btn-ghost btn-sm">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="orcDesconto">Desconto (R$)</label>
+                        <input type="number" id="orcDesconto" step="0.01" min="0" value="0" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <span class="total-label">Total: <strong id="orcTotalDisplay">R$ 0,00</strong></span>
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary">Salvar Orçamento</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card">
+                <div class="section-header">
+                    <h2>Orçamentos</h2>
+                    <select id="filterOrcStatus">
+                        <option value="">Todos</option>
+                        <option value="aberto">Aberto</option>
+                        <option value="aprovado">Aprovado</option>
+                        <option value="recusado">Recusado</option>
+                        <option value="expirado">Expirado</option>
+                    </select>
+                </div>
+                <div id="listaOrcamentos" class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Cliente</th>
+                                <th>Valor</th>
+                                <th>Validade</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyOrcamentos"></tbody>
+                    </table>
+                </div>
+                <p id="emptyOrcamentos" class="empty-state" style="display:none;">Nenhum orçamento encontrado.</p>
+            </section>
+        </div>
+    </main>
+
+    <div id="modalOrcamento" class="modal">
+        <div class="modal-content modal-lg">
+            <h3>Detalhes do Orçamento</h3>
+            <div id="modalOrcConteudo"></div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-ghost" id="modalOrcFechar">Fechar</button>
+                <button type="button" class="btn btn-primary" id="modalOrcAprovar">Marcar Aprovado</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer"></div>
+    <script src="app.js"></script>
+    <script src="orcamentos.js"></script>
+</body>
+</html>

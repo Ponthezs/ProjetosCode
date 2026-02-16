@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Datailer Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer<span class="logo-accent">Premium</span></span>
+            </a>
+            <nav class="app-nav">
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="agendamentos.html" class="nav-link">Agendamentos</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="servicos.html" class="nav-link">Serviços</a>
+                <a href="orcamentos.html" class="nav-link">Orçamentos</a>
+                <a href="relatorios.html" class="nav-link">Relatórios</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p>Visão geral do seu negócio</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="statAgendamentos">0</span>
+                        <span class="stat-label">Agendamentos hoje</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="statClientes">0</span>
+                        <span class="stat-label">Clientes cadastrados</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="statFaturamento">R$ 0</span>
+                        <span class="stat-label">Faturamento do mês</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✓</div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="statConcluidos">0</span>
+                        <span class="stat-label">Serviços concluídos</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Agendamentos de Hoje</h3>
+                    <div id="listaAgendamentosHoje" class="mini-list">
+                        <p class="empty-state">Nenhum agendamento para hoje.</p>
+                    </div>
+                    <a href="agendamentos.html" class="link-more">Ver todos →</a>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Ações Rápidas</h3>
+                    <div class="quick-actions">
+                        <a href="agendamentos.html#novo" class="quick-action">+ Novo agendamento</a>
+                        <a href="clientes.html#novo" class="quick-action">+ Cadastrar cliente</a>
+                        <a href="orcamentos.html#novo" class="quick-action">+ Criar orçamento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toastContainer"></div>
+    <script src="app.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

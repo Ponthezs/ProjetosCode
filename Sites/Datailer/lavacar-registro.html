@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Lava-Car | Datailer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <div class="login-bg"></div>
+    <div class="login-container login-container-wide">
+        <a href="index.html" class="login-logo">
+            <span class="logo-icon">◆</span>
+            Datailer<span class="logo-accent">Premium</span>
+        </a>
+        <div class="login-box">
+            <h1>Cadastrar Estabelecimento</h1>
+            <p class="login-subtitle">Registre seu lava-car na plataforma</p>
+            <form id="formRegistro" class="login-form form-grid-vertical">
+                <div class="form-group">
+                    <label for="nome">Nome do estabelecimento *</label>
+                    <input type="text" id="nome" required placeholder="Ex: Lava Rápido Centro">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" required placeholder="contato@lavacar.com">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" placeholder="(11) 99999-9999">
+                </div>
+                <div class="form-group">
+                    <label for="endereco">Endereço *</label>
+                    <input type="text" id="endereco" required placeholder="Rua, número, bairro">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cidade">Cidade *</label>
+                        <input type="text" id="cidade" required placeholder="São Paulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado *</label>
+                        <input type="text" id="estado" required placeholder="SP" maxlength="2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" placeholder="00000-000">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha *</label>
+                    <input type="password" id="senha" required placeholder="Mínimo 6 caracteres" minlength="6">
+                </div>
+                <p id="registroErro" class="error-text" style="display:none;"></p>
+                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                <p class="login-hint">Já tem conta? <a href="lavacar-login.html">Entrar</a></p>
+            </form>
+        </div>
+        <a href="index.html" class="back-home">← Voltar</a>
+    </div>
+    <script type="module" src="lavacar-registro.js"></script>
+</body>
+</html>

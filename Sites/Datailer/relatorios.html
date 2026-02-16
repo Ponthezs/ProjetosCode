@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios | Datailer Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer<span class="logo-accent">Premium</span></span>
+            </a>
+            <nav class="app-nav">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="agendamentos.html" class="nav-link">Agendamentos</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="servicos.html" class="nav-link">Serviços</a>
+                <a href="orcamentos.html" class="nav-link">Orçamentos</a>
+                <a href="relatorios.html" class="nav-link active">Relatórios</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Relatórios</h1>
+                <p>Análises e visão do negócio</p>
+            </div>
+
+            <div class="filters-bar">
+                <div class="form-group">
+                    <label>Período</label>
+                    <div class="form-row">
+                        <input type="date" id="relDataInicio">
+                        <input type="date" id="relDataFim">
+                    </div>
+                </div>
+                <button id="btnGerarRelatorio" class="btn btn-primary">Gerar Relatório</button>
+            </div>
+
+            <div class="reports-grid">
+                <section class="card report-card">
+                    <h3>Faturamento por Período</h3>
+                    <div class="report-value" id="reportFaturamento">R$ 0,00</div>
+                    <p class="report-desc">Soma dos serviços concluídos no período</p>
+                </section>
+                <section class="card report-card">
+                    <h3>Serviços Realizados</h3>
+                    <div class="report-value" id="reportServicos">0</div>
+                    <p class="report-desc">Total de serviços concluídos</p>
+                </section>
+                <section class="card report-card">
+                    <h3>Novos Clientes</h3>
+                    <div class="report-value" id="reportNovosClientes">0</div>
+                    <p class="report-desc">Clientes cadastrados no período</p>
+                </section>
+                <section class="card report-card">
+                    <h3>Orçamentos Aprovados</h3>
+                    <div class="report-value" id="reportOrcAprovados">0</div>
+                    <p class="report-desc">Orçamentos convertidos em vendas</p>
+                </section>
+            </div>
+
+            <section class="card">
+                <h3>Top Serviços Mais Vendidos</h3>
+                <div id="reportTopServicos" class="report-list">
+                    <p class="empty-state">Selecione o período e gere o relatório.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h3>Agendamentos por Status</h3>
+                <div id="reportAgStatus" class="report-list">
+                    <p class="empty-state">Selecione o período e gere o relatório.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="toastContainer"></div>
+    <script src="app.js"></script>
+    <script src="relatorios.js"></script>
+</body>
+</html>

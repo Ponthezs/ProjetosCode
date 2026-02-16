@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Agendamentos | Datailer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="cliente-dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer</span>
+            </a>
+            <nav class="app-nav">
+                <a href="cliente-dashboard.html" class="nav-link active">Meus Agendamentos</a>
+                <a href="cliente-agendar.html" class="nav-link">Novo Agendamento</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Meus Agendamentos</h1>
+                <p>Visualize e gerencie seus agendamentos</p>
+            </div>
+
+            <div class="aviso-cancelamento card">
+                <strong>⚠️ Lembrete:</strong> Cancelamentos devem ser feitos com no mínimo 24 horas de antecedência. Caso contrário, poderá ser cobrada uma taxa.
+            </div>
+
+            <div id="listaAgendamentos" class="agendamentos-list"></div>
+            <p id="emptyAgendamentos" class="empty-state" style="display:none;">Você ainda não tem agendamentos.</p>
+        </div>
+    </main>
+
+    <div id="toastContainer"></div>
+    <script type="module" src="cliente-dashboard.js"></script>
+</body>
+</html>

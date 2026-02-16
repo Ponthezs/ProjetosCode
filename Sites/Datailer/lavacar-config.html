@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Datailer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="lavacar-painel.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text" id="nomeEstabelecimento">Painel</span>
+            </a>
+            <nav class="app-nav">
+                <a href="lavacar-painel.html" class="nav-link">Agendamentos</a>
+                <a href="lavacar-config.html" class="nav-link active">Configurações</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Configurações</h1>
+                <p>Dados do estabelecimento, horários e serviços</p>
+            </div>
+
+            <section class="card">
+                <h2>Dados do Estabelecimento</h2>
+                <form id="formDados" class="form-grid">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="telefone">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Endereço</label>
+                        <input type="text" id="endereco">
+                    </div>
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <input type="text" id="cidade">
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" id="estado" maxlength="2">
+                    </div>
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <input type="text" id="cep">
+                    </div>
+                    <div class="form-group">
+                        <label>Taxa de cancelamento (R$) - cobrada se cliente cancelar com &lt; 24h</label>
+                        <input type="number" id="taxaCancelamento" step="0.01" min="0" value="0">
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card">
+                <h2>Serviços</h2>
+                <form id="formNovoServico" class="form-grid" style="margin-bottom:1rem;">
+                    <div class="form-group">
+                        <label>Nome do serviço</label>
+                        <input type="text" id="srvNome" placeholder="Ex: Lavagem simples">
+                    </div>
+                    <div class="form-group">
+                        <label>Preço (R$)</label>
+                        <input type="number" id="srvPreco" step="0.01" min="0" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Duração (min)</label>
+                        <input type="number" id="srvDuracao" min="15" value="60" placeholder="60">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </div>
+                </form>
+                <div id="listaServicos"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="toastContainer"></div>
+    <script type="module" src="lavacar-config.js"></script>
+</body>
+</html>

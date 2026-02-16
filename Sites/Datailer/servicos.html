@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços | Datailer Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer<span class="logo-accent">Premium</span></span>
+            </a>
+            <nav class="app-nav">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="agendamentos.html" class="nav-link">Agendamentos</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="servicos.html" class="nav-link active">Serviços</a>
+                <a href="orcamentos.html" class="nav-link">Orçamentos</a>
+                <a href="relatorios.html" class="nav-link">Relatórios</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Serviços</h1>
+                <p>Catálogo de serviços da datailer</p>
+            </div>
+
+            <section id="novo" class="card form-card">
+                <h2>Novo Serviço</h2>
+                <form id="formServico" class="form-grid">
+                    <div class="form-group">
+                        <label for="srvNome">Nome do Serviço *</label>
+                        <input type="text" id="srvNome" required placeholder="Ex: Polimento completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="srvPreco">Preço (R$) *</label>
+                        <input type="number" id="srvPreco" required step="0.01" min="0" placeholder="0,00">
+                    </div>
+                    <div class="form-group">
+                        <label for="srvDuracao">Duração (min)</label>
+                        <input type="number" id="srvDuracao" min="0" placeholder="Ex: 120">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="srvDescricao">Descrição</label>
+                        <textarea id="srvDescricao" rows="2" placeholder="Descrição do serviço..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary">Cadastrar Serviço</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card">
+                <h2>Catálogo de Serviços</h2>
+                <div id="listaServicos" class="cards-grid">
+                    <!-- cards gerados via JS -->
+                </div>
+                <p id="emptyServicos" class="empty-state" style="display:none;">Nenhum serviço cadastrado. Os serviços padrão aparecerão após adicionar.</p>
+            </section>
+        </div>
+    </main>
+
+    <div id="modalServico" class="modal">
+        <div class="modal-content">
+            <h3>Editar Serviço</h3>
+            <form id="formEditServico">
+                <input type="hidden" id="editSrvId">
+                <div class="form-group">
+                    <label>Nome *</label>
+                    <input type="text" id="editSrvNome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preço (R$)</label>
+                        <input type="number" id="editSrvPreco" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Duração (min)</label>
+                        <input type="number" id="editSrvDuracao" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="editSrvDescricao" rows="2"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="modalSrvCancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastContainer"></div>
+    <script src="app.js"></script>
+    <script src="servicos.js"></script>
+</body>
+</html>

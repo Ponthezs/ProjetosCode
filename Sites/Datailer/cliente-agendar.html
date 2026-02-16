@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Lavagem | Datailer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="cliente-dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer</span>
+            </a>
+            <nav class="app-nav">
+                <a href="cliente-dashboard.html" class="nav-link">Meus Agendamentos</a>
+                <a href="cliente-agendar.html" class="nav-link active">Novo Agendamento</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Novo Agendamento</h1>
+                <p>Siga os passos para agendar sua lavagem</p>
+            </div>
+
+            <div class="aviso-cancelamento card">
+                <strong>⚠️ Política de cancelamento:</strong> Cancelamentos devem ser feitos com no mínimo 24 horas de antecedência. Caso contrário, poderá ser cobrada uma taxa de cancelamento pelo estabelecimento.
+            </div>
+
+            <div class="steps-card card">
+                <div class="step active" data-step="1">
+                    <h3>1. Escolha o lava-car</h3>
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <input type="text" id="filtroCidade" placeholder="Ex: São Paulo">
+                    </div>
+                    <button type="button" id="btnBuscarLavacar" class="btn btn-primary">Buscar</button>
+                    <div id="listaLavacars" class="lavacar-list"></div>
+                </div>
+
+                <div class="step" data-step="2">
+                    <h3>2. Escolha o serviço</h3>
+                    <div id="listaServicos" class="servicos-list"></div>
+                </div>
+
+                <div class="step" data-step="3">
+                    <h3>3. Escolha data e horário</h3>
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="dataAgendamento">
+                    </div>
+                    <div id="listaHorarios" class="horarios-grid"></div>
+                </div>
+
+                <div class="step" data-step="4">
+                    <h3>4. Confirme</h3>
+                    <div id="resumoAgendamento" class="resumo-agendamento"></div>
+                    <button type="button" id="btnConfirmar" class="btn btn-primary">Confirmar agendamento</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toastContainer"></div>
+    <script type="module" src="cliente-agendar.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes | Datailer Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">Datailer<span class="logo-accent">Premium</span></span>
+            </a>
+            <nav class="app-nav">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="agendamentos.html" class="nav-link">Agendamentos</a>
+                <a href="clientes.html" class="nav-link active">Clientes</a>
+                <a href="servicos.html" class="nav-link">Serviços</a>
+                <a href="orcamentos.html" class="nav-link">Orçamentos</a>
+                <a href="relatorios.html" class="nav-link">Relatórios</a>
+            </nav>
+            <button id="logoutBtn" class="btn btn-outline btn-sm">Sair</button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Clientes</h1>
+                <p>Cadastro e gerenciamento de clientes</p>
+            </div>
+
+            <section id="novo" class="card form-card">
+                <h2>Novo Cliente</h2>
+                <form id="formCliente" class="form-grid">
+                    <div class="form-group">
+                        <label for="cliNome">Nome *</label>
+                        <input type="text" id="cliNome" required placeholder="Nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliTelefone">Telefone *</label>
+                        <input type="tel" id="cliTelefone" required placeholder="(11) 99999-9999">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliEmail">E-mail</label>
+                        <input type="email" id="cliEmail" placeholder="email@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliCPF">CPF</label>
+                        <input type="text" id="cliCPF" placeholder="000.000.000-00" maxlength="14">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="cliEndereco">Endereço</label>
+                        <input type="text" id="cliEndereco" placeholder="Rua, número, bairro">
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card">
+                <div class="section-header">
+                    <h2>Lista de Clientes</h2>
+                    <input type="search" id="searchCliente" placeholder="Buscar por nome ou telefone..." class="input-search">
+                </div>
+                <div id="listaClientes" class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyClientes"></tbody>
+                    </table>
+                </div>
+                <p id="emptyClientes" class="empty-state" style="display:none;">Nenhum cliente cadastrado.</p>
+            </section>
+        </div>
+    </main>
+
+    <div id="modalCliente" class="modal">
+        <div class="modal-content">
+            <h3>Editar Cliente</h3>
+            <form id="formEditCliente">
+                <input type="hidden" id="editCliId">
+                <div class="form-group">
+                    <label>Nome *</label>
+                    <input type="text" id="editCliNome" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefone *</label>
+                    <input type="tel" id="editCliTelefone" required>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="editCliEmail">
+                </div>
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input type="text" id="editCliEndereco">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="modalCliCancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastContainer"></div>
+    <script src="app.js"></script>
+    <script src="clientes.js"></script>
+</body>
+</html>
