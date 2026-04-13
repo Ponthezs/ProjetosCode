@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-Tuner Pro | ECU Remap Interface</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 60px 1fr 150px;
+            height: 100vh;
+        }
+
+        /* Top Bar */
+        header {
+            background: #1a1a1a;
+            border-bottom: 2px solid #333;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .logo { font-weight: bold; font-size: 1.5rem; color: #fff; }
+        .status { display: flex; gap: 20px; font-size: 0.9rem; }
+        .badge { background: #333; padding: 5px 10px; border-radius: 4px; color: #fff; }
+        .badge.active { background: #007f0e; }
+
+        /* Main Content */
+        main {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            gap: 2px;
+            background: #333; /* border color */
+        }
+        
+        .panel {
+            background: #0f0f0f;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h3 { margin-top: 0; color: #aaa; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 0.9rem; }
+
+        /* Sidebar */
+        .menu-item {
+            padding: 10px;
+            border-bottom: 1px solid #222;
+            cursor: pointer;
+            color: #888;
+        }
+        .menu-item:hover, .menu-item.active {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 3px solid #00ff41;
+        }
+
+        /* Table (Hex Map) */
+        .hex-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        .hex-cell {
+            background: #1a1a1a;
+            padding: 5px;
+            text-align: center;
+            transition: background 0.1s;
+        }
+        .hex-cell.highlight {
+            background: #003300;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Graph Area */
+        canvas {
+            width: 100%;
+            height: 250px;
+            border: 1px solid #333;
+            background: #000;
+        }
+
+        /* Bottom Console */
+        footer {
+            background: #000;
+            padding: 10px;
+            font-size: 0.8rem;
+            overflow-y: hidden;
+            border-top: 2px solid #333;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        .log-entry { margin: 2px 0; }
+        .log-time { color: #666; margin-right: 10px; }
+        .log-msg { color: #ddd; }
+
+        /* Button */
+        .btn-action {
+            width: 100%;
+            padding: 15px;
+            background: #b00;
+            color: white;
+            border: none;
+            font-family: inherit;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-action:hover { background: #d00; }
+        
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">X-TUNER <span style="color:#b00">PRO</span> v4.5.2</div>
+        <div class="status">
+            <span class="badge active">INTERFACE: CONNECTED</span>
+            <span class="badge active">ECU: BOSCH ME7.5</span>
+            <span class="badge">VOLTAGE: 14.2V</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="panel">
+            <div class="menu-item active">Fuel Map (Injection)</div>
+            <div class="menu-item">Ignition Timing</div>
+            <div class="menu-item">Turbo Pressure</div>
+            <div class="menu-item">Lambda Sensors</div>
+            <div class="menu-item">DTC Error Codes</div>
+            <div class="menu-item">Data Logging</div>
+            
+            <button class="btn-action" onclick="startFlash()">WRITE ECU</button>
+        </div>
+
+        <div class="panel">
+            <h3>MAP: INJECTION DURATION (ms)</h3>
+            <div class="hex-grid" id="hexGrid">
+                </div>
+            
+            <div style="margin-top: 20px;">
+                <h3>LIVE TELEMETRY: RPM / LOAD</h3>
+                <canvas id="dynoCanvas"></canvas>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>REALTIME SENSORS</h3>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <div>
+                    <div style="color:#888">ENGINE RPM</div>
+                    <div style="font-size: 2rem; font-weight: bold;" id="rpmDisplay">850</div>
+                </div>
+                <div>
+                    <div style="color:#888">BOOST PRESSURE</div>
+                    <div style="font-size: 2rem; font-weight: bold;" id="boostDisplay">0.4 BAR</div>
+                </div>
+                <div>
+                    <div style="color:#888">INTAKE TEMP</div>
+                    <div style="font-size: 2rem; font-weight: bold;">32°C</div>
+                </div>
+                <div>
+                    <div style="color:#888">THROTTLE POS</div>
+                    <div style="font-size: 2rem; font-weight: bold;" id="tpsDisplay">12%</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="consoleLog">
+        <div class="log-entry"><span class="log-time">10:42:05</span><span class="log-msg">Ready.</span></div>
+    </footer>
+
+    <script>
+        // 1. Populate Hex Grid with fake data
+        const grid = document.getElementById('hexGrid');
+        const cells = [];
+        for(let i=0; i<64; i++) {
+            const div = document.createElement('div');
+            div.className = 'hex-cell';
+            div.innerText = Math.floor(Math.random() * 255).toString(16).toUpperCase().padStart(2, '0');
+            grid.appendChild(div);
+            cells.push(div);
+        }
+
+        // Randomly update cells to look "alive"
+        setInterval(() => {
+            const idx = Math.floor(Math.random() * cells.length);
+            cells[idx].innerText = Math.floor(Math.random() * 255).toString(16).toUpperCase().padStart(2, '0');
+            cells[idx].classList.add('highlight');
+            setTimeout(() => cells[idx].classList.remove('highlight'), 300);
+        }, 100);
+
+        // 2. Simulate Sensor Data
+        setInterval(() => {
+            // RPM fluctuation
+            const baseRpm = 850;
+            const fluctuation = Math.floor(Math.random() * 50) - 25;
+            document.getElementById('rpmDisplay').innerText = baseRpm + fluctuation;
+            
+            // Boost fluctuation slightly
+            document.getElementById('boostDisplay').innerText = (0.4 + (Math.random() * 0.1 - 0.05)).toFixed(2) + " BAR";
+
+            // TPS
+            document.getElementById('tpsDisplay').innerText = Math.floor(10 + Math.random() * 5) + "%";
+        }, 150);
+
+        // 3. Fake Console Log
+        const consoleLog = document.getElementById('consoleLog');
+        function log(msg) {
+            const now = new Date();
+            const time = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+            div.innerHTML = `<span class="log-time">${time}</span><span class="log-msg">${msg}</span>`;
+            consoleLog.prepend(div);
+            if(consoleLog.children.length > 10) consoleLog.lastChild.remove();
+        }
+
+        setInterval(() => {
+            const msgs = [
+                "Reading Block 0x4F...", 
+                "Verifying Checksum...", 
+                "Keep Alive sent...", 
+                "Sync OK.",
+                "Updating map address 00AF2..."
+            ];
+            if(Math.random() > 0.7) {
+                log(msgs[Math.floor(Math.random() * msgs.length)]);
+            }
+        }, 2000);
+
+        // 4. Simple Graph Animation
+        const canvas = document.getElementById('dynoCanvas');
+        const ctx = canvas.getContext('2d');
+        let dataPoints = new Array(50).fill(50);
+
+        function drawGraph() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = 250;
+            
+            // Shift data
+            dataPoints.push(50 + Math.random() * 30);
+            dataPoints.shift();
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - dataPoints[0]);
+
+            const step = canvas.width / dataPoints.length;
+            for(let i=1; i<dataPoints.length; i++) {
+                ctx.lineTo(i * step, canvas.height - dataPoints[i] * 2);
+            }
+            
+            ctx.strokeStyle = '#00ff41';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Fill under
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.fillStyle = 'rgba(0, 255, 65, 0.1)';
+            ctx.fill();
+
+            requestAnimationFrame(drawGraph);
+        }
+        drawGraph();
+
+        function startFlash() {
+            alert("⚠️ WARNING: FLASHING ECU WILL OVERWRITE FACTORY SETTINGS.\n\nProceeding...");
+            log("INITIATING WRITE SEQUENCE...");
+            log("ERASING EEPROM...");
+        }
+    </script>
+</body>
+</html>
