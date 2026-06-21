@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema PRO de Cadastro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    .hero img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .container {
+      background: rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 12px;
+      width: 350px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #00c896;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover { background: #00a87d; }
+
+    .feedback {
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .success { color: #00ffae; }
+    .error { color: #ff6b6b; }
+
+    .list {
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .item {
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🚀 Sistema Profissional de Cadastro de Produtos</h1>
+</header>
+
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db" alt="Produtos">
+
+  <div class="container">
+    <h2>Cadastrar Produto</h2>
+
+    <input type="text" id="nome" placeholder="Nome do Produto">
+    <input type="number" id="preco" placeholder="Preço">
+    <input type="number" id="quantidade" placeholder="Quantidade">
+
+    <select id="categoria">
+      <option value="">Categoria</option>
+      <option>Eletrônicos</option>
+      <option>Alimentos</option>
+      <option>Roupas</option>
+    </select>
+
+    <button onclick="cadastrar()">Cadastrar</button>
+
+    <div id="feedback" class="feedback"></div>
+
+    <div class="list" id="lista"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Projeto UX • Heurísticas de Nielsen • Interface Responsiva</p>
+</footer>
+
+<script>
+  function cadastrar() {
+    const nome = document.getElementById('nome').value;
+    const preco = document.getElementById('preco').value;
+    const quantidade = document.getElementById('quantidade').value;
+    const categoria = document.getElementById('categoria').value;
+    const feedback = document.getElementById('feedback');
+
+    if (!nome || !preco || !quantidade || !categoria) {
+      feedback.innerText = "Preencha todos os campos!";
+      feedback.className = "feedback error";
+      feedback.style.display = "block";
+      return;
+    }
+
+    feedback.innerText = "Produto cadastrado com sucesso!";
+    feedback.className = "feedback success";
+    feedback.style.display = "block";
+
+    const lista = document.getElementById('lista');
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.innerHTML = `<strong>${nome}</strong><br>R$ ${preco} | Qtd: ${quantidade} | ${categoria}`;
+
+    lista.appendChild(item);
+
+    document.getElementById('nome').value = '';
+    document.getElementById('preco').value = '';
+    document.getElementById('quantidade').value = '';
+    document.getElementById('categoria').value = '';
+  }
+</script>
+
+</body>
+</html>

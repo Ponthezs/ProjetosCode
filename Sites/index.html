@@ -1,287 +1,635 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-Tuner Pro | ECU Remap Interface</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: #00ff41;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            overflow: hidden;
-            display: grid;
-            grid-template-rows: 60px 1fr 150px;
-            height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro de Produto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary: #4f46e5;
+        --primary-light: #e0e7ff;
+        --success: #16a34a;
+        --success-bg: #f0fdf4;
+        --success-border: #bbf7d0;
+        --error: #dc2626;
+        --text-main: #111827;
+        --text-muted: #6b7280;
+        --border: #d1d5db;
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+    }
 
-        /* Top Bar */
-        header {
-            background: #1a1a1a;
-            border-bottom: 2px solid #333;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+        font-family: 'Inter', sans-serif; 
+    }
+
+    body {
+        background-color: var(--bg-body);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    /* 1. VISIBILIDADE DO ESTADO DO SISTEMA: Mensagem de Sucesso */
+    .toast {
+        background-color: var(--success-bg);
+        border: 1px solid var(--success-border);
+        color: var(--success);
+        padding: 16px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .toast-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .toast-icon {
+        background-color: var(--success);
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .card {
+        background-color: var(--bg-card);
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 3. CONSISTÊNCIA E PADRÕES: Organização Lógica */
+    .header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .header-icon {
+        background-color: var(--primary-light);
+        color: var(--primary);
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+
+    .header-text h1 {
+        font-size: 24px;
+        color: var(--text-main);
+        margin-bottom: 4px;
+    }
+
+    .header-text p {
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .form-label i {
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    /* 2. PREVENÇÃO DE ERROS: Marcador Visual de Obrigatório */
+    .required {
+        color: var(--error);
+    }
+
+    .form-control {
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 14px;
+        color: var(--text-main);
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .form-control.is-invalid {
+        border-color: var(--error);
+    }
+
+    .form-control::placeholder {
+        color: #9ca3af;
+    }
+
+    select.form-control {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px top 50%;
+        background-size: 10px auto;
+        color: #6b7280;
+    }
+
+    /* 1. VISIBILIDADE DO ESTADO: Mensagens de erro abaixo dos campos */
+    .error-text {
+        color: var(--error);
+        font-size: 12px;
+        margin-top: -4px;
+    }
+
+    .upload-section {
+        margin-bottom: 24px;
+    }
+
+    .upload-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 12px;
+    }
+
+    .upload-box {
+        border: 1px dashed #a78bfa;
+        border-radius: 8px;
+        padding: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        background-color: #ffffff;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .upload-box.dragover {
+        background-color: var(--primary-light);
+        border-color: var(--primary);
+    }
+
+    .upload-icon {
+        font-size: 32px;
+        color: var(--text-muted);
+    }
+
+    .upload-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .upload-text {
+        font-size: 14px;
+        color: var(--text-main);
+    }
+
+    .upload-btn {
+        background-color: white;
+        border: 1px solid var(--primary-light);
+        color: var(--primary);
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        transition: background-color 0.2s;
+    }
+    
+    .upload-btn:hover {
+        background-color: var(--bg-body);
+    }
+
+    .upload-hint {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 12px;
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+    }
+
+    /* 1. VISIBILIDADE DO ESTADO: Feedback visual de carregamento */
+    .saving-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .saving-icon {
+        animation: spin 1s linear infinite;
+        font-size: 18px;
+    }
+
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+
+    .actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    /* 3. CONSISTÊNCIA E PADRÕES: Cancelar Neutro e Salvar Verde */
+    .btn-cancel {
+        background-color: white;
+        border: 1px solid var(--border);
+        color: var(--text-main);
+    }
+
+    .btn-cancel i {
+        color: var(--error);
+    }
+
+    .btn-save {
+        background-color: var(--success);
+        border: 1px solid var(--success);
+        color: white;
+    }
+
+    @media (max-width: 480px) {
+        .footer {
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch;
+        }
+        
+        .actions {
             justify-content: space-between;
         }
-        .logo { font-weight: bold; font-size: 1.5rem; color: #fff; }
-        .status { display: flex; gap: 20px; font-size: 0.9rem; }
-        .badge { background: #333; padding: 5px 10px; border-radius: 4px; color: #fff; }
-        .badge.active { background: #007f0e; }
-
-        /* Main Content */
-        main {
-            display: grid;
-            grid-template-columns: 250px 1fr 300px;
-            gap: 2px;
-            background: #333; /* border color */
-        }
-        
-        .panel {
-            background: #0f0f0f;
-            padding: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        h3 { margin-top: 0; color: #aaa; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 0.9rem; }
-
-        /* Sidebar */
-        .menu-item {
-            padding: 10px;
-            border-bottom: 1px solid #222;
-            cursor: pointer;
-            color: #888;
-        }
-        .menu-item:hover, .menu-item.active {
-            background: #1a1a1a;
-            color: #fff;
-            border-left: 3px solid #00ff41;
-        }
-
-        /* Table (Hex Map) */
-        .hex-grid {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 5px;
-            font-size: 0.8rem;
-            color: #ccc;
-        }
-        .hex-cell {
-            background: #1a1a1a;
-            padding: 5px;
-            text-align: center;
-            transition: background 0.1s;
-        }
-        .hex-cell.highlight {
-            background: #003300;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        /* Graph Area */
-        canvas {
-            width: 100%;
-            height: 250px;
-            border: 1px solid #333;
-            background: #000;
-        }
-
-        /* Bottom Console */
-        footer {
-            background: #000;
-            padding: 10px;
-            font-size: 0.8rem;
-            overflow-y: hidden;
-            border-top: 2px solid #333;
-            display: flex;
-            flex-direction: column-reverse;
-        }
-        .log-entry { margin: 2px 0; }
-        .log-time { color: #666; margin-right: 10px; }
-        .log-msg { color: #ddd; }
-
-        /* Button */
-        .btn-action {
-            width: 100%;
-            padding: 15px;
-            background: #b00;
-            color: white;
-            border: none;
-            font-family: inherit;
-            font-weight: bold;
-            margin-top: 20px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-        .btn-action:hover { background: #d00; }
-        
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-    </style>
+    }
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">X-TUNER <span style="color:#b00">PRO</span> v4.5.2</div>
-        <div class="status">
-            <span class="badge active">INTERFACE: CONNECTED</span>
-            <span class="badge active">ECU: BOSCH ME7.5</span>
-            <span class="badge">VOLTAGE: 14.2V</span>
+<div class="container">
+    <div class="toast" id="toast" style="display: none;">
+        <div class="toast-content">
+            <div class="toast-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <span>Produto cadastrado com sucesso!</span>
         </div>
-    </header>
+        <button class="close-btn" onclick="document.getElementById('toast').style.display='none'">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
 
-    <main>
-        <div class="panel">
-            <div class="menu-item active">Fuel Map (Injection)</div>
-            <div class="menu-item">Ignition Timing</div>
-            <div class="menu-item">Turbo Pressure</div>
-            <div class="menu-item">Lambda Sensors</div>
-            <div class="menu-item">DTC Error Codes</div>
-            <div class="menu-item">Data Logging</div>
-            
-            <button class="btn-action" onclick="startFlash()">WRITE ECU</button>
-        </div>
-
-        <div class="panel">
-            <h3>MAP: INJECTION DURATION (ms)</h3>
-            <div class="hex-grid" id="hexGrid">
-                </div>
-            
-            <div style="margin-top: 20px;">
-                <h3>LIVE TELEMETRY: RPM / LOAD</h3>
-                <canvas id="dynoCanvas"></canvas>
+    <div class="card">
+        <div class="header">
+            <div class="header-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+            <div class="header-text">
+                <h1>Cadastro de Produto</h1>
+                <p>Preencha as informações abaixo</p>
             </div>
         </div>
 
-        <div class="panel">
-            <h3>REALTIME SENSORS</h3>
-            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-                <div>
-                    <div style="color:#888">ENGINE RPM</div>
-                    <div style="font-size: 2rem; font-weight: bold;" id="rpmDisplay">850</div>
+        <form id="productForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fa-solid fa-tag"></i>
+                        Nome do Produto <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="Digite o nome do produto">
+                    <span class="error-text" style="display:none;">Campo obrigatório</span>
                 </div>
-                <div>
-                    <div style="color:#888">BOOST PRESSURE</div>
-                    <div style="font-size: 2rem; font-weight: bold;" id="boostDisplay">0.4 BAR</div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fa-solid fa-list"></i>
+                        Categoria <span class="required">*</span>
+                    </label>
+                    <select class="form-control">
+                        <option value="" disabled selected>Selecione a categoria</option>
+                        <option value="1">Eletrônicos</option>
+                        <option value="2">Roupas</option>
+                    </select>
+                    <span class="error-text" style="display:none;">Campo obrigatório</span>
                 </div>
-                <div>
-                    <div style="color:#888">INTAKE TEMP</div>
-                    <div style="font-size: 2rem; font-weight: bold;">32°C</div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fa-solid fa-shirt"></i>
+                        Tamanho <span class="required">*</span>
+                    </label>
+                    <select class="form-control">
+                        <option value="" disabled selected>Selecione o tamanho</option>
+                        <option value="p">P</option>
+                        <option value="m">M</option>
+                        <option value="g">G</option>
+                    </select>
+                    <span class="error-text" style="display:none;">Campo obrigatório</span>
                 </div>
-                <div>
-                    <div style="color:#888">THROTTLE POS</div>
-                    <div style="font-size: 2rem; font-weight: bold;" id="tpsDisplay">12%</div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fa-solid fa-palette"></i>
+                        Cor <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="Digite a cor do produto">
+                    <span class="error-text" style="display:none;">Campo obrigatório</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        Preço (R$) <span class="required">*</span>
+                    </label>
+                    <input type="text" id="precoInput" class="form-control" placeholder="0,00">
+                    <span class="error-text" style="display:none;">Digite um valor válido</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fa-solid fa-box"></i>
+                        Quantidade em estoque <span class="required">*</span>
+                    </label>
+                    <input type="number" id="qtdInput" class="form-control" placeholder="0" min="0">
+                    <span class="error-text" style="display:none;">Informe uma quantidade válida (mín. 0)</span>
                 </div>
             </div>
-        </div>
-    </main>
 
-    <footer id="consoleLog">
-        <div class="log-entry"><span class="log-time">10:42:05</span><span class="log-msg">Ready.</span></div>
-    </footer>
+            <div class="upload-section">
+                <label class="upload-title">
+                    <i class="fa-regular fa-image"></i>
+                    Imagem do Produto
+                </label>
+                <div class="upload-box" id="drop-zone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <div class="upload-content">
+                        <span class="upload-text">Arraste e solte uma imagem aqui<br>ou</span>
+                        <button type="button" class="upload-btn" onclick="document.getElementById('file-upload').click()">
+                            <i class="fa-regular fa-file"></i>
+                            Escolher arquivo
+                        </button>
+                        <input type="file" id="file-upload" style="display: none;" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+                <p class="upload-hint">Formatos aceitos: JPG, PNG. Tamanho máximo: 5MB.</p>
+            </div>
 
-    <script>
-        // 1. Populate Hex Grid with fake data
-        const grid = document.getElementById('hexGrid');
-        const cells = [];
-        for(let i=0; i<64; i++) {
-            const div = document.createElement('div');
-            div.className = 'hex-cell';
-            div.innerText = Math.floor(Math.random() * 255).toString(16).toUpperCase().padStart(2, '0');
-            grid.appendChild(div);
-            cells.push(div);
+            <div class="footer">
+                <div class="saving-status" id="loadingState" style="display: none;">
+                    <i class="fa-solid fa-spinner saving-icon"></i>
+                    Salvando produto...
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-cancel" onclick="document.getElementById('productForm').reset(); clearErrors();">
+                        Cancelar <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <button type="button" class="btn btn-save" id="saveBtn">
+                        <i class="fa-regular fa-floppy-disk"></i> Salvar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const btnSalvar = document.getElementById('saveBtn');
+    const loading = document.getElementById('loadingState');
+    const toast = document.getElementById('toast');
+    const form = document.getElementById('productForm');
+    const formControls = form.querySelectorAll('.form-control');
+    
+    const fileInput = document.getElementById('file-upload');
+    const dropZone = document.getElementById('drop-zone');
+    const originalDropZoneHTML = dropZone.innerHTML; 
+
+    // --- 2. PREVENÇÃO DE ERROS: Máscaras e Travas ---
+
+    // Trava para o campo de Preço (Aceita apenas números e formata como moeda)
+    const precoInput = document.getElementById('precoInput');
+    precoInput.addEventListener('input', function(e) {
+        let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+        
+        if (valor.length > 0) {
+            // Formata em moeda: divide por 100 para ter as casas decimais
+            valor = (parseInt(valor) / 100).toFixed(2) + '';
+            valor = valor.replace('.', ',');
+            valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Coloca os pontos de milhar
+            e.target.value = valor;
+        } else {
+            e.target.value = '';
         }
+    });
 
-        // Randomly update cells to look "alive"
-        setInterval(() => {
-            const idx = Math.floor(Math.random() * cells.length);
-            cells[idx].innerText = Math.floor(Math.random() * 255).toString(16).toUpperCase().padStart(2, '0');
-            cells[idx].classList.add('highlight');
-            setTimeout(() => cells[idx].classList.remove('highlight'), 300);
-        }, 100);
+    // Trava para o campo de Quantidade (Não permite digitar o sinal de menos nem letras)
+    const qtdInput = document.getElementById('qtdInput');
+    qtdInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Remove qualquer coisa que não seja número (0-9)
+    });
 
-        // 2. Simulate Sensor Data
-        setInterval(() => {
-            // RPM fluctuation
-            const baseRpm = 850;
-            const fluctuation = Math.floor(Math.random() * 50) - 25;
-            document.getElementById('rpmDisplay').innerText = baseRpm + fluctuation;
-            
-            // Boost fluctuation slightly
-            document.getElementById('boostDisplay').innerText = (0.4 + (Math.random() * 0.1 - 0.05)).toFixed(2) + " BAR";
+    // --- Fim Prevenção de Erros ---
 
-            // TPS
-            document.getElementById('tpsDisplay').innerText = Math.floor(10 + Math.random() * 5) + "%";
-        }, 150);
-
-        // 3. Fake Console Log
-        const consoleLog = document.getElementById('consoleLog');
-        function log(msg) {
-            const now = new Date();
-            const time = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-            const div = document.createElement('div');
-            div.className = 'log-entry';
-            div.innerHTML = `<span class="log-time">${time}</span><span class="log-msg">${msg}</span>`;
-            consoleLog.prepend(div);
-            if(consoleLog.children.length > 10) consoleLog.lastChild.remove();
-        }
-
-        setInterval(() => {
-            const msgs = [
-                "Reading Block 0x4F...", 
-                "Verifying Checksum...", 
-                "Keep Alive sent...", 
-                "Sync OK.",
-                "Updating map address 00AF2..."
-            ];
-            if(Math.random() > 0.7) {
-                log(msgs[Math.floor(Math.random() * msgs.length)]);
+    // Limpa os alertas de erro quando o usuário começa a digitar
+    formControls.forEach(control => {
+        control.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+            const errorSpan = this.nextElementSibling;
+            if (errorSpan && errorSpan.classList.contains('error-text')) {
+                errorSpan.style.display = 'none';
             }
-        }, 2000);
+        });
+    });
 
-        // 4. Simple Graph Animation
-        const canvas = document.getElementById('dynoCanvas');
-        const ctx = canvas.getContext('2d');
-        let dataPoints = new Array(50).fill(50);
-
-        function drawGraph() {
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = 250;
-            
-            // Shift data
-            dataPoints.push(50 + Math.random() * 30);
-            dataPoints.shift();
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height - dataPoints[0]);
-
-            const step = canvas.width / dataPoints.length;
-            for(let i=1; i<dataPoints.length; i++) {
-                ctx.lineTo(i * step, canvas.height - dataPoints[i] * 2);
+    // Função para limpar tudo (Cancelamento)
+    function clearErrors() {
+        formControls.forEach(control => {
+            control.classList.remove('is-invalid');
+            const errorSpan = control.nextElementSibling;
+            if (errorSpan && errorSpan.classList.contains('error-text')) {
+                errorSpan.style.display = 'none';
             }
-            
-            ctx.strokeStyle = '#00ff41';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            
-            // Fill under
-            ctx.lineTo(canvas.width, canvas.height);
-            ctx.lineTo(0, canvas.height);
-            ctx.fillStyle = 'rgba(0, 255, 65, 0.1)';
-            ctx.fill();
+        });
+        dropZone.innerHTML = originalDropZoneHTML;
+        fileInput.value = '';
+    }
 
-            requestAnimationFrame(drawGraph);
+    // Pré-visualização da imagem
+    function previewImage(file) {
+        if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                dropZone.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%;">
+                        <img src="${e.target.result}" style="max-height: 200px; max-width: 100%; border-radius: 8px; object-fit: contain; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('file-upload').click()">
+                            <i class="fa-solid fa-arrows-rotate"></i> Trocar Imagem
+                        </button>
+                    </div>
+                `;
+            }
+            reader.readAsDataURL(file);
+        } else {
+            alert("Por favor, selecione uma imagem válida (JPG ou PNG).");
         }
-        drawGraph();
+    }
 
-        function startFlash() {
-            alert("⚠️ WARNING: FLASHING ECU WILL OVERWRITE FACTORY SETTINGS.\n\nProceeding...");
-            log("INITIATING WRITE SEQUENCE...");
-            log("ERASING EEPROM...");
+    fileInput.addEventListener('change', function(e) {
+        if(e.target.files.length > 0) previewImage(e.target.files[0]);
+    });
+
+    // Drag and drop imagem
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) {
+            fileInput.files = e.dataTransfer.files;
+            previewImage(e.dataTransfer.files[0]); 
         }
-    </script>
+    });
+
+    // Lógica do botão Salvar (1. VISIBILIDADE DO ESTADO)
+    btnSalvar.addEventListener('click', function() {
+        let isValid = true;
+
+        // Verifica os campos obrigatórios vazios
+        formControls.forEach(control => {
+            if (!control.value.trim()) {
+                isValid = false;
+                control.classList.add('is-invalid');
+                const errorSpan = control.nextElementSibling;
+                if (errorSpan && errorSpan.classList.contains('error-text')) {
+                    errorSpan.style.display = 'block';
+                }
+            }
+        });
+
+        // Bloqueia se tiver erro (2. PREVENÇÃO DE ERRO)
+        if (!isValid) return;
+
+        // Feedback de "Salvando..."
+        loading.style.display = 'flex';
+        btnSalvar.disabled = true;
+        btnSalvar.style.opacity = '0.5';
+        btnSalvar.style.cursor = 'not-allowed';
+
+        setTimeout(() => {
+            loading.style.display = 'none';
+            btnSalvar.disabled = false;
+            btnSalvar.style.opacity = '1';
+            btnSalvar.style.cursor = 'pointer';
+
+            // Feedback de Sucesso
+            toast.style.display = 'flex';
+            
+            form.reset();
+            clearErrors(); 
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3500);
+
+        }, 2000); 
+    });
+</script>
+
 </body>
 </html>

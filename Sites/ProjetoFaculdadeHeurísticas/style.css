@@ -1,0 +1,100 @@
+:root {
+    --primary: #3498db;
+    --sc: #2ecc71;
+    --bg: #ecf0f1;
+    --text-color: #2c3e50;
+    --border: #bdc3c7;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+}
+.cointer {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+}
+h2 {
+    margin-top: 0;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.progress-bar {
+    height: 6px;
+    background: #2c3e50;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.progress-fill{
+    width: 30%;
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.5s ease;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+label { 
+    display: block;
+    margin-bottom: 0.4;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="email"],
+select{
+    widgth: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input:focus{
+    outline: none;
+    border-color: var(--primary);
+    ring: 2px solid #3498db;
+}
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+}
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn-cancel { background: #E05361; color: white;}
+.brn-save { background: var(--primary); color: white;}
+
+#message { 
+    display: none;
+    margin-top: 1rem;
+}
