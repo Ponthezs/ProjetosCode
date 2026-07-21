@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - HelpDesk Pro{% endblock %}
+{% block page_title %}Visão Geral do Atendimento{% endblock %}
+
+{% block content %}
+<!-- Stat Counters Grid -->
+<div class="grid-stats">
+    <div class="glass-card stat-card stat-primary">
+        <div class="stat-info">
+            <div class="stat-value">{{ total_tickets }}</div>
+            <div class="stat-label">Total de Chamados</div>
+        </div>
+        <div class="stat-icon-wrapper" style="color: var(--primary);">
+            <i class="fa-solid fa-folder-open"></i>
+        </div>
+    </div>
+
+    <div class="glass-card stat-card stat-amber">
+        <div class="stat-info">
+            <div class="stat-value">{{ open_tickets }}</div>
+            <div class="stat-label">Abertos</div>
+        </div>
+        <div class="stat-icon-wrapper" style="color: var(--amber);">
+            <i class="fa-solid fa-clock"></i>
+        </div>
+    </div>
+
+    <div class="glass-card stat-card stat-blue">
+        <div class="stat-info">
+            <div class="stat-value">{{ in_progress_tickets }}</div>
+            <div class="stat-label">Em Andamento</div>
+        </div>
+        <div class="stat-icon-wrapper" style="color: var(--blue);">
+            <i class="fa-solid fa-spinner"></i>
+        </div>
+    </div>
+
+    <div class="glass-card stat-card stat-purple">
+        <div class="stat-info">
+            <div class="stat-value">{{ waiting_tickets }}</div>
+            <div class="stat-label">Aguardando Resposta</div>
+        </div>
+        <div class="stat-icon-wrapper" style="color: var(--purple);">
+            <i class="fa-solid fa-comments"></i>
+        </div>
+    </div>
+
+    <div class="glass-card stat-card stat-emerald">
+        <div class="stat-info">
+            <div class="stat-value">{{ closed_tickets }}</div>
+            <div class="stat-label">Concluídos / Fechados</div>
+        </div>
+        <div class="stat-icon-wrapper" style="color: var(--emerald);">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+    <div class="glass-card">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-chart-donut text-gradient"></i> Distribuição por Status
+        </h3>
+        <div style="position: relative; height: 260px;">
+            <canvas id="statusChart"></canvas>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-chart-column text-gradient"></i> Distribuição por Prioridade
+        </h3>
+        <div style="position: relative; height: 260px;">
+            <canvas id="priorityChart"></canvas>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-tags text-gradient"></i> Distribuição por Categoria
+        </h3>
+        <div style="position: relative; height: 260px;">
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity Section -->
+<div class="glass-card">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-history text-gradient"></i> Atendimentos Recentes
+        </h3>
+        <a href="{{ url_for('main.my_tickets') }}" style="color: var(--primary); text-decoration: none; font-size: 0.85rem; font-weight: 600;">
+            Ver Todos <i class="fa-solid fa-chevron-right"></i>
+        </a>
+    </div>
+
+    {% if recent_tickets %}
+    <div class="custom-table-container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>Título</th>
+                    <th>Solicitante</th>
+                    <th>Categoria</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                    <th>Atualizado em</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in recent_tickets %}
+                <tr>
+                    <td><span class="protocol-badge">#{{ ticket.protocol }}</span></td>
+                    <td style="font-weight: 600; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <a href="{{ url_for('main.view_ticket', protocol=ticket.protocol) }}" style="color: #fff; text-decoration: none;">
+                            {{ ticket.title }}
+                        </a>
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <img src="{{ ticket.requester.avatar_url(40) }}" style="width: 26px; height: 26px; border-radius: 50%;">
+                            <span>{{ ticket.requester.name }}</span>
+                        </div>
+                    </td>
+                    <td><span style="font-size: 0.82rem; color: var(--text-muted);">{{ ticket.category.value }}</span></td>
+                    <td>
+                        <span class="badge-status {{ ticket.priority_badge }}">
+                            {{ ticket.priority.value }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge-status {{ ticket.status_badge }}">
+                            {{ ticket.status.value }}
+                        </span>
+                    </td>
+                    <td style="font-size: 0.82rem; color: var(--text-muted);">
+                        {{ ticket.updated_at.strftime('%d/%m/%Y %H:%M') }}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('main.view_ticket', protocol=ticket.protocol) }}" class="btn-custom btn-secondary-custom" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">
+                            Abrir <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+        <i class="fa-solid fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+        <p>Nenhum atendimento registrado até o momento.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const chartData = {{ chart_data|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

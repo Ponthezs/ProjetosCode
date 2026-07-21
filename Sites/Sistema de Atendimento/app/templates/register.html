@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Criar Conta - HelpDesk Pro{% endblock %}
+
+{% block guest_content %}
+<div style="text-align: center; margin-bottom: 2rem;">
+    <div class="brand-icon" style="width: 54px; height: 54px; margin: 0 auto 1rem auto; font-size: 1.6rem;">
+        <i class="fa-solid fa-user-plus"></i>
+    </div>
+    <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff;">Criar Nova Conta</h2>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;">Preencha o formulário para abrir seu cadastro de usuário.</p>
+</div>
+
+<form method="POST" action="{{ url_for('auth.register') }}">
+    <div class="form-group">
+        <label for="name" class="form-label">Nome Completo</label>
+        <input type="text" id="name" name="name" class="form-control-custom" placeholder="Ex: Maria Santos" required autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" id="email" name="email" class="form-control-custom" placeholder="seu.email@exemplo.com" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone" class="form-label">Telefone / WhatsApp (Opcional)</label>
+        <input type="text" id="phone" name="phone" class="form-control-custom" placeholder="(11) 99999-9999">
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" id="password" name="password" class="form-control-custom" placeholder="Crie uma senha forte" minlength="6" required>
+    </div>
+
+    <div class="form-group">
+        <label for="confirm_password" class="form-label">Confirmar Senha</label>
+        <input type="password" id="confirm_password" name="confirm_password" class="form-control-custom" placeholder="Repita a senha" minlength="6" required>
+    </div>
+
+    <button type="submit" class="btn-custom btn-primary-custom" style="width: 100%; padding: 0.85rem; margin-top: 1rem; font-size: 1rem;">
+        Finalizar Cadastro <i class="fa-solid fa-check"></i>
+    </button>
+</form>
+
+<div style="text-align: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--bg-card-border); font-size: 0.9rem; color: var(--text-muted);">
+    Já possui uma conta? 
+    <a href="{{ url_for('auth.login') }}" style="color: var(--primary); font-weight: 600; text-decoration: none;">Faça login aqui</a>
+</div>
+{% endblock %}

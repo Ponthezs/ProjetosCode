@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Help Desk - Sistema de Atendimento{% endblock %}</title>
+    <!-- FontAwesome 6 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+{% if current_user.is_authenticated %}
+<div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+        <a href="{{ url_for('main.dashboard') }}" class="brand-logo">
+            <div class="brand-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <span>HelpDesk<span class="text-gradient">Pro</span></span>
+        </a>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ url_for('main.dashboard') }}" class="sidebar-link {% if request.endpoint == 'main.dashboard' %}active{% endif %}">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('main.create_ticket') }}" class="sidebar-link {% if request.endpoint == 'main.create_ticket' %}active{% endif %}">
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Novo Chamado</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('main.my_tickets') }}" class="sidebar-link {% if request.endpoint in ['main.my_tickets', 'main.view_ticket'] %}active{% endif %}">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Atendimentos</span>
+                </a>
+            </li>
+            {% if current_user.is_admin %}
+            <li style="margin-top: 1rem; margin-bottom: 0.2rem; padding-left: 0.8rem; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">
+                Administração
+            </li>
+            <li>
+                <a href="{{ url_for('main.admin_users') }}" class="sidebar-link {% if request.endpoint == 'main.admin_users' %}active{% endif %}">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Usuários</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="user-profile-card">
+                <img src="{{ current_user.avatar_url() }}" alt="{{ current_user.name }}" class="user-avatar">
+                <div class="user-info">
+                    <div class="user-name">{{ current_user.name }}</div>
+                    <div class="user-role">
+                        {% if current_user.is_admin %}
+                            <i class="fa-solid fa-shield-halved text-gradient"></i> Admin
+                        {% else %}
+                            <i class="fa-solid fa-user"></i> Cliente
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{{ url_for('auth.logout') }}" class="btn-custom btn-secondary-custom" style="padding: 0.4rem 0.6rem;" title="Sair">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+        <header class="app-topbar">
+            <div class="page-title-heading">
+                {% block page_title %}Painel de Controle{% endblock %}
+            </div>
+            <div>
+                <a href="{{ url_for('main.create_ticket') }}" class="btn-custom btn-primary-custom">
+                    <i class="fa-solid fa-plus"></i> Abrir Chamado
+                </a>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <!-- Flash Notification Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert-custom alert-{{ category }}">
+                            {% if category == 'success' %}
+                                <i class="fa-solid fa-circle-check"></i>
+                            {% elif category == 'danger' %}
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            {% elif category == 'warning' %}
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            {% else %}
+                                <i class="fa-solid fa-circle-info"></i>
+                            {% endif %}
+                            <span>{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+{% else %}
+    <!-- Guest Layout (Login / Register) -->
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert-custom alert-{{ category }}">
+                            <span>{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block guest_content %}{% endblock %}
+        </div>
+    </div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

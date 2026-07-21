@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Atendimentos - HelpDesk Pro{% endblock %}
+{% block page_title %}Gerenciamento de Atendimentos{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="margin-bottom: 1.5rem;">
+    <!-- Filter and Search Form -->
+    <form method="GET" action="{{ url_for('main.my_tickets') }}" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+        <div style="flex: 2; min-width: 240px;">
+            <label class="form-label">Buscar por palavra-chave ou protocolo</label>
+            <div style="position: relative;">
+                <input type="text" name="q" value="{{ search_query }}" class="form-control-custom" placeholder="Ex: TK-123456 ou Erro no login...">
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 160px;">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-control-custom">
+                <option value="">Todos os Status</option>
+                {% for s in statuses %}
+                <option value="{{ s.name }}" {% if current_status == s.name %}selected{% endif %}>{{ s.value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="flex: 1; min-width: 160px;">
+            <label class="form-label">Prioridade</label>
+            <select name="priority" class="form-control-custom">
+                <option value="">Todas as Prioridades</option>
+                {% for p in priorities %}
+                <option value="{{ p.name }}" {% if current_priority == p.name %}selected{% endif %}>{{ p.value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="flex: 1; min-width: 160px;">
+            <label class="form-label">Categoria</label>
+            <select name="category" class="form-control-custom">
+                <option value="">Todas as Categorias</option>
+                {% for c in categories %}
+                <option value="{{ c.name }}" {% if current_category == c.name %}selected{% endif %}>{{ c.value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem;">
+            <button type="submit" class="btn-custom btn-primary-custom" style="padding: 0.75rem 1.25rem;">
+                <i class="fa-solid fa-filter"></i> Filtrar
+            </button>
+            {% if search_query or current_status or current_priority or current_category %}
+            <a href="{{ url_for('main.my_tickets') }}" class="btn-custom btn-secondary-custom" style="padding: 0.75rem 1rem;" title="Limpar Filtros">
+                <i class="fa-solid fa-rotate-left"></i>
+            </a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<div class="glass-card">
+    {% if tickets %}
+    <div class="custom-table-container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>Título do Atendimento</th>
+                    <th>Solicitante</th>
+                    <th>Categoria</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                    <th>Data Atualização</th>
+                    <th style="text-align: right;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td><span class="protocol-badge">#{{ ticket.protocol }}</span></td>
+                    <td style="font-weight: 600; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <a href="{{ url_for('main.view_ticket', protocol=ticket.protocol) }}" style="color: #fff; text-decoration: none;">
+                            {{ ticket.title }}
+                        </a>
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <img src="{{ ticket.requester.avatar_url(40) }}" style="width: 26px; height: 26px; border-radius: 50%;">
+                            <span>{{ ticket.requester.name }}</span>
+                        </div>
+                    </td>
+                    <td><span style="font-size: 0.82rem; color: var(--text-muted);">{{ ticket.category.value }}</span></td>
+                    <td>
+                        <span class="badge-status {{ ticket.priority_badge }}">
+                            {{ ticket.priority.value }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge-status {{ ticket.status_badge }}">
+                            {{ ticket.status.value }}
+                        </span>
+                    </td>
+                    <td style="font-size: 0.82rem; color: var(--text-muted);">
+                        {{ ticket.updated_at.strftime('%d/%m/%Y %H:%M') }}
+                    </td>
+                    <td style="text-align: right;">
+                        <a href="{{ url_for('main.view_ticket', protocol=ticket.protocol) }}" class="btn-custom btn-secondary-custom" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
+                            Visualizar <i class="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+        <i class="fa-solid fa-magnifying-glass" style="font-size: 3.5rem; margin-bottom: 1.25rem; opacity: 0.25;"></i>
+        <h4 style="color: #fff; font-weight: 600; margin-bottom: 0.5rem;">Nenhum chamado encontrado</h4>
+        <p style="font-size: 0.9rem;">Tente ajustar seus filtros de busca ou abra um novo atendimento.</p>
+        <a href="{{ url_for('main.create_ticket') }}" class="btn-custom btn-primary-custom" style="margin-top: 1.25rem;">
+            <i class="fa-solid fa-plus"></i> Abrir Novo Atendimento
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

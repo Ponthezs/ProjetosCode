@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Atendimento - HelpDesk Pro{% endblock %}
+{% block page_title %}Abrir Novo Atendimento{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div class="glass-card">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--bg-card-border);">
+            <div class="brand-icon" style="width: 46px; height: 46px;">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <div>
+                <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff;">Formulário de Solicitação</h2>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Descreva detalhadamente o seu problema para que nossa equipe de suporte possa ajudá-lo.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="{{ url_for('main.create_ticket') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title" class="form-label">Título da Solicitação *</label>
+                <input type="text" id="title" name="title" class="form-control-custom" placeholder="Ex: Erro ao emitir nota fiscal no sistema" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div class="form-group">
+                    <label for="category" class="form-label">Categoria do Atendimento *</label>
+                    <select id="category" name="category" class="form-control-custom" required>
+                        {% for c in categories %}
+                        <option value="{{ c.name }}">{{ c.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="priority" class="form-label">Prioridade Estimada *</label>
+                    <select id="priority" name="priority" class="form-control-custom" required>
+                        {% for p in priorities %}
+                        <option value="{{ p.name }}" {% if p.name == 'MEDIA' %}selected{% endif %}>{{ p.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-label">Descrição Detalhada *</label>
+                <textarea id="description" name="description" class="form-control-custom" rows="6" placeholder="Explique os passos para reproduzir o problema, mensagens de erro exibidas ou informações relevantes..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Anexos de Suporte (Imagens, PDF, Logs)</label>
+                <div class="file-upload-zone" onclick="document.getElementById('attachments').click()">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.75rem;"></i>
+                    <p style="font-weight: 600; color: #fff; margin-bottom: 0.25rem;">Clique para selecionar arquivos</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Suporta imagens (PNG, JPG), documentos (PDF, TXT) de até 16MB.</p>
+                    <input type="file" id="attachments" name="attachments" multiple style="display: none;" onchange="showSelectedFiles(this)">
+                </div>
+                <div id="file-list" style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--bg-card-border);">
+                <a href="{{ url_for('main.my_tickets') }}" class="btn-custom btn-secondary-custom">Cancelar</a>
+                <button type="submit" class="btn-custom btn-primary-custom" style="padding: 0.75rem 2rem;">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar Chamado
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function showSelectedFiles(input) {
+    const list = document.getElementById('file-list');
+    list.innerHTML = '';
+    if (input.files) {
+        Array.from(input.files).forEach(file => {
+            const item = document.createElement('div');
+            item.className = 'alert-custom alert-info';
+            item.style.margin = '0';
+            item.style.padding = '0.5rem 0.8rem';
+            item.innerHTML = `<i class="fa-solid fa-paperclip"></i> <span>${file.name} (${(file.size/1024).toFixed(1)} KB)</span>`;
+            list.appendChild(item);
+        });
+    }
+}
+</script>
+{% endblock %}

@@ -1,30 +1,31 @@
 # app/__init__.py
-from flask import Flask
-from .models import db
-from .routes import main_bp
-from .auth import auth_bp
-from flask_login import LoginManager
-from .models import User
 import os
+from flask import Flask
+from flask_login import LoginManager
+from config import Config
+from .models import db, User
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
-    
-    # Configurações
-    app.config['SECRET_KEY'] = 'uma-chave-secreta-muito-segura'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///helpdesk.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['UPLOAD_FOLDER'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/uploads')
+    app.config.from_object(config_class)
+
+    # Garantir diretórios necessários
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
     db.init_app(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
+    login_manager.login_message = 'Por favor, faça login para acessar esta página.'
+    login_manager.login_message_category = 'warning'
     login_manager.init_app(app)
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+    from .routes import main_bp
+    from .auth import auth_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
