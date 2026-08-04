@@ -1,0 +1,31 @@
+{
+  "active_profile": "Geral",
+  "smoothing_factor": 4,
+  "click_cooldown_sec": 0.4,
+  "profiles": {
+    "Geral": {
+      "PINCH_INDEX": "left_click",
+      "PINCH_MIDDLE": "right_click",
+      "TWO_FINGERS": "scroll",
+      "FIST": "minimize_all",
+      "THUMBS_UP": "open_spotify",
+      "ROCK_SIGN": "screenshot"
+    },
+    "Trabalho": {
+      "PINCH_INDEX": "left_click",
+      "PINCH_MIDDLE": "right_click",
+      "TWO_FINGERS": "scroll",
+      "FIST": "minimize_all",
+      "THUMBS_UP": "open_vscode",
+      "ROCK_SIGN": "alt_tab"
+    },
+    "Jogos": {
+      "PINCH_INDEX": "left_click",
+      "PINCH_MIDDLE": "right_click",
+      "TWO_FINGERS": "scroll",
+      "FIST": "volume_mute",
+      "THUMBS_UP": "volume_up",
+      "ROCK_SIGN": "volume_down"
+    }
+  }
+}

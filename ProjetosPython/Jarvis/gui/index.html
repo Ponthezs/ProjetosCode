@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S - Interface de Controle</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- TOP HEADER BAR -->
+        <header class="top-bar">
+            <div class="brand">
+                <h1 class="logo">J.A.R.V.I.S</h1>
+                <span class="status-badge online" id="status-online"><i class="fa-solid fa-circle"></i> Online</span>
+            </div>
+
+            <div class="top-pill clock-pill">
+                <i class="fa-regular fa-clock"></i>
+                <span id="live-time">00:00:00 AM</span>
+                <span class="divider">|</span>
+                <span id="live-date">1 de Janeiro, 2026</span>
+            </div>
+
+            <div class="top-right-actions">
+                <div class="top-pill weather-pill" id="top-weather-pill">
+                    <i class="fa-solid fa-temperature-half"></i>
+                    <span id="top-temp">--°C</span>
+                    <span id="top-city">Maringá</span>
+                </div>
+                <button class="icon-btn" id="btn-settings" title="Configurações">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN DASHBOARD CONTENT -->
+        <main class="dashboard">
+            <!-- LEFT PANEL: SYSTEM WIDGETS -->
+            <section class="panel left-panel">
+                <!-- SYSTEM STATS WIDGET -->
+                <div class="widget card">
+                    <div class="widget-header">
+                        <span><i class="fa-solid fa-microchip"></i> System Stats</span>
+                        <button class="widget-action-btn" id="refresh-stats"><i class="fa-solid fa-rotate-right"></i></button>
+                    </div>
+                    <div class="widget-body">
+                        <div class="stat-group">
+                            <div class="stat-label">
+                                <span>CPU Usage</span>
+                                <span id="cpu-val">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cpu-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-group">
+                            <div class="stat-label">
+                                <span>RAM Usage</span>
+                                <span id="ram-val">0 GB</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill cyan-gradient" id="ram-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stats-grid-3">
+                            <div class="stat-box">
+                                <div class="stat-title">CPU</div>
+                                <div class="stat-num" id="cpu-num">0%</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-title">Memory</div>
+                                <div class="stat-num" id="ram-num">0%</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-title">Disk</div>
+                                <div class="stat-num" id="disk-num">0/0 GB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WEATHER WIDGET -->
+                <div class="widget card">
+                    <div class="widget-header">
+                        <span><i class="fa-solid fa-cloud-sun"></i> Weather</span>
+                        <button class="widget-action-btn" id="refresh-weather"><i class="fa-solid fa-rotate-right"></i></button>
+                    </div>
+                    <div class="widget-body weather-body">
+                        <div class="weather-main">
+                            <div class="weather-temp-container">
+                                <span class="temp-big" id="weather-temp">--°C</span>
+                                <div class="city-info">
+                                    <span class="city-name" id="weather-city">Maringá</span>
+                                    <span class="weather-desc" id="weather-desc">Carregando...</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-cloud weather-icon-large" id="weather-icon"></i>
+                        </div>
+                        <div class="stats-grid-3">
+                            <div class="stat-box">
+                                <div class="stat-title">Humidity</div>
+                                <div class="stat-num" id="weather-humidity">--%</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-title">Wind</div>
+                                <div class="stat-num" id="weather-wind">-- km/h</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-title">Feels Like</div>
+                                <div class="stat-num" id="weather-feels">--°C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAMERA & GESTURE CONTROL WIDGET -->
+                <div class="widget card camera-widget">
+                    <div class="widget-header">
+                        <span><i class="fa-solid fa-hand-pointer"></i> Gesture & Camera Control</span>
+                        <div class="header-actions">
+                            <button class="widget-action-btn" id="btn-snapshot" title="Tirar Foto"><i class="fa-solid fa-camera"></i></button>
+                            <button class="widget-action-btn" id="btn-toggle-cam" title="Ligar/Desligar Gestos da Câmera"><i class="fa-solid fa-power-off"></i></button>
+                        </div>
+                    </div>
+                    <div class="widget-body camera-container" id="camera-container">
+                        <div class="camera-placeholder" id="camera-placeholder">
+                            <i class="fa-solid fa-hand cam-off-icon"></i>
+                            <span class="cam-status-text">Controle por Gestos Desativado</span>
+                            <small class="cam-subtext">Clique no botão power para ativar a câmera e o rastreamento da mão por IA.</small>
+                        </div>
+                        <img id="camera-stream" class="camera-stream hidden" src="" alt="Webcam Gesture Stream">
+                    </div>
+                    <div class="gesture-status-bar hidden" id="gesture-status-bar">
+                        <span>Status do Gesto:</span>
+                        <span class="gesture-badge" id="gesture-badge">Nenhum</span>
+                    </div>
+                </div>
+
+                <!-- SYSTEM UPTIME WIDGET -->
+                <div class="widget card">
+                    <div class="widget-header">
+                        <span><i class="fa-solid fa-circle-info"></i> System Uptime</span>
+                        <span class="uptime-badge" id="uptime-mini">00:00:00</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="uptime-main">
+                            <span class="uptime-label">System Running For:</span>
+                            <span class="uptime-clock" id="uptime-clock">00:00:00</span>
+                        </div>
+                        <div class="stats-grid-2">
+                            <div class="stat-box">
+                                <div class="stat-title">Session</div>
+                                <div class="stat-num">1</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-title">Commands</div>
+                                <div class="stat-num" id="cmd-count">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-group mt-10">
+                            <div class="stat-label">
+                                <span>System Load</span>
+                                <span id="system-load-text" class="cyan-text">Optimal 15%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="system-load-bar" style="width: 15%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CENTER PANEL: SCI-FI VOICE ORB REACTOR -->
+            <section class="panel center-panel">
+                <div class="reactor-container">
+                    <div class="ring outer-ring"></div>
+                    <div class="ring middle-ring"></div>
+                    <div class="ring inner-ring"></div>
+
+                    <!-- Voice Orb Center -->
+                    <div class="voice-orb" id="voice-orb">
+                        <div class="orb-core">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-title-container">
+                    <h2 class="center-title">J.A.R.V.I.S</h2>
+                    <div class="action-pill" id="voice-status-pill">
+                        <span class="pulse-dot"></span>
+                        <span id="voice-status-text">Escutando comandos...</span>
+                    </div>
+                </div>
+
+                <!-- CENTER QUICK CONTROLS -->
+                <div class="center-controls">
+                    <button class="ctrl-btn" id="ctrl-cam" title="Câmera & Gestos"><i class="fa-solid fa-camera"></i></button>
+                    <button class="ctrl-btn active" id="ctrl-mic" title="Ativar/Desativar Escuta"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="ctrl-btn" id="ctrl-keyboard" title="Focar Chat"><i class="fa-solid fa-keyboard"></i></button>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: CONVERSATION CHAT LOG -->
+            <section class="panel right-panel">
+                <div class="card chat-card">
+                    <div class="widget-header">
+                        <span><i class="fa-solid fa-comments"></i> Conversation</span>
+                        <div class="header-actions">
+                            <button class="chat-btn-small" id="btn-clear-chat"><i class="fa-solid fa-trash-can"></i> Clear</button>
+                            <button class="chat-btn-small" id="btn-export-chat"><i class="fa-solid fa-download"></i> Extract</button>
+                        </div>
+                    </div>
+
+                    <div class="chat-body" id="chat-messages">
+                        <div class="chat-msg jarvis-msg">
+                            <div class="msg-content">
+                                Olá, eu sou o <strong>J.A.R.V.I.S</strong>. O sistema de voz e o rastreamento por gestos de mão estão online. Como posso ajudá-lo hoje, senhor?
+                            </div>
+                            <div class="msg-time" id="welcome-time">00:00</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Digite uma mensagem..." autocomplete="off">
+                        <button id="btn-send" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
