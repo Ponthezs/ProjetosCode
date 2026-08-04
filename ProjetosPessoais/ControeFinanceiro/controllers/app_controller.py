@@ -10,6 +10,7 @@ from services.report_service import ReportExportService
 from services.backup_service import BackupService
 from repositories.category_repo import CategoryRepository, OwnerRepository, TagRepository
 from repositories.goal_budget_repo import GoalRepository, BudgetRepository
+from repositories.recurring_repo import ImportHistoryRepository
 
 class AppController:
     """Orquestrador central da aplicação que provê acesso a todos os serviços com gerenciamento de sessão DB."""
@@ -29,6 +30,7 @@ class AppController:
         self.tags = TagRepository(self.db)
         self.goals = GoalRepository(self.db)
         self.budgets = BudgetRepository(self.db)
+        self.import_history = ImportHistoryRepository(self.db)
 
     def close(self):
         self.db.close()

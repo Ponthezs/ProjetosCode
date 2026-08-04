@@ -190,7 +190,7 @@ def render(controller: AppController):
     # TAB 3: Histórico de Arquivos Importados
     with tab_history:
         st.subheader("📜 Log Auditado de Arquivos Importados")
-        history = controller.recurring.hist_repo.get_latest()
+        history = controller.import_history.get_latest()
         if not history:
             st.info("Nenhum histórico de importação registrado.")
         else:
