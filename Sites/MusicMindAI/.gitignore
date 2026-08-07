@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Builds & Outputs
+dist/
+build/
+*.db
+*.sqlite3
+
+# Environment & OAuth keys
+.env
+.env.local
+oauth.json
+
+# IDE & System
+.DS_Store
+.vscode/
+.idea/

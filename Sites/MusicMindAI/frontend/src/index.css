@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-obsidian-900 text-slate-100;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d111a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f293d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(13, 17, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s ease;
+}
+.glass-panel-hover:hover {
+  background: rgba(20, 26, 38, 0.9);
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Equalizer Visualizer animation */
+@keyframes eq-bounce {
+  0%, 100% { height: 6px; }
+  50% { height: 22px; }
+}
+
+.animate-eq-1 { animation: eq-bounce 0.8s ease-in-out infinite; }
+.animate-eq-2 { animation: eq-bounce 1.1s ease-in-out 0.2s infinite; }
+.animate-eq-3 { animation: eq-bounce 0.7s ease-in-out 0.4s infinite; }
+.animate-eq-4 { animation: eq-bounce 0.9s ease-in-out 0.1s infinite; }
