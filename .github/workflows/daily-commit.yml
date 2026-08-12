@@ -1,0 +1,32 @@
+name: Daily Automatic Commit
+
+on:
+  schedule:
+    # Runs every day at 00:00 UTC (21:00 BRT)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Update Daily Log
+        run: |
+          mkdir -p daily-log
+          echo "Last daily update: $(date -u)" > daily-log/activity.log
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add daily-log/activity.log
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(auto): daily log update [$(date -u +'%Y-%m-%d')]"
+            git push
+          fi
