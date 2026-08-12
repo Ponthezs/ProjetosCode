@@ -3,357 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eloah & Felipe — Nosso Amor</title>
-    <meta name="description" content="Uma história de amor escrita em cada detalhe. O diário cinematográfico de Eloah & Felipe.">
+    <title>Nosso Amor ❤️ - Eloah & Felipe</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Google Fonts: Cormorant Garamond, Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Textura de Grão de Filme Analógico -->
-    <div class="film-grain"></div>
+    <!-- Partículas de fundo -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
-    <!-- Partículas e Auras de Luz Ambiente -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
-    <canvas id="ambientCanvas"></canvas>
-
-    <!-- Header Flutuante / Navbar -->
+    <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <a href="#hero" class="nav-brand">
-                <span class="brand-monogram">E & F</span>
-                <span class="brand-sub">Nosso Filme</span>
-            </a>
+            <div class="nav-brand">💕</div>
             <ul class="nav-links">
                 <li><a href="#hero">Início</a></li>
-                <li><a href="#tempo">Nosso Tempo</a></li>
-                <li><a href="#timeline">Capítulos</a></li>
-                <li><a href="#galeria">Memórias</a></li>
-                <li><a href="#cartas">Cartas</a></li>
+                <li><a href="#timeline">História</a></li>
+                <li><a href="#galeria">Momentos</a></li>
+                <li><a href="#mensagens">Mensagens</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section Cinematográfica -->
+    <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="hero-backdrop"></div>
         <div class="hero-content">
-            <span class="hero-badge">Uma História de Amor • 2024 — Presente</span>
-            <h1 class="hero-title">Eloah <span class="ampersand">&</span> Felipe</h1>
-            <p class="hero-subtitle">"O amor não consiste em olhar um para o outro, mas em olhar juntos na mesma direção."</p>
-            <div class="hero-actions">
-                <a href="#tempo" class="btn-primary">
-                    <span>Explorar Nossa História</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                </a>
-                <a href="#galeria" class="btn-secondary">Ver Fotos</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Role para descobrir</span>
-            <div class="mouse-icon"><div class="wheel"></div></div>
+            <div class="heart-animation">💕</div>
+            <h1 class="title">Eloah & Felipe</h1>
+            <p class="subtitle">Uma História de Amor</p>
+            <p class="tagline">Juntos desde o primeiro encontro</p>
+            <a href="#timeline" class="cta-button">Conheça Nossa História</a>
         </div>
     </section>
 
-    <!-- Contador Vivo em Tempo Real -->
-    <section class="contador-section" id="tempo">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="section-tag">Eternidade em Segundos</span>
-                <h2 class="section-title">Nosso Tempo Juntos</h2>
-                <p class="section-description">Desde o momento em que nossas vidas se cruzaram pela primeira vez em 18 de Fevereiro de 2024.</p>
-            </div>
-
-            <div class="timer-grid">
-                <div class="timer-card">
-                    <span class="timer-number" id="timerDays">000</span>
-                    <span class="timer-label">Dias</span>
-                </div>
-                <div class="timer-divider">:</div>
-                <div class="timer-card">
-                    <span class="timer-number" id="timerHours">00</span>
-                    <span class="timer-label">Horas</span>
-                </div>
-                <div class="timer-divider">:</div>
-                <div class="timer-card">
-                    <span class="timer-number" id="timerMinutes">00</span>
-                    <span class="timer-label">Minutos</span>
-                </div>
-                <div class="timer-divider">:</div>
-                <div class="timer-card accent">
-                    <span class="timer-number" id="timerSeconds">00</span>
-                    <span class="timer-label">Segundos</span>
-                </div>
-            </div>
-            
-            <div class="timer-footer text-center">
-                <p class="timer-quote">Cada segundo ao seu lado é uma memória inesquecível construída. ✨</p>
-            </div>
+    <!-- Contador de Dias Juntos -->
+    <section class="contador-dias">
+        <div class="contador-card">
+            <h3>Dias Juntos</h3>
+            <div class="dias-numero" id="diasJuntos">0</div>
+            <p>Contando cada momento especial</p>
         </div>
     </section>
 
-    <!-- Timeline estilo Capítulos de Filme -->
-    <section class="timeline-section" id="timeline">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="section-tag">Nossa Jornada</span>
-                <h2 class="section-title">Capítulos da Nossa História</h2>
-                <p class="section-description">Os marcos mais marcantes do nosso livro de memórias.</p>
+    <!-- Timeline - Nossa História -->
+    <section class="timeline" id="timeline">
+        <h2 class="section-title">📖 Nossa História</h2>
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-date">18/02/2024</span>
+                    <h3>Nos Conhecemos</h3>
+                    <p>O dia em que tudo começou... Um encontro que mudaria nossas vidas para sempre ❤️</p>
+                </div>
             </div>
 
-            <div class="timeline-wrapper">
-                <!-- Capítulo 1 -->
-                <div class="timeline-item">
-                    <div class="timeline-meta">
-                        <span class="chapter-number">Capítulo I</span>
-                        <span class="chapter-date">18 de Fevereiro, 2024</span>
-                    </div>
-                    <div class="timeline-card">
-                        <div class="timeline-card-header">
-                            <h3>O Início de Tudo</h3>
-                            <span class="card-badge">O Primeiro Olhar</span>
-                        </div>
-                        <p>O dia em que o destino nos aproximou. Um encontro despretensioso que mudou o rumo dos nossos caminhos para sempre e deu início ao nosso universo particular.</p>
-                    </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-date">06/03/2024</span>
+                    <h3>Primeiro Encontro Romântico</h3>
+                    <p>Um momento mágico, cheio de risadas e conexão. O começo de algo lindo 🌹</p>
                 </div>
+            </div>
 
-                <!-- Capítulo 2 -->
-                <div class="timeline-item">
-                    <div class="timeline-meta">
-                        <span class="chapter-number">Capítulo II</span>
-                        <span class="chapter-date">06 de Março, 2024</span>
-                    </div>
-                    <div class="timeline-card">
-                        <div class="timeline-card-header">
-                            <h3>Primeiro Encontro Romântico</h3>
-                            <span class="card-badge">A Conexão</span>
-                        </div>
-                        <p>Horas que pareceram minutos. Risadas sinceras, olhares profundos e a certeza instantânea de que havia algo extraordinário nascendo entre nós dois.</p>
-                    </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-date">31/12/2024</span>
+                    <h3>Nosso Primeiro Ano Novo</h3>
+                    <p>Celebrando amor e momentos especiais juntos. Uma data que nunca esqueceremos</p>
                 </div>
+            </div>
 
-                <!-- Capítulo 3 -->
-                <div class="timeline-item">
-                    <div class="timeline-meta">
-                        <span class="chapter-number">Capítulo III</span>
-                        <span class="chapter-date">26 de Dezembro, 2024</span>
-                    </div>
-                    <div class="timeline-card">
-                        <div class="timeline-card-header">
-                            <h3>Nossa Primeira Viagem</h3>
-                            <span class="card-badge">Novos Horizontes</span>
-                        </div>
-                        <p>Mala pronta, corações cheios e o mundo para explorar juntos. Colecionando paisagens inesquecíveis, caminhos novos e a alegria indescritível de viajar lado a lado.</p>
-                    </div>
-                </div>
-
-                <!-- Capítulo 4 -->
-                <div class="timeline-item">
-                    <div class="timeline-meta">
-                        <span class="chapter-number">Capítulo IV</span>
-                        <span class="chapter-date">31 de Dezembro, 2024</span>
-                    </div>
-                    <div class="timeline-card">
-                        <div class="timeline-card-header">
-                            <h3>Nosso Primeiro Ano Novo</h3>
-                            <span class="card-badge">Novo Ciclo</span>
-                        </div>
-                        <p>Brindando ao amor, aos aprendizados do ano que passou e aos infinitos sonhos que construiríamos juntas e juntos nos anos que ainda virão.</p>
-                    </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-date">26/12/2024</span>
+                    <h3>Primeira Viagem</h3>
+                    <p>Explorando o mundo juntos e criando memórias que durarão para sempre ✈️</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Galeria Editorial (Mosaico Bento) -->
-    <section class="galeria-section" id="galeria">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="section-tag">Galeria de Cinema</span>
-                <h2 class="section-title">Memórias Fotografadas</h2>
-                <p class="section-description">Momentos congelados no tempo. Clique em qualquer foto para ver em alta definição.</p>
+    <!-- Galeria de Momentos -->
+    <section class="galeria" id="galeria">
+        <h2 class="section-title">📸 Nossos Momentos</h2>
+        <div class="galeria-grid">
+            <div class="galeria-item">
+                <img src="Images/AnoNovo.jpeg" alt="Ano Novo - Momento Especial">
+                <div class="galeria-overlay">
+                    <p>Ano Novo, Amor Renovado 🎆</p>
+                </div>
             </div>
-
-            <div class="bento-grid">
-                <!-- Foto 1 -->
-                <div class="bento-item bento-large" onclick="openLightbox('Images/AnoNovo.jpeg', 'Ano Novo Inesquecível', 'Celebrando a virada de ano lado a lado com brilho nos olhos.')">
-                    <img src="Images/AnoNovo.jpeg" alt="Ano Novo Eloah e Felipe" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Réveillon</span>
-                            <h4>Ano Novo Inesquecível</h4>
-                            <p>Celebrando o amor e o futuro 🥂</p>
-                        </div>
-                    </div>
+            <div class="galeria-item">
+                <img src="Images/AnoNovo2.jpeg" alt="Ano Novo 2">
+                <div class="galeria-overlay">
+                    <p>Celebrando Juntos 🥂</p>
                 </div>
-
-                <!-- Foto 2 -->
-                <div class="bento-item" onclick="openLightbox('Images/ParqueJP.jpeg', 'Tarde no Parque', 'Sorrisos sinceros e tranquilidade num passeio de sol.')">
-                    <img src="Images/ParqueJP.jpeg" alt="Passeio no Parque JP" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Natureza</span>
-                            <h4>Tarde no Parque</h4>
-                            <p>Paz e sintonia perfeita 🌿</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Foto 3 -->
-                <div class="bento-item" onclick="openLightbox('Images/Porto.jpeg', 'Viagem Inesquecível', 'Descobrindo cantinhos especiais e criando novas histórias.')">
-                    <img src="Images/Porto.jpeg" alt="Viagem Porto" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Aventura</span>
-                            <h4>Viagem Inesquecível</h4>
-                            <p>Explorando lugares novos ✈️</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Foto 4 -->
-                <div class="bento-item bento-tall" onclick="openLightbox('Images/Natal.jpeg', 'Natal em Família', 'O aconchego do fim de ano e a alegria de estarmos juntos.')">
-                    <img src="Images/Natal.jpeg" alt="Natal Eloah e Felipe" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Celebração</span>
-                            <h4>Magia do Natal</h4>
-                            <p>Calor, carinho e união 🎄</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Foto 5 -->
-                <div class="bento-item" onclick="openLightbox('Images/Confra.jpeg', 'Confraternizações', 'Dividindo risadas e bons momentos com quem amamos.')">
-                    <img src="Images/Confra.jpeg" alt="Confraternização" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Alegria</span>
-                            <h4>Bons Momentos</h4>
-                            <p>Sorrisos espontâneos ✨</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Foto 6 -->
-                <div class="bento-item" onclick="openLightbox('Images/Curiuva.jpeg', 'Passeio Especial', 'Um dia marcante recheado de memórias inesquecíveis.')">
-                    <img src="Images/Curiuva.jpeg" alt="Passeio Curiuva" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Refúgio</span>
-                            <h4>Passeio Especial</h4>
-                            <p>Simplicidade e carinho 🌹</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Foto 7 -->
-                <div class="bento-item bento-wide" onclick="openLightbox('Images/AnoNovo2.jpeg', 'Brinde ao Futuro', 'Olhando na mesma direção com amor e cumplicidade.')">
-                    <img src="Images/AnoNovo2.jpeg" alt="Ano Novo 2" loading="lazy">
-                    <div class="bento-overlay">
-                        <div class="bento-text">
-                            <span class="bento-tag">Amor</span>
-                            <h4>Brinde ao Futuro</h4>
-                            <p>Nossos melhores dias ainda estão por vir 🥂</p>
-                        </div>
-                    </div>
+            </div>
+            <div class="galeria-item">
+                <img src="Images/ParqueJP.jpeg" alt="Parque JP">
+                <div class="galeria-overlay">
+                    <p>Momentos Felizes 🌳</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal Lightbox para Imagens em Alta Definição -->
-    <div class="lightbox" id="lightboxModal" onclick="closeLightbox(event)">
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-            <img src="" id="lightboxImg" alt="Foto ampliada">
-            <div class="lightbox-info">
-                <h3 id="lightboxTitle">Título</h3>
-                <p id="lightboxDesc">Descrição da foto</p>
-            </div>
+    <!-- Mensagens Especiais -->
+    <section class="mensagens" id="mensagens">
+        <h2 class="section-title">💌 Mensagens Especiais</h2>
+        <div class="mensagens-container">
+            <button class="msg-button" onclick="mostrarMensagem(0)">Para Eloah ❤️</button>
+            <button class="msg-button" onclick="mostrarMensagem(1)">Para Felipe 💙</button>
+            <button class="msg-button" onclick="mostrarMensagem(2)">Nosso Amor 💕</button>
         </div>
-    </div>
-
-    <!-- Cartas de Amor Translucidas -->
-    <section class="cartas-section" id="cartas">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="section-tag">Palavras de Coração</span>
-                <h2 class="section-title">Cartas & Notas Secretas</h2>
-                <p class="section-description">Selecione uma das cartas para ler o que sentimos um pelo outro.</p>
-            </div>
-
-            <div class="letters-tabs">
-                <button class="tab-btn active" onclick="selectTab(0)">Para Eloah</button>
-                <button class="tab-btn" onclick="selectTab(1)">Para Felipe</button>
-                <button class="tab-btn" onclick="selectTab(2)">Sobre Nós</button>
-            </div>
-
-            <div class="letter-card-container">
-                <div class="letter-card active" id="letter-0">
-                    <div class="letter-watermark">E</div>
-                    <span class="letter-subtitle">Para minha eterna paixão</span>
-                    <h3>Para Eloah</h3>
-                    <p class="letter-body">
-                        "Você é a pessoa mais incrível que o destino colocou na minha vida. Seu sorriso tem o poder mágico de iluminar os dias mais cinzentos, e a sua ternura me ensina a ser uma versão melhor de mim mesmo a cada amanhecer. Obrigado por caminhar ao meu lado, por me apoiar e por transformar o cotidiano em um filme inesquecível. Te amo além das palavras."
-                    </p>
-                    <div class="letter-signature">— Com todo o meu amor, Felipe</div>
-                </div>
-
-                <div class="letter-card" id="letter-1">
-                    <div class="letter-watermark">F</div>
-                    <span class="letter-subtitle">Para o meu porto seguro</span>
-                    <h3>Para Felipe</h3>
-                    <p class="letter-body">
-                        "Você é meu companheiro de aventuras, meu abrigo e meu maior amor. Cada gesto de carinho, cada abraço acolhedor e cada risada compartilhada contigo reafirmam a bênção que é ter você na minha vida. Obrigado por ser tão dedicado, gentil e por sonhar os meus sonhos junto comigo. Você é o meu lugar favorito no mundo."
-                    </p>
-                    <div class="letter-signature">— Com todo o carinho, Eloah</div>
-                </div>
-
-                <div class="letter-card" id="letter-2">
-                    <div class="letter-watermark">∞</div>
-                    <span class="letter-subtitle">A nossa promessa diária</span>
-                    <h3>Nosso Amor</h3>
-                    <p class="letter-body">
-                        "A cada capítulo que escrevemos juntos, nosso laço se fortalece mais. Somos uma combinação única de cumplicidade, paciência e paixão. Não importa a distância ou os desafios que o futuro nos traga, sabemos que juntos somos invencíveis. Nossa história está apenas no começo e os melhores capítulos ainda virão!"
-                    </p>
-                    <div class="letter-signature">— Eloah & Felipe</div>
-                </div>
-            </div>
+        <div class="mensagem-display" id="mensagemDisplay">
+            <p id="textoMensagem">Clique em um botão para ver a mensagem especial!</p>
+            <button class="close-btn" onclick="fecharMensagem()">✕</button>
         </div>
     </section>
 
-    <!-- Citações & Detalhes Interativos -->
-    <section class="quotes-section">
-        <div class="container text-center">
-            <span class="section-tag">Inspirações & Notas</span>
-            <h2 class="section-title">Pensamentos de Amor</h2>
-            
-            <div class="quote-display-card">
-                <div class="quote-icon">“</div>
-                <p class="quote-text" id="quoteText">"O amor não se vê com os olhos, mas com o coração."</p>
-                <div class="quote-author" id="quoteAuthor">— William Shakespeare</div>
-            </div>
-
-            <button class="btn-quote" onclick="nextQuote()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span>Nova Inspiração</span>
-            </button>
+    <!-- Perguntas Românticas -->
+    <section class="random-quotes">
+        <h2 class="section-title">✨ Sabia que...</h2>
+        <div class="quote-card" id="quoteCard">
+            <p id="quoteText">Clique no coração para descobrir!</p>
         </div>
+        <button class="heart-btn" onclick="proximaCuriosidade()">💕</button>
     </section>
 
-    <!-- Footer Cinematográfico -->
+    <!-- Footer -->
     <footer class="footer">
-        <div class="container text-center">
-            <div class="footer-brand">Eloah & Felipe</div>
-            <p class="footer-tagline">Uma história real vivida e celebrada a cada dia.</p>
-            <div class="footer-line"></div>
-            <p class="footer-credits">&copy; 2024 — 2026 • Eternizando nossos melhores momentos</p>
-        </div>
+        <p>Feito com 💕 para o nosso amor</p>
+        <p>&copy; 2024 - 2025 | Eloah & Felipe</p>
     </footer>
 
     <script src="script.js"></script>
