@@ -15,6 +15,8 @@ export const SuitGallery: React.FC<SuitGalleryProps> = ({ onInspectSuit }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const filteredSuits = SUITS_DATA.filter((suit) => {
+    // Only display suits with active image renders in the main showcase
+    if (!suit.imageUrl) return false;
     if (activeCategory === 'ALL') return true;
     return suit.categories.includes(activeCategory);
   });

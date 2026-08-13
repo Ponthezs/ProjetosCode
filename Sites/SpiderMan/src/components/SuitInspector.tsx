@@ -14,6 +14,7 @@ export const SuitInspector: React.FC<SuitInspectorProps> = ({ suit, onClose }) =
   const [rotation, setRotation] = useState(0);
   const [showBackView, setShowBackView] = useState(false);
   const [activeHotspot, setActiveHotspot] = useState<SuitHotspot | null>(null);
+  const [fpsCap, setFpsCap] = useState(60);
 
   if (!suit) return null;
 
@@ -25,7 +26,7 @@ export const SuitInspector: React.FC<SuitInspectorProps> = ({ suit, onClose }) =
 
   const handleRotate = (deg: number) => {
     soundEngine.playSuitSpin();
-    setRotation((prev) => prev + deg);
+    setRotation((prev) => (prev + deg + 360) % 360);
   };
 
   return (
@@ -144,7 +145,7 @@ export const SuitInspector: React.FC<SuitInspectorProps> = ({ suit, onClose }) =
             </div>
 
             {/* Middle Suit Visualizer Canvas */}
-            <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[450px] rounded-2xl bg-black/60 border border-red-500/20 p-4">
+            <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[480px] rounded-2xl bg-black/60 border border-red-500/20 p-4">
               <SuitCanvasVisual
                 suit={suit}
                 isInspecting={true}
@@ -152,7 +153,47 @@ export const SuitInspector: React.FC<SuitInspectorProps> = ({ suit, onClose }) =
                 showBackView={showBackView}
                 activeHotspotId={activeHotspot?.id || null}
                 onHotspotClick={handleHotspotClick}
+                fpsCap={fpsCap}
               />
+
+              {/* Turntable 360° & Framerate Control Bar */}
+              <div className="w-full mt-4 p-3 rounded-xl bg-black/80 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 backdrop-blur-md z-30">
+                {/* 360 Degree Slider */}
+                <div className="flex items-center space-x-3 w-full sm:w-auto flex-1">
+                  <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold tracking-wider whitespace-nowrap">
+                    TURNTABLE 360°: {rotation}°
+                  </span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="360"
+                    value={rotation}
+                    onChange={(e) => setRotation(parseInt(e.target.value))}
+                    className="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                  />
+                </div>
+
+                {/* Framerate Controls */}
+                <div className="flex items-center space-x-1.5">
+                  <span className="text-[10px] font-mono text-gray-400 uppercase mr-1">FPS:</span>
+                  {[60, 30, 12].map((fMode) => (
+                    <button
+                      key={fMode}
+                      onClick={() => {
+                        soundEngine.playClick();
+                        setFpsCap(fMode);
+                      }}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold transition-all cursor-pointer ${
+                        fpsCap === fMode
+                          ? 'bg-red-600 text-white shadow-[0_0_10px_#E50914]'
+                          : 'bg-white/5 border border-white/10 text-gray-400 hover:text-white'
+                      }`}
+                    >
+                      {fMode === 12 ? '12 FPS (HQ)' : `${fMode} FPS`}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               {/* Active Hotspot HUD Popup */}
               <AnimatePresence>
