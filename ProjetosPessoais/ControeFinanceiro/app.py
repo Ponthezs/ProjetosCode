@@ -40,8 +40,15 @@ def main():
     controller = AppController()
 
     try:
+        # Sincronização automática em background de novas planilhas na pasta dados/ na primeira inicialização da sessão
+        if "auto_synced" not in st.session_state:
+            sync_res = controller.importer.auto_sync_all_csvs()
+            st.session_state["auto_synced"] = True
+            if sync_res.get("imported", 0) > 0:
+                st.toast(sync_res["message"], icon="🚀")
+
         # Renderizar Navegação Sidebar
-        page = render_sidebar()
+        page = render_sidebar(controller)
 
         # Roteamento de Páginas
         if page == "dashboard":

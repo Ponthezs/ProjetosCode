@@ -7,6 +7,7 @@ from models.account import Account
 from models.card import Card
 from models.category import Category, Subcategory
 from models.owner import Owner
+from models.split import TransactionSplit
 
 class Transaction(Base):
     __tablename__ = 'transactions'

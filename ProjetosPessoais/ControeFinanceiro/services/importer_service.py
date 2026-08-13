@@ -301,3 +301,42 @@ class IntelligentImporterService:
         owner_id = owners[0].id if owners else 1
 
         return self.import_mapped_csv(target, mapping, acc_id, owner_id)
+
+    def auto_sync_all_csvs(self) -> Dict[str, Any]:
+        """Varre TODOS os arquivos CSV/XLSX da pasta dados/ e sincroniza automaticamente todas as movimentações novas."""
+        files = self.find_all_csv_files()
+        if not files:
+            return {"success": False, "message": "Nenhuma planilha encontrada em dados/", "imported": 0, "skipped": 0, "files_processed": 0}
+
+        total_imported = 0
+        total_skipped = 0
+        processed_files = []
+
+        accs = self.acc_repo.get_all()
+        owners = self.owner_repo.get_all()
+        acc_id = accs[0].id if accs else 1
+        owner_id = owners[0].id if owners else 1
+
+        for file_path in files:
+            try:
+                res = self.import_latest_csv(file_path)
+                if res.get("success"):
+                    total_imported += res.get("imported", 0)
+                    total_skipped += res.get("skipped", 0)
+                    if res.get("imported", 0) > 0:
+                        processed_files.append(f"{file_path.name} (+{res['imported']})")
+            except Exception as e:
+                logger.error(f"Erro no auto-sync do arquivo {file_path.name}: {e}")
+
+        if total_imported > 0:
+            msg = f"⚡ Sincronização Automática: {total_imported} novas movimentações importadas das planilhas em dados/ ({', '.join(processed_files)})."
+        else:
+            msg = f"Nenhuma movimentação nova encontrada. As {total_skipped} movimentações das planilhas já estão sincronizadas no banco de dados."
+
+        return {
+            "success": True,
+            "message": msg,
+            "imported": total_imported,
+            "skipped": total_skipped,
+            "files_processed": len(files)
+        }
