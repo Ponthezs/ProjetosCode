@@ -59,12 +59,17 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               <path d="M12 2C10.5 2 9 3.5 9 5c0 1.2.7 2.2 1.7 2.7-.4 1-1.3 2-2.7 2.3C6 10.3 4 8.5 4 7c0-.6-.4-1-1-1s-1 .4-1 1c0 2.5 2.5 5 5.5 5.5.3 1.2.8 2.5 1.5 3.5-2 .5-4.5 2-4.5 4.5 0 .6.4 1 1 1s1-.4 1-1c0-1.5 1.8-2.6 3.5-3 1 1.2 2.2 2 3.5 2s2.5-.8 3.5-2c1.7.4 3.5 1.5 3.5 3 0 .6.4 1 1 1s1-.4 1-1c0-2.5-2.5-4-4.5-4.5.7-1 1.2-2.3 1.5-3.5 3-.5 5.5-3 5.5-5.5 0-.6-.4-1-1-1s-1 .4-1 1c0 1.5-2 3.3-4 3c-1.4-.3-2.3-1.3-2.7-2.3C14.3 7.2 15 6.2 15 5c0-1.5-1.5-3-3-3zm0 3c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z" />
             </svg>
           </div>
-          <div>
-            <span className="block font-extrabold text-sm sm:text-base tracking-widest text-white uppercase font-sans">
-              SPIDER-MAN
-            </span>
-            <span className="block text-[10px] tracking-widest text-red-500 font-mono uppercase">
-              SUIT EVOLUTION
+          <div className="flex items-center space-x-2">
+            <div>
+              <span className="block font-extrabold text-sm sm:text-base tracking-widest text-white uppercase font-sans">
+                SPIDER-MAN
+              </span>
+              <span className="block text-[10px] tracking-widest text-red-500 font-mono uppercase">
+                SUIT EVOLUTION
+              </span>
+            </div>
+            <span className="hidden lg:inline-block px-2 py-0.5 rounded-full bg-red-600/20 border border-red-500/40 text-[9px] font-mono text-red-400 uppercase font-bold tracking-wider">
+              15+ SUITS
             </span>
           </div>
         </button>
