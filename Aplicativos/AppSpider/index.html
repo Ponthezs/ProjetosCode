@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPIDER-COMM HUD // Multiverse Sighting Radar</title>
+  <meta name="description" content="Retro 8-bit Spider-Man Multiverse Sighting & Crime Radar Console">
+  <!-- Google Fonts: Retro Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Retro CRT Bezel Container -->
+  <div class="deck-wrapper">
+    <div class="cyber-bezel">
+      
+      <!-- Top Bezel Header -->
+      <div class="bezel-header">
+        <div class="sub-display">
+          <div class="sub-disp-top">
+            <span class="spidey-small-icon"></span>
+            <span class="disp-title">SMT_1</span>
+          </div>
+          <div class="sub-disp-bars">
+            <span class="bar-line"></span>
+            <span class="bar-line"></span>
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+
+        <div class="header-center">
+          <div class="clock-display">
+            <span id="timer-left">00:00</span>
+            <div class="spidey-head-badge" id="head-badge-btn" title="Toggle Sound / Pulse">
+              <div class="pixel-spidey-mask"></div>
+            </div>
+            <span id="timer-right">00:00</span>
+          </div>
+          <div class="sighting-banner" id="sighting-banner">
+            <div class="banner-title">NEW SIGHTING</div>
+            <div class="banner-location" id="banner-loc">LOCATION: NEW YORK</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="top-spider-btn" id="top-spider-btn" title="Spidey Signal Alarm">
+            <div class="pixel-spider-logo"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Middle Viewport & Side Dock -->
+      <div class="viewport-section">
+        
+        <!-- Left Side Control Column -->
+        <div class="left-side-controls">
+          <!-- Stacked OST/SFX/CRT Shield Buttons -->
+          <button class="side-hex-btn red-btn" id="btn-ost" title="OST Music Toggle">
+            <span>O</span>
+          </button>
+          <button class="side-hex-btn red-btn" id="btn-sfx" title="SFX Sound Toggle">
+            <span>S</span>
+          </button>
+          <button class="side-hex-btn red-btn" id="btn-crt" title="CRT Scanlines Toggle">
+            <span>T</span>
+          </button>
+
+          <!-- Mask Status Pill -->
+          <div class="mask-status-card" id="mask-status-card">
+            <div class="spidey-icon-wrap">
+              <div class="pixel-mask-small"></div>
+              <span class="status-dot online" id="status-dot"></span>
+            </div>
+          </div>
+
+          <!-- Full Body Spidey Pod Dock -->
+          <div class="spidey-pod-dock" id="spidey-pod-dock" title="Click to inspect active Spider suit">
+            <canvas id="spidey-sprite-canvas" width="64" height="80"></canvas>
+            <div class="pod-glow"></div>
+            <div class="pod-label" id="pod-label">PETER</div>
+          </div>
+        </div>
+
+        <!-- Center Main 3D Globe Radar Viewport -->
+        <div class="radar-viewport" id="radar-viewport">
+          <!-- Scanline overlay -->
+          <div class="scanlines-overlay" id="scanlines-overlay"></div>
+          <div class="crt-vignette"></div>
+
+          <!-- HUD Grid Overlay Info -->
+          <div class="hud-corner top-left">RADAR SYS v3.6 // SEC-7</div>
+          <div class="hud-corner top-right" id="coords-hud">LAT: 40.7128 | LON: -74.0060</div>
+          <div class="hud-corner bottom-left" id="multiverse-hud">DIMENSION: EARTH-616</div>
+          <div class="hud-corner bottom-right" id="zoom-hud">MODE: 3D GLOBE</div>
+
+          <!-- 3D Globe Canvas -->
+          <canvas id="globe-canvas"></canvas>
+
+          <!-- Target Sighting Tooltip Popover -->
+          <div class="sighting-popover hidden" id="sighting-popover">
+            <div class="popover-header">
+              <span id="popover-title">CRIME IN PROGRESS</span>
+              <button class="popover-close" id="popover-close">×</button>
+            </div>
+            <div class="popover-body">
+              <div class="popover-hero" id="popover-hero">Spider-Man (Peter Parker)</div>
+              <div class="popover-detail" id="popover-detail">Fighting Green Goblin at Oscorp Tower!</div>
+              <div class="popover-tags">
+                <span class="tag red" id="popover-threat">THREAT: HIGH</span>
+                <span class="tag green" id="popover-dim">EARTH-616</span>
+              </div>
+              <button class="popover-act-btn" id="popover-dispatch-btn">DISPATCH SPIDEY</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Control Matrix Console -->
+      <div class="bottom-console">
+        <!-- Row 1 & 2 Left Indicators: A.1 & A.2 -->
+        <div class="console-left-column">
+          <button class="matrix-btn small-btn green-btn" id="btn-a1" title="Alert Scan 1">A.1</button>
+          <button class="matrix-btn small-btn red-btn" id="btn-a2" title="Alert Scan 2">A.2</button>
+        </div>
+
+        <!-- Middle Column: Suit Profiles PROF 1, PROF 2, PROF 3 -->
+        <div class="console-mid-column">
+          <button class="matrix-btn wide-btn green-btn" id="btn-prof1">
+            <span class="btn-text">PROF 1</span>
+            <span class="sub-text">PETER</span>
+          </button>
+          <button class="matrix-btn wide-btn green-btn" id="btn-prof2">
+            <span class="btn-text">PROF 2</span>
+            <span class="sub-text">MILES</span>
+          </button>
+          <button class="matrix-btn wide-btn green-btn" id="btn-prof3">
+            <span class="btn-text">PROF 3</span>
+            <span class="sub-text">GWEN</span>
+          </button>
+        </div>
+
+        <!-- Right Column Grid 1: TERRAIN, 3D VIEW, CENTER LOC -->
+        <div class="console-right-column">
+          <button class="matrix-btn wide-btn yellow-btn" id="btn-terrain">
+            <span>TERRAIN</span>
+          </button>
+          <button class="matrix-btn wide-btn yellow-btn" id="btn-3dview">
+            <span>3D VIEW</span>
+          </button>
+          <button class="matrix-btn wide-btn yellow-btn" id="btn-centerloc">
+            <span>CENTER LOC</span>
+          </button>
+        </div>
+
+        <!-- Right Column Grid 2: CHAT, ARCHIVE, SHARE -->
+        <div class="console-actions-column">
+          <button class="matrix-btn wide-btn yellow-btn" id="btn-chat">
+            <span>CHAT</span>
+          </button>
+          <button class="matrix-btn wide-btn yellow-btn" id="btn-archive">
+            <span>ARCHIVE</span>
+          </button>
+          <button class="matrix-btn wide-btn yellow-btn" id="btn-share">
+            <span>SHARE</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODALS CONTAINER -->
+
+  <!-- Modal 1: Spider Profile Dossier -->
+  <div class="pixel-modal-backdrop hidden" id="modal-profile">
+    <div class="pixel-modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="profile-modal-title">SPIDER DOSSIER</span>
+        <button class="modal-close-btn" id="profile-modal-close">X</button>
+      </div>
+      <div class="modal-body profile-body">
+        <div class="profile-avatar-column">
+          <canvas id="modal-spidey-avatar" width="128" height="140"></canvas>
+          <div class="profile-name-tag" id="profile-name-tag">PETER PARKER</div>
+          <div class="profile-earth-tag" id="profile-earth-tag">EARTH-616</div>
+        </div>
+        <div class="profile-info-column">
+          <div class="info-row"><span class="lbl">ALIAS:</span> <span class="val" id="profile-alias">Spider-Man</span></div>
+          <div class="info-row"><span class="lbl">SUIT:</span> <span class="val" id="profile-suit">Classic Red & Blue</span></div>
+          <div class="info-row"><span class="lbl">POWER:</span> <span class="val" id="profile-power">98 / 100</span></div>
+          <div class="info-row"><span class="lbl">WEBS:</span> <span class="val" id="profile-webs">Synthetic Fluid</span></div>
+          <div class="info-row"><span class="lbl">TECH:</span> <span class="val" id="profile-tech">Spider-Tracer v4</span></div>
+          <div class="bio-box" id="profile-bio">
+            Bitten by a radioactive spider, Peter Parker protects New York City with incredible agility, wall-crawling abilities, and keen spider-sense!
+          </div>
+          <div class="profile-actions">
+            <button class="modal-act-btn" id="btn-select-spider">EQUIP SPIDER</button>
+            <button class="modal-act-btn alt" id="btn-next-spider">NEXT SPIDER &gt;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Interactive Web-Comm AI Chat -->
+  <div class="pixel-modal-backdrop hidden" id="modal-chat">
+    <div class="pixel-modal-box chat-modal-box">
+      <div class="modal-header">
+        <span class="modal-title">SPIDER-COMM TERMINAL // AI CHAT</span>
+        <button class="modal-close-btn" id="chat-modal-close">X</button>
+      </div>
+      <div class="modal-body chat-body">
+        <div class="chat-logs" id="chat-logs">
+          <div class="chat-msg system">
+            <span class="chat-sender">KAREN AI:</span> Web-Comm initialized. Ask me about active crimes, Spider-Man suits, or multiverse dimensions!
+          </div>
+        </div>
+        <div class="chat-controls">
+          <div class="quick-questions">
+            <button class="quick-btn" data-query="quais crimes estao acontecendo?">🚨 Crimes Ativos?</button>
+            <button class="quick-btn" data-query="quem e o miles morales?">🕷️ Miles Morales</button>
+            <button class="quick-btn" data-query="qual o vilao mais perigoso?">⚠️ Super Vilões</button>
+            <button class="quick-btn" data-query="tocar musica do aranha">🎵 Tocar Som</button>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chat-input" placeholder="Digite uma mensagem..." autocomplete="off">
+            <button id="chat-send-btn">ENVIAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Villain Archive Database -->
+  <div class="pixel-modal-backdrop hidden" id="modal-archive">
+    <div class="pixel-modal-box archive-modal-box">
+      <div class="modal-header">
+        <span class="modal-title">ROGUES GALLERY // VILLAIN ARCHIVE</span>
+        <button class="modal-close-btn" id="archive-modal-close">X</button>
+      </div>
+      <div class="modal-body archive-body">
+        <div class="villain-list" id="villain-list">
+          <!-- Populated dynamically -->
+        </div>
+        <div class="villain-detail-panel" id="villain-detail-panel">
+          <div class="villain-art-box">
+            <canvas id="villain-canvas" width="100" height="100"></canvas>
+            <div class="villain-threat-badge" id="villain-threat">THREAT LEVEL: OMEGA</div>
+          </div>
+          <div class="villain-info">
+            <h3 id="villain-name">GREEN GOBLIN</h3>
+            <p class="villain-real" id="villain-real">Real Name: Norman Osborn</p>
+            <p class="villain-desc" id="villain-desc">Genius CEO turned psychopathic menace on a glider equipped with pumpkin bombs.</p>
+            <button class="modal-act-btn" id="btn-track-villain">TRACK ON RADAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Share / Report Sighting -->
+  <div class="pixel-modal-backdrop hidden" id="modal-share">
+    <div class="pixel-modal-box">
+      <div class="modal-header">
+        <span class="modal-title">SPIDER-SIGNAL BROADCAST</span>
+        <button class="modal-close-btn" id="share-modal-close">X</button>
+      </div>
+      <div class="modal-body share-body">
+        <div class="share-card">
+          <div class="share-title">🕷️ SPIDER SIGHTING CONFIRMED!</div>
+          <div class="share-code" id="share-report-text">
+            [SPIDEY-RADAR-REPORT]
+            Location: New York, Earth-616
+            Hero: Spider-Man (Peter Parker)
+            Threat Level: ACTIVE PATROL
+            Radar Frequency: 98.4 MHz
+          </div>
+        </div>
+        <button class="modal-act-btn" id="btn-copy-report">📋 COPIAR RELATÓRIO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio elements & Scripts -->
+  <script src="audio.js"></script>
+  <script src="globe.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
