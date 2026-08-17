@@ -23,10 +23,10 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Felipe Pontes"
+          git config --global user.email "pontesfelipe835@gmail.com"
           git add daily-log/activity.log
           if ! git diff --staged --quiet; then
             git commit -m "chore(auto): daily log update [$(date -u +'%Y-%m-%d')]"
-            git push
+            git push origin main
           fi
