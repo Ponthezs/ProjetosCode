@@ -303,6 +303,24 @@ class JarvisAPI:
     def get_gesture_status(self):
         return gesture_controller.active_gesture_text
 
+    def set_profile(self, profile_name):
+        gesture_controller.active_profile = profile_name
+        return profile_name
+
+    def save_settings(self, settings):
+        if 'city' in settings:
+            w_data = weather_svc.get_weather(city=settings['city'])
+            if window:
+                try:
+                    window.evaluate_js(f"window.updateWeather({json.dumps(w_data)});")
+                except Exception:
+                    pass
+        if 'profile' in settings:
+            gesture_controller.active_profile = settings['profile']
+        if 'smoothing' in settings:
+            gesture_controller.smoothing = int(settings['smoothing'])
+        return True
+
 # ==============================================================================
 # INICIALIZAÇÃO DA GUI DESKTOP
 # ==============================================================================

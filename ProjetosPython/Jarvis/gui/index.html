@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J.A.R.V.I.S - Interface de Controle</title>
+    <title>J.A.R.V.I.S - Interface de Controle Futurista</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,7 @@
             <div class="brand">
                 <h1 class="logo">J.A.R.V.I.S</h1>
                 <span class="status-badge online" id="status-online"><i class="fa-solid fa-circle"></i> Online</span>
+                <span class="profile-badge" id="profile-pill" title="Clique para alternar perfil"><i class="fa-solid fa-sliders"></i> Perfil: <strong id="profile-name">Geral</strong></span>
             </div>
 
             <div class="top-pill clock-pill">
@@ -34,7 +35,7 @@
                     <span id="top-temp">--°C</span>
                     <span id="top-city">Maringá</span>
                 </div>
-                <button class="icon-btn" id="btn-settings" title="Configurações">
+                <button class="icon-btn" id="btn-settings" title="Configurações do Sistema">
                     <i class="fa-solid fa-gear"></i>
                 </button>
             </div>
@@ -48,7 +49,7 @@
                 <div class="widget card">
                     <div class="widget-header">
                         <span><i class="fa-solid fa-microchip"></i> System Stats</span>
-                        <button class="widget-action-btn" id="refresh-stats"><i class="fa-solid fa-rotate-right"></i></button>
+                        <button class="widget-action-btn" id="refresh-stats" title="Atualizar"><i class="fa-solid fa-rotate-right"></i></button>
                     </div>
                     <div class="widget-body">
                         <div class="stat-group">
@@ -92,7 +93,7 @@
                 <div class="widget card">
                     <div class="widget-header">
                         <span><i class="fa-solid fa-cloud-sun"></i> Weather</span>
-                        <button class="widget-action-btn" id="refresh-weather"><i class="fa-solid fa-rotate-right"></i></button>
+                        <button class="widget-action-btn" id="refresh-weather" title="Atualizar Clima"><i class="fa-solid fa-rotate-right"></i></button>
                     </div>
                     <div class="widget-body weather-body">
                         <div class="weather-main">
@@ -135,7 +136,7 @@
                         <div class="camera-placeholder" id="camera-placeholder">
                             <i class="fa-solid fa-hand cam-off-icon"></i>
                             <span class="cam-status-text">Controle por Gestos Desativado</span>
-                            <small class="cam-subtext">Clique no botão power para ativar a câmera e o rastreamento da mão por IA.</small>
+                            <small class="cam-subtext">Clique no botão power para ativar a câmera e o rastreamento por IA.</small>
                         </div>
                         <img id="camera-stream" class="camera-stream hidden" src="" alt="Webcam Gesture Stream">
                     </div>
@@ -186,9 +187,11 @@
                     <div class="ring middle-ring"></div>
                     <div class="ring inner-ring"></div>
 
-                    <!-- Voice Orb Center -->
-                    <div class="voice-orb" id="voice-orb">
+                    <!-- Voice Orb Center with Dynamic Wave Spectrum -->
+                    <div class="voice-orb" id="voice-orb" title="Clique para ativar/desativar voz">
                         <div class="orb-core">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
                             <div class="wave-bar"></div>
                             <div class="wave-bar"></div>
                             <div class="wave-bar"></div>
@@ -214,7 +217,7 @@
                 </div>
             </section>
 
-            <!-- RIGHT PANEL: CONVERSATION CHAT LOG -->
+            <!-- RIGHT PANEL: CONVERSATION CHAT LOG & QUICK ACTION PILLS -->
             <section class="panel right-panel">
                 <div class="card chat-card">
                     <div class="widget-header">
@@ -225,22 +228,87 @@
                         </div>
                     </div>
 
+                    <!-- Chat Messages Container -->
                     <div class="chat-body" id="chat-messages">
                         <div class="chat-msg jarvis-msg">
-                            <div class="msg-content">
-                                Olá, eu sou o <strong>J.A.R.V.I.S</strong>. O sistema de voz e o rastreamento por gestos de mão estão online. Como posso ajudá-lo hoje, senhor?
+                            <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                            <div class="msg-bubble-container">
+                                <div class="msg-sender">J.A.R.V.I.S</div>
+                                <div class="msg-content">
+                                    Olá! Todos os sistemas operacionais, comando por voz e gestos estão online. Como posso ajudá-lo hoje, senhor?
+                                </div>
+                                <div class="msg-time" id="welcome-time">00:00</div>
                             </div>
-                            <div class="msg-time" id="welcome-time">00:00</div>
                         </div>
                     </div>
 
+                    <!-- INTERACTIVE QUICK ACTION COMMAND PILLS -->
+                    <div class="quick-pills-bar">
+                        <span class="pill-label">Sugestões Rápidas:</span>
+                        <div class="pills-scroll">
+                            <button class="cmd-pill" data-cmd="Que horas são?"><i class="fa-regular fa-clock"></i> Horas</button>
+                            <button class="cmd-pill" data-cmd="Qual a data de hoje?"><i class="fa-regular fa-calendar"></i> Data</button>
+                            <button class="cmd-pill" data-cmd="Clima em Maringá"><i class="fa-solid fa-sun"></i> Clima</button>
+                            <button class="cmd-pill" data-cmd="Abrir Bloco de Notas"><i class="fa-solid fa-file-lines"></i> Notepad</button>
+                            <button class="cmd-pill" data-cmd="Abrir Steam"><i class="fa-solid fa-gamepad"></i> Steam</button>
+                            <button class="cmd-pill" data-cmd="Abrir Spotify"><i class="fa-brands fa-spotify"></i> Spotify</button>
+                            <button class="cmd-pill" data-cmd="Ativar gestos"><i class="fa-solid fa-hand"></i> Ativar Gestos</button>
+                            <button class="cmd-pill" data-cmd="Fechar Bloco de Notas"><i class="fa-solid fa-xmark"></i> Fechar App</button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Bar -->
                     <div class="chat-input-area">
-                        <input type="text" id="chat-input" placeholder="Digite uma mensagem..." autocomplete="off">
-                        <button id="btn-send" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                        <input type="text" id="chat-input" placeholder="Digite uma mensagem ou comando..." autocomplete="off">
+                        <button id="btn-send" class="send-btn" title="Enviar"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- SETTINGS MODAL OVERLAY -->
+    <div class="modal-overlay hidden" id="settings-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-sliders"></i> Configurações do J.A.R.V.I.S</h3>
+                <button class="modal-close-btn" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="setting-city"><i class="fa-solid fa-location-dot"></i> Cidade Padrão para Clima:</label>
+                    <input type="text" id="setting-city" value="Maringá" class="modal-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="setting-profile"><i class="fa-solid fa-user-gear"></i> Perfil de Gestos e Atalhos:</label>
+                    <select id="setting-profile" class="modal-select">
+                        <option value="Geral">Geral (Navegação Padrão)</option>
+                        <option value="Trabalho">Trabalho (Produtividade / Code)</option>
+                        <option value="Jogos">Jogos (Mídia e Atalhos de Som)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="setting-voice"><i class="fa-solid fa-volume-high"></i> Voz do Assistente:</label>
+                    <select id="setting-voice" class="modal-select">
+                        <option value="pt-BR-AntonioNeural">Neural Antonio (Masculina Clean)</option>
+                        <option value="pt-BR-FranciscaNeural">Neural Francisca (Feminina Clean)</option>
+                        <option value="SAPI5">Windows SAPI5 (Offline)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-gauge-high"></i> Suavização do Mouse por Gestos (Filtro EMA):</label>
+                    <input type="range" id="setting-smoothing" min="1" max="10" value="4" class="modal-range">
+                    <span class="range-val" id="smoothing-val-label">Nível 4</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="btn-cancel-settings">Cancelar</button>
+                <button class="btn-primary" id="btn-save-settings"><i class="fa-solid fa-check"></i> Salvar Alterações</button>
+            </div>
+        </div>
     </div>
 
     <!-- Application Script -->
