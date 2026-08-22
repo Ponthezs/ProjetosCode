@@ -4,7 +4,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-01',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/toyota/corolla/20-vvt-ie-flex-xei-direct-shift/2022/10001',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/toyota/corolla/20-vvt-ie-flex-xei-direct-shift/de.2022/ate.2022',
     title: 'Toyota Corolla XEi 2.0 Flex Automático',
     brand: 'Toyota',
     model: 'Corolla',
@@ -36,7 +36,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-02',
     source: 'OLX',
-    sourceUrl: 'https://sp.olx.com.br/autos-e-pecas/carros-e-utilitarios/toyota-corolla-xei-2022-super-conservado-10002',
+    sourceUrl: 'https://www.olx.com.br/autos-e-pecas/carros-e-utilitarios/estado-sp?q=Toyota%20Corolla%20XEi%202022',
     title: 'Toyota Corolla 2.0 XEi Flex 4P Automático',
     brand: 'Toyota',
     model: 'Corolla',
@@ -67,7 +67,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-03',
     source: 'iCarros',
-    sourceUrl: 'https://www.icarros.com.br/comprar/toyota/corolla/2023/10003',
+    sourceUrl: 'https://www.icarros.com.br/comprar/toyota/corolla/2023',
     title: 'Toyota Corolla Altis Premium 1.8 Hybrid',
     brand: 'Toyota',
     model: 'Corolla',
@@ -98,7 +98,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-04',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/honda/civic/15-turbo-gasolina-touring-cvt/2021/10004',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/honda/civic/15-turbo-gasolina-touring-cvt/de.2021/ate.2021',
     title: 'Honda Civic Touring 1.5 Turbo CVT',
     brand: 'Honda',
     model: 'Civic',
@@ -129,7 +129,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-05',
     source: 'OLX',
-    sourceUrl: 'https://rj.olx.com.br/autos-e-pecas/honda-civic-exl-2020-10005',
+    sourceUrl: 'https://www.olx.com.br/autos-e-pecas/carros-e-utilitarios?q=Honda%20Civic%20EXL%202020',
     title: 'Honda Civic EXL 2.0 Flex Automático 2020',
     brand: 'Honda',
     model: 'Civic',
@@ -159,7 +159,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-06',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/volkswagen/t-cross/14-250-tsi-flex-highline-automatico/2023/10006',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/volkswagen/t-cross/14-250-tsi-flex-highline-automatico/de.2023/ate.2023',
     title: 'Volkswagen T-Cross Highline 250 TSI 2023',
     brand: 'Volkswagen',
     model: 'T-Cross',
@@ -190,7 +190,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-07',
     source: 'AutoLine',
-    sourceUrl: 'https://www.autoline.com.br/comprar/volkswagen/t-cross-comfortline-2022-10007',
+    sourceUrl: 'https://www.autoline.com.br/comprar/volkswagen/t-cross',
     title: 'Volkswagen T-Cross Comfortline 200 TSI 2022',
     brand: 'Volkswagen',
     model: 'T-Cross',
@@ -220,7 +220,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-08',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/chevrolet/onix/10-turbo-flex-premier-automatico/2024/10008',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/chevrolet/onix/10-turbo-flex-premier-automatico/de.2024/ate.2024',
     title: 'Chevrolet Onix Premier 1.0 Turbo Flex 2024',
     brand: 'Chevrolet',
     model: 'Onix',
@@ -251,7 +251,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-09',
     source: 'OLX',
-    sourceUrl: 'https://sp.olx.com.br/chevrolet-onix-ltz-2023-10009',
+    sourceUrl: 'https://www.olx.com.br/autos-e-pecas/carros-e-utilitarios?q=Chevrolet%20Onix%20LTZ%202023',
     title: 'Chevrolet Onix LTZ 1.0 Turbo Flex Automático 2023',
     brand: 'Chevrolet',
     model: 'Onix',
@@ -281,7 +281,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-10',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/jeep/compass/13-t270-turbo-flex-longitude-at6/2022/10010',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/jeep/compass/13-t270-turbo-flex-longitude-at6/de.2022/ate.2022',
     title: 'Jeep Compass Longitude 1.3 Turbo Flex 2022',
     brand: 'Jeep',
     model: 'Compass',
@@ -312,7 +312,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-11',
     source: 'iCarros',
-    sourceUrl: 'https://www.icarros.com.br/comprar/jeep/compass/2023/10011',
+    sourceUrl: 'https://www.icarros.com.br/comprar/jeep/compass/2023',
     title: 'Jeep Compass Limited 1.3 Turbo Flex 2023',
     brand: 'Jeep',
     model: 'Compass',
@@ -342,7 +342,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-12',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/hyundai/creta/20-smartstream-flex-ultimate-at/2023/10012',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/hyundai/creta/20-smartstream-flex-ultimate-at/de.2023/ate.2023',
     title: 'Hyundai Creta Ultimate 2.0 Flex 2023',
     brand: 'Hyundai',
     model: 'Creta',
@@ -372,7 +372,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-13',
     source: 'OLX',
-    sourceUrl: 'https://sp.olx.com.br/hyundai-hb20-platinum-plus-2023-10013',
+    sourceUrl: 'https://www.olx.com.br/autos-e-pecas/carros-e-utilitarios?q=Hyundai%20HB20%20Platinum%202023',
     title: 'Hyundai HB20 Platinum Plus 1.0 TGDI 2023',
     brand: 'Hyundai',
     model: 'HB20',
@@ -402,7 +402,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-14',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/fiat/fastback/10-turbo-impetus-cvt/2024/10014',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/fiat/fastback/10-turbo-impetus-cvt/de.2024/ate.2024',
     title: 'Fiat Fastback Impetus 1.0 Turbo Flex 2024',
     brand: 'Fiat',
     model: 'Fastback',
@@ -432,7 +432,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-15',
     source: 'AutoLine',
-    sourceUrl: 'https://www.autoline.com.br/comprar/nissan/kicks-exclusive-2022-10015',
+    sourceUrl: 'https://www.autoline.com.br/comprar/nissan/kicks',
     title: 'Nissan Kicks Exclusive 1.6 Flex CVT 2022',
     brand: 'Nissan',
     model: 'Kicks',
@@ -462,7 +462,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-16',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/volkswagen/nivus/10-200-tsi-highline-at/2022/10016',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/volkswagen/nivus/10-200-tsi-highline-at/de.2022/ate.2022',
     title: 'Volkswagen Nivus Highline 200 TSI 2022',
     brand: 'Volkswagen',
     model: 'Nivus',
@@ -492,7 +492,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-17',
     source: 'OLX',
-    sourceUrl: 'https://sp.olx.com.br/volkswagen-polo-gts-2023-10017',
+    sourceUrl: 'https://www.olx.com.br/autos-e-pecas/carros-e-utilitarios?q=Volkswagen%20Polo%20GTS%202023',
     title: 'Volkswagen Polo GTS 1.4 TSI Flex 2023',
     brand: 'Volkswagen',
     model: 'Polo',
@@ -522,7 +522,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-18',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/bmw/320i/20-gp-m-sport-turbo/2021/10018',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/bmw/320i/20-gp-m-sport-turbo/de.2021/ate.2021',
     title: 'BMW 320i M Sport 2.0 Turbo Flex 2021',
     brand: 'BMW',
     model: '320i',
@@ -553,7 +553,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-19',
     source: 'iCarros',
-    sourceUrl: 'https://www.icarros.com.br/comprar/byd/song-plus/2023/10019',
+    sourceUrl: 'https://www.icarros.com.br/comprar/byd/song-plus/2023',
     title: 'BYD Song Plus DM-i Plug-in Hybrid 2023',
     brand: 'BYD',
     model: 'Song Plus',
@@ -583,7 +583,7 @@ export const mockCarAds: CarAd[] = [
   {
     id: 'car-20',
     source: 'Webmotors',
-    sourceUrl: 'https://www.webmotors.com.br/comprar/toyota/hilux/28-srx-4x4-cd-16v-turbo-diesel/2022/10020',
+    sourceUrl: 'https://www.webmotors.com.br/carros/estoque/toyota/hilux/28-srx-4x4-cd-16v-turbo-diesel/de.2022/ate.2022',
     title: 'Toyota Hilux SRX 2.8 Turbo Diesel 4x4 2022',
     brand: 'Toyota',
     model: 'Hilux',
