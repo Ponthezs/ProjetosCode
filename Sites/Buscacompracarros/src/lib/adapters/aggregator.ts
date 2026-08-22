@@ -4,18 +4,12 @@ import { analyzeCarPrice, calculateDealOpportunity } from '../engine/priceAnalyz
 import { evaluateCarAd } from '../engine/aiEvaluator';
 
 export class CarAggregator {
-  /**
-   * Search car ads across integrated sources, filter, deduplicate and sort
-   */
   public async searchAds(filters: FilterState): Promise<CarAd[]> {
-    // 1. Fetch from mock source registry
     let results = [...mockCarAds];
 
-    // 2. Query filter matching
     if (filters.search && filters.search.trim() !== '') {
       const q = filters.search.toLowerCase().trim();
-      
-      // Parse natural language hints like "até R$ 130.000", "2022"
+
       const priceMatch = q.match(/até r\$\s*(\d+[\d.]*)/i) || q.match(/até\s*(\d+)\s*mil/i);
       let parsedMaxPrice: number | undefined = undefined;
       if (priceMatch) {
@@ -33,10 +27,9 @@ export class CarAggregator {
 
       results = results.filter(car => {
         const textToSearch = `${car.brand} ${car.model} ${car.version} ${car.description} ${car.location.city} ${car.location.state} ${car.engine} ${car.bodyType}`.toLowerCase();
-        
-        // Remove specific numbers extracted for special checks to allow model match
+
         const cleanedQ = q.replace(/até r\$\s*[\d.]+/gi, '').replace(/até\s*\d+\s*mil/gi, '').trim();
-        
+
         let matchesText = true;
         if (cleanedQ.length > 0) {
           const terms = cleanedQ.split(' ').filter(t => t.length > 1);
@@ -57,7 +50,6 @@ export class CarAggregator {
       });
     }
 
-    // 3. Structured Filters
     if (filters.brand) {
       results = results.filter(c => c.brand.toLowerCase() === filters.brand.toLowerCase());
     }
@@ -91,22 +83,19 @@ export class CarAggregator {
     if (filters.sellerType) {
       results = results.filter(c => c.seller.type.toLowerCase() === filters.sellerType!.toLowerCase());
     }
+    if (filters.onlyBelowFipe) {
+      results = results.filter(c => c.price < c.fipePrice);
+    }
 
-    // 4. Deduplication Engine (collapses duplicate cars posted on multiple sites)
     results = this.deduplicateAds(results);
-
-    // 5. Sort Engine
     results = this.sortAds(results, filters.sortBy);
 
     return results;
   }
 
-  /**
-   * Identifies ads with matching brand, model, version, year, mileage within ±500km and price within ±2%
-   */
   private deduplicateAds(ads: CarAd[]): CarAd[] {
     const uniqueAds: CarAd[] = [];
-    
+
     for (const ad of ads) {
       const isDuplicate = uniqueAds.some(existing => {
         const sameModel = existing.brand.toLowerCase() === ad.brand.toLowerCase() &&
@@ -126,9 +115,6 @@ export class CarAggregator {
     return uniqueAds;
   }
 
-  /**
-   * Sorts listings based on requested criterion
-   */
   private sortAds(ads: CarAd[], sortBy: FilterState['sortBy']): CarAd[] {
     const sorted = [...ads];
 
@@ -141,11 +127,13 @@ export class CarAggregator {
         return sorted.sort((a, b) => b.year - a.year);
       case 'mileage_asc':
         return sorted.sort((a, b) => a.mileage - b.mileage);
+      case 'fipe_discount':
+        return sorted.sort((a, b) => (a.price - a.fipePrice) - (b.price - b.fipePrice));
       case 'discount_desc':
         return sorted.sort((a, b) => {
           const pA = analyzeCarPrice(a, mockCarAds);
           const pB = analyzeCarPrice(b, mockCarAds);
-          return pA.difference - pB.difference; // most negative difference first
+          return pA.difference - pB.difference;
         });
       case 'score_desc':
         return sorted.sort((a, b) => {

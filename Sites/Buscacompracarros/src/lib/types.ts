@@ -4,6 +4,7 @@ export type TransmissionType = 'Automático' | 'Manual' | 'CVT' | 'Automatizado'
 export type BodyType = 'Sedan' | 'Hatch' | 'SUV' | 'Pickup' | 'Coupe' | 'Perua' | 'Minivan';
 export type SellerType = 'Particular' | 'Loja';
 export type PriceStatus = 'excellent' | 'good' | 'average' | 'high';
+export type FipeStatus = 'below_fipe' | 'at_fipe' | 'above_fipe';
 
 export interface CarAd {
   id: string;
@@ -17,6 +18,7 @@ export interface CarAd {
   modelYear: number;
   mileage: number;
   price: number;
+  fipePrice: number; // Official Tabela FIPE benchmark price
   location: {
     city: string;
     state: string;
@@ -44,11 +46,18 @@ export interface PriceAnalysis {
   status: PriceStatus;
   statusLabel: string;
   marketAverage: number;
-  difference: number; // e.g. -4600 (below) or +2000 (above)
-  differencePercent: number; // e.g. -3.7%
+  difference: number; // vs market average
+  differencePercent: number;
   minMarketPrice: number;
   maxMarketPrice: number;
-  percentileRank: number; // 0 to 100 position in spectrum
+  percentileRank: number;
+  
+  // Tabela FIPE Benchmark
+  fipePrice: number;
+  fipeDifference: number; // ad.price - fipePrice
+  fipeDifferencePercent: number;
+  fipeStatus: FipeStatus;
+  fipeStatusLabel: string;
 }
 
 export interface AIScoreBreakdown {
@@ -69,7 +78,7 @@ export interface AIScore {
 
 export interface DealOpportunity {
   dealScore: number;       // 0-100 opportunity index
-  savingsAmount: number;   // discount in R$
+  savingsAmount: number;   // discount in R$ vs market/FIPE
   savingsPercent: number;
   isHotDeal: boolean;
 }
@@ -87,7 +96,8 @@ export interface FilterState {
   fuel?: string;
   bodyType?: string;
   sellerType?: string;
-  sortBy: 'cost_benefit' | 'price_asc' | 'price_desc' | 'discount_desc' | 'year_desc' | 'mileage_asc' | 'score_desc';
+  onlyBelowFipe?: boolean; // New filter for Abaixo da FIPE
+  sortBy: 'cost_benefit' | 'price_asc' | 'price_desc' | 'discount_desc' | 'year_desc' | 'mileage_asc' | 'score_desc' | 'fipe_discount';
 }
 
 export interface FavoriteItem {
@@ -117,4 +127,5 @@ export interface PriceHistoryPoint {
   avgPrice: number;
   minPrice: number;
   maxPrice: number;
+  fipePrice: number;
 }

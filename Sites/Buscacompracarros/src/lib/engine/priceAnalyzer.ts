@@ -1,8 +1,7 @@
-import { CarAd, PriceAnalysis, PriceStatus } from '../types';
+import { CarAd, PriceAnalysis, PriceStatus, FipeStatus } from '../types';
 import { mockCarAds } from '../data/mockCars';
 
 export function analyzeCarPrice(ad: CarAd, allAds: CarAd[] = mockCarAds): PriceAnalysis {
-  // Find comparable ads by brand and model (and year range ±1 year if possible)
   const comparables = allAds.filter(
     item =>
       item.brand.toLowerCase() === ad.brand.toLowerCase() &&
@@ -21,13 +20,11 @@ export function analyzeCarPrice(ad: CarAd, allAds: CarAd[] = mockCarAds): PriceA
     minMarketPrice = Math.min(...prices);
     maxMarketPrice = Math.max(...prices);
   } else {
-    // Fallback baseline if no exact model match in mock
-    marketAverage = Math.round(ad.price * 1.05); // assume 5% above this ad
+    marketAverage = Math.round(ad.price * 1.04);
     minMarketPrice = Math.round(ad.price * 0.90);
-    maxMarketPrice = Math.round(ad.price * 1.18);
+    maxMarketPrice = Math.round(ad.price * 1.15);
   }
 
-  // Ensure reasonable bounds for display spectrum
   if (minMarketPrice >= ad.price) {
     minMarketPrice = Math.round(ad.price * 0.92);
   }
@@ -43,19 +40,37 @@ export function analyzeCarPrice(ad: CarAd, allAds: CarAd[] = mockCarAds): PriceA
 
   if (differencePercent <= -6.0) {
     status = 'excellent';
-    statusLabel = 'Excelente preço';
+    statusLabel = 'Excelente Preço';
   } else if (differencePercent <= -1.5) {
     status = 'good';
-    statusLabel = 'Bom preço';
+    statusLabel = 'Abaixo da Média';
   } else if (differencePercent <= 4.0) {
     status = 'average';
-    statusLabel = 'Preço dentro da média';
+    statusLabel = 'Na Média do Mercado';
   } else {
     status = 'high';
-    statusLabel = 'Preço elevado';
+    statusLabel = 'Acima da Média';
   }
 
-  // Calculate relative percentile rank 0-100 on price spectrum
+  // --- TABELA FIPE CALCULATION ---
+  const fipePrice = ad.fipePrice || Math.round(ad.price * 1.03);
+  const fipeDifference = ad.price - fipePrice;
+  const fipeDifferencePercent = Number(((fipeDifference / fipePrice) * 100).toFixed(1));
+
+  let fipeStatus: FipeStatus;
+  let fipeStatusLabel: string;
+
+  if (fipeDifferencePercent <= -1.5) {
+    fipeStatus = 'below_fipe';
+    fipeStatusLabel = `${Math.abs(fipeDifference).toLocaleString('pt-BR')} abaixo da FIPE`;
+  } else if (fipeDifferencePercent <= 1.5) {
+    fipeStatus = 'at_fipe';
+    fipeStatusLabel = 'Na Tabela FIPE';
+  } else {
+    fipeStatus = 'above_fipe';
+    fipeStatusLabel = `${fipeDifference.toLocaleString('pt-BR')} acima da FIPE`;
+  }
+
   const range = maxMarketPrice - minMarketPrice;
   let percentileRank = range > 0 ? ((ad.price - minMarketPrice) / range) * 100 : 50;
   percentileRank = Math.max(5, Math.min(95, Math.round(percentileRank)));
@@ -69,22 +84,27 @@ export function analyzeCarPrice(ad: CarAd, allAds: CarAd[] = mockCarAds): PriceA
     minMarketPrice,
     maxMarketPrice,
     percentileRank,
+    fipePrice,
+    fipeDifference,
+    fipeDifferencePercent,
+    fipeStatus,
+    fipeStatusLabel,
   };
 }
 
 export function calculateDealOpportunity(ad: CarAd, analysis: PriceAnalysis) {
-  // Deal score from 0 to 100
   let dealScore = 50;
 
-  // Price factor: up to +35 points for big discounts
-  if (analysis.differencePercent < 0) {
-    const discountFactor = Math.abs(analysis.differencePercent);
-    dealScore += Math.min(35, Math.round(discountFactor * 4));
+  if (analysis.fipeDifferencePercent < 0) {
+    dealScore += Math.min(30, Math.round(Math.abs(analysis.fipeDifferencePercent) * 4));
   } else {
-    dealScore -= Math.min(25, Math.round(analysis.differencePercent * 3));
+    dealScore -= Math.min(20, Math.round(analysis.fipeDifferencePercent * 3));
   }
 
-  // Mileage factor: lower km relative to year boosts score
+  if (analysis.differencePercent < 0) {
+    dealScore += Math.min(15, Math.round(Math.abs(analysis.differencePercent) * 2));
+  }
+
   const expectedKm = (2026 - ad.year) * 15000;
   if (expectedKm > 0) {
     const kmRatio = ad.mileage / expectedKm;
@@ -92,19 +112,18 @@ export function calculateDealOpportunity(ad: CarAd, analysis: PriceAnalysis) {
     else if (kmRatio > 1.3) dealScore -= 10;
   }
 
-  // Features & Seller factor
   if (ad.seller.verified) dealScore += 5;
   if (ad.features.length >= 6) dealScore += 5;
 
   dealScore = Math.max(10, Math.min(99, dealScore));
 
-  const savingsAmount = analysis.difference < 0 ? Math.abs(analysis.difference) : 0;
-  const savingsPercent = analysis.differencePercent < 0 ? Math.abs(analysis.differencePercent) : 0;
+  const savingsAmount = analysis.fipeDifference < 0 ? Math.abs(analysis.fipeDifference) : 0;
+  const savingsPercent = analysis.fipeDifferencePercent < 0 ? Math.abs(analysis.fipeDifferencePercent) : 0;
 
   return {
     dealScore,
     savingsAmount,
     savingsPercent,
-    isHotDeal: dealScore >= 80 || savingsAmount >= 5000,
+    isHotDeal: dealScore >= 80 || savingsAmount >= 4000,
   };
 }

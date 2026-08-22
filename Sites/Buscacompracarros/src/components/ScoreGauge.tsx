@@ -22,34 +22,34 @@ export default function ScoreGauge({ score, compact = false }: ScoreGaugeProps) 
   if (compact) {
     return (
       <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-bold border ${getScoreColor(totalScore)}`}>
-        <Star className="w-3.5 h-3.5 fill-current" />
-        <span>Avaliação: {totalScore.toFixed(1)}/10</span>
+        <Star className="w-3.5 h-3.5 fill-current text-amber-400" />
+        <span>Avaliação AutoBusca: {totalScore.toFixed(1)}/10</span>
       </div>
     );
   }
 
   const items = [
-    { label: 'Preço', value: breakdown.price },
-    { label: 'Custo-benefício', value: breakdown.costBenefit },
-    { label: 'Quilometragem', value: breakdown.mileage },
-    { label: 'Ano', value: breakdown.year },
-    { label: 'Equipamentos', value: breakdown.features },
-    { label: 'Informações do anúncio', value: breakdown.descriptionQuality },
+    { label: 'Preço & Valor', value: breakdown.price },
+    { label: 'Custo-benefício Geral', value: breakdown.costBenefit },
+    { label: 'Quilometragem x Ano', value: breakdown.mileage },
+    { label: 'Ano de Fabricação', value: breakdown.year },
+    { label: 'Equipamentos de Série', value: breakdown.features },
+    { label: 'Clareza do Anúncio', value: breakdown.descriptionQuality },
   ];
 
   return (
-    <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+    <div className="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800 space-y-4">
       {/* Header Total Score */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">Score do Veículo</h3>
-          <p className="text-xs text-slate-400">Análise computacional multivariável</p>
+          <h3 className="text-base font-extrabold text-white">Avaliação Geral do Veículo</h3>
+          <p className="text-xs text-slate-400">Índice sintético baseado em dados do mercado e do anúncio</p>
         </div>
-        <div className={`flex items-center gap-2 px-4 py-2 rounded-2xl border ${getScoreColor(totalScore)} shadow-inner`}>
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-2xl border ${getScoreColor(totalScore)} shadow-sm`}>
           <Star className="w-6 h-6 fill-current text-amber-400" />
           <div className="flex flex-col">
-            <span className="text-xs font-medium text-slate-400">Avaliação geral</span>
-            <span className="text-xl font-black tracking-tight">{totalScore.toFixed(1)} <span className="text-xs font-normal text-slate-400">/ 10</span></span>
+            <span className="text-[10px] font-bold text-slate-400 uppercase">Nota AutoBusca</span>
+            <span className="text-xl font-black tracking-tight text-white">{totalScore.toFixed(1)} <span className="text-xs font-normal text-slate-400">/ 10</span></span>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function ScoreGauge({ score, compact = false }: ScoreGaugeProps) 
       {/* Sub-scores grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {items.map(item => (
-          <div key={item.label} className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/60 space-y-1">
+          <div key={item.label} className="bg-slate-950 p-3 rounded-xl border border-slate-800/80 space-y-1">
             <div className="flex justify-between text-xs font-medium text-slate-300">
               <span>{item.label}</span>
               <span className="font-bold text-slate-100">{item.value.toFixed(1)}/10</span>
@@ -80,11 +80,11 @@ export default function ScoreGauge({ score, compact = false }: ScoreGaugeProps) 
         ))}
       </div>
 
-      {/* Transparency Note */}
-      <div className="flex items-start gap-2 pt-2 text-[11px] text-slate-400 bg-slate-950 p-2.5 rounded-xl border border-slate-800/80">
+      {/* Clear Disclaimer */}
+      <div className="flex items-start gap-2 pt-2 text-[11px] text-slate-400 bg-slate-950 p-3 rounded-xl border border-slate-800">
         <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <span>
-          <strong>Aviso de Transparência:</strong> Esta nota é uma estimativa calculada com base nas informações disponibilizadas pelo anúncio. Não substitui vistoria física, consulta de débitos ou inspeção mecânica.
+          <strong>Importante:</strong> Esta nota é uma estimativa calculada com base nos dados disponibilizados pelo vendedor e nos valores médios praticados no mercado. Recomendamos realizar vistoria cautelar e inspeção mecânica prévia.
         </span>
       </div>
     </div>

@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { mockCarAds } from '../../../lib/data/mockCars';
 import { analyzeCarPrice } from '../../../lib/engine/priceAnalyzer';
 import { evaluateCarAd } from '../../../lib/engine/aiEvaluator';
@@ -20,14 +19,14 @@ import {
   CheckCircle2,
   AlertTriangle,
   Info,
-  Car,
   ChevronLeft,
   Share2,
   Calendar,
   Gauge,
   Fuel,
   Cog,
-  Zap,
+  TrendingDown,
+  TrendingUp,
 } from 'lucide-react';
 
 export default function CarDetailPage({ params }: { params: { id: string } }) {
@@ -63,14 +62,14 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Back Navigation Button */}
+      {/* Back Navigation Bar */}
       <div className="flex items-center justify-between">
         <Link
           href="/busca"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-800 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-800 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
-          <span>Voltar aos resultados</span>
+          <span>Voltar para busca</span>
         </Link>
 
         <div className="flex items-center gap-2">
@@ -101,14 +100,14 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      {/* Top Banner Title & Main Specs */}
+      {/* Title & Location Header */}
       <div className="space-y-2">
         <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
           <span className="bg-brand-600/20 text-brand-300 border border-brand-500/30 px-2.5 py-1 rounded-lg">
             {ad.brand}
           </span>
-          <span className="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">
-            Fonte: {ad.source}
+          <span className="bg-slate-800 text-slate-200 px-2.5 py-1 rounded-lg">
+            Anúncio publicado em: {ad.source}
           </span>
           <span className="text-slate-400 flex items-center gap-1">
             <MapPin className="w-3.5 h-3.5" />
@@ -120,12 +119,11 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
         <p className="text-sm text-slate-400">{ad.version}</p>
       </div>
 
-      {/* Main Grid: Gallery + Buying Action Card */}
+      {/* Main Grid: Gallery + Purchasing Action Box */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Gallery Section */}
         <div className="lg:col-span-2 space-y-3">
-          {/* Main Large Image */}
-          <div className="relative aspect-[16/10] w-full rounded-3xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl">
+          <div className="relative aspect-[16/10] w-full rounded-3xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl">
             <Image
               src={ad.images[activeImageIndex] || ad.images[0]}
               alt={ad.title}
@@ -135,7 +133,6 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
             />
           </div>
 
-          {/* Thumbnails */}
           {ad.images.length > 1 && (
             <div className="flex items-center gap-3 overflow-x-auto pb-1">
               {ad.images.map((img, idx) => (
@@ -153,17 +150,38 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
           )}
         </div>
 
-        {/* Buying Action Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-2xl flex flex-col justify-between">
+        {/* Action Box: Price & Direct Link */}
+        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl flex flex-col justify-between">
           <div className="space-y-4">
             <div className="space-y-1">
-              <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Preço do Anúncio</span>
+              <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Preço Solicitado</span>
               <div className="text-3xl sm:text-4xl font-black text-white tracking-tight">
                 {formatBRL(ad.price)}
               </div>
-              <p className="text-xs text-emerald-400 font-bold">
-                Média do mercado: {formatBRL(priceAnalysis.marketAverage)}
-              </p>
+
+              {/* Explicit Tabela FIPE Benchmark */}
+              <div className="pt-2">
+                <div className="bg-slate-950 p-3 rounded-2xl border border-slate-800 text-xs space-y-1">
+                  <div className="flex justify-between items-center text-slate-400">
+                    <span>Tabela FIPE oficial:</span>
+                    <strong className="text-white">{formatBRL(priceAnalysis.fipePrice)}</strong>
+                  </div>
+                  <div className="flex justify-between items-center font-bold">
+                    <span>Comparativo FIPE:</span>
+                    {priceAnalysis.fipeDifference < 0 ? (
+                      <span className="text-emerald-400 flex items-center gap-1">
+                        <TrendingDown className="w-3.5 h-3.5" />
+                        {formatBRL(Math.abs(priceAnalysis.fipeDifference))} abaixo
+                      </span>
+                    ) : (
+                      <span className="text-amber-400 flex items-center gap-1">
+                        <TrendingUp className="w-3.5 h-3.5" />
+                        {formatBRL(priceAnalysis.fipeDifference)} acima
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Price Spectrum Bar */}
@@ -201,7 +219,7 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            {/* Seller Info */}
+            {/* Seller info */}
             <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-xs space-y-1">
               <div className="flex items-center justify-between font-bold text-slate-200">
                 <span className="flex items-center gap-1">
@@ -212,50 +230,42 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
                   {ad.seller.type}
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400">Anúncio publicado em {ad.source}</p>
+              <p className="text-[11px] text-slate-400">Anúncio veiculado no {ad.source}</p>
             </div>
           </div>
 
-          {/* Primary CTA Button: Ver anúncio no site de origem */}
+          {/* INSTANT DIRECT EXTERNAL LINK CTA */}
           <div className="space-y-2 pt-2">
             <a
               href={ad.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-500 hover:from-brand-500 hover:to-cyan-400 text-white font-extrabold text-base shadow-xl shadow-brand-600/30 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
+              className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-base shadow-xl shadow-brand-600/30 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
             >
-              <span>Ver anúncio original no {ad.source}</span>
-              <ExternalLink className="w-4 h-4" />
+              <span>Abrir anúncio original no {ad.source}</span>
+              <ExternalLink className="w-5 h-5" />
             </a>
             <p className="text-[10px] text-center text-slate-400">
-              Você será redirecionado para a plataforma oficial que hospeda o anúncio.
+              Acesso direto instantâneo à página do vendedor no {ad.source}.
             </p>
           </div>
         </div>
       </div>
 
-      {/* AI Analysis Section */}
+      {/* Analysis Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left 2 Cols: Description Evaluation & Positive/Attention Points */}
         <div className="lg:col-span-2 space-y-6">
-          {/* AI Score Breakdown Gauge */}
           <ScoreGauge score={aiScore} />
 
-          {/* AI Description Points Box */}
           <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-6">
             <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
-              <Zap className="w-5 h-5 text-brand-400" />
-              <div>
-                <h3 className="font-extrabold text-base text-white">Análise Inteligente da Descrição</h3>
-                <p className="text-xs text-slate-400">Processamento textual automático do anúncio disponibilizado</p>
-              </div>
+              <h3 className="font-extrabold text-base text-white">Análise da Descrição do Vendedor</h3>
             </div>
 
-            {/* Positive Points List */}
             <div className="space-y-3">
               <h4 className="text-xs font-extrabold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" />
-                Pontos Positivos Identificados ({aiScore.positivePoints.length})
+                Destaques Positivos Mencionados ({aiScore.positivePoints.length})
               </h4>
               <ul className="space-y-2 text-xs text-slate-200">
                 {aiScore.positivePoints.map((point, idx) => (
@@ -267,11 +277,10 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
               </ul>
             </div>
 
-            {/* Attention Points List */}
             <div className="space-y-3">
               <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                 <AlertTriangle className="w-4 h-4" />
-                Pontos de Atenção ({aiScore.attentionPoints.length})
+                Pontos de Atenção & Omissões ({aiScore.attentionPoints.length})
               </h4>
               <ul className="space-y-2 text-xs text-slate-200">
                 {aiScore.attentionPoints.map((point, idx) => (
@@ -283,50 +292,50 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
               </ul>
             </div>
 
-            {/* Strict Data Transparency Box */}
             <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800/80 space-y-2 text-xs">
               <div className="flex items-center gap-2 text-slate-300 font-bold">
                 <Info className="w-4 h-4 text-cyan-400" />
-                <span>Transparência de Informações</span>
+                <span>Transparência da Informação</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
                   <span className="text-[10px] font-extrabold text-brand-400 uppercase block mb-1">DADO INFORMADO PELO ANÚNCIO</span>
                   <p className="text-[11px] text-slate-300">
-                    Preço, ano, quilometragem, fotos e texto disponibilizados diretamente pelo vendedor no {ad.source}.
+                    Preço, ano, quilometragem, fotos e texto fornecidos diretamente no {ad.source}.
                   </p>
                 </div>
-                <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] font-extrabold text-emerald-400 uppercase block mb-1">ANÁLISE / ESTIMATIVA DO SISTEMA</span>
+                <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] font-extrabold text-emerald-400 uppercase block mb-1">ESTIMATIVA DO SISTEMA</span>
                   <p className="text-[11px] text-slate-300">
-                    Média de mercado, desvio de preço, nota do veículo (0-10) e extração sintática de pontos de atenção.
+                    Comparativo com Tabela FIPE, média de mercado e análise de pontos positivos/atenção.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Description Text */}
             <div className="space-y-2 pt-2 border-t border-slate-800">
-              <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Texto Original do Anúncio</h4>
-              <p className="text-xs text-slate-300 leading-relaxed bg-slate-950 p-4 rounded-xl border border-slate-800/80 font-mono">
+              <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Texto do Anúncio</h4>
+              <p className="text-xs text-slate-300 leading-relaxed bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono">
                 &ldquo;{ad.description}&rdquo;
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right 1 Col: Technical Specs & Price History */}
         <div className="space-y-6">
-          {/* Specs List */}
           <div className="bg-slate-900 p-5 rounded-3xl border border-slate-800 space-y-4">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider border-b border-slate-800 pb-3">
-              Ficha Técnica
+              Especificações Técnicas
             </h3>
 
             <div className="space-y-2.5 text-xs">
               <div className="flex justify-between py-1 border-b border-slate-800/60">
                 <span className="text-slate-400">Marca / Modelo</span>
                 <span className="font-bold text-white">{ad.brand} {ad.model}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-800/60">
+                <span className="text-slate-400">Tabela FIPE</span>
+                <span className="font-bold text-emerald-400">{formatBRL(ad.fipePrice)}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-800/60">
                 <span className="text-slate-400">Versão</span>
@@ -362,9 +371,8 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            {/* Features Tags */}
             <div className="pt-2 space-y-2">
-              <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Itens e Opcionais</h4>
+              <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Itens Mencionados</h4>
               <div className="flex flex-wrap gap-1.5">
                 {ad.features.map((feat, idx) => (
                   <span key={idx} className="bg-slate-950 text-slate-300 text-[11px] font-medium px-2.5 py-1 rounded-lg border border-slate-800">
@@ -375,7 +383,6 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          {/* Price Evolution Chart */}
           <PriceHistoryChart modelName={`${ad.brand} ${ad.model}`} />
         </div>
       </div>

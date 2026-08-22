@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FilterState } from '../lib/types';
-import { SlidersHorizontal, RotateCcw, DollarSign, Calendar, Gauge, Car, Shield, Fuel, Cog } from 'lucide-react';
+import { SlidersHorizontal, RotateCcw, DollarSign, Calendar, Gauge, Car, Shield, Fuel, Cog, TrendingDown } from 'lucide-react';
 
 interface FilterSidebarProps {
   filters: FilterState;
@@ -25,7 +25,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
   };
 
   return (
-    <aside className="w-full bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-6 text-slate-200">
+    <aside className="w-full bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-6 text-slate-200">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center gap-2">
@@ -39,6 +39,23 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Limpar</span>
         </button>
+      </div>
+
+      {/* SPECIAL FILTER: ABAIXO DA TABELA FIPE */}
+      <div className="bg-emerald-950/40 border border-emerald-500/30 p-3.5 rounded-xl space-y-2">
+        <label className="flex items-center justify-between cursor-pointer">
+          <div className="flex items-center gap-2">
+            <TrendingDown className="w-4 h-4 text-emerald-400" />
+            <span className="text-xs font-extrabold text-emerald-300">Apenas Abaixo da FIPE</span>
+          </div>
+          <input
+            type="checkbox"
+            checked={!!filters.onlyBelowFipe}
+            onChange={e => updateField('onlyBelowFipe', e.target.checked || undefined)}
+            className="w-4 h-4 rounded border-slate-700 text-emerald-500 focus:ring-emerald-500 bg-slate-900"
+          />
+        </label>
+        <p className="text-[11px] text-slate-400">Exibe somente veículos com preço inferior à Tabela FIPE oficial.</p>
       </div>
 
       {/* Marca */}
@@ -193,7 +210,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
         </select>
       </div>
 
-      {/* Anunciante (Particular / Loja) */}
+      {/* Anunciante */}
       <div className="space-y-2">
         <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5 uppercase tracking-wider">
           <Shield className="w-4 h-4 text-slate-400" />

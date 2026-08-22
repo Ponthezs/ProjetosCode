@@ -5,7 +5,7 @@ export const mockCarAds: CarAd[] = [
     id: 'car-01',
     source: 'Webmotors',
     sourceUrl: 'https://www.webmotors.com.br/comprar/toyota/corolla/20-vvt-ie-flex-xei-direct-shift/2022/10001',
-    title: 'Toyota Corolla XEi 2.0 Flex Automatico',
+    title: 'Toyota Corolla XEi 2.0 Flex Automático',
     brand: 'Toyota',
     model: 'Corolla',
     version: 'XEi 2.0 Flex Direct Shift',
@@ -13,6 +13,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 48000,
     price: 119900,
+    fipePrice: 123500,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Auto Premium Moema', type: 'Loja', verified: true },
     images: [
@@ -44,6 +45,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 42000,
     price: 112900,
+    fipePrice: 123500,
     location: { city: 'Campinas', state: 'SP' },
     seller: { name: 'Carlos Eduardo M.', type: 'Particular', verified: true },
     images: [
@@ -74,6 +76,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 28000,
     price: 139900,
+    fipePrice: 144200,
     location: { city: 'Belo Horizonte', state: 'MG' },
     seller: { name: 'BH Motors Select', type: 'Loja', verified: true },
     images: [
@@ -104,6 +107,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2021,
     mileage: 52000,
     price: 129900,
+    fipePrice: 133000,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Jardins Auto Concept', type: 'Loja', verified: true },
     images: [
@@ -126,7 +130,7 @@ export const mockCarAds: CarAd[] = [
     id: 'car-05',
     source: 'OLX',
     sourceUrl: 'https://rj.olx.com.br/autos-e-pecas/honda-civic-exl-2020-10005',
-    title: 'Honda Civic EXL 2.0 Flex Automatico 2020',
+    title: 'Honda Civic EXL 2.0 Flex Automático 2020',
     brand: 'Honda',
     model: 'Civic',
     version: 'EXL 2.0 Flex',
@@ -134,12 +138,13 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2020,
     mileage: 65000,
     price: 104900,
+    fipePrice: 108500,
     location: { city: 'Rio de Janeiro', state: 'RJ' },
     seller: { name: 'Fernando S.', type: 'Particular', verified: false },
     images: [
       'https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?auto=format&fit=crop&w=1200&q=80'
     ],
-    description: 'Civic EXL 2020 em ótimo estado. Painel digital TFT, ar digital dual zone, multimidia 7 polegadas com Android Auto e Apple CarPlay. Pneus bons, documento em dia. Aceito troca de menor valor.',
+    description: 'Civic EXL 2020 em ótimo estado. Painel digital TFT, ar digital dual zone, multimídia 7 polegadas com Android Auto e Apple CarPlay. Pneus bons, documento em dia. Aceito troca de menor valor.',
     fuel: 'Flex',
     transmission: 'CVT',
     engine: '2.0 i-VTEC',
@@ -163,6 +168,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 31000,
     price: 124900,
+    fipePrice: 128000,
     location: { city: 'Curitiba', state: 'PR' },
     seller: { name: 'Eurocar Select', type: 'Loja', verified: true },
     images: [
@@ -193,6 +199,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 44000,
     price: 108900,
+    fipePrice: 111500,
     location: { city: 'Porto Alegre', state: 'RS' },
     seller: { name: 'Sul Autos', type: 'Loja', verified: true },
     images: [
@@ -222,6 +229,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2024,
     mileage: 16000,
     price: 92900,
+    fipePrice: 96000,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Viamar Concessionária', type: 'Loja', verified: true },
     images: [
@@ -236,7 +244,7 @@ export const mockCarAds: CarAd[] = [
     bodyType: 'Hatch',
     color: 'Vermelho Carmim',
     doors: 4,
-    features: ['Estacionamento Automático', 'Alerta Ponto Cego', 'Wi-Fi OnStar', 'Garantia de Fábrica', 'Semimovo'],
+    features: ['Estacionamento Automático', 'Alerta Ponto Cego', 'Wi-Fi OnStar', 'Garantia de Fábrica', 'Seminovo'],
     publishedAt: '2026-08-20T18:30:00Z',
     updatedAt: '2026-08-21T11:00:00Z'
   },
@@ -244,7 +252,7 @@ export const mockCarAds: CarAd[] = [
     id: 'car-09',
     source: 'OLX',
     sourceUrl: 'https://sp.olx.com.br/chevrolet-onix-ltz-2023-10009',
-    title: 'Chevrolet Onix LTZ 1.0 Turbo Flex Automatico 2023',
+    title: 'Chevrolet Onix LTZ 1.0 Turbo Flex Automático 2023',
     brand: 'Chevrolet',
     model: 'Onix',
     version: 'LTZ 1.0 Turbo Flex',
@@ -252,6 +260,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 35000,
     price: 81900,
+    fipePrice: 84500,
     location: { city: 'Santo André', state: 'SP' },
     seller: { name: 'Lucas P.', type: 'Particular', verified: true },
     images: [
@@ -281,6 +290,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 46000,
     price: 128900,
+    fipePrice: 134000,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Metropolis Jeep', type: 'Loja', verified: true },
     images: [
@@ -311,6 +321,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 29000,
     price: 147900,
+    fipePrice: 152500,
     location: { city: 'Brasília', state: 'DF' },
     seller: { name: 'Capital Jeep Motors', type: 'Loja', verified: true },
     images: [
@@ -340,6 +351,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 27000,
     price: 135900,
+    fipePrice: 139000,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Hyundai HMB Caoa', type: 'Loja', verified: true },
     images: [
@@ -369,6 +381,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 22000,
     price: 84900,
+    fipePrice: 87900,
     location: { city: 'São José dos Campos', state: 'SP' },
     seller: { name: 'Mariana R.', type: 'Particular', verified: true },
     images: [
@@ -398,6 +411,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2024,
     mileage: 14000,
     price: 118900,
+    fipePrice: 122500,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Sinal Fiat Moema', type: 'Loja', verified: true },
     images: [
@@ -427,6 +441,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 38000,
     price: 99900,
+    fipePrice: 103000,
     location: { city: 'Santos', state: 'SP' },
     seller: { name: 'Litoral Auto Import', type: 'Loja', verified: true },
     images: [
@@ -456,6 +471,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 41000,
     price: 109900,
+    fipePrice: 113200,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'VW Carrera Moema', type: 'Loja', verified: true },
     images: [
@@ -485,6 +501,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 26000,
     price: 119900,
+    fipePrice: 124000,
     location: { city: 'Sorocaba', state: 'SP' },
     seller: { name: 'Renato B.', type: 'Particular', verified: true },
     images: [
@@ -514,6 +531,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2021,
     mileage: 45000,
     price: 219900,
+    fipePrice: 226500,
     location: { city: 'São Paulo', state: 'SP' },
     seller: { name: 'Grand Brasil BMW Premium', type: 'Loja', verified: true },
     images: [
@@ -544,6 +562,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2023,
     mileage: 21000,
     price: 189900,
+    fipePrice: 195000,
     location: { city: 'Campinas', state: 'SP' },
     seller: { name: 'BYD Dahruj', type: 'Loja', verified: true },
     images: [
@@ -573,6 +592,7 @@ export const mockCarAds: CarAd[] = [
     modelYear: 2022,
     mileage: 58000,
     price: 249900,
+    fipePrice: 258000,
     location: { city: 'Ribeirão Preto', state: 'SP' },
     seller: { name: 'Agro Motors', type: 'Loja', verified: true },
     images: [

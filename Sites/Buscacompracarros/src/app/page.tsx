@@ -6,13 +6,12 @@ import Link from 'next/link';
 import CarCard from '../components/CarCard';
 import { mockCarAds } from '../lib/data/mockCars';
 import { analyzeCarPrice, calculateDealOpportunity } from '../lib/engine/priceAnalyzer';
-import { Search, Flame, Sparkles, ShieldCheck, ArrowRight, DollarSign, Calendar, Car, Cog, Zap } from 'lucide-react';
+import { Search, Flame, ArrowRight, ShieldCheck, Zap, TrendingDown } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Quick filter dropdowns state on home
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedMaxPrice, setSelectedMaxPrice] = useState('');
   const [selectedMinYear, setSelectedMinYear] = useState('');
@@ -39,7 +38,6 @@ export default function HomePage() {
     router.push(`/busca?${params.toString()}`);
   };
 
-  // Top 3 Hot Deals for showcase
   const hotDeals = mockCarAds
     .map(ad => {
       const priceAnalysis = analyzeCarPrice(ad, mockCarAds);
@@ -53,22 +51,22 @@ export default function HomePage() {
   return (
     <div className="space-y-16 py-4 sm:py-8">
       {/* Hero Section */}
-      <section className="text-center space-y-8 max-w-4xl mx-auto pt-4 sm:pt-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-bold shadow-inner">
-          <Sparkles className="w-4 h-4" />
-          <span>Pesquisa Inteligente & Avaliação por IA</span>
+      <section className="text-center space-y-8 max-w-4xl mx-auto pt-4 sm:pt-8">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-bold">
+          <TrendingDown className="w-4 h-4 text-emerald-400" />
+          <span>Comparativo com Tabela FIPE & Acesso Direto aos Anúncios</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-          Encontre seu <span className="bg-gradient-to-r from-brand-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">próximo carro</span> com a melhor oportunidade
+          Encontre seu <span className="text-brand-400">próximo carro</span> pelo melhor preço do mercado
         </h1>
 
         <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Pesquisamos anúncios de sites e marketplaces conhecidos em uma única interface, analisamos os preços e avaliamos as descrições para você.
+          Pesquise em marketplaces automotivos em um só lugar, compare com a Tabela FIPE e acesse o link original do vendedor em 1 clique.
         </p>
 
         {/* Centralized Search Box */}
-        <form onSubmit={handleSearchSubmit} className="bg-slate-900/90 p-4 sm:p-5 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
+        <form onSubmit={handleSearchSubmit} className="bg-slate-900 p-4 sm:p-5 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
           <div className="relative">
             <input
               type="text"
@@ -134,10 +132,9 @@ export default function HomePage() {
             </select>
           </div>
 
-          {/* Submit CTA Button */}
           <button
             type="submit"
-            className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:from-brand-500 hover:to-cyan-400 text-white font-black text-base shadow-xl shadow-brand-500/25 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
+            className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black text-base shadow-xl shadow-brand-600/25 flex items-center justify-center gap-2 transition-all"
           >
             <Search className="w-5 h-5" />
             <span>Buscar Carros Agora</span>
@@ -146,7 +143,7 @@ export default function HomePage() {
 
         {/* Quick Example Searches */}
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-slate-400">Exemplos populares de busca:</p>
+          <p className="text-xs font-semibold text-slate-400">Exemplos de busca rápida:</p>
           <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
             {searchExamples.map((ex, idx) => (
               <button
@@ -155,7 +152,7 @@ export default function HomePage() {
                   setSearchQuery(ex);
                   router.push(`/busca?search=${encodeURIComponent(ex)}`);
                 }}
-                className="bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-full border border-slate-800 hover:border-slate-700 transition-colors"
+                className="bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-full border border-slate-800 transition-colors"
               >
                 {ex}
               </button>
@@ -165,26 +162,26 @@ export default function HomePage() {
       </section>
 
       {/* Market Statistics Bar */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="bg-slate-900 border border-slate-800 rounded-3xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-brand-400">100% Legais</span>
-          <span className="text-xs text-slate-400 font-medium">Fontes & Feeds Autorizados</span>
+          <span className="block text-2xl sm:text-3xl font-black text-emerald-400">Tabela FIPE</span>
+          <span className="text-xs text-slate-400 font-medium">Benchmark em Tempo Real</span>
         </div>
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-emerald-400">R$ 4.600</span>
-          <span className="text-xs text-slate-400 font-medium">Economia Média Encontrada</span>
+          <span className="block text-2xl sm:text-3xl font-black text-brand-400">1-Clique</span>
+          <span className="text-xs text-slate-400 font-medium">Link Direto para o Anúncio</span>
         </div>
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-amber-400">IA 0-10</span>
-          <span className="text-xs text-slate-400 font-medium">Score Computacional</span>
+          <span className="block text-2xl sm:text-3xl font-black text-amber-400">0 a 10</span>
+          <span className="text-xs text-slate-400 font-medium">Avaliação AutoBusca</span>
         </div>
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-purple-400">Deduplicado</span>
-          <span className="text-xs text-slate-400 font-medium">Sem Anúncios Repetidos</span>
+          <span className="block text-2xl sm:text-3xl font-black text-purple-400">Sem Duplicatas</span>
+          <span className="text-xs text-slate-400 font-medium">Busca Unificada Limpa</span>
         </div>
       </section>
 
-      {/* Hot Deals Showcase ("Melhores Oportunidades") */}
+      {/* Hot Deals Showcase */}
       <section className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
@@ -192,8 +189,8 @@ export default function HomePage() {
               <Flame className="w-6 h-6 fill-current" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-black text-white">🔥 Melhores Oportunidades do Dia</h2>
-              <p className="text-xs sm:text-sm text-slate-400">Anúncios com preço significativamente abaixo da média de mercado</p>
+              <h2 className="text-xl sm:text-2xl font-black text-white">🔥 Melhores Oportunidades</h2>
+              <p className="text-xs sm:text-sm text-slate-400">Carros com preço abaixo da Tabela FIPE e da média de mercado</p>
             </div>
           </div>
 
@@ -213,69 +210,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Brand Value Differential Banner */}
-      <section className="bg-gradient-to-r from-slate-900 via-slate-900 to-brand-950 border border-slate-800 rounded-3xl p-8 space-y-6">
+      {/* Value Proposition */}
+      <section className="bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-6">
         <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-500/30">
-            <Zap className="w-3.5 h-3.5" />
-            <span>O grande diferencial do AutoBusca</span>
-          </div>
-
           <h3 className="text-2xl sm:text-3xl font-black text-white italic">
             &ldquo;Nós encontramos os carros. Você descobre quais realmente valem a pena.&rdquo;
           </h3>
 
           <p className="text-sm text-slate-300 leading-relaxed">
-            Cruzamos preço, ano, quilometragem, versão, equipamentos e analisamos semanticamente as descrições dos anúncios para destacar possíveis boas compras com clareza e transparência.
+            Comparamos o preço de cada anúncio diretamente com a Tabela FIPE e com outros anúncios do mesmo modelo para ajudar você a decidir rápido e acessar o link original sem perda de tempo.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-          <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-            <div className="text-emerald-400 font-bold text-sm">🟢 Análise de Preço</div>
-            <p className="text-xs text-slate-400">Comparação em tempo real com a média real de mercado.</p>
-          </div>
-          <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-            <div className="text-amber-400 font-bold text-sm">⭐ Score Inteligente</div>
-            <p className="text-xs text-slate-400">Nota de 0 a 10 calculada em 6 fatores essenciais.</p>
-          </div>
-          <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-            <div className="text-cyan-400 font-bold text-sm">📝 Análise da Descrição</div>
-            <p className="text-xs text-slate-400">Extração de pontos positivos e alertas de omissão no texto.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* How it works summary */}
-      <section className="text-center space-y-6">
-        <h2 className="text-xl sm:text-2xl font-black text-white">Como Funciona a Busca Simplificada</h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 text-left">
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
-            <span className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 font-black text-sm flex items-center justify-center">1</span>
-            <h4 className="font-bold text-sm text-white">Pesquise o Carro</h4>
-            <p className="text-xs text-slate-400">Informe modelo, versão, ano ou faixa de preço desejada.</p>
-          </div>
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
-            <span className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 font-black text-sm flex items-center justify-center">2</span>
-            <h4 className="font-bold text-sm text-white">Encontra Anúncios</h4>
-            <p className="text-xs text-slate-400">Reúne dados de múltiplos marketplaces parceiros.</p>
-          </div>
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
-            <span className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 font-black text-sm flex items-center justify-center">3</span>
-            <h4 className="font-bold text-sm text-white">Compara Preços</h4>
-            <p className="text-xs text-slate-400">Calcula a média real e indica a faixa de desconto.</p>
-          </div>
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
-            <span className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 font-black text-sm flex items-center justify-center">4</span>
-            <h4 className="font-bold text-sm text-white">Análise da IA</h4>
-            <p className="text-xs text-slate-400">Identifica histórico de revisões, pontos positivos e alertas.</p>
-          </div>
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
-            <span className="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 font-black text-sm flex items-center justify-center">5</span>
-            <h4 className="font-bold text-sm text-white">Abra o Anúncio</h4>
-            <p className="text-xs text-slate-400">Acesse diretamente o site de origem com total segurança.</p>
-          </div>
         </div>
       </section>
     </div>
