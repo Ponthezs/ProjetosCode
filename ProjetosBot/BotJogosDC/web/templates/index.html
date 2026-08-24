@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo — Bot Game Deals</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <span>🎮</span>
+        <span>Game Deals Bot — Painel Admin</span>
+      </div>
+      <div>
+        <button id="btnSync" class="btn-primary" onclick="triggerManualSync()">
+          🔄 Sincronizar Lojas Agora
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="card">
+        <div class="card-stat-label">🎮 Jogos Monitorados</div>
+        <div class="card-stat-val" style="color: var(--accent-blue);">{{ stats.total_monitored_games }}</div>
+      </div>
+      <div class="card">
+        <div class="card-stat-label">🔥 Promoções Ativas</div>
+        <div class="card-stat-val" style="color: var(--accent-orange);">{{ stats.active_deals_count }}</div>
+      </div>
+      <div class="card">
+        <div class="card-stat-label">🎁 Jogos Grátis</div>
+        <div class="card-stat-val" style="color: var(--accent-green);">{{ stats.free_games_count }}</div>
+      </div>
+      <div class="card">
+        <div class="card-stat-label">📢 Ofertas Publicadas</div>
+        <div class="card-stat-val" style="color: var(--accent-purple);">{{ stats.published_offers_count }}</div>
+      </div>
+      <div class="card">
+        <div class="card-stat-label">🏪 Lojas Ativas</div>
+        <div class="card-stat-val">{{ stats.active_stores_count }}/{{ stats.total_stores_count }}</div>
+      </div>
+    </div>
+
+    <!-- Free Games Section -->
+    <h2 class="section-title">🎁 Jogos Gratuitos no Momento</h2>
+    {% if free_games %}
+    <div class="free-games-grid">
+      {% for game in free_games %}
+      <div class="game-card">
+        {% if game.image_url %}
+        <img src="{{ game.image_url }}" alt="{{ game.title }}" loading="lazy">
+        {% else %}
+        <div style="height: 160px; background: #334155; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🎮</div>
+        {% endif %}
+        <div class="game-card-body">
+          <div>
+            <span class="badge-free">GRÁTIS</span>
+            <div class="game-card-title">{{ game.title }}</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Loja: <strong>{{ game.store }}</strong></div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">De: <del>R$ {{ "%.2f"|format(game.normal_price) }}</del> ➔ <strong>GRÁTIS</strong></div>
+          </div>
+          <div style="margin-top: 14px;">
+            <a href="{{ game.url }}" target="_blank" class="btn-primary" style="display: block; text-align: center; text-decoration: none; padding: 8px;">Resgatar na Loja</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card" style="margin-bottom: 35px; color: var(--text-muted);">
+      Nenhum jogo 100% gratuito disponível no momento.
+    </div>
+    {% endif %}
+
+    <!-- Main Content Split Grid -->
+    <div class="grid-2">
+
+      <!-- Left: Recent Deals Table -->
+      <div class="card">
+        <h2 class="section-title">🔥 Principais Ofertas Ativas</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Jogo</th>
+                <th>Loja</th>
+                <th>De</th>
+                <th>Por</th>
+                <th>Desconto</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for deal in deals %}
+              <tr>
+                <td><strong><a href="{{ deal.url }}" target="_blank" style="color: var(--text-main); text-decoration: none;">{{ deal.title }}</a></strong></td>
+                <td>{{ deal.store }}</td>
+                <td><del>R$ {{ "%.2f"|format(deal.normal_price) }}</del></td>
+                <td><strong style="color: var(--accent-green);">R$ {{ "%.2f"|format(deal.sale_price) }}</strong></td>
+                <td><span style="background: rgba(239, 68, 68, 0.2); color: var(--accent-red); padding: 2px 6px; border-radius: 4px; font-weight: 700;">-{{ "%.0f"|format(deal.discount) }}%</span></td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--text-muted);">Nenhuma promoção encontrada.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right: Store Status & Settings -->
+      <div>
+        <!-- Store Status Table -->
+        <div class="card" style="margin-bottom: 25px;">
+          <h2 class="section-title">🏪 Status das Lojas</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Loja</th>
+                  <th>Status</th>
+                  <th>Ofertas</th>
+                  <th>Grátis</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for store in stats.stores %}
+                <tr>
+                  <td><strong>{{ store.store_name }}</strong></td>
+                  <td>
+                    {% if store.status == "OK" %}
+                    <span class="badge-status-ok">✅ OK</span>
+                    {% else %}
+                    <span class="badge-status-err">❌ ERRO</span>
+                    {% endif %}
+                  </td>
+                  <td>{{ store.items_found }}</td>
+                  <td>{{ store.free_games_found }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Global Settings Form -->
+        <div class="card">
+          <h2 class="section-title">⚙️ Configurações do Sistema</h2>
+          <form id="settingsForm" onsubmit="saveSettings(event)">
+            <div class="form-group">
+              <label for="check_interval">Intervalo de Verificação (Minutos):</label>
+              <input type="number" id="check_interval" name="check_interval" value="{{ settings.CHECK_INTERVAL_MINUTES }}" min="5" max="1440">
+            </div>
+
+            <div class="form-group">
+              <label for="min_discount">Desconto Mínimo Padrão (%):</label>
+              <input type="number" id="min_discount" name="min_discount" value="{{ settings.MIN_DISCOUNT }}" min="10" max="95">
+            </div>
+
+            <div class="form-group">
+              <label for="extreme_discount">Limiar de Oferta Imperdível (%):</label>
+              <input type="number" id="extreme_discount" name="extreme_discount" value="{{ settings.EXTREME_DISCOUNT }}" min="50" max="99">
+            </div>
+
+            <div class="form-group">
+              <label for="preferred_currency">Moeda Preferencial:</label>
+              <select id="preferred_currency" name="preferred_currency">
+                <option value="BRL" {% if settings.PREFERRED_CURRENCY == 'BRL' %}selected{% endif %}>BRL (R$)</option>
+                <option value="USD" {% if settings.PREFERRED_CURRENCY == 'USD' %}selected{% endif %}>USD ($)</option>
+                <option value="EUR" {% if settings.PREFERRED_CURRENCY == 'EUR' %}selected{% endif %}>EUR (€)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Salvar Alterações</button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    async function triggerManualSync() {
+      const btn = document.getElementById("btnSync");
+      btn.disabled = true;
+      btn.innerText = "🔄 Sincronizando...";
+      try {
+        const resp = await fetch("/api/sync", { method: "POST" });
+        const data = await resp.json();
+        alert(data.message || "Sincronização iniciada com sucesso!");
+      } catch (err) {
+        alert("Erro ao iniciar sincronização: " + err);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "🔄 Sincronizar Lojas Agora";
+      }
+    }
+
+    async function saveSettings(e) {
+      e.preventDefault();
+      const form = document.getElementById("settingsForm");
+      const formData = new FormData(form);
+      try {
+        const resp = await fetch("/api/settings", {
+          method: "POST",
+          body: formData
+        });
+        const data = await resp.json();
+        alert(data.message || "Configurações salvas com sucesso!");
+      } catch (err) {
+        alert("Erro ao salvar configurações: " + err);
+      }
+    }
+  </script>
+</body>
+</html>
