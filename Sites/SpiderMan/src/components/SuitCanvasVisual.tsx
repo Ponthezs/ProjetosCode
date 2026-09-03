@@ -100,7 +100,7 @@ export const SuitCanvasVisual: React.FC<SuitCanvasVisualProps> = ({
 
       if (imgRef.current && imgRef.current.complete) {
         const img = imgRef.current;
-        const targetH = height * 0.72;
+        const targetH = height * 0.82;
         const aspect = img.width / img.height;
         const targetW = targetH * aspect;
 
@@ -111,25 +111,58 @@ export const SuitCanvasVisual: React.FC<SuitCanvasVisualProps> = ({
         ctx.drawImage(img, -targetW / 2, -targetH / 2, targetW, targetH);
         ctx.shadowBlur = 0;
       } else {
-        // Fallback Vector Drawing
-        ctx.beginPath();
-        ctx.ellipse(0, -150, 45, 55, 0, 0, Math.PI * 2);
-        ctx.fillStyle = suit.primaryColor || '#E50914';
-        ctx.fill();
+        // High-Tech Holographic Spider Blueprint (No red mannequin body)
+        ctx.save();
+        ctx.shadowColor = suit.glowColor || 'rgba(0,240,255,0.8)';
+        ctx.shadowBlur = 20;
 
+        // Glowing Spider Symbol Outline
+        ctx.strokeStyle = suit.primaryColor || '#00F0FF';
+        ctx.lineWidth = 3;
+
+        // Spider Head & Thorax
         ctx.beginPath();
-        ctx.moveTo(-30, -100);
-        ctx.lineTo(30, -100);
-        ctx.lineTo(65, -40);
-        ctx.lineTo(45, 70);
-        ctx.lineTo(60, 160);
-        ctx.lineTo(0, 180);
-        ctx.lineTo(-60, 160);
-        ctx.lineTo(-45, 70);
-        ctx.lineTo(-65, -40);
-        ctx.closePath();
-        ctx.fillStyle = suit.primaryColor || '#E50914';
-        ctx.fill();
+        ctx.arc(0, -20, 14, 0, Math.PI * 2);
+        ctx.arc(0, 15, 22, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Spider Legs
+        const drawLeg = (sx: number, sy: number, ex1: number, ey1: number, ex2: number, ey2: number) => {
+          ctx.beginPath();
+          ctx.moveTo(sx, sy);
+          ctx.lineTo(ex1, ey1);
+          ctx.lineTo(ex2, ey2);
+          ctx.stroke();
+        };
+
+        // Top legs
+        drawLeg(10, -25, 45, -60, 65, -90);
+        drawLeg(-10, -25, -45, -60, -65, -90);
+        drawLeg(12, -15, 55, -40, 75, -55);
+        drawLeg(-12, -15, -55, -40, -75, -55);
+
+        // Bottom legs
+        drawLeg(14, 10, 60, 30, 70, 70);
+        drawLeg(-14, 10, -60, 30, -70, 70);
+        drawLeg(12, 25, 45, 60, 55, 100);
+        drawLeg(-12, 25, -45, 60, -55, 100);
+
+        // Animated Laser Scanline
+        const scanY = Math.sin(time * 2) * 110;
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.7)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(-100, scanY);
+        ctx.lineTo(100, scanY);
+        ctx.stroke();
+
+        // Hologram HUD Text
+        ctx.shadowBlur = 0;
+        ctx.font = '10px monospace';
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.8)';
+        ctx.textAlign = 'center';
+        ctx.fillText('HOLOGRAPHIC // SUIT BLUEPRINT', 0, 140);
+        ctx.restore();
       }
 
       ctx.restore();
@@ -145,8 +178,8 @@ export const SuitCanvasVisual: React.FC<SuitCanvasVisualProps> = ({
   }, [suit, isInspecting, rotationAngle, showBackView]);
 
   return (
-    <div className="relative w-full h-full min-h-[420px] sm:min-h-[500px] flex items-center justify-center">
-      <canvas ref={canvasRef} className="w-full h-full max-w-md max-h-[550px]" />
+    <div className="relative w-full h-full min-h-[350px] flex items-center justify-center overflow-hidden">
+      <canvas ref={canvasRef} className="w-full h-full max-w-md max-h-[500px]" />
 
       {/* Render Hotspot Markers if Inspecting */}
       {isInspecting &&

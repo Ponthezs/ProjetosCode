@@ -61,6 +61,11 @@ export const CustomCursor: React.FC = () => {
         <div className="absolute -bottom-1 left-1/2 h-2 w-[1px] -translate-x-1/2 bg-red-500" />
         <div className="absolute top-1/2 -left-1 h-[1px] w-2 -translate-y-1/2 bg-red-500" />
         <div className="absolute top-1/2 -right-1 h-[1px] w-2 -translate-y-1/2 bg-red-500" />
+
+        {/* Spider-Man Face Logo Center Badge */}
+        <div className="absolute inset-0 rounded-full overflow-hidden p-0.5 opacity-80">
+          <img src="/spiderman_face_logo_clean.png" alt="Spider Face" className="w-full h-full object-cover" />
+        </div>
       </motion.div>
 
       {/* Inner Dot */}

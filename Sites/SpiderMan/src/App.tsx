@@ -4,6 +4,7 @@ import { ComicFXOverlay } from './components/ComicFXOverlay';
 import { Navbar } from './components/Navbar';
 import { HeroIntro } from './components/HeroIntro';
 import { SuitGallery } from './components/SuitGallery';
+import { MoviesAndGamesSection } from './components/MoviesAndGamesSection';
 import { SuitInspector } from './components/SuitInspector';
 import { Timeline } from './components/Timeline';
 import { MultiversePortals } from './components/MultiversePortals';
@@ -45,7 +46,7 @@ export function App() {
       { threshold: 0.3 }
     );
 
-    const sections = ['hero-section', 'suits-section', 'timeline-section', 'multiverse-section', 'swing-section', 'compare-section'];
+    const sections = ['hero-section', 'suits-section', 'media-section', 'timeline-section', 'multiverse-section', 'swing-section', 'compare-section'];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -82,6 +83,7 @@ export function App() {
           {/* Main Experience Content Sections */}
           <main className="relative z-10 space-y-16 sm:space-y-24">
             <SuitGallery onInspectSuit={(suit) => setInspectedSuit(suit)} />
+            <MoviesAndGamesSection />
             <Timeline onSelectSuit={handleSelectSuitById} />
             <MultiversePortals onSelectSuit={handleSelectSuitById} />
             <CitySwingScene />

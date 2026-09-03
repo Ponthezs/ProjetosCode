@@ -54,6 +54,11 @@ export const FooterFinale: React.FC<FooterFinaleProps> = ({ onRestart }) => {
           transition={{ delay: 0.9 }}
           className="space-y-4 pt-6"
         >
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-full bg-red-600/20 border-2 border-red-500/50 p-1 shadow-[0_0_25px_rgba(229,9,20,0.8)] animate-pulse">
+              <img src="/spiderman_face_logo_clean.png" alt="Spider Face Logo" className="w-full h-full object-cover" />
+            </div>
+          </div>
           <h3
             className="text-5xl sm:text-7xl font-extrabold uppercase italic tracking-wider text-white"
             style={{ fontFamily: 'impact, sans-serif' }}

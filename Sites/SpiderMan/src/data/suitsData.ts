@@ -2,78 +2,66 @@ import type { Suit, TimelineItem, MultiversePortal } from '../types/suit';
 
 export const SUITS_DATA: Suit[] = [
   {
-    id: 'classic-suit',
+    id: 'raimi-classic-webbed',
     number: '01',
-    name: 'Classic Suit',
-    tagline: 'O Traje Lendário onde tudo começou.',
-    year: '1962',
-    period: 'Primeira Aparição - Amazing Fantasy #15',
-    version: 'Earth-616 Classic',
-    universe: 'Earth-616',
-    origin: 'Criado por Peter Parker com malha reforçada para ocultar a sua identidade após a picada da aranha radioativa.',
-    description: 'O uniforme icônico azul e vermelho desenhado por Steve Ditko. Tornou-se o símbolo definitivo do Homem-Aranha, estabelecendo o padrão visual com a teia estilizada e os disparadores de teia mecânicos.',
+    name: 'Webbed Suit (Sam Raimi 2002)',
+    tagline: 'O Lendário Traje da Trilogia de Tobey Maguire.',
+    year: '2002',
+    period: 'Spider-Man 1 & 2 Movie (Tobey Maguire)',
+    version: 'Earth-96283 Classic Webbed',
+    universe: 'Earth-96283',
+    origin: 'Desenhado e confeccionado por Peter Parker na Nova York cinematográfica de Sam Raimi após a morte do tio Ben.',
+    description: 'Um dos uniformes mais icônicos do cinema mundial. Apresenta teias prateadas em alto relevo 3D moldadas sobre tecido vermelho e azul texturizado, lentes de espelho angular afiadas e teia orgânica.',
     characteristics: [
-      'Cores clássicas vermelho, azul e detalhes em preto',
-      'Máscara com lentes oculares de ajuste de foco',
-      'Disparadores de teia mecânicos duplos no pulso',
-      'Emblema de aranha clássica bordado no peito e nas costas'
+      'Teias prateadas tridimensionais em alto relevo mecânico',
+      'Lentes espelhadas triangulares com armação prateada afiada',
+      'Emblema de aranha clássica prateada no peito e aranha vermelha nas costas',
+      'Disparadores de teia orgânicos integrados nos pulsos'
     ],
     abilities: [
-      'Agilidade acrobática incomparável',
-      'Aderência à superfícies verticais',
-      'Sentido Aranha apurado',
-      'Resistência de impacto amplificada'
+      'Geração de teia orgânica biológica sem recargas',
+      'Força física e resistência de impacto ampliadas',
+      'Sentido Aranha apurado para esquiva de projéteis'
     ],
     technology: [
-      'Fluido de teia sintético de alta resistência mecânica',
-      'Disparadores com seletor de padrão de jato (linha, rede, esfera)',
-      'Rastreadores Aranha de rádio (Spider-Tracers)',
-      'Cinto de utilidades com projetor de sinal aranha'
+      'Tecido sintético militar de alta densidade texturizado',
+      'Lentes de vidro temperado espelhado com reflexo fotônico'
     ],
     trivia: [
-      'Originalmente desenhado com teias sob os braços por Steve Ditko em 1962.',
-      'O tom azul das calças era usado como iluminação para a cor preta nas HQs originais.',
-      'É o traje mais recriado e adaptado da história dos quadrinhos.'
+      'Foi o primeiro traje do Homem-Aranha a usar teias 3D em alto relevo no cinema.',
+      'Tobey Maguire usou teia orgânica diretamente dos pulsos no filme de 2002.'
     ],
-    categories: ['ALL', 'CLASSICS', 'PETER'],
+    categories: ['ALL', 'CLASSICS', 'LIVE-ACTION', 'PETER'],
     primaryColor: '#E50914',
     accentColor: '#0055FF',
-    glowColor: 'rgba(229, 9, 20, 0.6)',
-    badgeText: 'ORIGIN 1962',
+    glowColor: 'rgba(229, 9, 20, 0.8)',
+    badgeText: 'RAIMI 2002',
+    imageUrl: '/suits/raimi_classic_webbed.png',
     stats: {
-      defense: 65,
-      speed: 85,
-      tech: 70,
+      defense: 85,
+      speed: 92,
+      tech: 65,
       agility: 98,
-      stealth: 75
+      stealth: 80
     },
     hotspots: [
       {
-        id: 'c1',
-        label: 'LENTES OCULARES',
-        title: 'Lentes Expressivas',
-        description: 'Lentes flexíveis que acompanham as expressões faciais e ajustam o foco de visão para rajadas de luz ou escuridão.',
+        id: 'r1',
+        label: 'TEIA 3D RELEVO',
+        title: 'Teias Prateadas em Alto Relevo',
+        description: 'Teias moldadas em polímero flexível prateado em alto relevo 3D sobre todo o uniforme.',
+        x: 50,
+        y: 38,
+        category: 'armor'
+      },
+      {
+        id: 'r2',
+        label: 'LENTES ESPELHADAS',
+        title: 'Lentes Triangulares de Espelho',
+        description: 'Lentes angulares com superfície espelhada que refletem os prédios de Nova York.',
         x: 50,
         y: 18,
         category: 'lens'
-      },
-      {
-        id: 'c2',
-        label: 'SÍMBOLO ARANHA',
-        title: 'Emblema Frontal',
-        description: 'Desenho icônico em formato de aranha estilizada bordada com fibra reforçada sobre o peito.',
-        x: 50,
-        y: 40,
-        category: 'emblem'
-      },
-      {
-        id: 'c3',
-        label: 'DISPARADORES DE TEIA',
-        title: 'Shooters Mecânicos',
-        description: 'Mecanismo acionado por pressão dupla da palma da mão, capaz de disparar teia sintética pressurizada.',
-        x: 28,
-        y: 62,
-        category: 'shooter'
       }
     ],
     suitType: 'classic'
@@ -97,19 +85,15 @@ export const SUITS_DATA: Suit[] = [
     ],
     abilities: [
       'Ataques devastadores com Iron Arms (Garras Mecânicas)',
-      'Habilidade de impulso com assas de teia (Web Wings) para voo livre',
-      'Sobrecarga elétrica de Bio-Parry em combate',
-      'Super aceleração entre prédios'
+      'Habilidade de impulso com asas de teia (Web Wings) para voo livre',
+      'Sobrecarga elétrica de Bio-Parry em combate'
     ],
     technology: [
       'Asas de teia sob os braços para travessia por correntes de vento',
-      'Braços nanotecnológicos retráteis embutidos na aranha traseira',
-      'Sensores biométricos conectados aos sinais de Miles Morales',
-      'Liga polimérica contra cortes e mordidas de simbionte'
+      'Braços nanotecnológicos retráteis embutidos na aranha traseira'
     ],
     trivia: [
-      'Adiciona as Web Wings (Asas de teia) permitindo cruzar Nova York voando.',
-      'Projetado especificamente para tirar proveito da velocidade de carregamento do SSD do PS5.'
+      'Adiciona as Web Wings (Asas de teia) permitindo cruzar Nova York voando.'
     ],
     categories: ['ALL', 'TECHNOLOGY', 'PETER'],
     primaryColor: '#FF0B18',
@@ -133,15 +117,6 @@ export const SUITS_DATA: Suit[] = [
         x: 68,
         y: 48,
         category: 'armor'
-      },
-      {
-        id: 'a2_2',
-        label: 'IRON ARMS 2.0',
-        title: 'Interface de Garras Mecânicas',
-        description: 'Conectores dorsais que estendem 4 garras de titânio articuladas durante combate pesado.',
-        x: 50,
-        y: 35,
-        category: 'tech'
       }
     ],
     suitType: 'advanced'
@@ -201,8 +176,7 @@ export const SUITS_DATA: Suit[] = [
     description: 'Design de alto contraste futurista ideal para travessias aéreas e combate de alta velocidade.',
     characteristics: [
       'Azul royal dominante com detalhes em vermelho carmesim',
-      'Lentes brancas angulares ativas',
-      'Placas de armadura no peito'
+      'Lentes brancas angulares ativas'
     ],
     abilities: [
       'Manobras acrobáticas vertiginosas',
@@ -246,8 +220,7 @@ export const SUITS_DATA: Suit[] = [
       'Circuitos de energia dourados nas articulações'
     ],
     abilities: [
-      'Isolamento contra choques elétricos e calor',
-      'Emissão de pulso luminoso'
+      'Isolamento contra choques elétricos e calor'
     ],
     technology: [
       'Bateria solar fotovoltaica interna'
@@ -272,8 +245,134 @@ export const SUITS_DATA: Suit[] = [
     suitType: 'advanced'
   },
   {
-    id: 'raimi-black-webbed',
+    id: 'superior-suit-red-black',
     number: '06',
+    name: 'Superior Suit (Red & Black Armor)',
+    tagline: 'A Mente Superior no Corpo do Homem-Aranha.',
+    year: '2013',
+    period: 'Superior Spider-Man #1',
+    version: 'Earth-616 Otto Octavius',
+    universe: 'Earth-616',
+    origin: 'Criado pelo Doutor Otto Octavius enquanto assumiu o corpo de Peter Parker para se tornar um Aranha mais eficiente e impiedoso.',
+    description: 'Design militar agressivo em vermelho fosco e preto. Apresenta lentes pretas assustadoras, garras de titânio nos dedos e tentáculos mecânicos retráteis nas costas.',
+    characteristics: [
+      'Base preta com aranha peitoral vermelha expansiva estilo aranha-viúva',
+      'Lentes escuras de visão tática e infravermelha',
+      'Garras afiadas nas pontas das luvas e botas'
+    ],
+    abilities: [
+      'Ataques letais de combate corpo a corpo com garras',
+      'Interface direta com Spider-Bots autônomos por toda a cidade'
+    ],
+    technology: [
+      'Nanotecnologia Octavius com braços robóticos dorsais',
+      'Sistemas de rastreamento e vigilância global'
+    ],
+    trivia: [
+      'Otto Octavius jurou ser um Homem-Aranha superior a Peter em todas as métricas.'
+    ],
+    categories: ['ALL', 'TECHNOLOGY', 'CLASSICS', 'PETER'],
+    primaryColor: '#E50914',
+    accentColor: '#101014',
+    glowColor: 'rgba(229, 9, 20, 0.85)',
+    badgeText: 'SUPERIOR 2013',
+    imageUrl: '/suits/superior_suit_red_black.png',
+    stats: {
+      defense: 93,
+      speed: 94,
+      tech: 99,
+      agility: 95,
+      stealth: 86
+    },
+    hotspots: [],
+    suitType: 'iron'
+  },
+  {
+    id: 'velocity-neon-green',
+    number: '07',
+    name: 'Velocity Suit (Neon Cyber Style)',
+    tagline: 'Supervelocidade e Isolamento Fotônico.',
+    year: '2018',
+    period: 'Marvel\'s Spider-Man (PS4)',
+    version: 'Earth-1048 Velocity Armor',
+    universe: 'Earth-1048',
+    origin: 'Projetado pela renomada artista de HQs Adi Granov especificamente para o jogo do PlayStation 4.',
+    description: 'Armadura cibernética futurista nas cores branco marfim, preto fosco e linhas bioluminescentes verde neon. Desenvolvida para alcançar velocidades supersônicas com proteção fotônica.',
+    characteristics: [
+      'Corpo branco metálico com aranha central verde neon brilhante',
+      'Lentes verdes com visão de varredura térmica',
+      'Placas de blindagem aerodinâmicas'
+    ],
+    abilities: [
+      'Carga de impulso cinético supersônico',
+      'Resistência a radiação e pulsos eletromagnéticos'
+    ],
+    technology: [
+      'Micro-turbinas cinéticas integradas às pernas e peito'
+    ],
+    trivia: [
+      'Desenhado exclusivamente pela Marvel para o jogo da Insomniac Games.'
+    ],
+    categories: ['ALL', 'TECHNOLOGY', 'PETER'],
+    primaryColor: '#00FF66',
+    accentColor: '#FFFFFF',
+    glowColor: 'rgba(0, 255, 102, 0.85)',
+    badgeText: 'VELOCITY NEON',
+    imageUrl: '/suits/velocity_neon_green.png',
+    stats: {
+      defense: 92,
+      speed: 100,
+      tech: 97,
+      agility: 96,
+      stealth: 75
+    },
+    hotspots: [],
+    suitType: 'advanced'
+  },
+  {
+    id: 'superior-suit-dark-red',
+    number: '08',
+    name: 'Superior Armor (Dark Red & Charcoal)',
+    tagline: 'Blindagem Tática e Furtividade Noturna.',
+    year: '2023',
+    period: 'Marvel\'s Spider-Man 2 (PS5 Style)',
+    version: 'Earth-1048 Superior Armor',
+    universe: 'Earth-1048',
+    origin: 'Variação tática noturna com revestimento em fibra de carbono preto carvão e aranha vermelha carmesim.',
+    description: 'Estética intimidadora ideal para operações noturnas e travessias rápidas sem detecção radar.',
+    characteristics: [
+      'Preto carvão fosco com aranha e linhas em vermelho escuro',
+      'Lentes escuras com antirreflexo militar'
+    ],
+    abilities: [
+      'Absorção de rastreamento térmico e sônico',
+      'Ataques com garras táticas'
+    ],
+    technology: [
+      'Malha de carbono com absorção de impacto pesado'
+    ],
+    trivia: [
+      'Variação tática inspirada nos trajes mais sombrios dos quadrinhos.'
+    ],
+    categories: ['ALL', 'TECHNOLOGY', 'PETER'],
+    primaryColor: '#CC0000',
+    accentColor: '#1A1A1E',
+    glowColor: 'rgba(204, 0, 0, 0.8)',
+    badgeText: 'DARK ARMOR',
+    imageUrl: '/suits/superior_suit_dark_red.png',
+    stats: {
+      defense: 94,
+      speed: 93,
+      tech: 96,
+      agility: 94,
+      stealth: 92
+    },
+    hotspots: [],
+    suitType: 'iron'
+  },
+  {
+    id: 'raimi-black-webbed',
+    number: '09',
     name: 'Black Webbed Suit (Spider-Man 3)',
     tagline: 'O Simbionte Sombrio da Trilogia de Sam Raimi.',
     year: '2007',
@@ -289,8 +388,7 @@ export const SUITS_DATA: Suit[] = [
     ],
     abilities: [
       'Força física amplificada e agressividade em combate',
-      'Geração de teia orgânica negra ilimitada',
-      'Resistência extrema a impactos'
+      'Geração de teia orgânica negra ilimitada'
     ],
     technology: [
       'Parasita Klyntar orgânico em simbiose com o traje de tecido'
@@ -316,7 +414,7 @@ export const SUITS_DATA: Suit[] = [
   },
   {
     id: 'anti-venom-suit',
-    number: '07',
+    number: '10',
     name: 'Anti-Venom Suit',
     tagline: 'A Cura Bio-Sintética Alva contra a Escuridão.',
     year: '2023',
@@ -327,8 +425,7 @@ export const SUITS_DATA: Suit[] = [
     description: 'Um organismo simbionte purificado e benevolente de cor branca impecável com tentáculos pretos e bioluminescência. Destrói células simbiontes malignas ao toque.',
     characteristics: [
       'Visual branco marfim com tentáculos pretos e aranha angular',
-      'Propriedades de cura biológica ativa',
-      'Tentáculos bio-sintéticos de destruição de simbiontes'
+      'Propriedades de cura biológica ativa'
     ],
     abilities: [
       'Ataques devastadores de Anti-Venom Strike & Anti-Venom Bomb',
@@ -358,7 +455,7 @@ export const SUITS_DATA: Suit[] = [
   },
   {
     id: 'symbiote-msm2',
-    number: '08',
+    number: '11',
     name: 'Symbiote Suit (Spider-Man 2)',
     tagline: 'O Hospedeiro Negro da Insomniac.',
     year: '2023',
@@ -369,8 +466,7 @@ export const SUITS_DATA: Suit[] = [
     description: 'Textura biológica orgânica preta brilhante com aranha branca reluzente cobrindo o peito e ombros. Confere habilidades de combate com tentáculos de força avassaladora.',
     characteristics: [
       'Textura orgânica alienígena preta reflexiva',
-      'Tentáculos simbiontes de combate corporal',
-      'Lentes brancas angulares agressivas'
+      'Tentáculos simbiontes de combate corporal'
     ],
     abilities: [
       'Symbiote Surge & Symbiote Punch',
@@ -399,461 +495,230 @@ export const SUITS_DATA: Suit[] = [
     suitType: 'symbiote'
   },
   {
-    id: 'symbiote-suit',
-    number: '09',
-    name: 'Symbiote Suit Classic',
-    tagline: 'A Força Negra do Espaço Profundo.',
-    year: '1984',
-    period: 'Secret Wars #8',
-    version: 'Alien Symbiote (Klyntar)',
-    universe: 'Earth-616',
-    origin: 'Adquirido por Peter Parker no planeta Mundo de Guerras (Battleworld) durante o evento Guerras Secretas.',
-    description: 'Um organismo simbionte alienígena vivo que responde aos pensamentos de Peter. Concede força sobre-humana amplificada, teia orgânica infinita e capacidade de alterar a forma e roupas à vontade.',
+    id: 'venom-host',
+    number: '12',
+    name: 'Venom (Harry Osborn)',
+    tagline: 'O Monstro Simbionte de Nova York.',
+    year: '2023',
+    period: 'Marvel\'s Spider-Man 2 (PS5)',
+    version: 'Insomniac Earth-1048 Venom',
+    universe: 'Earth-1048',
+    origin: 'Nascido da união completa da entidade Klyntar com Harry Osborn para curar sua doença mortal.',
+    description: 'Uma criatura gigantesca de puro músculo simbionte preto com garras afiadas, língua bífida e mandíbula com dentes amarelados. O vilão definitivo.',
     characteristics: [
-      'Estética inteiramente negra com emblema de aranha branca expandida',
-      'Propriedades metamórficas de mudança de tecido',
-      'Ausência de disparadores mecânicos'
+      'Porte físico colossal com asas simbiontes e garras gigantes',
+      'Mandíbula monstruosa com dentes afiados e língua tridimensional'
     ],
     abilities: [
-      'Geração de teia orgânica ilimitada das costas das mãos',
-      'Força física amplificada em até 300%'
+      'Devastação de infraestrutura e saltos de centenas de metros',
+      'Invocação de ondas de matéria simbionte'
     ],
     technology: [
-      'Biocombinação viva da raça Klyntar'
+      'Consciência de colmeia Klyntar ancestral'
     ],
     trivia: [
-      'A ideia original do traje preto veio de um fã chamado Randy Schueller.'
+      'Pela primeira vez jogável em missões de destruição massiva no jogo do PS5.'
     ],
-    categories: ['ALL', 'CLASSICS', 'SYMBIOTE', 'PETER'],
-    primaryColor: '#12131C',
+    categories: ['ALL', 'SYMBIOTE'],
+    primaryColor: '#0A0A0F',
     accentColor: '#FFFFFF',
-    glowColor: 'rgba(255, 255, 255, 0.7)',
-    badgeText: 'ALIEN KLYNTAR',
+    glowColor: 'rgba(255, 255, 255, 0.9)',
+    badgeText: 'VENOM 2023',
+    imageUrl: '/suits/Venom_from_MSM2_render.webp',
     stats: {
-      defense: 88,
-      speed: 92,
-      tech: 50,
-      agility: 95,
-      stealth: 98
+      defense: 100,
+      speed: 88,
+      tech: 40,
+      agility: 90,
+      stealth: 70
     },
     hotspots: [],
     suitType: 'symbiote'
   },
   {
-    id: 'iron-spider',
-    number: '10',
-    name: 'Iron Spider',
-    tagline: 'Engenharia Stark de Nível Militar.',
-    year: '2006',
-    period: 'Civil War #536 / MCU Avengers',
-    version: 'Stark Nanotech Armor',
-    universe: 'Earth-616 / Earth-199999',
-    origin: 'Construído por Tony Stark para Peter Parker antes dos eventos da Guerra Civil dos super-heróis.',
-    description: 'Armadura cibernética de alta tecnologia criada com fibra de metal líquido e nanotecnologia Stark. Equipado com braços mecânicos Walandos articulados, HUD tático avançado e sistemas de suporte à vida.',
-    characteristics: [
-      'Cores vermelho carmesim e dourado metálico estilo Homem de Ferro',
-      '4 garras mecânicas articuladas nas costas (Walandos)',
-      'Blindagem de malha nanotecnológica à prova de balas'
-    ],
-    abilities: [
-      'Garras dorsais usadas para escalada, ataque e defesa',
-      'Voo limitado com jatos estabilizadores micro-pulse'
-    ],
-    technology: [
-      'Nanotecnologia ativada em segundos através do reator Arc'
-    ],
-    trivia: [
-      'Nos quadrinhos originais o traje possuía apenas 3 braços mecânicos; no cinema ganhou 4.'
-    ],
-    categories: ['ALL', 'TECHNOLOGY', 'PETER', 'LIVE-ACTION'],
-    primaryColor: '#FF1E27',
-    accentColor: '#FFD700',
-    glowColor: 'rgba(255, 215, 0, 0.8)',
-    badgeText: 'STARK TECH 2006',
-    stats: {
-      defense: 96,
-      speed: 90,
-      tech: 99,
-      agility: 92,
-      stealth: 70
-    },
-    hotspots: [],
-    suitType: 'iron'
-  },
-  {
-    id: 'advanced-suit-1',
-    number: '11',
-    name: 'Advanced Suit 1.0',
-    tagline: 'Inovação Científica do Doutor Octavius.',
-    year: '2018',
-    period: 'Marvel\'s Spider-Man (PS4)',
-    version: 'Insomniac Earth-1048',
+    id: 'scream-symbiote',
+    number: '13',
+    name: 'Scream (Mary Jane Watson)',
+    tagline: 'A Fúria Amarela e Vermelha de Mary Jane.',
+    year: '2023',
+    period: 'Marvel\'s Spider-Man 2 (PS5)',
+    version: 'Insomniac Earth-1048 Scream',
     universe: 'Earth-1048',
-    origin: 'Desenvolvido por Peter Parker nos laboratórios da Octavius Industries para substituir o traje clássico danificado.',
-    description: 'Destaque pela grande aranha branca reforçada em fibra de carbono. Combina proteção contra impactos com flexibilidade máxima, otimizando o envio de energia motora aos músculos de Peter.',
+    origin: 'Infectada pela semente do simbionte Venom criada para transformar Mary Jane em Scream.',
+    description: 'Visual aterrorizante nas cores amarelo solar e vermelho com tentáculos de cabelo vivos de grande alcance.',
     characteristics: [
-      'Aranha branca arrojada cobrindo peito e costas',
-      'Painéis em azul flexível sintético e luvas reforçadas',
-      'Botas de borracha isolante tática para escalada urbana'
+      'Cabelos de tentáculos simbiontes amarelos e vermelhos',
+      'Garras de alta velocidade e grito sônico'
     ],
     abilities: [
-      'Geração de impulso de teia focado (Web Blossom)',
-      'Absorção de choque cinético aprimorada'
+      'Ataques à distância com tentáculos de cabelo',
+      'Grito sônico paralisante'
     ],
     technology: [
-      'Fibra de carbono flexível nos pontos de articulação'
+      'Organismo simbionte parasitário Klyntar'
     ],
     trivia: [
-      'Estreou como a imagem de marca oficial do jogo exclusivo de PlayStation 4 em 2018.'
+      'Chefe de fase emocionante durante a batalha emocional contra Peter Parker.'
     ],
-    categories: ['ALL', 'TECHNOLOGY', 'PETER'],
-    primaryColor: '#E62429',
-    accentColor: '#FFFFFF',
-    glowColor: 'rgba(255, 255, 255, 0.8)',
-    badgeText: 'INSOMNIAC 2018',
+    categories: ['ALL', 'SYMBIOTE'],
+    primaryColor: '#FFCC00',
+    accentColor: '#E50914',
+    glowColor: 'rgba(255, 204, 0, 0.9)',
+    badgeText: 'SCREAM 2023',
+    imageUrl: '/suits/Scream_from_MSM2_render.webp',
     stats: {
-      defense: 82,
-      speed: 91,
-      tech: 92,
-      agility: 96,
+      defense: 92,
+      speed: 96,
+      tech: 45,
+      agility: 97,
       stealth: 80
     },
     hotspots: [],
-    suitType: 'advanced'
-  },
-  {
-    id: 'spider-2099',
-    number: '12',
-    name: 'Spider-Man 2099',
-    tagline: 'O Protetor Futurista de Nueva York.',
-    year: '1992',
-    period: 'Spider-Man 2099 #1 / Across the Spider-Verse',
-    version: 'Earth-928 Miguel O\'Hara',
-    universe: 'Earth-928',
-    origin: 'Criado pelo geneticista Miguel O\'Hara no ano de 2099 após ter seu código genético mesclado com DNA de aranha.',
-    description: 'Feito com moleculagem instável de alta tecnologia do futuro. Apresenta uma máscara assustadora de caveira de aranha, garras retráteis nos dedos, capa de teia de luz plana (Web Glider) e estética cibernética impressionante.',
-    characteristics: [
-      'Tecido azul metálico com estampas vermelhas em formato de caveira-aranha',
-      'Capa posterior de teia de matéria leve (Light-Byte)'
-    ],
-    abilities: [
-      'Visão acelerada e hipersensorial cibernética',
-      'Geração de dublês de sombra em movimento ultrarrápido'
-    ],
-    technology: [
-      'Uniforme confeccionado em molécula instável indestrutível'
-    ],
-    trivia: [
-      'Foi o líder da Sociedade Aranha no filme de animação Homem-Aranha: Através do Aranhaverso.'
-    ],
-    categories: ['ALL', 'TECHNOLOGY', 'MULTIVERSE', 'ANIMATION'],
-    primaryColor: '#0A1B3A',
-    accentColor: '#FF003C',
-    glowColor: 'rgba(255, 0, 60, 0.9)',
-    badgeText: 'FUTURE 2099',
-    stats: {
-      defense: 94,
-      speed: 99,
-      tech: 98,
-      agility: 95,
-      stealth: 84
-    },
-    hotspots: [],
-    suitType: '2099'
-  },
-  {
-    id: 'miles-morales-suit',
-    number: '13',
-    name: 'Miles Morales Classic',
-    tagline: 'Qualquer um pode usar a máscara. Você pode usar a máscara.',
-    year: '2011',
-    period: 'Ultimate Fallout #4 / Into the Spider-Verse',
-    version: 'Earth-1610 / Earth-42',
-    universe: 'Earth-1610',
-    origin: 'Criado por Miles Morales pintando com tinta spray preta e vermelha sobre uma réplica do traje concedida pela SHIELD.',
-    description: 'Design moderno de rua com fundo preto fosco, teias vermelhas grafitadas e um estilo inconfundível.',
-    characteristics: [
-      'Base preta com aranha e detalhes vermelhos aplicados em tinta spray estilo grafite',
-      'Corte ajustado com lentes expressivas brancas com contorno vermelho'
-    ],
-    abilities: [
-      'Bio-Eletricidade (Venom Blast / Venom Strike)',
-      'Camuflagem Invisível (Invisibilidade completa)'
-    ],
-    technology: [
-      'Malha com condução de eletricidade bio-sintética'
-    ],
-    trivia: [
-      'Miles personalizou seu traje usando tinta spray em uma cena clássica do filme vencedor do Oscar.'
-    ],
-    categories: ['ALL', 'MILES', 'MULTIVERSE', 'ANIMATION', 'LIVE-ACTION'],
-    primaryColor: '#101014',
-    accentColor: '#FF003C',
-    glowColor: 'rgba(255, 0, 60, 0.8)',
-    badgeText: 'BROOKLYN 2011',
-    stats: {
-      defense: 80,
-      speed: 94,
-      tech: 85,
-      agility: 99,
-      stealth: 100
-    },
-    hotspots: [],
-    suitType: 'miles'
-  },
-  {
-    id: 'noir-suit',
-    number: '14',
-    name: 'Spider-Man Noir',
-    tagline: 'Sombras, Detetives e a Nova York de 1933.',
-    year: '2009',
-    period: 'Spider-Man Noir #1',
-    version: 'Earth-90214 1930s',
-    universe: 'Earth-90214',
-    origin: 'Montado por Peter Parker na era da Grande Depressão a partir do uniforme de aviador da Primeira Guerra do seu tio Ben.',
-    description: 'Um visual sombrio e pé-no-chão com sobretudo de couro preto, óculos de aviador com lentes reguláveis, chapéu fedora e revólver.',
-    characteristics: [
-      'Sobretudo de couro escuro reforçado com costuras duplas',
-      'Óculos de proteção de aviador militar com lentes redondas'
-    ],
-    abilities: [
-      'Furtividade absoluta nas sombras noturnas',
-      'Combate corpo a corpo agressivo e investigativo'
-    ],
-    technology: [
-      'Engrenagens analógicas e lentes de precisão manual'
-    ],
-    trivia: [
-      'Dublado pelo ator Nicolas Cage no filme Into the Spider-Verse.'
-    ],
-    categories: ['ALL', 'CLASSICS', 'MULTIVERSE', 'ANIMATION'],
-    primaryColor: '#1A1A1E',
-    accentColor: '#888899',
-    glowColor: 'rgba(150, 150, 160, 0.5)',
-    badgeText: 'NOIR 1933',
-    stats: {
-      defense: 78,
-      speed: 75,
-      tech: 35,
-      agility: 88,
-      stealth: 99
-    },
-    hotspots: [],
-    suitType: 'noir'
-  },
-  {
-    id: 'spider-punk',
-    number: '15',
-    name: 'Spider-Punk',
-    tagline: 'Anarquia, Guitarras e Revolução Contra o Sistema.',
-    year: '2015',
-    period: 'Amazing Spider-Man Vol. 3 #10 / Across the Spider-Verse',
-    version: 'Earth-138 Hobie Brown',
-    universe: 'Earth-138',
-    origin: 'Criado pelo jovem anarquista Hobie Brown para liderar a revolução contra o regime autoritário do Presidente Osborn.',
-    description: 'Uma mistura explosiva de punk rock e super-herói. Apresenta colete jeans rasgado coberto de broches e patches, spikes pontiagudos na máscara e guitarra.',
-    characteristics: [
-      'Máscara vermelha e preta com coroa de spikes metálicos',
-      'Colete de sarja/denim rasgado com broches de bandas punk'
-    ],
-    abilities: [
-      'Ataques sônicos de alta frequência usando amplificadores e sua guitarra'
-    ],
-    technology: [
-      'Guitarra modificada com emissor de ondas sônicas de 15.000 Watts'
-    ],
-    trivia: [
-      'Hobie derrotou o Presidente Osborn e seu exército simbionte usando 15.000 watts de puro som punk.'
-    ],
-    categories: ['ALL', 'MULTIVERSE', 'ANIMATION'],
-    primaryColor: '#CC0000',
-    accentColor: '#00E5FF',
-    glowColor: 'rgba(0, 229, 255, 0.8)',
-    badgeText: 'PUNK ROCK',
-    stats: {
-      defense: 75,
-      speed: 92,
-      tech: 70,
-      agility: 97,
-      stealth: 60
-    },
-    hotspots: [],
-    suitType: 'punk'
+    suitType: 'symbiote'
   }
 ];
 
 export const TIMELINE_DATA: TimelineItem[] = [
   {
     id: 't1',
-    year: '1962',
-    title: 'A Era Clássica de Steve Ditko',
-    era: 'ORIGIN ERA',
-    description: 'Amazing Fantasy #15 apresenta Peter Parker e o nascimento do herói da vizinhança com cores clássicas e disparadores mecânicos.',
-    suitId: 'classic-suit',
-    highlightSuitName: 'Classic Suit',
+    year: '2002',
+    title: 'A Era Clássica do Cinema de Sam Raimi',
+    era: 'LIVE ACTION CLASSIC',
+    description: 'Tobey Maguire assume o papel do herói com o lendário traje de teias prateadas em 3D e disparadores biológicos orgânicos.',
+    suitId: 'raimi-classic-webbed',
+    highlightSuitName: 'Webbed Suit (Sam Raimi)',
     keyEvents: [
-      'Primeira aparição em Amazing Fantasy #15',
-      'Criação dos disparadores de teia mecânicos',
-      'Estreia das lentes oculares de ajuste expressivo'
+      'Estreia histórica nos cinemas em 2002',
+      'Teias prateadas moldadas em alto relevo 3D',
+      'Teia orgânica gerada diretamente dos pulsos'
     ],
     color: '#E50914'
   },
   {
     id: 't2',
-    year: '1984',
-    title: 'A Saga do Traje Negro Alienígena',
+    year: '2007',
+    title: 'A Saga do Simbionte Sombrio de Raimi',
     era: 'SYMBIOTE ERA',
-    description: 'Nas Guerras Secretas, Peter encontra um organismo vivo no espaço que transforma seu visual e suas habilidades para sempre.',
-    suitId: 'symbiote-msm2',
-    highlightSuitName: 'Symbiote Suit',
+    description: 'Em Homem-Aranha 3, o organismo alienígena negro infecta o traje clássico de Tobey Maguire, amplificando sua agressividade.',
+    suitId: 'raimi-black-webbed',
+    highlightSuitName: 'Black Webbed Suit',
     keyEvents: [
-      'Introdução no evento Secret Wars #8',
-      'Teia orgânica ilimitada e troca de roupa instantânea',
-      'Origem posterior da entidade Venom'
+      'Transformação do uniforme clássico em preto fosco',
+      'Teias prateadas sobre o fundo negro alienígena',
+      'Origem do vilão Venom nos cinemas'
     ],
     color: '#FFFFFF'
   },
   {
     id: 't3',
-    year: '1992',
-    title: 'O Futuro Cibernético de 2099',
-    era: 'FUTURE ERA',
-    description: 'Miguel O\'Hara assume o manto no ano de 2099 em Nueva York com moléculas instáveis e garras de tálio.',
-    suitId: 'spider-2099',
-    highlightSuitName: 'Spider-Man 2099',
+    year: '2013',
+    title: 'A Mente Superior de Octavius',
+    era: 'SUPERIOR ERA',
+    description: 'Otto Octavius assume o manto do Aranha construindo uma armadura tática militar em vermelho e preto com tentáculos nanotecnológicos.',
+    suitId: 'superior-suit-red-black',
+    highlightSuitName: 'Superior Suit',
     keyEvents: [
-      'Criação por Peter David e Rick Leonardi',
-      'Capa de partículas de luz (Light-Byte)',
-      'Tecnologia de viagem no tempo e multiverso'
+      'Estreia na aclamada saga Superior Spider-Man #1',
+      'Lentes escuras táticas com visão infravermelha',
+      'Rede de Spider-Bots autônomos por toda Nova York'
     ],
-    color: '#FF003C'
+    color: '#E50914'
   },
   {
     id: 't4',
-    year: '2006',
-    title: 'A Armadura Iron Spider de Stark',
-    era: 'CIVIL WAR ERA',
-    description: 'Tony Stark projeta uma armadura nanotecnológica com braços mecânicos dorsais para Peter durante a Guerra Civil.',
-    suitId: 'iron-spider',
-    highlightSuitName: 'Iron Spider',
+    year: '2018',
+    title: 'Armaduras Futuristas & Velocidade Neon',
+    era: 'INSOMNIAC TECH ERA',
+    description: 'A Insomniac Games introduz a armadura Velocity Suit com supervelocidade supersônica e luzes neon fotônicas.',
+    suitId: 'velocity-neon-green',
+    highlightSuitName: 'Velocity Suit (Neon)',
     keyEvents: [
-      'Estreia na saga quadrinhos Civil War',
-      'Adição dos braços mecânicos (Walandos)',
-      'Interface tática com IA integrada'
+      'Design exclusivo criado pelo artista Adi Granov',
+      'Propulsão cinética para velocidade supersônica',
+      'Blindagem fotônica contra radiação'
     ],
-    color: '#FFD700'
+    color: '#00FF66'
   },
   {
     id: 't5',
-    year: '2011',
-    title: 'A Revolução de Miles Morales & Big Time',
-    era: 'MODERN HEROES ERA',
-    description: 'Miles Morales assume o legado com o traje preto e vermelho no universo Ultimate, enquanto Peter desenvolve tecnologia de camuflagem.',
-    suitId: 'miles-morales-suit',
-    highlightSuitName: 'Miles Morales Classic',
-    keyEvents: [
-      'Estreia de Miles Morales em Ultimate Fallout #4',
-      'Habilidades bio-elétricas (Venom Blast) e camuflagem',
-      'Traje Big Time com luzes neon camufladas'
-    ],
-    color: '#00F0FF'
-  },
-  {
-    id: 't6',
-    year: '2018 - 2023+',
-    title: 'Games Next-Gen & A Era do Aranhaverso',
-    era: 'MULTIVERSE & GAMING ERA',
-    description: 'O lançamento dos jogos da Insomniac e a trilogia premiada Aranhaverso levam a evolução dos trajes ao nível máximo da cultura pop.',
+    year: '2023+',
+    title: 'Next-Gen PS5: A Ameaça Simbionte & Anti-Venom',
+    era: 'NEXT-GEN ERA',
+    description: 'Peter Parker ganha as Asas de Teia (Web Wings), o traje Anti-Venom benevolente e combate Venom e Scream.',
     suitId: 'advanced-suit-2',
-    highlightSuitName: 'Advanced Suit 2.0 & Spider-Verse',
+    highlightSuitName: 'Advanced 2.0 & Anti-Venom',
     keyEvents: [
-      'Aranha branca reforçada em fibra de carbono',
-      'Asas de teia (Web Wings) para voo livre',
-      'Explosão cultural do Aranhaverso nos cinemas'
+      'Introdução das Asas de Teia (Web Wings)',
+      'Nascimento do traje Anti-Venom de cura biológica',
+      'Combate contra o colosso Venom no PS5'
     ],
-    color: '#E62429'
+    color: '#00C4FF'
   }
 ];
 
 export const MULTIVERSE_PORTALS: MultiversePortal[] = [
   {
-    id: 'earth-616',
-    heroName: 'Peter Parker',
-    alterEgo: 'Spider-Man Primordial',
-    universe: 'Earth-616',
-    earthCode: '616',
-    tagline: 'Onde a responsabilidade começou.',
-    quote: 'Com grandes poderes vêm grandes responsabilidades.',
-    description: 'O Homem-Aranha original do universo principal da Marvel Comics. Cientista brilhante, fotógrafo do Clarim Diário e o pilar de esperança de Nova York.',
-    suitId: 'classic-suit',
+    id: 'earth-96283',
+    heroName: 'Peter Parker (Tobey Maguire)',
+    alterEgo: 'Spider-Man Trilogia Raimi',
+    universe: 'Earth-96283',
+    earthCode: '96283',
+    tagline: 'O Homem-Aranha que marcou uma geração nos cinemas.',
+    quote: 'Não importa o que venha pela frente, nós sempre temos uma escolha. Meu tio Ben me ensinou isso.',
+    description: 'O Homem-Aranha da inesquecível trilogia dirigida por Sam Raimi. Possui teia orgânica, lentes espelhadas e enfrentou o Duende Verde, Doutor Octopus, Homem de Areia e Venom.',
+    suitId: 'raimi-classic-webbed',
     primaryColor: '#E50914',
     accentColor: '#0055FF',
     portalParticleColor: '#FF2A3B',
-    traits: ['Genialidade Científica', 'Sentido Aranha Perfeito', 'Humor Lendário'],
-    signatureWeapon: 'Disparadores de Teia Mecânicos Sintéticos'
+    traits: ['Teia Orgânica Biológica', 'Resistência Física Extrema', 'Coração e Heroísmo Impecáveis'],
+    signatureWeapon: 'Disparadores de Teia Biológicos Orgânicos'
   },
   {
-    id: 'earth-1610',
-    heroName: 'Miles Morales',
-    alterEgo: 'Ultimate Spider-Man',
-    universe: 'Earth-1610',
-    earthCode: '1610 / 42',
-    tagline: 'Qualquer um pode usar a máscara.',
-    quote: 'É um salto de fé. Isso é tudo que é, Peter. Um salto de fé.',
-    description: 'O jovem prodígio de Brooklyn com capacidade bio-elétrica devastadora e camuflagem de invisibilidade. Trouxe uma nova era e ritmo para o manto do herói.',
-    suitId: 'miles-morales-suit',
-    primaryColor: '#101014',
-    accentColor: '#FF003C',
-    portalParticleColor: '#FF003C',
-    traits: ['Bio-Eletricidade Venom Blast', 'Invisibilidade Total', 'Estilo Street Art'],
-    signatureWeapon: 'Bio-Eletricidade e Tênis Air Jordan'
+    id: 'earth-1048',
+    heroName: 'Peter Parker (Insomniac)',
+    alterEgo: 'Spider-Man Advanced 2.0',
+    universe: 'Earth-1048',
+    earthCode: '1048',
+    tagline: 'O Ápice da Tecnologia de Nova York.',
+    quote: 'Se você quer salvar a cidade, precisa ser melhor. Hoje à noite nós somos melhores.',
+    description: 'O herói veterano dos jogos de PlayStation. Utiliza tecnologia de ponta, braços nanotecnológicos de titânio, asas de teia para voo e o poder do simbionte Anti-Venom.',
+    suitId: 'advanced-suit-2',
+    primaryColor: '#FF0B18',
+    accentColor: '#00C4FF',
+    portalParticleColor: '#00C4FF',
+    traits: ['Asas de Teia Web Wings', 'Garras Iron Arms 2.0', 'Anti-Venom Bio-Sintético'],
+    signatureWeapon: 'Web Wings e Garras Nanotecnológicas'
   },
   {
-    id: 'earth-928',
-    heroName: 'Miguel O\'Hara',
-    alterEgo: 'Spider-Man 2099',
-    universe: 'Earth-928',
-    earthCode: '928',
-    tagline: 'Líder da Sociedade Aranha Multiversal.',
-    quote: 'O cânone deve ser protegido. Custe o que custar.',
-    description: 'Geneticista do futuro cibernético de Nueva York. Possui tecido molecular instável, garras cortantes e a missão de impedir o colapso do multiverso.',
-    suitId: 'spider-2099',
-    primaryColor: '#0A1B3A',
-    accentColor: '#FF003C',
-    portalParticleColor: '#00F0FF',
-    traits: ['Garras de Tálio', 'Glider de Luz Plana', 'Visão Acelerada'],
-    signatureWeapon: 'Dispositivo Temporal Gizmo e Capa Light-Byte'
+    id: 'earth-616',
+    heroName: 'Otto Octavius',
+    alterEgo: 'Superior Spider-Man',
+    universe: 'Earth-616',
+    earthCode: '616',
+    tagline: 'Justiça Implacável e Tecnologia Superior.',
+    quote: 'Eu sou Otto Octavius. Eu sou o Homem-Aranha Superior!',
+    description: 'O Doutor Octopus no corpo do Homem-Aranha. Luta contra o crime com arrogância genial, exército de robôs Spider-Bots e garras letais.',
+    suitId: 'superior-suit-red-black',
+    primaryColor: '#E50914',
+    accentColor: '#101014',
+    portalParticleColor: '#E50914',
+    traits: ['Genialidade de Otto Octavius', 'Rede de Spider-Bots', 'Garras de Titânio Letais'],
+    signatureWeapon: 'Spider-Bots e Tentáculos Nanotecnológicos'
   },
   {
-    id: 'earth-90214',
-    heroName: 'Peter Parker Noir',
-    alterEgo: 'Spider-Man Noir',
-    universe: 'Earth-90214',
-    earthCode: '90214',
-    tagline: 'Justiça na Sombra da Depressão.',
-    quote: 'Onde quer que eu vá, o vento me segue. E tem cheiro de chuva.',
-    description: 'Detetive durão operando no ano de 1933. Luta contra nazistas e mafiosos nos becos escuros usando sobretudo de couro, óculos de aviador e silêncio.',
-    suitId: 'noir-suit',
-    primaryColor: '#1A1A1E',
-    accentColor: '#888899',
-    portalParticleColor: '#A0A0A0',
-    traits: ['Furtividade Absoluta', 'Táticas Investigativas', 'Combate sem Hesitação'],
-    signatureWeapon: 'Sobretudo Militar e Lentes de Aviador'
-  },
-  {
-    id: 'earth-138',
-    heroName: 'Hobie Brown',
-    alterEgo: 'Spider-Punk',
-    universe: 'Earth-138',
-    earthCode: '138',
-    tagline: 'Anarquia e Liberdade de Expressão.',
-    quote: 'Eu não acredito em rótulos. Nem em consistência visual.',
-    description: 'Líder da revolução contra os fascistas. Usa uma guitarra elétrica Gibson de 15.000 Watts para pulverizar inimigos com ondas sônicas.',
-    suitId: 'spider-punk',
-    primaryColor: '#CC0000',
-    accentColor: '#00E5FF',
-    portalParticleColor: '#FF0055',
-    traits: ['Ataques Sônicos', 'Colete com Spikes', 'Animação Desincronizada'],
-    signatureWeapon: 'Guitarra Elétrica Sônica Gibson'
+    id: 'earth-symbiote',
+    heroName: 'Entidade Klyntar / Venom',
+    alterEgo: 'O Hospedeiro Negro',
+    universe: 'Earth-1048 Klyntar',
+    earthCode: 'KLYNTAR',
+    tagline: 'Nós Somos Venom.',
+    quote: 'Nós vamos curar o mundo.',
+    description: 'A entidade alienígena Klyntar capaz de se fundir a hospedeiros criando criaturas de força assustadora e regeneração ilimitada.',
+    suitId: 'venom-host',
+    primaryColor: '#0A0A0F',
+    accentColor: '#FFFFFF',
+    portalParticleColor: '#FFFFFF',
+    traits: ['Força Colossal de Destruição', 'Asas e Tentáculos de Matéria Viva', 'Regeneração Instantânea'],
+    signatureWeapon: 'Biomassa Simbionte e Mandíbula Colossal'
   }
 ];

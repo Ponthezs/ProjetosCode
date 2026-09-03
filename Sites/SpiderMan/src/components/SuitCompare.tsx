@@ -90,8 +90,8 @@ export const SuitCompare: React.FC = () => {
             </span>
             <span className="text-xs font-mono text-gray-400">{suit1.period}</span>
           </div>
-          <h3 className="text-2xl font-extrabold uppercase italic text-white">{suit1.name}</h3>
-          <div className="h-[300px] flex items-center justify-center bg-black/40 rounded-2xl">
+          <h3 className="text-2xl font-extrabold uppercase italic text-white font-title">{suit1.name}</h3>
+          <div className="h-[420px] sm:h-[480px] relative overflow-hidden flex items-center justify-center bg-black/60 rounded-2xl border border-red-500/20 p-2">
             <SuitCanvasVisual suit={suit1} />
           </div>
         </div>
@@ -104,8 +104,8 @@ export const SuitCompare: React.FC = () => {
             </span>
             <span className="text-xs font-mono text-gray-400">{suit2.period}</span>
           </div>
-          <h3 className="text-2xl font-extrabold uppercase italic text-white">{suit2.name}</h3>
-          <div className="h-[300px] flex items-center justify-center bg-black/40 rounded-2xl">
+          <h3 className="text-2xl font-extrabold uppercase italic text-white font-title">{suit2.name}</h3>
+          <div className="h-[420px] sm:h-[480px] relative overflow-hidden flex items-center justify-center bg-black/60 rounded-2xl border border-cyan-400/20 p-2">
             <SuitCanvasVisual suit={suit2} />
           </div>
         </div>
