@@ -46,7 +46,7 @@ export default function AlertModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-5">
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-5">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2">
@@ -54,7 +54,7 @@ export default function AlertModal({
               <Bell className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-extrabold text-base text-white">Criar Alerta de Preço</h3>
+              <h3 className="font-semibold text-base text-white">Criar Alerta de Preço</h3>
               <p className="text-xs text-slate-400">Receba notificações de novas oportunidades</p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function AlertModal({
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all"
+              className="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all"
             >
               <Check className="w-4 h-4" />
               <span>Salvar Alerta de Preço</span>

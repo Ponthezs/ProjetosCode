@@ -23,11 +23,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-200">
+          <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-200">
             <Car className="w-6 h-6 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+            <span className="font-semibold text-xl tracking-tight text-white">
               Auto<span className="text-brand-400">Busca</span>
             </span>
             <span className="text-[10px] text-slate-400 -mt-1 font-medium tracking-wide">

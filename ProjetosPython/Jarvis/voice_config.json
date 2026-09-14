@@ -1,0 +1,9 @@
+{
+  "provider": "edge",
+  "edge_voice": "pt-BR-AntonioNeural",
+  "edge_rate": "+5%",
+  "edge_pitch": "+0Hz",
+  "elevenlabs_voice_id": "",
+  "elevenlabs_model": "eleven_flash_v2_5",
+  "elevenlabs_api_key_env": "ELEVENLABS_API_KEY"
+}

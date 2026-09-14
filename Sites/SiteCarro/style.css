@@ -1,47 +1,196 @@
+/* ============================================================
+   Garage Pontes — tema futurista
+   ============================================================ */
+
+:root{
+    --bg: #04060a;
+    --bg-deep: #010306;
+    --panel: rgba(255,255,255,0.045);
+    --panel-strong: rgba(10,16,26,0.86);
+    --border: rgba(168,230,25,0.28);
+    --border-soft: rgba(255,255,255,0.09);
+    --accent: #a8e619;
+    --accent-soft: rgba(168,230,25,0.35);
+    --accent-2: #22e6ff;
+    --accent-2-soft: rgba(34,230,255,0.3);
+    --text: #f2f5f8;
+    --text-dim: #93a0ad;
+    --text-faint: #5c6773;
+    --font-display: "Boldonse", system-ui;
+    --font-hud: "Orbitron", system-ui, sans-serif;
+}
+
 *{
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
     list-style: none;
     font-family: "Poppins", sans-serif;
 }
 
-body{
-    background-color: black;
-    color: white;
-    font-family: 16px;
-    overflow: hidden;
+html{
+    background: var(--bg);
 }
+
+body{
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ---------------------------------------------------------
+   Efeitos de fundo (grid, glow, scanline)
+--------------------------------------------------------- */
+
+.fx-grid{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(168,230,25,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,230,25,0.055) 1px, transparent 1px);
+    background-size: 42px 42px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, #000 40%, transparent 85%);
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, #000 40%, transparent 85%);
+    animation: gridDrift 40s linear infinite;
+}
+
+@keyframes gridDrift{
+    0%{ background-position: 0 0, 0 0; }
+    100%{ background-position: 84px 0, 0 84px; }
+}
+
+.fx-glow{
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    width: 55vw;
+    height: 55vw;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.35;
+}
+
+.fx-glow--a{
+    background: radial-gradient(circle, var(--accent-2) 0%, transparent 70%);
+    top: -18vw;
+    left: -14vw;
+    animation: floatBlob 22s ease-in-out infinite;
+}
+
+.fx-glow--b{
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    bottom: -22vw;
+    right: -16vw;
+    animation: floatBlob 26s ease-in-out infinite reverse;
+}
+
+@keyframes floatBlob{
+    0%, 100%{ transform: translate(0, 0) scale(1); }
+    50%{ transform: translate(3vw, 2vw) scale(1.08); }
+}
+
+.fx-scan{
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.018) 0px,
+        rgba(255,255,255,0.018) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    opacity: 0.5;
+}
+
+/* ---------------------------------------------------------
+   Header
+--------------------------------------------------------- */
 
 header{
     position: fixed;
-    width: 80vw;
+    width: 86vw;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 600px;
     gap: 10%;
-    z-index: 2;
+    z-index: 5;
+    padding: 18px 22px;
+    top: 12px;
+    background: rgba(4,6,10,0.45);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 0 0 1px rgba(168,230,25,0.04), 0 12px 40px rgba(0,0,0,0.35);
 
     & img {
-        width: 250px;
+        width: 200px;
+        filter: drop-shadow(0 0 10px rgba(168,230,25,0.35));
     }
 
     & nav {
         & ul {
             display: grid;
-            grid-template-columns: repeat(3, 200px);
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        & li {
+            position: relative;
+            font-family: var(--font-hud);
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+            text-align: center;
+            padding-bottom: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        & li::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent-soft);
+            transition: width 0.3s ease;
+        }
+
+        & li:hover,
+        & li.nav-active {
+            color: var(--text);
+        }
+
+        & li:hover::after,
+        & li.nav-active::after {
+            width: 60%;
         }
     }
 }
 
+/* ---------------------------------------------------------
+   Palco principal
+--------------------------------------------------------- */
 
-
-section{
-    background-image: radial-gradient(#0162a2, #004c7d, #002a47);
+section.container{
+    background:
+        radial-gradient(ellipse 120% 90% at 50% 20%, rgba(34,230,255,0.10), transparent 55%),
+        radial-gradient(ellipse 120% 90% at 50% 100%, rgba(168,230,25,0.08), transparent 55%),
+        radial-gradient(circle at 50% 50%, #060a12, #01030a 78%);
     height: 100vh;
     position: relative;
+    z-index: 2;
 
     & .list {
         width: 70vw;
@@ -53,30 +202,59 @@ section{
             position: absolute;
             inset: 0;
 
-            & .car-ferrari {
+            & .car-visual{
                 position: absolute;
                 top: 50%;
+                left: 0;
                 transform: translateY(-50%);
                 width: 70%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            & .hud-ring{
+                position: absolute;
+                width: 62%;
+                aspect-ratio: 1 / 1;
+                left: 8%;
+                border: 1px dashed rgba(168,230,25,0.22);
+                border-radius: 50%;
+                animation: spinSlow 40s linear infinite;
+                pointer-events: none;
+            }
+
+            & .hud-ring--reverse{
+                width: 78%;
+                left: 1%;
+                border-color: rgba(34,230,255,0.16);
+                animation: spinSlow 55s linear infinite reverse;
+            }
+
+            & .car-ferrari {
+                position: relative;
+                width: 100%;
 
                 & img {
                     width: 100%;
+                    display: block;
                     transform: rotate(-30deg);
+                    filter: drop-shadow(0 18px 30px rgba(0,0,0,0.55));
                 }
 
                 &::before {
                     content: '';
                     position: absolute;
-                    background-color: #000;
-                    width: 100%;
-                    height: 100px;
+                    background: radial-gradient(ellipse at center, var(--accent) 0%, transparent 70%);
+                    opacity: 0.35;
+                    width: 90%;
+                    height: 90px;
                     top: 150%;
-                    left: 50px;
-                    border: 50%;
-                    filter: blur(50px);
+                    left: 5%;
+                    filter: blur(38px);
                 }
             }
-            
+
             & .content {
                 position: absolute;
                 right: 100px;
@@ -86,36 +264,132 @@ section{
                 flex-direction: column;
                 justify-content: center;
                 align-items: end;
-                gap: 20px;
+
+                & .info-panel{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: end;
+                    gap: 16px;
+                    padding: 32px 36px;
+                    background: rgba(3,5,9,0.55);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    border: 1px solid var(--border-soft);
+                    border-radius: 24px;
+                    box-shadow: 0 24px 70px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+                }
 
                 & .car-information {
-                    font-weight: bold;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-family: var(--font-hud);
+                    font-size: 11px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: var(--accent);
+                    padding: 6px 14px;
+                    border: 1px solid var(--border);
+                    border-radius: 30px;
+                    background: rgba(168,230,25,0.06);
+
+                    & .dot{
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background: var(--accent);
+                        box-shadow: 0 0 8px var(--accent);
+                        animation: pulse 1.8s ease-in-out infinite;
+                    }
                 }
 
                 & h2 {
-                    font-size: 6em;
+                    font-size: 5.4em;
                     line-height: 1em;
-                    font-family: "Boldonse", system-ui;
+                    font-family: var(--font-display);
+                    text-align: right;
+                    text-shadow: 0 0 30px rgba(168,230,25,0.25);
+                }
+
+                & .model-year{
+                    font-family: var(--font-hud);
+                    font-size: 13px;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    color: var(--accent-2);
+                    margin-top: -12px;
                 }
 
                 & .description {
-                    color: rgb(201, 199, 199);
-                    font-size: 12px;
+                    color: var(--text-dim);
+                    font-size: 13px;
+                    line-height: 1.6;
                     text-align: right;
                     max-width: 400px;
                 }
 
-                & .information{
-                    border-radius: 30px;
-                    height: 35px;
-                    width: 120px;
+                & .quick-specs{
+                    display: grid;
+                    grid-template-columns: repeat(4, 100px);
+                    gap: 10px;
+                }
+
+                & .spec{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 4px;
+                    padding: 10px 12px;
+                    border: 1px solid var(--border-soft);
+                    border-right: 2px solid var(--accent-soft);
+                    border-radius: 6px;
+                    background: var(--panel);
+                    backdrop-filter: blur(6px);
+                }
+
+                & .spec-value{
+                    font-family: var(--font-hud);
+                    font-weight: 700;
+                    font-size: 17px;
+                    color: var(--text);
+
+                    & small{
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: var(--text-faint);
+                        margin-left: 2px;
+                    }
+                }
+
+                & .spec-label{
+                    font-size: 9px;
+                    letter-spacing: 1px;
                     text-transform: uppercase;
-                    border: 2px solid #000;
-                    background-color: #a8e619;
-                    color: #000;
+                    color: var(--text-faint);
+                }
+
+                & .information{
+                    margin-top: 4px;
+                    border-radius: 30px;
+                    height: 42px;
+                    padding: 0 26px;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                    border: 2px solid var(--accent);
+                    background: var(--accent);
+                    color: #04120a;
                     cursor: pointer;
                     font-weight: bold;
-                    font-family: "Boldonse", system-ui;
+                    font-family: var(--font-hud);
+                    font-size: 12px;
+                    transition: all 0.25s ease;
+                    box-shadow: 0 0 0 rgba(168,230,25,0);
+                }
+
+                & .information:hover{
+                    background: transparent;
+                    color: var(--accent);
+                    box-shadow: 0 0 24px var(--accent-soft);
                 }
             }
         }
@@ -126,8 +400,8 @@ section{
             height: 200px;
             width: 100%;
             top: 50%;
-            border-top: 1px solid #fff;
-
+            border-top: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 0 12px rgba(168,230,25,0.15);
         }
     }
 
@@ -139,6 +413,7 @@ section{
         transform: translate(-50%, -25px);
         display: flex;
         justify-content: space-between;
+        z-index: 4;
 
         & button:nth-child(1) {
             & img {
@@ -148,20 +423,26 @@ section{
 
         & button {
             top: 60%;
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
-            border: none;
+            border: 1px solid var(--border-soft);
+            background: var(--panel);
+            backdrop-filter: blur(6px);
             cursor: pointer;
+            transition: all 0.25s ease;
 
             & img {
-                width: 30px;
+                width: 26px;
                 margin-top: 4px;
                 cursor: pointer;
+                filter: brightness(0) invert(1);
             }
 
             &:hover {
-                background-color: #a8e619;
+                background: rgba(168,230,25,0.12);
+                border-color: var(--accent);
+                box-shadow: 0 0 22px var(--accent-soft);
             }
         }
     }
@@ -177,10 +458,22 @@ section{
         flex-direction: column;
         justify-content: end;
         gap: 15px;
+        z-index: 3;
+        pointer-events: none;
 
         & .number {
-            font-size: 5em;
-            font-family: "Boldonse", system-ui;
+            font-size: 4.2em;
+            font-family: var(--font-hud);
+            font-weight: 700;
+            color: var(--text);
+            text-shadow: 0 0 20px rgba(168,230,25,0.3);
+        }
+
+        & .number-total{
+            font-size: 0.35em;
+            color: var(--text-faint);
+            font-weight: 400;
+            margin-left: 4px;
         }
 
         & ul{
@@ -190,20 +483,35 @@ section{
             & li {
                 width: 50px;
                 height: 5px;
-                background-color: #a8e619;
+                background-color: rgba(168,230,25,0.2);
                 border-radius: 5px;
                 transition: 0.5s;
             }
 
             & .active {
-                background-color: white;
+                background-color: var(--accent);
+                box-shadow: 0 0 12px var(--accent-soft);
             }
         }
 
     }
 }
 
-section {
+@keyframes spinSlow{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+}
+
+@keyframes pulse{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: 0.35; }
+}
+
+/* ---------------------------------------------------------
+   Transições do slider
+--------------------------------------------------------- */
+
+section.container {
 
     & .list {
 
@@ -214,7 +522,7 @@ section {
             transition: 0.5s;
             opacity: 0;
 
-            & .car-ferrari{
+            & .car-visual{
                 & img {
                     transform: rotate(0);
                     transition: 0.5s;
@@ -223,7 +531,7 @@ section {
             }
 
             & .content{
-                & .car-ferrari, h2, .description, .information {
+                & h2, .model-year, .description, .quick-specs, .information {
                     transform: translateX(calc(200px * var(--calculation)));
                     transition: 0.7s;
                     transition-delay: 0.3s;
@@ -234,8 +542,16 @@ section {
                 transition-delay: 0.5s;
             }
 
+            & .model-year {
+                transition-delay: 0.6s;
+            }
+
             & .description {
                 transition-delay: 0.7s;
+            }
+
+            & .quick-specs {
+                transition-delay: 0.8s;
             }
 
             & .information {
@@ -249,18 +565,313 @@ section {
             transition: 0.5s;
             opacity: 1;
 
-            & .car-ferrari{
+            & .car-visual{
                 & img {
                     transform: rotate(-20deg);
                 }
             }
 
             & .content{
-                & .car-ferrari, h2, .description, .information {
+                & h2, .model-year, .description, .quick-specs, .information {
                     transform: translateX(0);
                 }
             }
 
         }
+    }
+}
+
+/* ---------------------------------------------------------
+   Modal — Ficha Técnica
+--------------------------------------------------------- */
+
+.modal-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(1,2,5,0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.open{
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-panel{
+    position: relative;
+    width: 480px;
+    max-width: 90vw;
+    max-height: 82vh;
+    overflow-y: auto;
+    background: var(--panel-strong);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 34px 30px 28px;
+    box-shadow: 0 0 0 1px rgba(168,230,25,0.06), 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(168,230,25,0.08);
+    transform: scale(0.92) translateY(10px);
+    transition: transform 0.35s ease;
+}
+
+.modal-overlay.open .modal-panel{
+    transform: scale(1) translateY(0);
+}
+
+.modal-close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border-soft);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.modal-close:hover{
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 16px var(--accent-soft);
+}
+
+.modal-body{
+    & .modal-tag{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-hud);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent-2);
+        margin-bottom: 10px;
+    }
+
+    & h3{
+        font-family: var(--font-display);
+        font-size: 2.1em;
+        line-height: 1.1em;
+        margin-bottom: 4px;
+    }
+
+    & .modal-subtitle{
+        font-family: var(--font-hud);
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        margin-bottom: 22px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--border-soft);
+    }
+
+    & .spec-table{
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    & .spec-row{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 11px 4px;
+        border-bottom: 1px dashed rgba(255,255,255,0.08);
+    }
+
+    & .spec-row:last-child{
+        border-bottom: none;
+    }
+
+    & .spec-row .label{
+        font-size: 12px;
+        color: var(--text-dim);
+        letter-spacing: 0.5px;
+    }
+
+    & .spec-row .value{
+        font-family: var(--font-hud);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        text-align: right;
+    }
+}
+
+/* ---------------------------------------------------------
+   Responsivo
+--------------------------------------------------------- */
+
+@media (max-width: 1100px){
+    header{
+        grid-template-columns: 1fr 1fr;
+        width: 92vw;
+    }
+
+    header img{
+        width: 150px;
+    }
+
+    header nav li{
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    section.container .list .item .content{
+        right: 20px;
+        width: 85%;
+    }
+
+    section.container .list .item .content .info-panel{
+        padding: 24px 26px;
+    }
+
+    section.container .list .item .content h2{
+        font-size: 3.4em;
+    }
+
+    section.container .list .item .content .quick-specs{
+        grid-template-columns: repeat(2, 100px);
+    }
+
+    section.container .arrows,
+    section.container .list{
+        width: 90vw;
+    }
+}
+
+@media (max-width: 640px){
+    body{
+        overflow-y: auto;
+    }
+
+    header{
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        top: 8px;
+    }
+
+    header img{
+        width: 130px;
+    }
+
+    header nav ul{
+        gap: 4px;
+    }
+
+    header nav li{
+        font-size: 9px;
+    }
+
+    section.container{
+        height: auto;
+        min-height: 100vh;
+        padding: 175px 0 60px;
+    }
+
+    section.container .list{
+        position: static;
+        height: auto;
+    }
+
+    section.container .list .item{
+        position: relative;
+        inset: auto;
+        display: none;
+    }
+
+    section.container .list .item.active{
+        display: block;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    section.container .list .item .car-visual{
+        position: static;
+        transform: none;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    section.container .list .item .car-visual img{
+        transform: rotate(-14deg) !important;
+    }
+
+    section.container .list .item .hud-ring{
+        left: 19%;
+    }
+
+    section.container .list .item .hud-ring--reverse{
+        left: 11%;
+    }
+
+    section.container .list .item .content{
+        position: static;
+        width: 100%;
+        align-items: center;
+        transform: none !important;
+    }
+
+    section.container .list .item .content .info-panel{
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        padding: 26px 22px;
+        transform: none !important;
+    }
+
+    section.container .list .item .content h2,
+    section.container .list .item .content .model-year,
+    section.container .list .item .content .description{
+        text-align: center;
+        transform: none !important;
+    }
+
+    section.container .list .item .content h2{
+        font-size: 2.6em;
+    }
+
+    section.container .list .item .content .quick-specs{
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        transform: none !important;
+    }
+
+    section.container .list .item .content .spec{
+        align-items: center;
+        transform: none !important;
+    }
+
+    section.container .list .item .content .information{
+        transform: none !important;
+    }
+
+    section.container .arrows{
+        position: static;
+        transform: none;
+        width: 90vw;
+        margin: 20px auto 0;
+    }
+
+    section.container .indicators{
+        position: static;
+        transform: none;
+        height: auto;
+        align-items: center;
+        margin-top: 24px;
     }
 }

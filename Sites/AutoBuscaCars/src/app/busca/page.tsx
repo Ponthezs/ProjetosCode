@@ -50,7 +50,7 @@ function SearchResultsContent() {
   const activeFilterTags = [
     filters.search && `Busca: "${filters.search}"`,
     filters.brand && `Marca: ${filters.brand}`,
-    filters.onlyBelowFipe && `🟢 Abaixo da FIPE`,
+    filters.onlyBelowFipe && `Abaixo da FIPE`,
     filters.maxPrice && `Até R$ ${(filters.maxPrice / 1000).toFixed(0)}k`,
     filters.minYear && `Ano: ${filters.minYear}+`,
     filters.maxMileage && `Até ${(filters.maxMileage / 1000).toFixed(0)}k km`,
@@ -62,14 +62,14 @@ function SearchResultsContent() {
   return (
     <div className="space-y-6">
       {/* Top Search & Filter Bar */}
-      <div className="bg-slate-900 p-4 sm:p-5 rounded-3xl border border-slate-800 space-y-4 shadow-lg">
+      <div className="bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4 shadow-lg">
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <input
               type="text"
               value={filters.search}
               onChange={e => setFilters({ ...filters, search: e.target.value })}
-              placeholder="🔎 Digite marca, modelo ou versão (ex: Corolla XEi 2022)..."
+              placeholder="Digite marca, modelo ou versão (ex: Corolla XEi 2022)..."
               className="w-full bg-slate-950 border border-slate-800 rounded-2xl py-3 pl-11 pr-4 text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"
             />
             <Search className="absolute left-3.5 top-3.5 w-5 h-5 text-brand-400" />
@@ -83,7 +83,7 @@ function SearchResultsContent() {
             <SlidersHorizontal className="w-4 h-4 text-brand-400" />
             <span>Filtros</span>
             {activeFilterTags.length > 0 && (
-              <span className="bg-brand-500 text-white text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="bg-brand-500 text-white text-[11px] font-semibold w-5 h-5 rounded-full flex items-center justify-center">
                 {activeFilterTags.length}
               </span>
             )}
@@ -119,7 +119,7 @@ function SearchResultsContent() {
           <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800 text-xs">
             <div className="text-slate-300 font-medium flex items-center gap-2">
               {isPending && <Loader2 className="w-4 h-4 text-brand-400 animate-spin" />}
-              <span>Encontrados <strong className="text-white font-extrabold">{ads.length}</strong> veículos</span>
+              <span>Encontrados <strong className="text-white font-semibold">{ads.length}</strong> veículos</span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -142,9 +142,9 @@ function SearchResultsContent() {
           </div>
 
           {ads.length === 0 ? (
-            <div className="bg-slate-900 p-12 rounded-3xl border border-slate-800 text-center space-y-4">
+            <div className="bg-slate-900 p-12 rounded-2xl border border-slate-800 text-center space-y-4">
               <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-slate-400">
-                🔎
+                <Search className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-white">Nenhum veículo encontrado</h3>
               <p className="text-sm text-slate-400 max-w-md mx-auto">

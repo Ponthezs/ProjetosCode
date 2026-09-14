@@ -115,7 +115,7 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-4xl font-black text-white">{ad.title}</h1>
+        <h1 className="text-2xl sm:text-4xl font-bold text-white">{ad.title}</h1>
         <p className="text-sm text-slate-400">{ad.version}</p>
       </div>
 
@@ -123,7 +123,7 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Gallery Section */}
         <div className="lg:col-span-2 space-y-3">
-          <div className="relative aspect-[16/10] w-full rounded-3xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl">
+          <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl">
             <Image
               src={ad.images[activeImageIndex] || ad.images[0]}
               alt={ad.title}
@@ -151,11 +151,11 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* Action Box: Price & Direct Link */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl flex flex-col justify-between">
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl flex flex-col justify-between">
           <div className="space-y-4">
             <div className="space-y-1">
               <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Preço Solicitado</span>
-              <div className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              <div className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
                 {formatBRL(ad.price)}
               </div>
 
@@ -190,28 +190,28 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
             {/* Quick Specs Cards */}
             <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-brand-400 shrink-0" />
+                <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
                   <span className="block text-[10px] text-slate-400 font-normal">Ano</span>
                   <span>{ad.year} / {ad.modelYear}</span>
                 </div>
               </div>
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                <Gauge className="w-4 h-4 text-cyan-400 shrink-0" />
+                <Gauge className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
                   <span className="block text-[10px] text-slate-400 font-normal">KM</span>
                   <span>{formatKm(ad.mileage)}</span>
                 </div>
               </div>
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                <Cog className="w-4 h-4 text-amber-400 shrink-0" />
+                <Cog className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
                   <span className="block text-[10px] text-slate-400 font-normal">Câmbio</span>
                   <span>{ad.transmission}</span>
                 </div>
               </div>
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center gap-2">
-                <Fuel className="w-4 h-4 text-emerald-400 shrink-0" />
+                <Fuel className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
                   <span className="block text-[10px] text-slate-400 font-normal">Combustível</span>
                   <span>{ad.fuel}</span>
@@ -240,7 +240,7 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
               href={ad.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-base shadow-xl shadow-brand-600/30 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
+              className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-base shadow-xl shadow-brand-600/30 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5"
             >
               <span>Abrir anúncio original no {ad.source}</span>
               <ExternalLink className="w-5 h-5" />
@@ -257,20 +257,20 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
         <div className="lg:col-span-2 space-y-6">
           <ScoreGauge score={aiScore} />
 
-          <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-6">
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-6">
             <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
-              <h3 className="font-extrabold text-base text-white">Análise da Descrição do Vendedor</h3>
+              <h3 className="font-semibold text-base text-white">Análise da Descrição do Vendedor</h3>
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-extrabold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <h4 className="text-xs font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" />
                 Destaques Positivos Mencionados ({aiScore.positivePoints.length})
               </h4>
               <ul className="space-y-2 text-xs text-slate-200">
                 {aiScore.positivePoints.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-2 bg-emerald-950/30 p-2.5 rounded-xl border border-emerald-800/40">
-                    <span className="text-emerald-400 font-bold shrink-0">✓</span>
+                    <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-emerald-400 shrink-0" />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -278,14 +278,14 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+              <h4 className="text-xs font-semibold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                 <AlertTriangle className="w-4 h-4" />
                 Pontos de Atenção & Omissões ({aiScore.attentionPoints.length})
               </h4>
               <ul className="space-y-2 text-xs text-slate-200">
                 {aiScore.attentionPoints.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-2 bg-amber-950/30 p-2.5 rounded-xl border border-amber-800/40">
-                    <span className="text-amber-400 font-bold shrink-0">⚠️</span>
+                    <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-amber-400 shrink-0" />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -299,13 +299,13 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] font-extrabold text-brand-400 uppercase block mb-1">DADO INFORMADO PELO ANÚNCIO</span>
+                  <span className="text-[10px] font-semibold text-brand-400 uppercase block mb-1">DADO INFORMADO PELO ANÚNCIO</span>
                   <p className="text-[11px] text-slate-300">
                     Preço, ano, quilometragem, fotos e texto fornecidos diretamente no {ad.source}.
                   </p>
                 </div>
                 <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] font-extrabold text-emerald-400 uppercase block mb-1">ESTIMATIVA DO SISTEMA</span>
+                  <span className="text-[10px] font-semibold text-emerald-400 uppercase block mb-1">ESTIMATIVA DO SISTEMA</span>
                   <p className="text-[11px] text-slate-300">
                     Comparativo com Tabela FIPE, média de mercado e análise de pontos positivos/atenção.
                   </p>
@@ -323,8 +323,8 @@ export default function CarDetailPage({ params }: { params: { id: string } }) {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-slate-900 p-5 rounded-3xl border border-slate-800 space-y-4">
-            <h3 className="text-sm font-extrabold text-white uppercase tracking-wider border-b border-slate-800 pb-3">
+          <div className="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+            <h3 className="text-sm font-semibold text-white uppercase tracking-wider border-b border-slate-800 pb-3">
               Especificações Técnicas
             </h3>
 

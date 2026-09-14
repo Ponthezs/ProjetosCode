@@ -15,13 +15,13 @@ export default function AlertsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xl">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
             <Bell className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-black text-white">Alertas de Preço</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">Alertas de Preço</h1>
             <p className="text-xs sm:text-sm text-slate-400">
               Gerencie seus alertas ativos e seja notificado quando surgir uma nova oportunidade
             </p>
@@ -30,7 +30,7 @@ export default function AlertsPage() {
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all"
+          className="py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all"
         >
           <Plus className="w-4 h-4" />
           <span>Criar Novo Alerta</span>
@@ -39,7 +39,7 @@ export default function AlertsPage() {
 
       {/* Alerts Grid */}
       {alerts.length === 0 ? (
-        <div className="bg-slate-900/80 p-12 rounded-3xl border border-slate-800 text-center space-y-4">
+        <div className="bg-slate-900/80 p-12 rounded-2xl border border-slate-800 text-center space-y-4">
           <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-amber-400">
             <Bell className="w-8 h-8" />
           </div>
@@ -49,7 +49,7 @@ export default function AlertsPage() {
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="py-3 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm"
+            className="py-3 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm"
           >
             Criar Primeiro Alerta
           </button>
@@ -77,7 +77,7 @@ export default function AlertsPage() {
                   </button>
                 </div>
 
-                <h3 className="font-extrabold text-base text-white">{alert.title}</h3>
+                <h3 className="font-semibold text-base text-white">{alert.title}</h3>
 
                 <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 pt-1">
                   <div className="bg-slate-950 p-2 rounded-xl border border-slate-800">

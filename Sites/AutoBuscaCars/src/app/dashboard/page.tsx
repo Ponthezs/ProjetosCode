@@ -17,13 +17,13 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="bg-slate-900/90 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
+      <div className="bg-slate-900/90 p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+          <div className="w-14 h-14 rounded-2xl bg-brand-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
             <User className="w-7 h-7" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white">Meu Painel AutoBusca</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">Meu Painel AutoBusca</h1>
             <p className="text-xs sm:text-sm text-slate-400">
               Resumo de suas atividades, veículos salvos, alertas configurados e tendências de preço
             </p>
@@ -38,7 +38,7 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between text-rose-400">
               <Heart className="w-5 h-5 fill-current" />
-              <span className="text-xl font-black">{favorites.length}</span>
+              <span className="text-xl font-bold">{favorites.length}</span>
             </div>
             <span className="text-xs text-slate-400 font-bold block">Favoritos Salvos</span>
           </Link>
@@ -49,7 +49,7 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between text-amber-400">
               <Bell className="w-5 h-5" />
-              <span className="text-xl font-black">{alerts.length}</span>
+              <span className="text-xl font-bold">{alerts.length}</span>
             </div>
             <span className="text-xs text-slate-400 font-bold block">Alertas Ativos</span>
           </Link>
@@ -60,7 +60,7 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between text-brand-400">
               <Scale className="w-5 h-5" />
-              <span className="text-xl font-black">{compareList.length}</span>
+              <span className="text-xl font-bold">{compareList.length}</span>
             </div>
             <span className="text-xs text-slate-400 font-bold block">No Comparador</span>
           </Link>
@@ -69,9 +69,9 @@ export default function DashboardPage() {
             href="/oportunidades"
             className="bg-slate-950 p-4 rounded-2xl border border-slate-800 hover:border-slate-700 transition-colors space-y-1"
           >
-            <div className="flex items-center justify-between text-emerald-400">
+            <div className="flex items-center justify-between text-amber-400">
               <Flame className="w-5 h-5 fill-current" />
-              <span className="text-xl font-black">20+</span>
+              <span className="text-xl font-bold">20+</span>
             </div>
             <span className="text-xs text-slate-400 font-bold block">Oportunidades</span>
           </Link>
@@ -82,9 +82,9 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left 2 Cols: Favorites & Recent Deals */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-extrabold text-base text-white flex items-center gap-2">
+              <h3 className="font-semibold text-base text-white flex items-center gap-2">
                 <Heart className="w-5 h-5 text-rose-500 fill-current" />
                 Meus Veículos Favoritos
               </h3>
@@ -104,9 +104,9 @@ export default function DashboardPage() {
             )}
           </div>
 
-          <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-extrabold text-base text-white flex items-center gap-2">
+              <h3 className="font-semibold text-base text-white flex items-center gap-2">
                 <Flame className="w-5 h-5 text-amber-400 fill-current" />
                 Últimas Oportunidades no seu Perfil
               </h3>
@@ -127,8 +127,8 @@ export default function DashboardPage() {
         <div className="space-y-6">
           <PriceHistoryChart modelName="Toyota Corolla / Honda Civic" />
 
-          <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4 text-xs">
-            <h3 className="font-extrabold text-sm text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 text-xs">
+            <h3 className="font-semibold text-sm text-white border-b border-slate-800 pb-3 flex items-center gap-2">
               <Search className="w-4 h-4 text-brand-400" />
               Minhas Buscas Recentes
             </h3>

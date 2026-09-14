@@ -9,10 +9,10 @@ export default function Footer() {
         {/* Brand Column */}
         <div className="space-y-4 md:col-span-2">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center shadow-md">
+            <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center shadow-md">
               <Car className="w-5 h-5 text-white" />
             </div>
-            <span className="font-extrabold text-xl text-white">
+            <span className="font-semibold text-xl text-white">
               Auto<span className="text-brand-400">Busca</span>
             </span>
           </div>
@@ -39,7 +39,7 @@ export default function Footer() {
           <p className="text-xs text-slate-400">Integração preparada para feeds e fontes autorizadas:</p>
           <ul className="space-y-2 text-xs font-medium text-slate-300">
             <li className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400"></span>
               <span>Webmotors</span>
             </li>
             <li className="flex items-center gap-1.5">
@@ -68,7 +68,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/oportunidades" className="hover:text-amber-400 transition-colors text-amber-400 font-semibold">
-                🔥 Melhores Oportunidades
+                Melhores Oportunidades
               </Link>
             </li>
             <li>

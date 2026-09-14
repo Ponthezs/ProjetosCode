@@ -21,7 +21,7 @@ export default function HowItWorksPage() {
     {
       num: '3',
       title: 'Comparamos preços e especificações',
-      desc: 'Calculamos a média de mercado do veículo e classificamos visualmente (🟢 Excelente, 🔵 Bom, 🟡 Média, 🔴 Elevado) com variação em R$.',
+      desc: 'Calculamos a média de mercado do veículo e classificamos visualmente por faixas (Excelente, Bom, Médio, Elevado) com variação em R$.',
       icon: Scale,
       color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
     },
@@ -50,7 +50,7 @@ export default function HowItWorksPage() {
           <span>Metodologia & Transparência</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
           Como Funciona o <span className="text-brand-400">AutoBusca</span>
         </h1>
 
@@ -65,14 +65,14 @@ export default function HowItWorksPage() {
           const Icon = step.icon;
           return (
             <React.Fragment key={step.num}>
-              <div className="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl flex flex-col sm:flex-row items-start gap-5">
+              <div className="bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl flex flex-col sm:flex-row items-start gap-5">
                 <div className={`p-4 rounded-2xl border ${step.color} shrink-0`}>
                   <Icon className="w-8 h-8" />
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">Passo {step.num} de 5</span>
-                  <h3 className="text-xl font-extrabold text-white">{step.title}</h3>
+                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Passo {step.num} de 5</span>
+                  <h3 className="text-xl font-semibold text-white">{step.title}</h3>
                   <p className="text-sm text-slate-300 leading-relaxed">{step.desc}</p>
                 </div>
               </div>
@@ -88,8 +88,8 @@ export default function HowItWorksPage() {
       </div>
 
       {/* Disclaimer Box */}
-      <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
-        <h3 className="font-extrabold text-base text-white flex items-center gap-2">
+      <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+        <h3 className="font-semibold text-base text-white flex items-center gap-2">
           <ShieldCheck className="w-5 h-5 text-emerald-400" />
           Compromisso com a Transparência
         </h3>
@@ -107,7 +107,7 @@ export default function HowItWorksPage() {
       <div className="text-center pt-4">
         <Link
           href="/busca"
-          className="inline-flex items-center gap-2 py-4 px-8 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black text-base shadow-xl shadow-brand-600/30 transition-all transform hover:-translate-y-0.5"
+          className="inline-flex items-center gap-2 py-4 px-8 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-base shadow-xl shadow-brand-600/30 transition-all transform hover:-translate-y-0.5"
         >
           <span>Experimentar a Busca Agora</span>
           <ExternalLink className="w-5 h-5" />

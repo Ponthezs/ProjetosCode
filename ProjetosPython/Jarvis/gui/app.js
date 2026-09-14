@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingVoiceEl = document.getElementById('setting-voice');
     const settingSmoothingEl = document.getElementById('setting-smoothing');
     const smoothingValLabelEl = document.getElementById('smoothing-val-label');
+    const settingElevenVoiceIdEl = document.getElementById('setting-elevenlabs-voice-id');
+    const elevenVoiceIdGroupEl = document.getElementById('elevenlabs-voice-id-group');
 
     let commandCounter = 0;
     let cameraActive = false;
@@ -244,19 +246,28 @@ document.addEventListener('DOMContentLoaded', () => {
         smoothingValLabelEl.textContent = `Nível ${e.target.value}`;
     });
 
+    // Mostra o campo de Voice ID só quando ElevenLabs está selecionado
+    function syncElevenVoiceIdVisibility() {
+        elevenVoiceIdGroupEl.classList.toggle('hidden', settingVoiceEl.value !== 'ElevenLabs');
+    }
+    settingVoiceEl.addEventListener('change', syncElevenVoiceIdVisibility);
+    syncElevenVoiceIdVisibility();
+
     btnSaveSettingsEl.addEventListener('click', () => {
         const newCity = settingCityEl.value.trim() || "Maringá";
         const newProfile = settingProfileEl.value;
         const newVoice = settingVoiceEl.value;
         const newSmoothing = parseInt(settingSmoothingEl.value);
+        const newElevenVoiceId = settingElevenVoiceIdEl.value.trim();
 
         profileNameEl.textContent = newProfile;
-        
+
         if (window.pywebview && window.pywebview.api) {
             window.pywebview.api.save_settings({
                 city: newCity,
                 profile: newProfile,
                 voice: newVoice,
+                elevenlabs_voice_id: newElevenVoiceId,
                 smoothing: newSmoothing
             });
         }

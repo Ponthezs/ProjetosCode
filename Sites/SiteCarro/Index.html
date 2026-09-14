@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Garage Pontes — coleção de carros com ficha técnica completa.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Garage Pontes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="fx-grid" aria-hidden="true"></div>
+    <div class="fx-glow fx-glow--a" aria-hidden="true"></div>
+    <div class="fx-glow fx-glow--b" aria-hidden="true"></div>
+    <div class="fx-scan" aria-hidden="true"></div>
+
     <header>
-        <img src="/img/logo.png" alt="Logo FP">
+        <img src="img/logo.png" alt="Logo Garage Pontes">
         <nav>
             <ul>
-                <li>HOME</li>
+                <li class="nav-active">HOME</li>
                 <li>CARROS</li>
                 <li>FALE CONOSCO</li>
             </ul>
@@ -26,80 +30,188 @@
 
     <section class="container">
         <div class="list">
-            <div class="item active">
-                <div class="car-ferrari">
-                    <img src="img/parati.png" alt="Parati">
+
+            <div class="item active" data-index="0">
+                <div class="car-visual">
+                    <div class="hud-ring"></div>
+                    <div class="hud-ring hud-ring--reverse"></div>
+                    <div class="car-ferrari">
+                        <img src="img/parati.png" alt="Volkswagen Parati G4">
+                    </div>
                 </div>
                 <div class="content">
-                    <p class="car-information">
-                        Único Dono
-                    </p>
-                    <h2>
-                        Parati
-                    </h2>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure itaque, in quis laudantium illum soluta deleniti error quidem ex cupiditate, neque cumque. Aut libero voluptatibus ut aliquid voluptate officiis commodi!
-                    </p>
-                    <button class="information">
-                        Saiba Mais!
-                    </button>
+                    <div class="info-panel">
+                        <p class="car-information"><span class="dot"></span>Único Dono</p>
+                        <h2>Parati</h2>
+                        <p class="model-year">G4 1.6 Total Flex &middot; 2011</p>
+                        <p class="description">
+                            A perua que provou que praticidade também pode ter estilo. Robusta, econômica e feita para rodar — um clássico da Volkswagen no Brasil.
+                        </p>
+                        <div class="quick-specs">
+                            <div class="spec">
+                                <span class="spec-value">101<small>cv</small></span>
+                                <span class="spec-label">Potência</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">14,2<small>kgfm</small></span>
+                                <span class="spec-label">Torque</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">11,4<small>s</small></span>
+                                <span class="spec-label">0&ndash;100 km/h</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">182<small>km/h</small></span>
+                                <span class="spec-label">Vel. Máxima</span>
+                            </div>
+                        </div>
+                        <button class="information" data-car="parati">Ficha Técnica</button>
+                    </div>
                 </div>
             </div>
-            <div class="item">
-                <div class="car-ferrari">
-                    <img src="img/GolfVariant.png" alt="Golf">
+
+            <div class="item" data-index="1">
+                <div class="car-visual">
+                    <div class="hud-ring"></div>
+                    <div class="hud-ring hud-ring--reverse"></div>
+                    <div class="car-ferrari">
+                        <img src="img/GolfVariant.png" alt="Volkswagen Golf Variant">
+                    </div>
                 </div>
                 <div class="content">
-                    <p class="car-information">
-                        Único Dono
-                    </p>
-                    <h2 class="Golf">
-                        Golf
-                    </h2>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure itaque, in quis laudantium illum soluta deleniti error quidem ex cupiditate, neque cumque. Aut libero voluptatibus ut aliquid voluptate officiis commodi!
-                    </p>
-                    <button class="information">
-                        Saiba Mais!
-                    </button>
+                    <div class="info-panel">
+                        <p class="car-information"><span class="dot"></span>Único Dono</p>
+                        <h2 class="Golf">Golf Variant</h2>
+                        <p class="model-year">Comfortline 1.4 TSI DSG &middot; 2016</p>
+                        <p class="description">
+                            Uma perua europeia com alma esportiva: motor turbo, acabamento refinado e um porta-malas gigante para quem não abre mão de tecnologia e conforto.
+                        </p>
+                        <div class="quick-specs">
+                            <div class="spec">
+                                <span class="spec-value">140<small>cv</small></span>
+                                <span class="spec-label">Potência</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">25,5<small>kgfm</small></span>
+                                <span class="spec-label">Torque</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">9,5<small>s</small></span>
+                                <span class="spec-label">0&ndash;100 km/h</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">205<small>km/h</small></span>
+                                <span class="spec-label">Vel. Máxima</span>
+                            </div>
+                        </div>
+                        <button class="information" data-car="golf">Ficha Técnica</button>
+                    </div>
                 </div>
             </div>
-            <div class="item">
-                <div class="car-ferrari">
-                    <img src="img/Porsche.png" alt="ferrari">
+
+            <div class="item" data-index="2">
+                <div class="car-visual">
+                    <div class="hud-ring"></div>
+                    <div class="hud-ring hud-ring--reverse"></div>
+                    <div class="car-ferrari">
+                        <img src="img/Porsche.png" alt="Porsche 911 Turbo S">
+                    </div>
                 </div>
                 <div class="content">
-                    <p class="car-information">
-                        Único Dono
-                    </p>
-                    <h2>
-                        Porsche
-                    </h2>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure itaque, in quis laudantium illum soluta deleniti error quidem ex cupiditate, neque cumque. Aut libero voluptatibus ut aliquid voluptate officiis commodi!
-                    </p>
-                    <button class="information">
-                        Saiba Mais!
-                    </button>
+                    <div class="info-panel">
+                        <p class="car-information"><span class="dot"></span>Único Dono</p>
+                        <h2>911 Turbo S</h2>
+                        <p class="model-year">Porsche 992 &middot; 2021</p>
+                        <p class="description">
+                            O topo da linha 911. Tração integral, 650 cv e um som de motor boxer inconfundível — a definição de superesportivo do dia a dia.
+                        </p>
+                        <div class="quick-specs">
+                            <div class="spec">
+                                <span class="spec-value">650<small>cv</small></span>
+                                <span class="spec-label">Potência</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">81,6<small>kgfm</small></span>
+                                <span class="spec-label">Torque</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">2,7<small>s</small></span>
+                                <span class="spec-label">0&ndash;100 km/h</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">330<small>km/h</small></span>
+                                <span class="spec-label">Vel. Máxima</span>
+                            </div>
+                        </div>
+                        <button class="information" data-car="porsche">Ficha Técnica</button>
+                    </div>
                 </div>
             </div>
+
+            <div class="item" data-index="3">
+                <div class="car-visual">
+                    <div class="hud-ring"></div>
+                    <div class="hud-ring hud-ring--reverse"></div>
+                    <div class="car-ferrari">
+                        <img src="img/polo.png" alt="Volkswagen Polo Sportline">
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="info-panel">
+                        <p class="car-information"><span class="dot"></span>Único Dono</p>
+                        <h2>Polo</h2>
+                        <p class="model-year">Sportline 1.6 MSI &middot; 2015</p>
+                        <p class="description">
+                            Compacto, ágil e com pegada esportiva. Rodas escurecidas, aerofólio e motor MSI de resposta rápida para o dia a dia na cidade.
+                        </p>
+                        <div class="quick-specs">
+                            <div class="spec">
+                                <span class="spec-value">101<small>cv</small></span>
+                                <span class="spec-label">Potência</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">15,4<small>kgfm</small></span>
+                                <span class="spec-label">Torque</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">11,2<small>s</small></span>
+                                <span class="spec-label">0&ndash;100 km/h</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-value">185<small>km/h</small></span>
+                                <span class="spec-label">Vel. Máxima</span>
+                            </div>
+                        </div>
+                        <button class="information" data-car="polo">Ficha Técnica</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-
         <div class="arrows">
-            <button id="prev"><img src="img/arrow.png" alt="seta esquerda"></button>
-            <button id="next"><img src="img/arrow.png" alt="seta direita"></button>
+            <button id="prev" aria-label="Carro anterior"><img src="img/arrow.png" alt="seta esquerda"></button>
+            <button id="next" aria-label="Próximo carro"><img src="img/arrow.png" alt="seta direita"></button>
         </div>
 
         <div class="indicators">
-            <div class="number">01</div>
+            <div class="number">01<span class="number-total">/04</span></div>
             <ul>
                 <li class="active"></li>
                 <li></li>
-                <li></li>   
+                <li></li>
+                <li></li>
             </ul>
         </div>
     </section>
+
+    <div class="modal-overlay" id="specModal">
+        <div class="modal-panel">
+            <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

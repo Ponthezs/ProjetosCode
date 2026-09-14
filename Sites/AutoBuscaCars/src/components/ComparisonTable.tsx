@@ -7,7 +7,7 @@ import { CarAd } from '../lib/types';
 import { analyzeCarPrice } from '../lib/engine/priceAnalyzer';
 import { evaluateCarAd } from '../lib/engine/aiEvaluator';
 import { useApp } from '../context/AppContext';
-import { X, ExternalLink, Star, Trophy } from 'lucide-react';
+import { X, ExternalLink, Star, Trophy, Scale } from 'lucide-react';
 
 interface ComparisonTableProps {
   cars: CarAd[];
@@ -18,9 +18,9 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
 
   if (cars.length === 0) {
     return (
-      <div className="bg-slate-900/80 p-8 rounded-3xl border border-slate-800 text-center space-y-4">
+      <div className="bg-slate-900/80 p-8 rounded-2xl border border-slate-800 text-center space-y-4">
         <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-slate-400">
-          ⚖️
+          <Scale className="w-7 h-7" />
         </div>
         <h3 className="text-xl font-bold text-white">Nenhum veículo selecionado para comparação</h3>
         <p className="text-sm text-slate-400 max-w-md mx-auto">
@@ -53,12 +53,12 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
   const maxScore = Math.max(...carScores);
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl space-y-0">
+    <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl space-y-0">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse min-w-[700px]">
           <thead>
             <tr className="bg-slate-950 border-b border-slate-800">
-              <th className="p-4 w-48 text-xs font-extrabold uppercase text-slate-400 tracking-wider">
+              <th className="p-4 w-48 text-xs font-semibold uppercase text-slate-400 tracking-wider">
                 Característica
               </th>
               {cars.map((car, index) => {
@@ -85,7 +85,7 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
                           className="object-cover"
                         />
                         {isBestScore && (
-                          <div className="absolute top-2 left-2 bg-emerald-500 text-slate-950 font-extrabold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
+                          <div className="absolute top-2 left-2 bg-emerald-500 text-slate-950 font-semibold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
                             <Trophy className="w-3 h-3" />
                             Melhor Score
                           </div>
@@ -94,7 +94,7 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
 
                       <div>
                         <span className="text-[11px] font-bold text-brand-400 uppercase tracking-wider">{car.brand}</span>
-                        <h4 className="font-extrabold text-base text-white line-clamp-1">{car.model}</h4>
+                        <h4 className="font-semibold text-base text-white line-clamp-1">{car.model}</h4>
                         <p className="text-xs text-slate-400 line-clamp-1">{car.version}</p>
                       </div>
                     </div>
@@ -110,10 +110,10 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
               {cars.map(car => {
                 const isBest = car.price === minPrice;
                 return (
-                  <td key={car.id} className={`p-4 font-extrabold border-l border-slate-800/60 ${isBest ? 'bg-emerald-950/30 text-emerald-300' : 'text-white'}`}>
+                  <td key={car.id} className={`p-4 font-semibold border-l border-slate-800/60 ${isBest ? 'bg-emerald-950/30 text-emerald-300' : 'text-white'}`}>
                     <div className="flex items-center gap-1.5">
                       <span>{formatBRL(car.price)}</span>
-                      {isBest && <span className="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">Menor preço</span>}
+                      {isBest && <span className="text-[10px] bg-emerald-500 text-slate-950 font-semibold px-1.5 py-0.5 rounded">Menor preço</span>}
                     </div>
                   </td>
                 );
@@ -129,7 +129,7 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
                 const isBest = s.totalScore === maxScore;
                 return (
                   <td key={car.id} className={`p-4 border-l border-slate-800/60 ${isBest ? 'bg-emerald-950/30' : ''}`}>
-                    <div className="flex items-center gap-1.5 font-black text-amber-400">
+                    <div className="flex items-center gap-1.5 font-bold text-amber-400">
                       <Star className="w-4 h-4 fill-current" />
                       <span>{s.totalScore.toFixed(1)} / 10</span>
                     </div>
@@ -160,7 +160,7 @@ export default function ComparisonTable({ cars }: ComparisonTableProps) {
                   <td key={car.id} className={`p-4 border-l border-slate-800/60 ${isBest ? 'bg-emerald-950/30 text-emerald-300 font-bold' : 'text-slate-200'}`}>
                     <div className="flex items-center gap-1.5">
                       <span>{formatKm(car.mileage)}</span>
-                      {isBest && <span className="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">Menor KM</span>}
+                      {isBest && <span className="text-[10px] bg-emerald-500 text-slate-950 font-semibold px-1.5 py-0.5 rounded">Menor KM</span>}
                     </div>
                   </td>
                 );
