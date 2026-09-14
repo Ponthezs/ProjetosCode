@@ -42,14 +42,14 @@ export default function ScoreGauge({ score, compact = false }: ScoreGaugeProps) 
       {/* Header Total Score */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div>
-          <h3 className="text-base font-extrabold text-white">Avaliação Geral do Veículo</h3>
+          <h3 className="text-base font-semibold text-white">Avaliação Geral do Veículo</h3>
           <p className="text-xs text-slate-400">Índice sintético baseado em dados do mercado e do anúncio</p>
         </div>
         <div className={`flex items-center gap-2 px-4 py-2 rounded-2xl border ${getScoreColor(totalScore)} shadow-sm`}>
           <Star className="w-6 h-6 fill-current text-amber-400" />
           <div className="flex flex-col">
             <span className="text-[10px] font-bold text-slate-400 uppercase">Nota AutoBusca</span>
-            <span className="text-xl font-black tracking-tight text-white">{totalScore.toFixed(1)} <span className="text-xs font-normal text-slate-400">/ 10</span></span>
+            <span className="text-xl font-bold tracking-tight text-white">{totalScore.toFixed(1)} <span className="text-xs font-normal text-slate-400">/ 10</span></span>
           </div>
         </div>
       </div>

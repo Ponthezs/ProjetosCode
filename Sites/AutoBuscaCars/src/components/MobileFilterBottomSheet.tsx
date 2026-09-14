@@ -30,12 +30,12 @@ export default function MobileFilterBottomSheet({
       <div className="flex-1" onClick={onClose} />
 
       {/* Bottom Sheet Modal Container */}
-      <div className="bg-slate-900 border-t border-slate-700 rounded-t-3xl p-4 max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col justify-between space-y-4">
+      <div className="bg-slate-900 border-t border-slate-700 rounded-t-2xl p-4 max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col justify-between space-y-4">
         {/* Sheet Grab Handle & Header */}
         <div className="flex flex-col items-center gap-2 sticky top-0 bg-slate-900 z-10 pb-2 border-b border-slate-800">
           <div className="w-12 h-1.5 bg-slate-700 rounded-full" />
           <div className="w-full flex items-center justify-between">
-            <h3 className="font-extrabold text-lg text-white">⚙️ Filtros Avançados</h3>
+            <h3 className="font-semibold text-lg text-white">Filtros Avançados</h3>
             <button
               onClick={onClose}
               className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white"
@@ -58,7 +58,7 @@ export default function MobileFilterBottomSheet({
           </button>
           <button
             onClick={onClose}
-            className="flex-1 py-3 px-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/30"
+            className="flex-1 py-3 px-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/30"
           >
             <Check className="w-4 h-4" />
             <span>Ver {resultCount} {resultCount === 1 ? 'anúncio' : 'anúncios'}</span>

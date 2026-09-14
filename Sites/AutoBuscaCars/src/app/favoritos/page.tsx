@@ -15,13 +15,13 @@ export default function FavoritesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between bg-slate-900/90 p-6 rounded-3xl border border-slate-800 shadow-xl">
+      <div className="flex items-center justify-between bg-slate-900/90 p-6 rounded-2xl border border-slate-800 shadow-xl">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
             <Heart className="w-6 h-6 fill-current" />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-black text-white">Meus Carros Favoritos</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">Meus Carros Favoritos</h1>
             <p className="text-xs sm:text-sm text-slate-400">
               Acompanhe alterações de preço e disponibilidade dos anúncios que você salvou ({favoriteCars.length} salvos)
             </p>
@@ -30,7 +30,7 @@ export default function FavoritesPage() {
       </div>
 
       {favoriteCars.length === 0 ? (
-        <div className="bg-slate-900/80 p-12 rounded-3xl border border-slate-800 text-center space-y-4">
+        <div className="bg-slate-900/80 p-12 rounded-2xl border border-slate-800 text-center space-y-4">
           <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-rose-400">
             <Heart className="w-8 h-8" />
           </div>

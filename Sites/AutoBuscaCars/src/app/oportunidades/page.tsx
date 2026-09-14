@@ -41,21 +41,21 @@ export default function OpportunitiesPage() {
   return (
     <div className="space-y-6">
       {/* Header Showcase Banner */}
-      <div className="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-amber-500/30 shadow-xl space-y-4">
+      <div className="bg-slate-900 p-6 sm:p-8 rounded-2xl border border-amber-500/30 shadow-xl space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-amber-500 text-slate-950 font-black shadow-md">
+            <div className="p-3 rounded-2xl bg-amber-500 text-slate-950 font-bold shadow-md">
               <Flame className="w-7 h-7 fill-current" />
             </div>
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-wider text-amber-400">Oportunidades em Destaque</span>
-              <h1 className="text-2xl sm:text-3xl font-black text-white">Carros Abaixo da Tabela FIPE</h1>
+              <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Oportunidades em Destaque</span>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">Carros Abaixo da Tabela FIPE</h1>
             </div>
           </div>
 
           <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-right">
             <span className="text-xs text-slate-400 font-medium block">Desconto FIPE acumulado</span>
-            <span className="text-xl sm:text-2xl font-black text-emerald-400">{formatBRL(totalPotentialSavings)}</span>
+            <span className="text-xl sm:text-2xl font-bold text-emerald-400">{formatBRL(totalPotentialSavings)}</span>
           </div>
         </div>
 
@@ -92,12 +92,12 @@ export default function OpportunitiesPage() {
         {sortedDeals.map(({ ad, priceAnalysis, deal }) => (
           <div key={ad.id} className="relative flex flex-col justify-between">
             <div className="z-10 -mb-3 mx-4 bg-slate-950 text-slate-100 p-2.5 rounded-2xl border border-emerald-500/40 shadow-lg flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1.5 font-extrabold text-emerald-400">
+              <div className="flex items-center gap-1.5 font-semibold text-emerald-400">
                 <TrendingDown className="w-4 h-4" />
-                <span>🟢 {formatBRL(Math.abs(priceAnalysis.fipeDifference))} abaixo da FIPE</span>
+                <span>{formatBRL(Math.abs(priceAnalysis.fipeDifference))} abaixo da FIPE</span>
               </div>
 
-              <div className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-lg font-black text-[11px] border border-amber-500/40">
+              <div className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-lg font-bold text-[11px] border border-amber-500/40">
                 Score {deal.dealScore}/100
               </div>
             </div>

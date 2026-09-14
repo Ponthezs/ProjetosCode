@@ -30,7 +30,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center gap-2">
           <SlidersHorizontal className="w-5 h-5 text-brand-400" />
-          <h3 className="font-extrabold text-base text-white">Filtros de Pesquisa</h3>
+          <h3 className="font-semibold text-base text-white">Filtros de Pesquisa</h3>
         </div>
         <button
           onClick={onReset}
@@ -46,7 +46,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
         <label className="flex items-center justify-between cursor-pointer">
           <div className="flex items-center gap-2">
             <TrendingDown className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-extrabold text-emerald-300">Apenas Abaixo da FIPE</span>
+            <span className="text-xs font-semibold text-emerald-300">Apenas Abaixo da FIPE</span>
           </div>
           <input
             type="checkbox"
@@ -79,10 +79,10 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
       <div className="space-y-2">
         <label className="text-xs font-bold text-slate-300 flex items-center justify-between uppercase tracking-wider">
           <span className="flex items-center gap-1.5">
-            <DollarSign className="w-4 h-4 text-emerald-400" />
+            <DollarSign className="w-4 h-4 text-brand-400" />
             Preço Máximo
           </span>
-          <span className="text-emerald-400 font-extrabold text-xs">
+          <span className="text-brand-400 font-semibold text-xs">
             {filters.maxPrice ? `Até R$ ${(filters.maxPrice / 1000).toFixed(0)} mil` : 'Sem limite'}
           </span>
         </label>
@@ -93,7 +93,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
               onClick={() => updateField('maxPrice', filters.maxPrice === p ? undefined : p)}
               className={`py-1.5 px-2 rounded-lg border transition-all text-center ${
                 filters.maxPrice === p
-                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 font-bold'
+                  ? 'bg-brand-500/20 text-brand-300 border-brand-500/50 font-bold'
                   : 'bg-slate-950 hover:bg-slate-800 text-slate-300 border-slate-800'
               }`}
             >
@@ -107,10 +107,10 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
       <div className="space-y-2">
         <label className="text-xs font-bold text-slate-300 flex items-center justify-between uppercase tracking-wider">
           <span className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-blue-400" />
+            <Calendar className="w-4 h-4 text-brand-400" />
             Ano Mínimo
           </span>
-          <span className="text-blue-400 font-extrabold text-xs">
+          <span className="text-brand-400 font-semibold text-xs">
             {filters.minYear ? `${filters.minYear}+` : 'Qualquer ano'}
           </span>
         </label>
@@ -121,7 +121,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
               onClick={() => updateField('minYear', filters.minYear === y ? undefined : y)}
               className={`py-1.5 rounded-lg border transition-all text-center ${
                 filters.minYear === y
-                  ? 'bg-blue-500/20 text-blue-300 border-blue-500/50 font-bold'
+                  ? 'bg-brand-500/20 text-brand-300 border-brand-500/50 font-bold'
                   : 'bg-slate-950 hover:bg-slate-800 text-slate-300 border-slate-800'
               }`}
             >
@@ -135,10 +135,10 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
       <div className="space-y-2">
         <label className="text-xs font-bold text-slate-300 flex items-center justify-between uppercase tracking-wider">
           <span className="flex items-center gap-1.5">
-            <Gauge className="w-4 h-4 text-cyan-400" />
+            <Gauge className="w-4 h-4 text-brand-400" />
             Quilometragem Máxima
           </span>
-          <span className="text-cyan-400 font-extrabold text-xs">
+          <span className="text-brand-400 font-semibold text-xs">
             {filters.maxMileage ? `Até ${(filters.maxMileage / 1000).toFixed(0)}k km` : 'Qualquer km'}
           </span>
         </label>
@@ -149,7 +149,7 @@ export default function FilterSidebar({ filters, onChange, onReset }: FilterSide
               onClick={() => updateField('maxMileage', filters.maxMileage === km ? undefined : km)}
               className={`py-1.5 px-2 rounded-lg border transition-all text-center ${
                 filters.maxMileage === km
-                  ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50 font-bold'
+                  ? 'bg-brand-500/20 text-brand-300 border-brand-500/50 font-bold'
                   : 'bg-slate-950 hover:bg-slate-800 text-slate-300 border-slate-800'
               }`}
             >

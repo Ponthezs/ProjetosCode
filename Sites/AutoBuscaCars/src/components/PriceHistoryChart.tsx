@@ -22,10 +22,10 @@ export default function PriceHistoryChart({ modelName }: PriceHistoryChartProps)
   const formatBRL = (val: number) => `R$ ${(val / 1000).toFixed(0)}k`;
 
   return (
-    <div className="bg-slate-900/90 p-5 rounded-3xl border border-slate-800 space-y-4">
+    <div className="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
         <div>
-          <h3 className="text-sm font-extrabold text-white">Histórico de Preços de Mercado</h3>
+          <h3 className="text-sm font-semibold text-white">Histórico de Preços de Mercado</h3>
           <p className="text-xs text-slate-400">Evolução do preço médio dos anúncios de {modelName}</p>
         </div>
         <div className="flex items-center gap-4 text-xs font-semibold">

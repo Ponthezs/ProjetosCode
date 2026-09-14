@@ -6,7 +6,7 @@ import Link from 'next/link';
 import CarCard from '../components/CarCard';
 import { mockCarAds } from '../lib/data/mockCars';
 import { analyzeCarPrice, calculateDealOpportunity } from '../lib/engine/priceAnalyzer';
-import { Search, Flame, ArrowRight, ShieldCheck, Zap, TrendingDown } from 'lucide-react';
+import { Search, Flame, ArrowRight, TrendingDown } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -48,6 +48,16 @@ export default function HomePage() {
     .slice(0, 3)
     .map(item => item.ad);
 
+  // Real numbers computed from the current dataset, not marketing copy
+  const allAnalyses = mockCarAds.map(ad => analyzeCarPrice(ad, mockCarAds));
+  const belowFipeAnalyses = allAnalyses.filter(p => p.fipeDifference < 0);
+  const avgDiscountPercent = belowFipeAnalyses.length > 0
+    ? Math.round(
+        belowFipeAnalyses.reduce((acc, p) => acc + Math.abs(p.fipeDifferencePercent), 0) / belowFipeAnalyses.length
+      )
+    : 0;
+  const brandCount = new Set(mockCarAds.map(ad => ad.brand)).size;
+
   return (
     <div className="space-y-16 py-4 sm:py-8">
       {/* Hero Section */}
@@ -57,7 +67,7 @@ export default function HomePage() {
           <span>Comparativo com Tabela FIPE & Acesso Direto aos Anúncios</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+        <h1 className="text-4xl sm:text-6xl font-bold text-white tracking-tight leading-tight">
           Encontre seu <span className="text-brand-400">próximo carro</span> pelo melhor preço do mercado
         </h1>
 
@@ -66,13 +76,13 @@ export default function HomePage() {
         </p>
 
         {/* Centralized Search Box */}
-        <form onSubmit={handleSearchSubmit} className="bg-slate-900 p-4 sm:p-5 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
+        <form onSubmit={handleSearchSubmit} className="bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 shadow-2xl space-y-4">
           <div className="relative">
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="🔎 Digite marca, modelo, versão ou características..."
+              placeholder="Digite marca, modelo, versão ou características..."
               className="w-full bg-slate-950 border border-slate-800 rounded-2xl py-4 pl-12 pr-4 text-base sm:text-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-inner"
             />
             <Search className="absolute left-4 top-4.5 w-5 h-5 text-brand-400" />
@@ -85,7 +95,7 @@ export default function HomePage() {
               onChange={e => setSelectedBrand(e.target.value)}
               className="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
-              <option value="">🚗 Todas as Marcas</option>
+              <option value="">Todas as Marcas</option>
               <option value="Toyota">Toyota</option>
               <option value="Honda">Honda</option>
               <option value="Volkswagen">Volkswagen</option>
@@ -100,7 +110,7 @@ export default function HomePage() {
               onChange={e => setSelectedMaxPrice(e.target.value)}
               className="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
-              <option value="">💰 Preço Máximo</option>
+              <option value="">Preço Máximo</option>
               <option value="60000">Até R$ 60 mil</option>
               <option value="90000">Até R$ 90 mil</option>
               <option value="120000">Até R$ 120 mil</option>
@@ -113,7 +123,7 @@ export default function HomePage() {
               onChange={e => setSelectedMinYear(e.target.value)}
               className="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
-              <option value="">📅 Ano Mínimo</option>
+              <option value="">Ano Mínimo</option>
               <option value="2020">2020+</option>
               <option value="2022">2022+</option>
               <option value="2023">2023+</option>
@@ -125,7 +135,7 @@ export default function HomePage() {
               onChange={e => setSelectedTransmission(e.target.value)}
               className="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
-              <option value="">⚙️ Câmbio</option>
+              <option value="">Câmbio</option>
               <option value="Automático">Automático</option>
               <option value="CVT">CVT</option>
               <option value="Manual">Manual</option>
@@ -134,7 +144,7 @@ export default function HomePage() {
 
           <button
             type="submit"
-            className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black text-base shadow-xl shadow-brand-600/25 flex items-center justify-center gap-2 transition-all"
+            className="w-full py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-base shadow-xl shadow-brand-600/25 flex items-center justify-center gap-2 transition-all"
           >
             <Search className="w-5 h-5" />
             <span>Buscar Carros Agora</span>
@@ -161,23 +171,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Market Statistics Bar */}
-      <section className="bg-slate-900 border border-slate-800 rounded-3xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* Market Statistics Bar — real numbers from the current dataset */}
+      <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-emerald-400">Tabela FIPE</span>
-          <span className="text-xs text-slate-400 font-medium">Benchmark em Tempo Real</span>
+          <span className="block text-2xl sm:text-3xl font-bold text-white">{mockCarAds.length}</span>
+          <span className="text-xs text-slate-400 font-medium">Anúncios monitorados agora</span>
         </div>
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-brand-400">1-Clique</span>
-          <span className="text-xs text-slate-400 font-medium">Link Direto para o Anúncio</span>
+          <span className="block text-2xl sm:text-3xl font-bold text-white">{brandCount}</span>
+          <span className="text-xs text-slate-400 font-medium">Marcas diferentes</span>
         </div>
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-amber-400">0 a 10</span>
-          <span className="text-xs text-slate-400 font-medium">Avaliação AutoBusca</span>
+          <span className="block text-2xl sm:text-3xl font-bold text-emerald-400">{avgDiscountPercent}%</span>
+          <span className="text-xs text-slate-400 font-medium">Desconto médio vs Tabela FIPE</span>
         </div>
         <div>
-          <span className="block text-2xl sm:text-3xl font-black text-purple-400">Sem Duplicatas</span>
-          <span className="text-xs text-slate-400 font-medium">Busca Unificada Limpa</span>
+          <span className="block text-2xl sm:text-3xl font-bold text-white">4</span>
+          <span className="text-xs text-slate-400 font-medium">Marketplaces integrados</span>
         </div>
       </section>
 
@@ -189,7 +199,7 @@ export default function HomePage() {
               <Flame className="w-6 h-6 fill-current" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-black text-white">🔥 Melhores Oportunidades</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">Melhores Oportunidades</h2>
               <p className="text-xs sm:text-sm text-slate-400">Carros com preço abaixo da Tabela FIPE e da média de mercado</p>
             </div>
           </div>
@@ -210,17 +220,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Value Proposition */}
-      <section className="bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-6">
-        <div className="max-w-3xl space-y-3">
-          <h3 className="text-2xl sm:text-3xl font-black text-white italic">
-            &ldquo;Nós encontramos os carros. Você descobre quais realmente valem a pena.&rdquo;
-          </h3>
+      {/* How each listing is evaluated */}
+      <section className="bg-slate-900 border border-slate-800 rounded-2xl p-8 space-y-5">
+        <h3 className="text-xl sm:text-2xl font-bold text-white">Como cada anúncio é avaliado</h3>
 
-          <p className="text-sm text-slate-300 leading-relaxed">
-            Comparamos o preço de cada anúncio diretamente com a Tabela FIPE e com outros anúncios do mesmo modelo para ajudar você a decidir rápido e acessar o link original sem perda de tempo.
-          </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-sm">
+          <div className="space-y-1">
+            <span className="text-brand-400 font-semibold">1. Preço</span>
+            <p className="text-slate-300 leading-relaxed">
+              Comparamos com a Tabela FIPE e com a média de outros anúncios do mesmo modelo.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <span className="text-brand-400 font-semibold">2. Anúncio</span>
+            <p className="text-slate-300 leading-relaxed">
+              Lemos a descrição para identificar o que foi informado e o que ficou em aberto.
+            </p>
+          </div>
+          <div className="space-y-1">
+            <span className="text-brand-400 font-semibold">3. Acesso</span>
+            <p className="text-slate-300 leading-relaxed">
+              Você acessa o anúncio original com um clique, sem cadastro ou intermediário.
+            </p>
+          </div>
         </div>
+
+        <Link href="/como-funciona" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-400 hover:text-brand-300 hover:underline">
+          <span>Ver metodologia completa</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </section>
     </div>
   );
