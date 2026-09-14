@@ -3,26 +3,18 @@ import re
 import json
 import time
 import queue
-import ctypes
 import threading
 import datetime
 import webbrowser
-import asyncio
 
-# TTA Neural (Edge TTS - Voz Humana Clean de Alta Definição)
-try:
-    import edge_tts
-except ImportError:
-    edge_tts = None
+import numpy as np
 
-# SAPI5 Windows (Fallback Offline)
-try:
-    import win32com.client
-    win_speaker = win32com.client.Dispatch("SAPI.SpVoice")
-except Exception:
-    win_speaker = None
-
-# SpeechRecognition (Reconhecedor de Alta Precisão)
+# SpeechRecognition (Reconhecedor de Alta Precisão). A captura de áudio usa
+# sounddevice (abaixo) em vez do sr.Microphone()/PyAudio: o PyAudio não tem
+# wheel pré-compilada pro Windows em versões novas do Python e exige o
+# Microsoft C++ Build Tools pra compilar do zero. Como o sounddevice já é
+# necessário para o fallback Vosk, usamos ele também para o reconhecimento
+# online do Google, e assim o app não depende de PyAudio em nenhum caminho.
 try:
     import speech_recognition as sr
 except ImportError:
@@ -41,6 +33,7 @@ except ImportError:
 from core import SystemInfo, ConversationalBrain, AppLauncher, GestureController
 from core.system import SystemStats
 from core.weather import WeatherService
+from core.tts import TTSEngine
 from nlu.classifier import classify
 
 # ==============================================================================
@@ -53,68 +46,26 @@ app_launcher = AppLauncher()
 gesture_controller = GestureController()
 
 window = None # Instância da janela GUI (PyWebView)
-speech_lock = threading.Lock()
 is_listening_active = False
 
-def play_audio_native(filepath):
-    """Toca o arquivo MP3 gerado via WinMM DLL nativo do Windows sem cortar nada."""
-    abs_path = os.path.abspath(filepath)
-    alias = "jarvis_voice"
-    ctypes.windll.winmm.mciSendStringW(f"close {alias}", None, 0, 0)
-    open_cmd = f'open "{abs_path}" type mpegvideo alias {alias}'
-    ctypes.windll.winmm.mciSendStringW(open_cmd, None, 0, 0)
-    ctypes.windll.winmm.mciSendStringW(f"play {alias} wait", None, 0, 0)
-    ctypes.windll.winmm.mciSendStringW(f"close {alias}", None, 0, 0)
+def _on_voice_state_change(state, label):
+    """Repassa o estado da fala (falando/escutando) para a GUI."""
+    if window:
+        try:
+            window.evaluate_js(f"window.setVoiceState('{state}', '{label}');")
+        except Exception:
+            pass
+
+# Motor de TTS: sintetiza por sentença em pipeline (a próxima sentença é
+# gerada enquanto a atual está tocando, o que deixa a fala bem mais fluida
+# em respostas longas) e suporta trocar de voz/provedor em tempo real via
+# voice_config.json ou pelo modal de configurações da GUI. Detalhes de
+# configuração e onde ouvir vozes antes de escolher: ver core/tts.py.
+tts_engine = TTSEngine(on_state_change=_on_voice_state_change)
 
 def speak(text):
-    """Sintetiza voz humana neural de alta definição sem cortes."""
-    def run_neural_tts():
-        with speech_lock:
-            if window:
-                try:
-                    window.evaluate_js("window.setVoiceState('speaking', 'Falando...');")
-                except Exception:
-                    pass
-
-            print(f"[Jarvis Voz]: {text}")
-
-            success = False
-            # 1. Voz Neural Humana Clean (edge-tts pt-BR-AntonioNeural)
-            if edge_tts:
-                try:
-                    audio_file = os.path.abspath("temp_voice.mp3")
-                    if os.path.exists(audio_file):
-                        try:
-                            os.remove(audio_file)
-                        except Exception:
-                            pass
-                    
-                    async def _gen_speech():
-                        communicator = edge_tts.Communicate(text, "pt-BR-AntonioNeural")
-                        await communicator.save(audio_file)
-
-                    asyncio.run(_gen_speech())
-
-                    if os.path.exists(audio_file):
-                        play_audio_native(audio_file)
-                        success = True
-                except Exception as e:
-                    print("Aviso no Edge-TTS neural:", e)
-
-            # 2. Fallback offline (SAPI5 Windows)
-            if not success and win_speaker:
-                try:
-                    win_speaker.Speak(text)
-                except Exception as e:
-                    print("Erro no SAPI5:", e)
-
-            if window:
-                try:
-                    window.evaluate_js("window.setVoiceState('listening', 'Escutando...');")
-                except Exception:
-                    pass
-
-    threading.Thread(target=run_neural_tts, daemon=True).start()
+    """Fala o texto em uma thread separada, sem bloquear quem chamou."""
+    threading.Thread(target=tts_engine.speak, args=(text,), daemon=True).start()
 
 # Helper para extração de nome de cidade
 def extract_city_name(text):
@@ -190,6 +141,71 @@ def process_intent(text):
     return response
 
 # ==============================================================================
+# CAPTURA DE ÁUDIO VIA SOUNDDEVICE (sem depender de PyAudio)
+# ==============================================================================
+def _rms16(data_bytes):
+    """Energia RMS de um buffer PCM int16, para detectar fala vs. silêncio
+    (substitui o que o audioop/PyAudio faziam por baixo dos panos)."""
+    if not data_bytes:
+        return 0.0
+    arr = np.frombuffer(data_bytes, dtype=np.int16)
+    if arr.size == 0:
+        return 0.0
+    return float(np.sqrt(np.mean(arr.astype(np.float64) ** 2)))
+
+def _listen_loop_google(r, samplerate=16000, chunk_ms=30):
+    """Captura contínua pelo sounddevice, detecta início/fim de fala por
+    energia (imitando r.listen()) e manda cada frase pro Google STT."""
+    chunk_samples = int(samplerate * chunk_ms / 1000)
+    silence_chunks_needed = max(1, int(r.pause_threshold * 1000 / chunk_ms))
+    min_speaking_chunks = max(1, int(r.phrase_threshold * 1000 / chunk_ms))
+
+    audio_q = queue.Queue()
+
+    def callback(indata, frames, time_info, status):
+        audio_q.put(bytes(indata))
+
+    print("[STT Automatico] Microfone (sounddevice) ativado e escutando instantaneamente!")
+    with sd.RawInputStream(samplerate=samplerate, blocksize=chunk_samples, dtype='int16', channels=1, callback=callback):
+        frames = []
+        speaking = False
+        silence_run = 0
+        speaking_run = 0
+
+        while True:
+            data = audio_q.get()
+            energy = _rms16(data)
+
+            if energy > r.energy_threshold:
+                if not speaking:
+                    frames = []
+                    speaking_run = 0
+                speaking = True
+                silence_run = 0
+                speaking_run += 1
+                frames.append(data)
+            elif speaking:
+                silence_run += 1
+                frames.append(data)
+                if silence_run >= silence_chunks_needed:
+                    if speaking_run >= min_speaking_chunks:
+                        raw = b"".join(frames)
+                        audio = sr.AudioData(raw, samplerate, 2)
+                        try:
+                            recognized_text = r.recognize_google(audio, language="pt-BR").strip()
+                            if recognized_text:
+                                handle_recognized_voice(recognized_text)
+                        except sr.UnknownValueError:
+                            pass
+                        except sr.RequestError as e:
+                            print("Aviso no serviço de voz online:", e)
+                            raise
+                    speaking = False
+                    frames = []
+                    speaking_run = 0
+                    silence_run = 0
+
+# ==============================================================================
 # RECONHECEDOR DE VOZ AUTOMÁTICO NA INICIALIZAÇÃO
 # ==============================================================================
 def start_voice_listener():
@@ -206,34 +222,18 @@ def start_voice_listener():
         except Exception:
             pass
 
-    if sr:
+    if sr and sd:
         r = sr.Recognizer()
-        r.dynamic_energy_threshold = False
         r.energy_threshold = 100
         r.pause_threshold = 0.6
         r.phrase_threshold = 0.1
-        r.non_speaking_duration = 0.3
 
         try:
-            mic = sr.Microphone()
-            print("[STT Automatico] Microfone ativado e escutando instantaneamente!")
-            
-            with mic as source:
-                while True:
-                    try:
-                        audio = r.listen(source, timeout=None)
-                        recognized_text = r.recognize_google(audio, language="pt-BR").strip()
-                        if recognized_text:
-                            handle_recognized_voice(recognized_text)
-                    except sr.UnknownValueError:
-                        pass
-                    except sr.RequestError as e:
-                        print("Aviso no serviço de voz online:", e)
-                        break
-                    except Exception as e:
-                        print("Aviso na captura de áudio:", e)
+            _listen_loop_google(r)
+        except sr.RequestError:
+            print("Sem internet para o reconhecimento online. Tentando Vosk...")
         except Exception as e:
-            print(f"Erro no microfone: {e}. Tentando Vosk...")
+            print(f"Erro no microfone (sounddevice): {e}. Tentando Vosk...")
 
     # Fallback local Vosk
     model_dir = "model"
@@ -319,6 +319,8 @@ class JarvisAPI:
             gesture_controller.active_profile = settings['profile']
         if 'smoothing' in settings:
             gesture_controller.smoothing = int(settings['smoothing'])
+        if 'voice' in settings:
+            tts_engine.set_voice(settings['voice'], settings.get('elevenlabs_voice_id'))
         return True
 
 # ==============================================================================

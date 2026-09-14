@@ -1,11 +1,43 @@
 SpeechRecognition==3.10.0
 vosk>=0.3.45
-pyaudio>=0.2.13
-pyttsx3==2.90
-tensorflow>=2.10.0
-keras>=2.10.0
 pyyaml>=6.0
 numpy>=1.23.0
 psutil>=5.9.0
 pywebview>=4.0
 requests>=2.28.0
+
+# audioop foi removido da biblioteca padrão do Python a partir da 3.13; o
+# SpeechRecognition ainda usa esse módulo por baixo dos panos (conversão de
+# taxa de amostragem/codificação ao enviar áudio pro Google). audioop-lts
+# reinstala um "audioop" compatível via pip. pyaudio NÃO é mais necessário:
+# a captura de microfone em Jarvis.py agora usa só sounddevice (veja
+# start_voice_listener/_listen_loop_google), porque o pyaudio não tem wheel
+# pré-compilada pro Windows em Python novo e exigiria instalar o Microsoft
+# C++ Build Tools só pra compilar.
+audioop-lts>=0.2.1; python_version>="3.13"
+
+# Voz (core/tts.py) - edge-tts e pywin32 já eram usados pelo Jarvis.py mas
+# não estavam listados aqui; elevenlabs é opcional (só necessário se você
+# escolher o provedor "elevenlabs" em voice_config.json / na GUI).
+edge-tts>=6.1.0
+pywin32>=306
+elevenlabs>=1.0.0
+
+# Controle por gestos (core/gestures.py) - também já eram usados pelo
+# Jarvis.py sem estar listados aqui.
+opencv-python>=4.8.0
+mediapipe>=0.10.0
+pyautogui>=0.9.54
+sounddevice>=0.4.6
+
+# ATENÇÃO: tensorflow/keras (usados só pelo classificador nlu/classifier.py
+# e por nlu/model.py) ficam de fora do requirements principal porque a
+# TensorFlow ainda não publica wheel para Python 3.14 (pip falha com
+# "No matching distribution found"). O Jarvis.py já lida com a ausência
+# deles: nlu/classifier.py cai automaticamente para classificação por
+# palavra-chave se o import falhar, então o app funciona normalmente sem
+# essas duas linhas. Se um dia quiser retreinar o modelo (nlu/model.py),
+# faça isso numa venv separada com Python 3.11 ou 3.12, onde a TensorFlow
+# tem wheel oficial, e instale só ali:
+#   tensorflow>=2.10.0
+#   keras>=2.10.0
