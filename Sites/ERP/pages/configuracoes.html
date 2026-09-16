@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .logo-upload { display: flex; align-items: center; gap: var(--space-4); }
+    .logo-preview-box { width: 88px; height: 88px; border-radius: var(--radius-md); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--surface-alt); flex-shrink: 0; }
+    .logo-preview-box img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-preview-box img[hidden] { display: none; }
+    .logo-preview-box i { font-size: 26px; color: var(--text-subtle); }
+    .appearance-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+    .appearance-label { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .settings-note { font-size: 12.5px; color: var(--text-subtle); margin-top: var(--space-3); }
+    .fin-cat-list { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Configurações</h1>
+            <span class="page-subtitle">Preferências gerais do sistema, da empresa e da sua conta</span>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabsBar">
+          <button type="button" class="tab-btn active" data-tab="empresa">Empresa</button>
+          <button type="button" class="tab-btn" data-tab="sistema">Sistema</button>
+          <button type="button" class="tab-btn" data-tab="financeiro">Financeiro</button>
+          <button type="button" class="tab-btn" data-tab="usuarios">Usuários</button>
+          <button type="button" class="tab-btn" data-tab="seguranca">Segurança</button>
+          <button type="button" class="tab-btn" data-tab="aparencia">Aparência</button>
+        </div>
+
+        <!-- Empresa -->
+        <div id="panelEmpresa">
+          <form id="companyForm" class="card">
+            <div class="card-header"><h3>Dados da empresa</h3></div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-field col-span-2">
+                  <label>Logo</label>
+                  <div class="logo-upload">
+                    <div class="logo-preview-box">
+                      <img id="logoPreview" alt="Logo da empresa" hidden>
+                      <i class="fa-solid fa-building" id="logoPlaceholder"></i>
+                    </div>
+                    <input type="file" class="input" id="logoInput" accept="image/*">
+                  </div>
+                </div>
+                <div class="form-field"><label>Razão social</label><input class="input" id="companyCorporateName"></div>
+                <div class="form-field"><label>Nome fantasia</label><input class="input" id="companyTradeName"></div>
+                <div class="form-field"><label>CNPJ</label><input class="input" id="companyCnpj" placeholder="00.000.000/0000-00"></div>
+                <div class="form-field"><label>Telefone</label><input class="input" id="companyPhone" placeholder="(00) 0000-0000"></div>
+                <div class="form-field"><label>E-mail</label><input class="input" type="email" id="companyEmail"></div>
+                <div class="form-field"><label>CEP</label><input class="input" id="companyZip" placeholder="00000-000"></div>
+                <div class="form-field"><label>Endereço</label><input class="input" id="companyAddress"></div>
+                <div class="form-field"><label>Número</label><input class="input" id="companyNumber"></div>
+                <div class="form-field"><label>Complemento</label><input class="input" id="companyComplement"></div>
+                <div class="form-field"><label>Bairro</label><input class="input" id="companyDistrict"></div>
+                <div class="form-field"><label>Cidade</label><input class="input" id="companyCity"></div>
+                <div class="form-field">
+                  <label>Estado</label>
+                  <select class="input" id="companyState"><option value="">Selecione</option></select>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer" style="display:flex;justify-content:flex-end">
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar alterações</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Sistema -->
+        <div id="panelSistema" hidden>
+          <div class="card">
+            <div class="card-header"><h3>Preferências do sistema</h3></div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-field"><label>Formato de data</label><input class="input" value="dd/MM/yyyy" disabled></div>
+                <div class="form-field"><label>Moeda padrão</label><input class="input" value="BRL — Real brasileiro" disabled></div>
+              </div>
+              <p class="settings-note">Estes valores refletem o padrão fixo utilizado por esta versão do sistema.</p>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-danger" id="btnResetDemo"><i class="fa-solid fa-rotate-left"></i> Restaurar dados de demonstração</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financeiro -->
+        <div id="panelFinanceiro" hidden>
+          <div class="card">
+            <div class="card-header"><h3>Categorias financeiras</h3></div>
+            <div class="card-body">
+              <p class="settings-note" style="margin-top:0">Gerencie as categorias financeiras em Financeiro &gt; Categorias financeiras.</p>
+              <div class="fin-cat-list" id="finCategoriesPreview"></div>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-secondary" id="btnGoFinCategories"><i class="fa-solid fa-arrow-right"></i> Ir para categorias financeiras</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usuários -->
+        <div id="panelUsuarios" hidden>
+          <div class="card">
+            <div class="card-header"><h3>Usuários do sistema</h3></div>
+            <div class="card-body">
+              <p class="settings-note" style="margin-top:0">Gerencie os usuários e perfis de acesso do sistema em Usuários.</p>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-secondary" id="btnGoUsers"><i class="fa-solid fa-arrow-right"></i> Ir para Usuários</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segurança -->
+        <div id="panelSeguranca" hidden>
+          <div class="card">
+            <div class="card-header"><h3>Alterar senha</h3></div>
+            <div class="card-body">
+              <form id="passwordForm">
+                <div class="form-grid">
+                  <div class="form-field"><label>Senha atual</label><input class="input" type="password" id="pwdCurrent" required></div>
+                  <div class="form-field"></div>
+                  <div class="form-field"><label>Nova senha</label><input class="input" type="password" id="pwdNew" required></div>
+                  <div class="form-field"><label>Confirmar nova senha</label><input class="input" type="password" id="pwdConfirm" required></div>
+                </div>
+                <div style="margin-top:var(--space-4);display:flex;justify-content:flex-end">
+                  <button type="submit" class="btn btn-primary"><i class="fa-solid fa-key"></i> Alterar senha</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aparência -->
+        <div id="panelAparencia" hidden>
+          <div class="card">
+            <div class="card-header"><h3>Tema da interface</h3></div>
+            <div class="card-body appearance-row">
+              <div>
+                <div class="appearance-label" id="themeLabel">Tema claro</div>
+                <div class="settings-note" style="margin-top:2px">Escolha entre o tema claro e o tema escuro. A preferência é salva neste navegador.</div>
+              </div>
+              <label class="toggle-switch"><input type="checkbox" id="themeSwitch"><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/configuracoes.js"></script>
+</body>
+</html>

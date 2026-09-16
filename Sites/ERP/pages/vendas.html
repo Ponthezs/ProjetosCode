@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendas — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .date-filter { display: flex; align-items: center; gap: 8px; }
+    .date-filter span { font-size: 12.5px; color: var(--text-muted); white-space: nowrap; }
+    .status-cell { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .status-cell select { width: auto; padding: 4px 8px; font-size: 11.5px; }
+    .view-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .view-grid .view-item.full { grid-column: 1 / -1; }
+    .view-item label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px; }
+    .view-item .view-value { font-size: 13.5px; color: var(--text); }
+    .view-section-title { font-size: 12.5px; font-weight: 700; color: var(--text-muted); margin: var(--space-4) 0 var(--space-2); text-transform: uppercase; letter-spacing: .03em; }
+    .view-section-title:first-child { margin-top: 0; }
+    .items-section-header { display: flex; align-items: center; justify-content: space-between; margin: var(--space-5) 0 var(--space-3); }
+    .items-section-header h4 { font-size: 13.5px; font-weight: 700; }
+    .items-table input, .items-table select { padding: 7px 9px; font-size: 13px; }
+    .items-table td { vertical-align: middle; }
+    .sale-summary { display: flex; justify-content: flex-end; align-items: flex-start; gap: var(--space-6); margin-top: var(--space-5); flex-wrap: wrap; }
+    .sale-summary .form-field { max-width: 200px; }
+    .sale-totals { min-width: 240px; }
+    .sale-totals .totals-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; color: var(--text-muted); }
+    .sale-totals .totals-row.total { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 10px; font-size: 16px; font-weight: 800; color: var(--text); }
+    .empty-items-hint { padding: var(--space-4); text-align: center; color: var(--text-subtle); font-size: 12.5px; }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Vendas</h1>
+            <span class="page-subtitle">Gestão de vendas e orçamentos</span>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button type="button" class="tab-btn active" data-tab="lista">Lista de vendas</button>
+          <button type="button" class="tab-btn" data-tab="nova">Nova venda</button>
+        </div>
+
+        <div id="panelLista">
+          <div class="table-card">
+            <div class="table-toolbar">
+              <div class="tt-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input class="input" id="searchInput" placeholder="Buscar por número ou cliente...">
+              </div>
+              <div class="tt-filters">
+                <select class="input" id="filterStatus">
+                  <option value="">Status (todos)</option>
+                  <option value="orcamento">Orçamento</option>
+                  <option value="pendente">Pendente</option>
+                  <option value="pago">Pago</option>
+                  <option value="finalizado">Finalizado</option>
+                  <option value="cancelado">Cancelado</option>
+                </select>
+                <select class="input" id="filterCustomer">
+                  <option value="">Cliente (todos)</option>
+                </select>
+                <div class="date-filter"><span>De</span><input class="input" type="date" id="filterDateFrom"></div>
+                <div class="date-filter"><span>Até</span><input class="input" type="date" id="filterDateTo"></div>
+              </div>
+            </div>
+            <div id="tableContainerVendas"></div>
+          </div>
+        </div>
+
+        <div id="panelNova" hidden>
+          <div class="card">
+            <div class="card-header"><h3 id="saleFormTitle">Nova venda</h3></div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label>Cliente<span style="color:var(--danger-600)"> *</span></label>
+                  <select class="input" id="saleCustomer"><option value="">Selecione</option></select>
+                </div>
+                <div class="form-field">
+                  <label>Data</label>
+                  <input class="input" type="date" id="saleDate">
+                </div>
+                <div class="form-field">
+                  <label>Vendedor</label>
+                  <select class="input" id="saleSeller"><option value="">Selecione</option></select>
+                </div>
+                <div class="form-field">
+                  <label>Forma de pagamento</label>
+                  <select class="input" id="salePayment">
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão de crédito">Cartão de crédito</option>
+                    <option value="Cartão de débito">Cartão de débito</option>
+                    <option value="Boleto">Boleto</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label>Status</label>
+                  <select class="input" id="saleStatus">
+                    <option value="orcamento">Orçamento</option>
+                    <option value="pendente" selected>Pendente</option>
+                    <option value="pago">Pago</option>
+                    <option value="finalizado">Finalizado</option>
+                  </select>
+                </div>
+                <div class="form-field col-span-2">
+                  <label>Observações<span class="optional"> (opcional)</span></label>
+                  <textarea class="input" id="saleNotes" rows="2"></textarea>
+                </div>
+              </div>
+
+              <div class="items-section-header">
+                <h4>Itens da venda</h4>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnAddItem"><i class="fa-solid fa-plus"></i> Adicionar item</button>
+              </div>
+              <div class="table-scroll">
+                <table class="data-table items-table">
+                  <thead>
+                    <tr>
+                      <th>Produto</th>
+                      <th style="width:110px">Quantidade</th>
+                      <th style="width:150px">Preço unitário</th>
+                      <th style="text-align:right">Subtotal</th>
+                      <th style="width:44px"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="saleItemsBody"></tbody>
+                </table>
+              </div>
+
+              <div class="sale-summary">
+                <div class="form-field">
+                  <label>Desconto geral</label>
+                  <input class="input" type="number" min="0" step="0.01" id="saleDiscount" value="0">
+                </div>
+                <div class="sale-totals">
+                  <div class="totals-row"><span>Subtotal</span><strong id="saleSubtotalOut">R$ 0,00</strong></div>
+                  <div class="totals-row"><span>Desconto</span><strong id="saleDiscountOut">R$ 0,00</strong></div>
+                  <div class="totals-row total"><span>Total</span><strong id="saleTotalOut">R$ 0,00</strong></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer" style="display:flex;justify-content:flex-end;gap:8px">
+              <button type="button" class="btn btn-secondary" id="btnCancelSale">Cancelar</button>
+              <button type="button" class="btn btn-primary" id="btnSaveSale"><i class="fa-solid fa-floppy-disk"></i> Salvar venda</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/vendas.js"></script>
+</body>
+</html>

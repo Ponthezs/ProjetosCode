@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Design tokens — Sistema ERP
+   Paleta neutra (slate) + azul-marinho corporativo como cor principal e
+   dourado envelhecido como destaque secundário. Sem gradientes, sem roxo.
+   ========================================================================== */
+
+:root {
+  /* Tipografia */
+  --font-sans: 'Manrope', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+
+  /* Neutros */
+  --n-0:   #ffffff;
+  --n-25:  #f7f8fa;
+  --n-50:  #f0f2f5;
+  --n-100: #e4e7ec;
+  --n-200: #d0d5dd;
+  --n-300: #aeb5c2;
+  --n-400: #8b93a3;
+  --n-500: #667085;
+  --n-600: #4b5468;
+  --n-700: #364152;
+  --n-800: #232b38;
+  --n-900: #141a24;
+
+  /* Marca — azul-marinho corporativo */
+  --brand-900: #0d1f33;
+  --brand-800: #122a44;
+  --brand-700: #17395a;
+  --brand-600: #1f4a73;
+  --brand-500: #2c5d8c;
+  --brand-400: #4c78a6;
+  --brand-100: #e2ebf3;
+  --brand-50:  #eef3f8;
+
+  /* Destaque — dourado envelhecido (uso pontual: CTAs, alertas positivos) */
+  --gold-600: #a8791f;
+  --gold-500: #bd8d33;
+  --gold-100: #f4e9d3;
+
+  /* Semânticas */
+  --success-600: #1c7a4d;
+  --success-500: #248f5c;
+  --success-100: #e0f2e7;
+  --warning-600: #b5721b;
+  --warning-500: #c98524;
+  --warning-100: #faecd8;
+  --danger-600:  #b23a2e;
+  --danger-500:  #c94538;
+  --danger-100:  #f8e3e0;
+  --info-600:    #2c6a8c;
+  --info-100:    #e2eef4;
+
+  /* Superfícies (tema claro) */
+  --bg: var(--n-25);
+  --surface: var(--n-0);
+  --surface-alt: var(--n-50);
+  --border: var(--n-100);
+  --border-strong: var(--n-200);
+  --text: var(--n-800);
+  --text-muted: var(--n-500);
+  --text-subtle: var(--n-400);
+  --sidebar-bg: var(--brand-900);
+  --sidebar-bg-hover: rgba(255,255,255,0.06);
+  --sidebar-text: rgba(255,255,255,0.72);
+  --sidebar-text-active: #ffffff;
+  --sidebar-border: rgba(255,255,255,0.08);
+
+  /* Raio, sombra, espaçamento */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-xs: 0 1px 2px rgba(20,26,36,0.05);
+  --shadow-sm: 0 1px 3px rgba(20,26,36,0.08), 0 1px 2px rgba(20,26,36,0.04);
+  --shadow-md: 0 4px 12px rgba(20,26,36,0.08), 0 2px 4px rgba(20,26,36,0.04);
+  --shadow-lg: 0 12px 32px rgba(20,26,36,0.14);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+
+  --sidebar-w: 264px;
+  --sidebar-w-collapsed: 76px;
+  --header-h: 64px;
+
+  --transition-fast: 150ms ease;
+  --transition-base: 220ms ease;
+}
+
+/* Tema escuro — acionado por [data-theme="dark"] no <html> */
+:root[data-theme="dark"] {
+  --bg: #0f141b;
+  --surface: #171d27;
+  --surface-alt: #1d2430;
+  --border: #2a3341;
+  --border-strong: #384252;
+  --text: #e7eaef;
+  --text-muted: #9aa4b2;
+  --text-subtle: #6b7686;
+  --sidebar-bg: #0a1420;
+  --sidebar-bg-hover: rgba(255,255,255,0.05);
+  --sidebar-text: rgba(255,255,255,0.68);
+  --sidebar-text-active: #ffffff;
+  --sidebar-border: rgba(255,255,255,0.06);
+
+  --success-100: #123324;
+  --warning-100: #362a15;
+  --danger-100: #3a1f1c;
+  --info-100: #182c37;
+  --brand-100: #16283a;
+  --gold-100: #33291a;
+}

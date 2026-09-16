@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Responsividade
+   ========================================================================== */
+
+@media (max-width: 1280px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .chart-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1024px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .login-shell { grid-template-columns: 1fr; }
+  .login-aside { display: none; }
+}
+
+@media (max-width: 768px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .page-content { padding: var(--space-4); }
+  .app-header { padding: 0 var(--space-4); }
+  .global-search { display: none; }
+  .page-header { flex-direction: column; align-items: stretch; }
+  .page-actions { justify-content: flex-start; }
+  .table-toolbar { flex-direction: column; align-items: stretch; }
+  .table-toolbar .tt-search { max-width: none; }
+  .modal-box { max-height: 100vh; border-radius: var(--radius-md); }
+}
+
+@media (max-width: 480px) {
+  .user-meta { display: none; }
+  #toast-root { left: 12px; right: 12px; max-width: none; top: 12px; }
+  .modal-footer { flex-wrap: wrap; }
+  .modal-footer .btn { flex: 1; }
+}

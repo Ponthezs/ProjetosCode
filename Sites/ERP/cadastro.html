@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar conta — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    body { background: var(--bg); }
+    .login-shell { align-items: stretch; }
+    .login-form-col { padding: var(--space-6) var(--space-6); }
+    .login-card.signup-card { max-width: 460px; }
+    .signup-back { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 18px; }
+    .signup-back:hover { color: var(--text); }
+    .login-brand-row { display: flex; align-items: center; gap: 12px; }
+    .login-brand-row .brand-mark { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; padding: 6px; }
+    .login-brand-row .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .login-brand-row .brand-name { font-size: 19px; font-weight: 800; }
+    .login-aside .aside-title { font-size: 27px; font-weight: 800; line-height: 1.25; margin: 40px 0 16px; max-width: 380px; }
+    .login-aside .aside-sub { color: rgba(255,255,255,.72); font-size: 14px; max-width: 380px; line-height: 1.6; }
+    .aside-feature-list { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+    .aside-feature { display: flex; gap: 12px; align-items: flex-start; color: rgba(255,255,255,.88); font-size: 13.5px; }
+    .aside-feature i { color: var(--gold-500); margin-top: 2px; }
+    .aside-footer { color: rgba(255,255,255,.5); font-size: 12px; }
+    .login-card h1 { font-size: 21px; margin-bottom: 6px; }
+    .login-card .subtitle { color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px; }
+    .signup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-bottom: 4px; }
+    .signup-grid .form-field.full { grid-column: 1 / -1; }
+    .demo-hint { margin-top: 20px; padding: 12px 14px; background: var(--brand-50); border: 1px solid var(--brand-100); border-radius: var(--radius-md); font-size: 12.5px; color: var(--brand-700); line-height: 1.5; }
+    [data-theme="dark"] .demo-hint { background: var(--surface-alt); border-color: var(--border); color: var(--text-muted); }
+    .signup-footer-link { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 20px; }
+    .signup-footer-link a { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <div class="login-aside">
+      <div class="login-brand-row">
+        <div class="brand-mark"><img src="assets/logo/fluxen-mark.png" alt="Fluxen"></div>
+        <div class="brand-name">Fluxen ERP</div>
+      </div>
+      <div>
+        <div class="aside-title">Comece a organizar sua empresa hoje.</div>
+        <div class="aside-sub">Crie sua conta e cadastre clientes, produtos e fornecedores em minutos. O dashboard já mostra os primeiros indicadores.</div>
+        <div class="aside-feature-list">
+          <div class="aside-feature"><i class="fa-solid fa-circle-check"></i> Cadastro completo em menos de 1 minuto</div>
+          <div class="aside-feature"><i class="fa-solid fa-circle-check"></i> Acesso administrador liberado na hora</div>
+          <div class="aside-feature"><i class="fa-solid fa-circle-check"></i> Convide sua equipe depois, com perfis por função</div>
+        </div>
+      </div>
+      <div class="aside-footer">© <span id="footerYear"></span> Fluxen ERP. Todos os direitos reservados.</div>
+    </div>
+
+    <div class="login-form-col">
+      <div class="login-card signup-card">
+        <a href="index.html" class="signup-back"><i class="fa-solid fa-arrow-left"></i> Voltar para a home</a>
+        <h1>Criar sua conta</h1>
+        <p class="subtitle">Preencha os dados abaixo para começar a usar o Fluxen ERP.</p>
+
+        <form id="signupForm" novalidate>
+          <div class="signup-grid">
+            <div class="form-field full">
+              <label>Nome completo</label>
+              <input class="input" type="text" id="suName" placeholder="Seu nome" autocomplete="name" required>
+              <div class="field-error" id="suNameError"></div>
+            </div>
+            <div class="form-field full">
+              <label>E-mail</label>
+              <input class="input" type="email" id="suEmail" placeholder="seu.email@empresa.com" autocomplete="email" required>
+              <div class="field-error" id="suEmailError"></div>
+            </div>
+            <div class="form-field">
+              <label>Nome da empresa</label>
+              <input class="input" type="text" id="suCompany" placeholder="Razão social ou nome fantasia" required>
+              <div class="field-error" id="suCompanyError"></div>
+            </div>
+            <div class="form-field">
+              <label>CNPJ <span class="optional">(opcional)</span></label>
+              <input class="input" type="text" id="suCnpj" placeholder="00.000.000/0000-00" maxlength="18">
+              <div class="field-error" id="suCnpjError"></div>
+            </div>
+            <div class="form-field full">
+              <label>Telefone <span class="optional">(opcional)</span></label>
+              <input class="input" type="text" id="suPhone" placeholder="(00) 00000-0000" maxlength="15">
+            </div>
+            <div class="form-field">
+              <label>Senha</label>
+              <div class="input-group">
+                <input type="password" id="suPassword" placeholder="Mínimo 6 caracteres" autocomplete="new-password" style="flex:1" required>
+                <span class="input-group-icon" id="toggleSuPassword"><i class="fa-solid fa-eye"></i></span>
+              </div>
+              <div class="field-error" id="suPasswordError"></div>
+            </div>
+            <div class="form-field">
+              <label>Confirmar senha</label>
+              <div class="input-group">
+                <input type="password" id="suPasswordConfirm" placeholder="Repita a senha" autocomplete="new-password" style="flex:1" required>
+                <span class="input-group-icon" id="toggleSuPasswordConfirm"><i class="fa-solid fa-eye"></i></span>
+              </div>
+              <div class="field-error" id="suPasswordConfirmError"></div>
+            </div>
+          </div>
+
+          <label class="checkbox-row" style="margin: 10px 0 18px">
+            <input type="checkbox" id="suTerms" required>
+            Estou de acordo em usar o sistema neste ambiente de demonstração.
+          </label>
+          <div class="field-error" id="suTermsError" style="margin: -14px 0 10px"></div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="signupSubmitBtn">
+            <i class="fa-solid fa-user-plus"></i> Criar conta
+          </button>
+        </form>
+
+        <div class="demo-hint">
+          <i class="fa-solid fa-circle-info"></i>
+          Ambiente de demonstração: seus dados ficam salvos apenas neste navegador (localStorage) e sua conta é criada com o perfil <strong>Administrador</strong>.
+        </div>
+
+        <div class="signup-footer-link">Já tem uma conta? <a href="login.html">Entrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/core/components.js"></script>
+  <script src="js/core/notifications.js"></script>
+  <script src="js/services/customerService.js"></script>
+  <script src="js/services/supplierService.js"></script>
+  <script src="js/services/categoryService.js"></script>
+  <script src="js/services/productService.js"></script>
+  <script src="js/services/stockService.js"></script>
+  <script src="js/services/salesService.js"></script>
+  <script src="js/services/purchaseService.js"></script>
+  <script src="js/services/financialService.js"></script>
+  <script src="js/services/userService.js"></script>
+  <script src="js/services/companyService.js"></script>
+  <script src="js/core/seed-data.js"></script>
+  <script src="js/pages/cadastro.js"></script>
+</body>
+</html>

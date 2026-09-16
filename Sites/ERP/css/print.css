@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Estilos de impressão — usados na área de Relatórios
+   ========================================================================== */
+@media print {
+  .sidebar, .app-header, .page-actions, .table-toolbar, .table-pagination,
+  .no-print, #toast-root, .mobile-overlay, .cell-actions { display: none !important; }
+  .main-col { margin-left: 0 !important; }
+  body { background: #fff; }
+  .page-content { padding: 0; }
+  .table-card, .card { box-shadow: none; border: none; }
+  table.data-table thead th { background: #fff; }
+  .print-report-header { display: block !important; margin-bottom: 20px; }
+}
+.print-report-header { display: none; }

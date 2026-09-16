@@ -1,90 +1,413 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja - ERP</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.0/crypto-js.min.js"></script>
-    <script>
-        if (localStorage.getItem('gestorProPlus_theme_v2') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluxen ERP — Gestão empresarial integrada</title>
+  <meta name="description" content="Fluxen ERP: vendas, compras, estoque e financeiro em um único painel. Cadastre-se e comece a organizar sua empresa agora.">
+  <link rel="icon" type="image/png" href="assets/logo/fluxen-favicon.png">
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); font-family: var(--font-sans); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; }
+    .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 var(--space-6); }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 40; background: var(--brand-900);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .site-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; color: #fff; text-decoration: none; }
+    .site-brand .brand-mark {
+      width: 36px; height: 36px; border-radius: 9px; background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center; padding: 5px;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .footer-brand .brand-mark { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,.08); padding: 5px; }
+    .site-nav { display: flex; align-items: center; gap: 30px; }
+    .site-nav a { font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.72); text-decoration: none; transition: color var(--transition-fast); }
+    .site-nav a:hover { color: #fff; }
+    .site-actions { display: flex; align-items: center; gap: 10px; }
+    .site-actions .btn-ghost-dark { background: transparent; color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.18); }
+    .site-actions .btn-ghost-dark:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .nav-burger {
+      display: none; width: 38px; height: 38px; border-radius: 8px; border: 1px solid rgba(255,255,255,.18);
+      background: transparent; color: #fff; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .mobile-nav-panel {
+      display: none; flex-direction: column; gap: 2px; background: var(--brand-800);
+      border-bottom: 1px solid rgba(255,255,255,.08); padding: var(--space-3) var(--space-6) var(--space-5);
+    }
+    .mobile-nav-panel.open { display: flex; }
+    .mobile-nav-panel a.mn-link { color: rgba(255,255,255,.82); text-decoration: none; font-size: 14px; font-weight: 600; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .mobile-nav-panel .mn-actions { display: flex; gap: 10px; margin-top: 12px; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; background: radial-gradient(120% 140% at 15% -10%, var(--brand-700), var(--brand-900) 55%);
+      color: #fff; overflow: hidden; padding: 90px 0 110px;
+    }
+    .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; pointer-events: none; }
+    .hero-grid-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 44px 44px; mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 85%);
+    }
+    .hero .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--gold-500); background: rgba(189,141,51,.12);
+      border: 1px solid rgba(189,141,51,.3); padding: 6px 12px; border-radius: 999px; margin-bottom: 22px;
+    }
+    .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-500); box-shadow: 0 0 0 3px rgba(189,141,51,.25); }
+    .hero h1 { font-size: 42px; line-height: 1.16; font-weight: 800; margin: 0 0 18px; letter-spacing: -.01em; color: #fff; }
+    .hero h1 span { color: var(--gold-500); }
+    .hero p.lead { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.72); max-width: 480px; margin: 0 0 32px; }
+    .hero-cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+    .btn-hero-lg { padding: 13px 22px; font-size: 14.5px; border-radius: var(--radius-md); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: rgba(255,255,255,.55); }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+    .hero-meta i { color: var(--gold-500); font-size: 11px; }
+
+    /* Hero visual: floating cards */
+    .hero-visual { position: relative; height: 380px; }
+    .hv-card {
+      position: absolute; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-lg); backdrop-filter: blur(6px); padding: 16px 18px; box-shadow: 0 20px 40px rgba(0,0,0,.25);
+      animation: hv-float 6s ease-in-out infinite;
+    }
+    .hv-card .hv-label { font-size: 11px; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+    .hv-card .hv-value { font-size: 22px; font-weight: 800; color: #fff; }
+    .hv-card .hv-trend { font-size: 11.5px; font-weight: 700; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .hv-trend.up { color: #6fd39a; } .hv-trend.down { color: #e8897c; }
+    .hv-card.hv-1 { top: 6%; left: 2%; width: 190px; animation-delay: 0s; }
+    .hv-card.hv-2 { top: 32%; right: 0; width: 200px; animation-delay: 1.4s; }
+    .hv-card.hv-3 { bottom: 12%; left: 12%; width: 210px; animation-delay: .7s; }
+    .hv-chart { position: absolute; top: 48%; left: 34%; width: 150px; opacity: .9; }
+    @keyframes hv-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .hv-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(189,141,51,.25); }
+    .hv-ring.r1 { width: 320px; height: 320px; top: 8%; left: 6%; }
+    .hv-ring.r2 { width: 220px; height: 220px; top: 22%; left: 22%; }
+
+    /* ---------- Stats ---------- */
+    .stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .stats-bar .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 34px var(--space-6); }
+    .stat-item { text-align: center; }
+    .stat-item .stat-value { font-size: 28px; font-weight: 800; color: var(--brand-700); font-family: var(--font-mono); }
+    .stat-item .stat-label { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ---------- Sections ---------- */
+    .section { padding: 84px 0; }
+    .section-alt { background: var(--surface-alt); }
+    .section-head { max-width: 560px; margin: 0 auto 48px; text-align: center; }
+    .section-head .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--brand-600); margin-bottom: 10px; }
+    .section-head h2 { font-size: 30px; font-weight: 800; margin: 0 0 14px; letter-spacing: -.01em; }
+    .section-head p { color: var(--text-muted); font-size: 14.5px; line-height: 1.65; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .feature-card { padding: 24px 22px; }
+    .feature-card .fc-icon {
+      width: 42px; height: 42px; border-radius: var(--radius-md); background: var(--brand-50); color: var(--brand-700);
+      display: flex; align-items: center; justify-content: center; font-size: 17px; margin-bottom: 16px;
+    }
+    [data-theme="dark"] .feature-card .fc-icon { background: var(--brand-100); }
+    .feature-card h3 { font-size: 15px; font-weight: 700; margin: 0 0 8px; }
+    .feature-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+    .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; counter-reset: step; }
+    .step-card { position: relative; padding: 28px 24px 24px; }
+    .step-card .step-num {
+      position: absolute; top: -16px; left: 22px; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--brand-700); color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 13px; box-shadow: 0 4px 10px rgba(13,31,51,.25);
+    }
+    .step-card h3 { font-size: 15px; font-weight: 700; margin: 10px 0 8px; }
+    .step-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+    .arch-note { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
+    .arch-note .arch-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--gold-600); background: var(--gold-100); padding: 6px 12px; border-radius: 999px; margin-bottom: 16px; }
+    .arch-note h2 { font-size: 27px; font-weight: 800; margin: 0 0 14px; letter-spacing: -.01em; }
+    .arch-note p { color: var(--text-muted); font-size: 14.5px; line-height: 1.7; margin: 0 0 14px; }
+    .arch-note ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .arch-note li { font-size: 13.5px; color: var(--text); display: flex; gap: 10px; }
+    .arch-note li i { color: var(--success-600); margin-top: 2px; }
+    .arch-code { background: var(--n-900); border-radius: var(--radius-lg); padding: 22px 24px; color: #cdd6e4; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.75; box-shadow: var(--shadow-lg); }
+    .arch-code .c-comment { color: #7c8aa3; }
+    .arch-code .c-key { color: var(--gold-500); }
+    .arch-code .c-str { color: #6fd39a; }
+
+    .cta-banner { background: linear-gradient(120deg, var(--brand-900), var(--brand-700)); color: #fff; text-align: center; padding: 72px 0; }
+    .cta-banner h2 { font-size: 28px; font-weight: 800; margin: 0 0 12px; color: #fff; }
+    .cta-banner p { color: rgba(255,255,255,.7); font-size: 14.5px; margin: 0 0 28px; }
+    .cta-banner .cta-note { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 16px; }
+
+    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    [data-reveal].in-view { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--n-900); color: rgba(255,255,255,.6); padding: 52px 0 26px; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 22px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: #fff; margin-bottom: 10px; }
+    .footer-top p { font-size: 13px; line-height: 1.6; max-width: 320px; color: rgba(255,255,255,.5); }
+    .footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: rgba(255,255,255,.4); margin: 0 0 14px; }
+    .footer-col a { display: block; font-size: 13.5px; color: rgba(255,255,255,.68); text-decoration: none; margin-bottom: 10px; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { font-size: 12px; color: rgba(255,255,255,.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+    @media (max-width: 1024px) {
+      .hero .container { grid-template-columns: 1fr; }
+      .hero-visual { height: 300px; margin-top: 20px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .arch-note { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 26px; }
+    }
+    @media (max-width: 860px) {
+      .site-nav { display: none; }
+      .nav-burger { display: flex; }
+      .site-actions .btn-ghost-dark span { display: none; }
+    }
+    @media (max-width: 640px) {
+      .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+      .steps-row { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 30px; }
+      .section { padding: 60px 0; }
+      .site-actions .btn-ghost-dark { display: none; }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-slate-900">
-    <div id="toast-container"></div>
-    
-    <nav id="mainNavbar" class="bg-sky-700 dark:bg-sky-800 p-4 shadow-lg hidden-element">
-        <div class="container mx-auto flex flex-wrap items-center justify-between">
-            <a href="index.html" class="text-white text-xl font-bold">ERP Store</a>
-            <div class="flex items-center space-x-2 md:space-x-4">
-                <a href="index.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium"><i class="fas fa-store mr-1"></i>Loja</a>
-                <a href="cart.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-shopping-cart mr-1"></i>Carrinho (<span id="cartItemCount">0</span>)
-                </a>
-                <a href="product-admin.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium hidden-element" id="adminMenuProductCreateLink"><i class="fas fa-plus-circle mr-1"></i>Gerir Produtos</a>
-                <a href="permissions-admin.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium hidden-element" id="adminMenuPermissionsLink"><i class="fas fa-users-cog mr-1"></i>Permissões</a>
-                <button id="themeToggle" class="text-white p-2 rounded-md hover:bg-sky-600 dark:hover:bg-sky-700"><i class="fas fa-moon"></i></button>
-                <div class="relative">
-                     <button type="button" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center" id="userMenuButton">
-                        <i class="fas fa-user-circle mr-1"></i><span id="loggedInUserDisplay">User</span> <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div id="userDropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden-element" role="menu" aria-orientation="vertical" aria-labelledby="userMenuButton">
-                        <a href="#" onclick="logoutUser()" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700" role="menuitem">Sair</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <main class="container mx-auto p-4 md:p-8 main-content-area">
-        <header class="mb-8">
-            <h1 class="text-4xl font-bold text-sky-800 dark:text-sky-300">Nossos Produtos</h1>
-            <input 
-                type="text" 
-                id="productSearchInput"
-                placeholder="Buscar produtos..."
-                class="w-full p-3 border border-gray-300 rounded-md dark:bg-slate-700 dark:border-slate-600 dark:text-white mt-4"
-                oninput="searchProducts(this.value)"
-            >
-            <div id="categoryFilters" class="mt-4 flex space-x-2 overflow-x-auto pb-2">
-                <button onclick="filterProductsByCategory()" class="px-4 py-2 bg-sky-600 text-white rounded-full whitespace-nowrap hover:bg-sky-700">Todos</button>
-            </div>
-        </header>
-        <div id="productListContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Produtos serão inseridos aqui pelo script.js -->
-            <p id="noProductsMessage" class="text-center text-gray-500 col-span-full hidden-element">Nenhum produto disponível no momento.</p>
-        </div>
-    </main>
-    
-    <footer class="text-center p-4 text-sm text-gray-500 dark:text-slate-400 mt-12 border-t dark:border-slate-700">
-        &copy; <span id="currentYear"></span> ERP. Todos os direitos reservados.
-    </footer>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-brand"><span class="brand-mark"><img src="assets/logo/fluxen-mark.png" alt="Fluxen"></span> Fluxen ERP</a>
+      <nav class="site-nav">
+        <a href="#recursos">Recursos</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#como-funciona">Como funciona</a>
+      </nav>
+      <div class="site-actions" id="desktopActions">
+        <a href="login.html" class="btn btn-sm btn-ghost-dark"><span>Entrar</span></a>
+        <a href="cadastro.html" class="btn btn-sm btn-gold">Criar conta</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+      <a class="mn-link" href="#recursos">Recursos</a>
+      <a class="mn-link" href="#modulos">Módulos</a>
+      <a class="mn-link" href="#como-funciona">Como funciona</a>
+      <div class="mn-actions" id="mobileActions">
+        <a href="login.html" class="btn btn-sm btn-ghost-dark" style="flex:1">Entrar</a>
+        <a href="cadastro.html" class="btn btn-sm btn-gold" style="flex:1">Criar conta</a>
+      </div>
+    </div>
+  </header>
 
-    <script src="validators.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Pequeno script para o dropdown do utilizador e ano atual
-        document.addEventListener('DOMContentLoaded', () => {
-            const userMenuButton = document.getElementById('userMenuButton');
-            const userDropdownMenu = document.getElementById('userDropdownMenu');
-            if(userMenuButton && userDropdownMenu){
-                userMenuButton.addEventListener('click', () => {
-                    userDropdownMenu.classList.toggle('hidden-element');
-                });
-                // Fechar se clicar fora
-                document.addEventListener('click', (event) => {
-                    if (!userMenuButton.contains(event.target) && !userDropdownMenu.contains(event.target)) {
-                        userDropdownMenu.classList.add('hidden-element');
-                    }
-                });
-            }
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        });
-    </script>
+  <section class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-grid-overlay"></div>
+    <div class="container">
+      <div class="hero-copy">
+        <div class="hero-eyebrow"><span class="dot"></span> Sistema de gestão empresarial</div>
+        <h1>Sua empresa <span>sob controle total</span>, do cadastro ao fluxo de caixa.</h1>
+        <p class="lead">Vendas, compras, estoque e financeiro integrados em um único painel — com indicadores atualizados a cada operação e relatórios prontos para decisão.</p>
+        <div class="hero-cta-row">
+          <a href="cadastro.html" class="btn btn-gold btn-hero-lg"><i class="fa-solid fa-rocket"></i> Criar conta gratuita</a>
+          <a href="login.html" class="btn btn-ghost-dark btn-hero-lg"><i class="fa-solid fa-right-to-bracket"></i> Já tenho conta</a>
+        </div>
+        <div class="hero-meta">
+          <span><i class="fa-solid fa-check"></i> Sem cartão de crédito</span>
+          <span><i class="fa-solid fa-check"></i> Pronto em menos de 1 minuto</span>
+          <span><i class="fa-solid fa-check"></i> 14 módulos integrados</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hv-ring r1"></div>
+        <div class="hv-ring r2"></div>
+        <div class="hv-card hv-1">
+          <div class="hv-label">Faturamento do mês</div>
+          <div class="hv-value">R$ 128.450</div>
+          <div class="hv-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 12,5% vs. mês anterior</div>
+        </div>
+        <div class="hv-card hv-2">
+          <div class="hv-label">Contas a receber</div>
+          <div class="hv-value">R$ 34.900</div>
+          <div class="hv-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 8 títulos em aberto</div>
+        </div>
+        <div class="hv-card hv-3">
+          <div class="hv-label">Estoque baixo</div>
+          <div class="hv-value">3 produtos</div>
+          <div class="hv-trend down"><i class="fa-solid fa-triangle-exclamation"></i> Reposição recomendada</div>
+        </div>
+        <svg class="hv-chart" viewBox="0 0 150 60" fill="none">
+          <path id="hvPath" d="M2 46 L26 34 L50 40 L74 20 L98 26 L122 8 L148 14" stroke="var(--gold-500)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-bar" data-reveal>
+    <div class="container">
+      <div class="stat-item"><div class="stat-value" data-count="14">0</div><div class="stat-label">Módulos integrados</div></div>
+      <div class="stat-item"><div class="stat-value" data-count="6">0</div><div class="stat-label">Perfis de acesso</div></div>
+      <div class="stat-item"><div class="stat-value" data-count="5">0</div><div class="stat-label">Relatórios exportáveis</div></div>
+      <div class="stat-item"><div class="stat-value" data-count="100" data-suffix="%">0%</div><div class="stat-label">Dos dados no seu navegador</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="recursos">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Recursos</div>
+        <h2>Tudo que a rotina da sua empresa precisa</h2>
+        <p>Cada módulo já vem com cadastro, validação, cálculos automáticos e atualização de indicadores em tempo real.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3>Vendas</h3>
+          <p>Orçamentos, pedidos e vendas com cálculo automático de subtotal, desconto e total.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <h3>Compras</h3>
+          <p>Compras por fornecedor que atualizam o estoque automaticamente ao serem confirmadas.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <h3>Estoque</h3>
+          <p>Entradas, saídas, ajustes e inventário, com alerta visual de estoque mínimo.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+          <h3>Financeiro</h3>
+          <p>Contas a pagar, a receber e fluxo de caixa reunidos em um painel só.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-address-book"></i></div>
+          <h3>Clientes e fornecedores</h3>
+          <p>Cadastro completo com dados fiscais, contato, endereço e status.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Relatórios</h3>
+          <p>Vendas, estoque, financeiro e compras com exportação em CSV e PDF.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-user-shield"></i></div>
+          <h3>Usuários e permissões</h3>
+          <p>Perfis por função: administrador, gerente, financeiro, vendedor e estoque.</p>
+        </div>
+        <div class="card feature-card" data-reveal>
+          <div class="fc-icon"><i class="fa-solid fa-gauge-high"></i></div>
+          <h3>Dashboard</h3>
+          <p>Indicadores de faturamento, contas e estoque atualizados a cada operação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="como-funciona">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">Como funciona</div>
+        <h2>Do cadastro ao primeiro relatório em três passos</h2>
+      </div>
+      <div class="steps-row">
+        <div class="card step-card" data-reveal>
+          <div class="step-num">1</div>
+          <h3>Crie sua conta</h3>
+          <p>Informe seus dados e os da sua empresa. Leva menos de um minuto.</p>
+        </div>
+        <div class="card step-card" data-reveal>
+          <div class="step-num">2</div>
+          <h3>Cadastre o essencial</h3>
+          <p>Clientes, produtos, fornecedores e categorias — a base de todos os módulos.</p>
+        </div>
+        <div class="card step-card" data-reveal>
+          <div class="step-num">3</div>
+          <h3>Acompanhe tudo</h3>
+          <p>Vendas, estoque e financeiro no dashboard, com indicadores sempre atualizados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="modulos">
+    <div class="container">
+      <div class="arch-note">
+        <div data-reveal>
+          <div class="arch-badge"><i class="fa-solid fa-layer-group"></i> Arquitetura</div>
+          <h2>Pronto para crescer junto com sua empresa</h2>
+          <p>Hoje o Fluxen ERP funciona inteiramente no seu navegador, para você testar cada módulo sem depender de um servidor. A lógica de negócio já fica separada do armazenamento, então a evolução para uma API própria e um banco de dados de verdade acontece sem reescrever as telas.</p>
+          <ul>
+            <li><i class="fa-solid fa-circle-check"></i> Camada de serviços isolada por módulo (vendas, estoque, financeiro...)</li>
+            <li><i class="fa-solid fa-circle-check"></i> Modelo de dados já desenhado para banco relacional</li>
+            <li><i class="fa-solid fa-circle-check"></i> Seus dados ficam no seu navegador nesta versão de demonstração</li>
+          </ul>
+        </div>
+        <div class="arch-code" data-reveal>
+          <span class="c-comment">// camada de armazenamento — troca única</span><br>
+          <span class="c-key">const</span> ProductService = {<br>
+          &nbsp;&nbsp;create: (data) => <span class="c-key">StorageService</span>.insert(<span class="c-str">'products'</span>, data),<br>
+          &nbsp;&nbsp;<span class="c-comment">// ...</span><br>
+          };<br><br>
+          <span class="c-comment">// futuro: mesma assinatura, outra fonte</span><br>
+          <span class="c-key">const</span> ProductService = {<br>
+          &nbsp;&nbsp;create: (data) => <span class="c-key">Api</span>.post(<span class="c-str">'/produtos'</span>, data),<br>
+          };
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2 data-reveal>Pronto para organizar sua empresa?</h2>
+      <p data-reveal>Crie sua conta e comece a cadastrar clientes, produtos e vendas agora mesmo.</p>
+      <a href="cadastro.html" class="btn btn-gold btn-hero-lg" data-reveal><i class="fa-solid fa-rocket"></i> Criar conta gratuita</a>
+      <div class="cta-note" data-reveal>Sem cartão de crédito · Ambiente de demonstração</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand"><span class="brand-mark"><img src="assets/logo/fluxen-mark.png" alt="Fluxen"></span> Fluxen ERP</div>
+          <p>Gestão empresarial integrada — vendas, compras, estoque, financeiro e relatórios em um único sistema.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produto</h4>
+          <a href="#recursos">Recursos</a>
+          <a href="#modulos">Módulos</a>
+          <a href="#como-funciona">Como funciona</a>
+        </div>
+        <div class="footer-col">
+          <h4>Conta</h4>
+          <a href="login.html">Entrar</a>
+          <a href="cadastro.html">Criar conta</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="footerYear"></span> Fluxen ERP. Todos os direitos reservados.</span>
+        <span>Ambiente de demonstração — dados armazenados localmente no navegador.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/pages/home.js"></script>
 </body>
 </html>
