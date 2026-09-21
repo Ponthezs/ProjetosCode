@@ -12,11 +12,28 @@
     <title>SlideShow</title>
 </head>
 <body>
-    <div class="container-slide">
-        <div class="action-button" id="previous">&laquo</div>
-        <div class="container-items" id="container-items"></div>
-        <div class="action-button" id="next">&raquo</div>
+    <div class="scene">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="container-slide" id="containerSlide">
+            <div class="stage">
+                <button class="action-button" id="previous" aria-label="Slide anterior">&laquo;</button>
+                <div class="container-items" id="container-items"></div>
+                <button class="action-button" id="next" aria-label="Próximo slide">&raquo;</button>
+            </div>
+
+            <div class="controls">
+                <button class="ctrl-btn" id="playPause" aria-label="Pausar apresentação" title="Pausar/Reproduzir">⏸</button>
+                <div class="dots" id="dots"></div>
+                <button class="ctrl-btn" id="fullscreenBtn" aria-label="Tela cheia" title="Tela cheia">⛶</button>
+            </div>
+        </div>
+
+        <p class="hint">Use as setas do teclado, arraste ou toque nos pontos &middot; espaço pausa &middot; F entra em tela cheia</p>
     </div>
+
     <script src="index.js"></script>
 </body>
 </html>
