@@ -14,11 +14,11 @@ dados relacional no futuro sem reescrever as telas.
    python3 -m http.server 8000
    # ou: npx http-server -p 8000
    ```
-2. Acesse `http://localhost:8000/index.html` — a home institucional, com
-   apresentação do sistema e os botões **Entrar** e **Criar conta**.
-3. Crie uma conta em `cadastro.html` (vira Administrador na hora) ou entre
-   com as credenciais de demonstração abaixo (dados fictícios são gerados
-   automaticamente na primeira execução).
+2. Acesse `http://localhost:8000/public/index.html` — a home institucional,
+   com apresentação do sistema e os botões **Entrar** e **Criar conta**.
+3. Crie uma conta em `public/cadastro.html` (vira Administrador na hora) ou
+   entre com as credenciais de demonstração abaixo (dados fictícios são
+   gerados automaticamente na primeira execução).
 
 | Perfil | E-mail | Senha |
 |---|---|---|
@@ -41,21 +41,24 @@ Descrição de cada módulo, regras de negócio e perfis de acesso estão em
 
 ```
 ERP/
-├── index.html       # Home institucional (apresentação do sistema)
-├── login.html, cadastro.html
+├── public/                  # Páginas de entrada (não autenticadas)
+│   ├── index.html           #   Home institucional (apresentação do sistema)
+│   ├── login.html
+│   └── cadastro.html
+├── pages/                   # Uma página HTML por módulo (área autenticada)
 ├── assets/
-│   ├── logo/        # Logo e favicon do Fluxen ERP
-│   ├── images/      # Reservado para banners/ilustrações (vazio por ora)
-│   └── icons/       # Reservado para ícones próprios em SVG (vazio por ora)
-├── css/            # Design system (tokens, layout, componentes, responsividade, impressão)
-├── js/core/        # Storage, autenticação, layout, componentes de UI, notificações
-├── js/services/    # Regras de negócio por entidade (uma camada, isolada do armazenamento)
-├── js/pages/        # Controlador de cada página
-├── pages/           # Uma página HTML por módulo
-├── db/schema.sql    # Modelo relacional para a futura API/banco de dados
+│   ├── logo/                # Logo e favicon do Fluxen ERP
+│   ├── images/              # Reservado para banners/ilustrações (vazio por ora)
+│   └── icons/                # Reservado para ícones próprios em SVG (vazio por ora)
+├── css/                     # Design system (tokens, layout, componentes, responsividade, impressão)
+├── js/
+│   ├── core/                 # Storage, autenticação, layout, componentes de UI, notificações
+│   ├── services/              # Regras de negócio por entidade (uma camada, isolada do armazenamento)
+│   └── pages/                 # Controlador de cada página (públicas e de módulo)
+├── db/schema.sql             # Modelo relacional para a futura API/banco de dados
 └── docs/
-    ├── negocio/     # Visão geral, regras de negócio, perfis de acesso, manual do usuário
-    └── tecnico/     # Arquitetura, modelo de dados, guia de desenvolvimento, plano de migração para API, changelog
+    ├── negocio/              # Visão geral, regras de negócio, perfis de acesso, manual do usuário
+    └── tecnico/               # Arquitetura, modelo de dados, guia de desenvolvimento, plano de migração para API, changelog
 ```
 
 Documentação técnica completa (arquitetura, modelo de dados, convenções de

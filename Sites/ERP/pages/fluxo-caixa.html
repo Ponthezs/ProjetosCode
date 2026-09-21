@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluxo de Caixa — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .kpi-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .period-bar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-5); }
+    .period-bar .input { width: auto; }
+    .period-custom { display: flex; align-items: center; gap: 6px; }
+    .period-custom .input { width: 150px; }
+    @media (max-width: 640px) { .kpi-grid-3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Fluxo de caixa</h1>
+            <span class="page-subtitle">Entradas, saídas e evolução do saldo por período</span>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btnNovoLancamento"><i class="fa-solid fa-plus"></i> Novo lançamento manual</button>
+          </div>
+        </div>
+
+        <div class="period-bar">
+          <select class="input" id="periodQuick">
+            <option value="hoje">Hoje</option>
+            <option value="semana">Esta semana</option>
+            <option value="mes" selected>Este mês</option>
+            <option value="ano">Este ano</option>
+            <option value="personalizado">Personalizado</option>
+          </select>
+          <div class="period-custom" id="customPeriodFields" hidden>
+            <input class="input" type="date" id="customFrom">
+            <span style="color:var(--text-subtle);font-size:12px">até</span>
+            <input class="input" type="date" id="customTo">
+          </div>
+        </div>
+
+        <div class="kpi-grid kpi-grid-3" id="kpiGrid"></div>
+
+        <div class="chart-grid">
+          <div class="chart-card wide">
+            <div class="chart-title">Evolução do saldo</div>
+            <div class="chart-sub">Saldo acumulado no período selecionado</div>
+            <canvas id="chartBalance"></canvas>
+          </div>
+        </div>
+
+        <div class="table-card" style="margin-top:var(--space-5)">
+          <div class="table-toolbar">
+            <div class="chart-title" style="margin:0">Movimentações do período</div>
+          </div>
+          <div id="tableContainer"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/fluxo-caixa.js"></script>
+</body>
+</html>

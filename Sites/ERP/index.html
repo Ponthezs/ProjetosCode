@@ -1,90 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja - ERP</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.0/crypto-js.min.js"></script>
-    <script>
-        if (localStorage.getItem('gestorProPlus_theme_v2') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=public/index.html">
+  <title>Fluxen ERP</title>
+  <link rel="icon" type="image/png" href="assets/logo/fluxen-favicon.png">
+  <script>window.location.replace('public/index.html');</script>
+  <style>
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+           font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #0b1220; color: #e7ebf3; }
+    a { color: #d4af37; }
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-slate-900">
-    <div id="toast-container"></div>
-    
-    <nav id="mainNavbar" class="bg-sky-700 dark:bg-sky-800 p-4 shadow-lg hidden-element">
-        <div class="container mx-auto flex flex-wrap items-center justify-between">
-            <a href="index.html" class="text-white text-xl font-bold">ERP Store</a>
-            <div class="flex items-center space-x-2 md:space-x-4">
-                <a href="index.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium"><i class="fas fa-store mr-1"></i>Loja</a>
-                <a href="cart.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <i class="fas fa-shopping-cart mr-1"></i>Carrinho (<span id="cartItemCount">0</span>)
-                </a>
-                <a href="product-admin.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium hidden-element" id="adminMenuProductCreateLink"><i class="fas fa-plus-circle mr-1"></i>Gerir Produtos</a>
-                <a href="permissions-admin.html" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium hidden-element" id="adminMenuPermissionsLink"><i class="fas fa-users-cog mr-1"></i>Permissões</a>
-                <button id="themeToggle" class="text-white p-2 rounded-md hover:bg-sky-600 dark:hover:bg-sky-700"><i class="fas fa-moon"></i></button>
-                <div class="relative">
-                     <button type="button" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center" id="userMenuButton">
-                        <i class="fas fa-user-circle mr-1"></i><span id="loggedInUserDisplay">User</span> <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div id="userDropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden-element" role="menu" aria-orientation="vertical" aria-labelledby="userMenuButton">
-                        <a href="#" onclick="logoutUser()" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700" role="menuitem">Sair</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <main class="container mx-auto p-4 md:p-8 main-content-area">
-        <header class="mb-8">
-            <h1 class="text-4xl font-bold text-sky-800 dark:text-sky-300">Nossos Produtos</h1>
-            <input 
-                type="text" 
-                id="productSearchInput"
-                placeholder="Buscar produtos..."
-                class="w-full p-3 border border-gray-300 rounded-md dark:bg-slate-700 dark:border-slate-600 dark:text-white mt-4"
-                oninput="searchProducts(this.value)"
-            >
-            <div id="categoryFilters" class="mt-4 flex space-x-2 overflow-x-auto pb-2">
-                <button onclick="filterProductsByCategory()" class="px-4 py-2 bg-sky-600 text-white rounded-full whitespace-nowrap hover:bg-sky-700">Todos</button>
-            </div>
-        </header>
-        <div id="productListContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Produtos serão inseridos aqui pelo script.js -->
-            <p id="noProductsMessage" class="text-center text-gray-500 col-span-full hidden-element">Nenhum produto disponível no momento.</p>
-        </div>
-    </main>
-    
-    <footer class="text-center p-4 text-sm text-gray-500 dark:text-slate-400 mt-12 border-t dark:border-slate-700">
-        &copy; <span id="currentYear"></span> ERP. Todos os direitos reservados.
-    </footer>
-
-    <script src="validators.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Pequeno script para o dropdown do utilizador e ano atual
-        document.addEventListener('DOMContentLoaded', () => {
-            const userMenuButton = document.getElementById('userMenuButton');
-            const userDropdownMenu = document.getElementById('userDropdownMenu');
-            if(userMenuButton && userDropdownMenu){
-                userMenuButton.addEventListener('click', () => {
-                    userDropdownMenu.classList.toggle('hidden-element');
-                });
-                // Fechar se clicar fora
-                document.addEventListener('click', (event) => {
-                    if (!userMenuButton.contains(event.target) && !userDropdownMenu.contains(event.target)) {
-                        userDropdownMenu.classList.add('hidden-element');
-                    }
-                });
-            }
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        });
-    </script>
+<body>
+  <noscript>
+    <p>Redirecionando para o Fluxen ERP... Se nada acontecer,
+      <a href="public/index.html">clique aqui</a>.</p>
+  </noscript>
 </body>
 </html>

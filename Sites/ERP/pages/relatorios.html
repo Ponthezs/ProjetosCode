@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/print.css">
+  <style>
+    .reports-layout { display: flex; gap: var(--space-5); align-items: flex-start; }
+    .reports-menu { width: 260px; flex-shrink: 0; padding: var(--space-2); }
+    .report-nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 10px 12px; border-radius: var(--radius-md); border: none; background: none; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; transition: all var(--transition-fast); }
+    .report-nav-btn i { width: 16px; text-align: center; color: var(--text-subtle); }
+    .report-nav-btn:hover { background: var(--surface-alt); color: var(--text); }
+    .report-nav-btn.active { background: var(--brand-700); color: #fff; }
+    .report-nav-btn.active i { color: #fff; }
+    .reports-content { flex: 1; min-width: 0; }
+    .report-filter-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: flex-end; }
+    .report-filter-row .form-field { min-width: 160px; }
+    .period-shortcuts { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .report-note { font-size: 12.5px; color: var(--text-subtle); }
+    .summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-bottom: var(--space-5); }
+    .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-4); }
+    .summary-card .sc-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .summary-card .sc-value { font-size: 20px; font-weight: 800; }
+    .print-report-header .prh-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .print-report-header .prh-period { font-size: 13px; color: #555; }
+    @media (max-width: 900px) {
+      .reports-layout { flex-direction: column; }
+      .reports-menu { width: 100%; }
+      .summary-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Relatórios</h1>
+            <span class="page-subtitle">Consulte, imprima e exporte os relatórios do sistema</span>
+          </div>
+        </div>
+
+        <div class="reports-layout">
+          <aside class="card reports-menu no-print" id="reportsMenu"></aside>
+
+          <section class="reports-content">
+            <div class="card no-print" style="margin-bottom:var(--space-5)">
+              <div class="card-body">
+                <div class="report-filter-row">
+                  <div class="form-field">
+                    <label>Data de</label>
+                    <input type="date" class="input" id="filterFrom">
+                  </div>
+                  <div class="form-field">
+                    <label>Data até</label>
+                    <input type="date" class="input" id="filterTo">
+                  </div>
+                  <div class="period-shortcuts" id="periodShortcuts">
+                    <button type="button" class="btn btn-secondary btn-sm" data-shortcut="month">Este mês</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-shortcut="lastMonth">Mês anterior</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-shortcut="year">Este ano</button>
+                  </div>
+                </div>
+                <div class="report-note" id="reportNote" hidden style="margin-top:var(--space-3)"></div>
+              </div>
+            </div>
+
+            <div class="print-report-header" id="printReportHeader">
+              <div class="prh-title" id="printReportTitle"></div>
+              <div class="prh-period" id="printReportPeriod"></div>
+            </div>
+
+            <div id="summaryArea"></div>
+
+            <div class="table-card">
+              <div class="card-header">
+                <h3>Resultado</h3>
+                <div class="page-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPrint"><i class="fa-solid fa-print"></i> Imprimir</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnExportCsv"><i class="fa-solid fa-file-csv"></i> Exportar CSV</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnExportPdf"><i class="fa-solid fa-file-pdf"></i> Exportar PDF</button>
+                </div>
+              </div>
+              <div id="tableContainer"></div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/relatorios.js"></script>
+</body>
+</html>

@@ -1,6 +1,38 @@
 # Changelog
 
-## v3.2 — Rebrand para Fluxen ERP e remoção dos arquivos legados (atual)
+## v3.4 — Redirecionamento automático da raiz (atual)
+
+**Organização**
+- `index.html`, `login.html` e `cadastro.html` na raiz do projeto agora
+  são páginas leves de redirecionamento automático (meta refresh + JS)
+  para `public/index.html`, `public/login.html` e `public/cadastro.html`
+  respectivamente. Isso elimina as duplicatas obsoletas que ficaram na
+  raiz após a mudança para `public/` na v3.3 — quem acessar a raiz do
+  projeto (ex.: abrir `index.html` direto, ou um link/favorito antigo) cai
+  automaticamente nos arquivos novos, sem precisar apagar nada à mão.
+- Conferidos todos os caminhos de CSS do projeto (inclusive `url()` dentro
+  dos arquivos `.css`) após a reorganização em `public/` — nenhuma
+  referência quebrada encontrada; as folhas de estilo não referenciam
+  nenhum recurso local além das já existentes em `assets/logo/`.
+
+## v3.3 — Páginas públicas movidas para /public
+
+**Organização**
+- `index.html`, `login.html` e `cadastro.html` — antes soltos na raiz do
+  projeto — foram movidos para uma pasta própria, `public/`, junto das
+  demais pastas já organizadas (`pages/`, `css/`, `js/`, `assets/`,
+  `docs/`, `db/`). A raiz do projeto agora só tem o `README.md` e pastas.
+- Ajustados todos os caminhos relativos afetados: os três arquivos movidos
+  passaram a referenciar `../css`, `../js` e `../assets`; `js/pages/login.js`,
+  `js/pages/cadastro.js`, `js/pages/home.js` e `js/pages/configuracoes.js`
+  (redirecionamentos para `pages/dashboard.html` e `public/login.html`); e
+  `js/core/auth.js` (`computeRelativePath`/`dashboardPath`, usados por
+  `guardPage` e `logout` em toda página autenticada).
+- Endereço de acesso mudou de `login.html`/`index.html` para
+  `public/login.html`/`public/index.html` — ver `README.md` e
+  `docs/tecnico/03-guia-de-desenvolvimento.md`.
+
+## v3.2 — Rebrand para Fluxen ERP e remoção dos arquivos legados
 
 **Alterado**
 - Sistema renomeado de "Cerne ERP" para "Fluxen ERP" em todas as páginas,

@@ -10,8 +10,10 @@ compartilha CSS e JavaScript com as demais.
 
 ```
 ERP/
-├── index.html              # Redireciona para login.html ou pages/dashboard.html
-├── login.html               # Autenticação
+├── public/                   # Páginas de entrada, não autenticadas
+│   ├── index.html             # Home institucional (apresentação do sistema)
+│   ├── login.html             # Autenticação
+│   └── cadastro.html          # Criação de conta (usuário Administrador + empresa)
 ├── css/
 │   ├── variables.css         # Tokens de design (cores, espaçamento, tipografia)
 │   ├── base.css              # Reset + layout estrutural (sidebar, header)
@@ -34,10 +36,11 @@ ERP/
 │   │   ├── financialService.js
 │   │   ├── userService.js, companyService.js
 │   └── pages/                  # Um controlador por página (lógica específica da tela)
-│       ├── login.js, dashboard.js, clientes.js, fornecedores.js, produtos.js,
+│       ├── home.js, login.js, cadastro.js (páginas de public/)
+│       ├── dashboard.js, clientes.js, fornecedores.js, produtos.js,
 │       │   estoque.js, vendas.js, compras.js, financeiro.js, contas-pagar.js,
 │       │   contas-receber.js, fluxo-caixa.js, relatorios.js, usuarios.js,
-│       │   configuracoes.js
+│       │   configuracoes.js (páginas de pages/)
 ├── pages/                       # Uma página HTML por módulo (ver acima)
 ├── assets/
 │   ├── logo/                     # Logo e favicon do Fluxen ERP

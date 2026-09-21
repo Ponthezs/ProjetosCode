@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    body { background: var(--bg); }
+    .login-brand-row { display: flex; align-items: center; gap: 12px; }
+    .login-brand-row .brand-mark { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; padding: 6px; }
+    .login-brand-row .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .login-brand-row .brand-name { font-size: 19px; font-weight: 800; }
+    .login-aside .aside-title { font-size: 28px; font-weight: 800; line-height: 1.25; margin: 40px 0 16px; max-width: 380px; }
+    .login-aside .aside-sub { color: rgba(255,255,255,.72); font-size: 14px; max-width: 380px; line-height: 1.6; }
+    .aside-feature-list { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+    .aside-feature { display: flex; gap: 12px; align-items: flex-start; color: rgba(255,255,255,.88); font-size: 13.5px; }
+    .aside-feature i { color: var(--gold-500); margin-top: 2px; }
+    .aside-footer { color: rgba(255,255,255,.5); font-size: 12px; }
+    .login-card h1 { font-size: 22px; margin-bottom: 6px; }
+    .login-card .subtitle { color: var(--text-muted); font-size: 13.5px; margin-bottom: 28px; }
+    .login-remember-row { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 20px; }
+    .demo-hint { margin-top: 22px; padding: 12px 14px; background: var(--brand-50); border: 1px solid var(--brand-100); border-radius: var(--radius-md); font-size: 12.5px; color: var(--brand-700); }
+    .demo-hint strong { font-family: var(--font-mono); }
+    [data-theme="dark"] .demo-hint { background: var(--surface-alt); border-color: var(--border); color: var(--text-muted); }
+    .login-footer-link { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 20px; }
+    .login-footer-link a { font-weight: 700; }
+    .brand-row-link { text-decoration: none; color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <div class="login-aside">
+      <a href="index.html" class="login-brand-row brand-row-link">
+        <div class="brand-mark"><img src="../assets/logo/fluxen-mark.png" alt="Fluxen"></div>
+        <div class="brand-name">Fluxen ERP</div>
+      </a>
+      <div>
+        <div class="aside-title">Gestão empresarial em um só lugar.</div>
+        <div class="aside-sub">Controle vendas, compras, estoque e finanças da sua empresa com indicadores em tempo real e relatórios prontos para decisão.</div>
+        <div class="aside-feature-list">
+          <div class="aside-feature"><i class="fa-solid fa-circle-check"></i> Vendas, compras e estoque integrados</div>
+          <div class="aside-feature"><i class="fa-solid fa-circle-check"></i> Contas a pagar, a receber e fluxo de caixa</div>
+          <div class="aside-feature"><i class="fa-solid fa-circle-check"></i> Perfis de acesso por função da equipe</div>
+        </div>
+      </div>
+      <div class="aside-footer">© <span id="footerYear"></span> Fluxen ERP. Todos os direitos reservados.</div>
+    </div>
+
+    <div class="login-form-col">
+      <div class="login-card">
+        <h1>Acessar o sistema</h1>
+        <p class="subtitle">Informe suas credenciais para continuar.</p>
+
+        <form id="loginForm" novalidate>
+          <div class="form-field" style="margin-bottom:16px">
+            <label>E-mail</label>
+            <input class="input" type="email" id="loginEmail" placeholder="seu.email@empresa.com" autocomplete="username" required>
+            <div class="field-error" id="loginEmailError"></div>
+          </div>
+          <div class="form-field">
+            <label>Senha</label>
+            <div class="input-group">
+              <input type="password" id="loginPassword" placeholder="Sua senha" autocomplete="current-password" required style="flex:1">
+              <span class="input-group-icon" id="togglePasswordBtn"><i class="fa-solid fa-eye"></i></span>
+            </div>
+            <div class="field-error" id="loginPasswordError"></div>
+          </div>
+
+          <div class="login-remember-row">
+            <label class="checkbox-row"><input type="checkbox" id="rememberMe" checked> Lembrar de mim</label>
+            <a href="#" id="forgotPasswordLink" style="font-size:12.5px">Esqueci minha senha</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+            <i class="fa-solid fa-right-to-bracket"></i> Entrar
+          </button>
+        </form>
+
+        <div class="demo-hint">
+          <strong>Ambiente de demonstração</strong><br>
+          E-mail: <strong>admin@erp.com</strong> &nbsp;·&nbsp; Senha: <strong>admin123</strong>
+        </div>
+
+        <div class="login-footer-link">Não tem uma conta? <a href="cadastro.html">Criar conta</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/pages/login.js"></script>
+</body>
+</html>

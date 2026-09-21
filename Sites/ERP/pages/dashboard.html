@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+            <span class="page-subtitle">Visão geral do desempenho da empresa</span>
+          </div>
+        </div>
+
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-title">Faturamento mensal</div>
+            <div class="chart-sub">Últimos 6 meses</div>
+            <canvas id="chartRevenue"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Vendas por mês</div>
+            <div class="chart-sub">Quantidade de vendas concluídas</div>
+            <canvas id="chartSalesCount"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Receitas x despesas</div>
+            <div class="chart-sub">Valores realizados por mês</div>
+            <canvas id="chartRevenueExpense"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Vendas por categoria</div>
+            <div class="chart-sub">Participação no faturamento</div>
+            <canvas id="chartByCategory"></canvas>
+          </div>
+          <div class="chart-card wide">
+            <div class="chart-title">Produtos mais vendidos</div>
+            <div class="chart-sub">Top 5 por quantidade vendida</div>
+            <canvas id="chartTopProducts"></canvas>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/dashboard.js"></script>
+</body>
+</html>

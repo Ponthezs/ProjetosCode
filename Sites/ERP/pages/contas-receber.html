@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contas a Receber — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .view-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .view-grid .view-item.full { grid-column: 1 / -1; }
+    .view-item label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px; }
+    .view-item .view-value { font-size: 13.5px; color: var(--text); }
+    .view-section-title { font-size: 12.5px; font-weight: 700; color: var(--text-muted); margin: var(--space-4) 0 var(--space-2); text-transform: uppercase; letter-spacing: .03em; }
+    .view-section-title:first-child { margin-top: 0; }
+    .period-inline { display: flex; align-items: center; gap: 6px; }
+    .period-inline .input { width: 140px; }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Contas a receber</h1>
+            <span class="page-subtitle">Controle de recebimentos de clientes</span>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btnNovo"><i class="fa-solid fa-plus"></i> Nova conta</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input class="input" id="searchInput" placeholder="Buscar por descrição...">
+            </div>
+            <div class="tt-filters">
+              <select class="input" id="filterStatus">
+                <option value="">Status (todos)</option>
+                <option value="pendente">Pendente</option>
+                <option value="recebido">Recebido</option>
+                <option value="vencido">Vencido</option>
+                <option value="cancelado">Cancelado</option>
+              </select>
+              <div class="period-inline">
+                <input class="input" type="date" id="filterDueFrom" data-tooltip="Vencimento de">
+                <span style="color:var(--text-subtle);font-size:12px">até</span>
+                <input class="input" type="date" id="filterDueTo" data-tooltip="Vencimento até">
+              </div>
+            </div>
+          </div>
+          <div id="tableContainer"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/contas-receber.js"></script>
+</body>
+</html>

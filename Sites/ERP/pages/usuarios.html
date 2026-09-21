@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuários — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+    .role-chip { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-3); }
+    .role-chip .role-chip-title { margin-bottom: 6px; }
+    .role-chip .role-chip-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    @media (max-width: 900px) { .roles-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .roles-grid { grid-template-columns: 1fr; } }
+    .view-item label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px; }
+    .view-item .view-value { font-size: 13.5px; color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Usuários</h1>
+            <span class="page-subtitle">Administração de usuários e perfis de acesso do sistema</span>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btnNovo"><i class="fa-solid fa-plus"></i> Novo usuário</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:var(--space-5)">
+          <div class="card-header"><h3>Perfis de acesso</h3></div>
+          <div class="card-body">
+            <div class="roles-grid" id="rolesInfo"></div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="tt-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input class="input" id="searchInput" placeholder="Buscar por nome ou e-mail...">
+            </div>
+            <div class="tt-filters">
+              <select class="input" id="filterRole">
+                <option value="">Perfil (todos)</option>
+              </select>
+              <select class="input" id="filterStatus">
+                <option value="">Status (todos)</option>
+                <option value="ativo">Ativo</option>
+                <option value="inativo">Inativo</option>
+              </select>
+            </div>
+          </div>
+          <div id="tableContainer"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/usuarios.js"></script>
+</body>
+</html>

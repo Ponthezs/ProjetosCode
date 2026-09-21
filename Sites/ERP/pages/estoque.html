@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estoque — Fluxen ERP</title>
+  <script>(function(){try{var s=JSON.parse(localStorage.getItem('erp_settings')||'{}');if(s.theme==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="../assets/logo/fluxen-favicon.png">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .checkbox-inline { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+    .date-filter { display: flex; align-items: center; gap: 8px; }
+    .date-filter span { font-size: 12.5px; color: var(--text-muted); white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+    <div class="main-col">
+      <div id="header-root"></div>
+      <main class="page-content" id="pageContent">
+        <div class="page-header">
+          <div class="page-title">
+            <h1>Estoque</h1>
+            <span class="page-subtitle">Controle de saldo e movimentações de estoque</span>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btnNovaMovimentacao"><i class="fa-solid fa-plus"></i> Nova movimentação</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button type="button" class="tab-btn active" data-tab="visao">Visão geral</button>
+          <button type="button" class="tab-btn" data-tab="movimentacoes">Movimentações</button>
+        </div>
+
+        <div id="panelVisao">
+          <div class="table-card">
+            <div class="table-toolbar">
+              <div class="tt-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input class="input" id="searchInput" placeholder="Buscar por produto ou código...">
+              </div>
+              <div class="tt-filters">
+                <select class="input" id="filterCategory">
+                  <option value="">Categoria (todas)</option>
+                </select>
+                <label class="checkbox-inline"><input type="checkbox" id="filterLowStock"> Somente estoque baixo</label>
+              </div>
+            </div>
+            <div id="tableContainerVisao"></div>
+          </div>
+        </div>
+
+        <div id="panelMovimentacoes" hidden>
+          <div class="table-card">
+            <div class="table-toolbar">
+              <div class="tt-filters">
+                <select class="input" id="filterProduct">
+                  <option value="">Produto (todos)</option>
+                </select>
+                <select class="input" id="filterType">
+                  <option value="">Tipo (todos)</option>
+                  <option value="entrada">Entrada</option>
+                  <option value="saida">Saída</option>
+                  <option value="ajuste">Ajuste</option>
+                  <option value="inventario">Inventário</option>
+                </select>
+                <div class="date-filter"><span>De</span><input class="input" type="date" id="filterDateFrom"></div>
+                <div class="date-filter"><span>Até</span><input class="input" type="date" id="filterDateTo"></div>
+              </div>
+            </div>
+            <div id="tableContainerMovimentacoes"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/core/utils.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/auth.js"></script>
+  <script src="../js/core/components.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/services/customerService.js"></script>
+  <script src="../js/services/supplierService.js"></script>
+  <script src="../js/services/categoryService.js"></script>
+  <script src="../js/services/productService.js"></script>
+  <script src="../js/services/stockService.js"></script>
+  <script src="../js/services/salesService.js"></script>
+  <script src="../js/services/purchaseService.js"></script>
+  <script src="../js/services/financialService.js"></script>
+  <script src="../js/services/userService.js"></script>
+  <script src="../js/services/companyService.js"></script>
+  <script src="../js/core/seed-data.js"></script>
+  <script src="../js/core/layout.js"></script>
+  <script src="../js/pages/estoque.js"></script>
+</body>
+</html>
