@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+ * Design tokens — FLOW OPS
+ * Dark é o padrão; .light redefine os mesmos papéis.
+ * ------------------------------------------------------------------ */
+:root {
+  --bg: #06080e;
+  --bg-2: #0b0f19;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.09);
+  --solid: #0e1320;
+  --solid-2: #131a2a;
+  --border: rgba(255, 255, 255, 0.075);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #e8ebf4;
+  --muted: #8b93a8;
+  --faint: #5b6378;
+  --accent: #7c83ff;
+  --accent-2: #22d3ee;
+  --good: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --glow: 0 0 0 1px rgba(124, 131, 255, 0.25), 0 8px 40px -8px rgba(124, 131, 255, 0.35);
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 30px -12px rgba(0, 0, 0, 0.7);
+  --grid: rgba(255, 255, 255, 0.06);
+  color-scheme: dark;
+}
+
+.light {
+  --bg: #eef1f8;
+  --bg-2: #e6eaf4;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(255, 255, 255, 0.9);
+  --surface-3: rgba(15, 23, 42, 0.05);
+  --solid: #ffffff;
+  --solid-2: #f6f8fc;
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --text: #0e1526;
+  --muted: #58627a;
+  --faint: #8a93a8;
+  --accent: #5b5ff0;
+  --accent-2: #0891b2;
+  --good: #059669;
+  --warn: #d97706;
+  --bad: #dc2626;
+  --glow: 0 0 0 1px rgba(91, 95, 240, 0.25), 0 8px 30px -10px rgba(91, 95, 240, 0.3);
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 30px -14px rgba(15, 23, 42, 0.25);
+  --grid: rgba(15, 23, 42, 0.07);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-solid: var(--solid);
+  --color-solid-2: var(--solid-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+  overflow: hidden;
+}
+
+/* Fundo ambiente com gradientes discretos */
+.app-bg {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(124, 131, 255, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(800px 600px at 50% 120%, rgba(168, 85, 247, 0.07), transparent 60%),
+    var(--bg);
+}
+.light .app-bg {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(91, 95, 240, 0.1), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(8, 145, 178, 0.08), transparent 60%),
+    var(--bg);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: var(--shadow);
+}
+
+.glass-strong {
+  background: color-mix(in oklab, var(--solid) 88%, transparent);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  box-shadow: var(--shadow);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #c7cbff 0%, #7c83ff 40%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.light .text-gradient {
+  background: linear-gradient(100deg, #3b3fd0 0%, #5b5ff0 40%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Scrollbars */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 8px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Card bloqueado: textura hachurada */
+.hatch-bad {
+  background-image: repeating-linear-gradient(135deg, rgba(248, 113, 113, 0.12) 0 6px, transparent 6px 12px);
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.0), inset 0 0 0 1px rgba(248, 113, 113, 0.5); }
+  50% { box-shadow: 0 0 24px 2px rgba(248, 113, 113, 0.35), inset 0 0 0 1px rgba(248, 113, 113, 0.9); }
+}
+.pulse-red { animation: pulse-red 1.6s ease-in-out infinite; }
+
+@keyframes pulse-amber {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.45), 0 0 0 0 rgba(251, 191, 36, 0); }
+  50% { box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.9), 0 0 20px 0 rgba(251, 191, 36, 0.25); }
+}
+.pulse-amber { animation: pulse-amber 2s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Recharts: textos com tokens */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--muted);
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+.recharts-legend-item-text {
+  color: var(--muted) !important;
+  font-size: 12px;
+}
+
+/* Ajustes de contraste do tema claro para tons pastel usados no dark */
+.light .text-red-200, .light .text-red-300 { color: #b91c1c; }
+.light .text-rose-200, .light .text-rose-300 { color: #be123c; }
+.light .text-emerald-200, .light .text-emerald-300 { color: #047857; }
+.light .text-amber-200, .light .text-amber-300 { color: #b45309; }
+.light .text-sky-200, .light .text-sky-300 { color: #0369a1; }
+.light .text-orange-200, .light .text-orange-300 { color: #c2410c; }
+.light .shimmer { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent); background-size: 200% 100%; }
